@@ -1,14 +1,17 @@
+
+import Formulario from './components/Forms'
+
 import './App.css';
+
 
 function App() {
   return (
     <div className="App">
-      
-       
-        <p>
-          Hello, world
-        </p>
-        
+
+      <p>Teste React</p>
+
+      <Formulario/>        
+
     </div>
   );
 }
