@@ -1,18 +1,17 @@
 
 import Formulario from './components/Forms'
+import Routes from './routes'
 
 import './App.css';
 
 
 function App() {
   return (
-    <div className="App">
+    <>
 
-      <p>Teste React</p>
+      <Routes/>        
 
-      <Formulario/>        
-
-    </div>
+    </>
   );
 }
 
