@@ -1,3 +1,7 @@
+p {
+  background-color: var(--primaryColor);
+}
+
 .App {
   text-align: center;
 }
