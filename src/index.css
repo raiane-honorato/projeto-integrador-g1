@@ -14,9 +14,10 @@ code {
 
 :root {
   --primaryColor: #1a535cff;
-  --secondColor: #4ecdc4ff;
+  --secondColor: #4ecdc5;
   --thirdColor: #ff6b6bff;
   --fourthColor: #ffe66dff;
+
   --mainWhite: #f7fff7ff;
   --mainBlack: #222;
   --mainGrey: #ececec;

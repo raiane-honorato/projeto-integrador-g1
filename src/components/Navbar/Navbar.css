@@ -1,0 +1,38 @@
+.navbar {
+    position: sticky;
+    top: 0;
+    background-color: var(--primaryColor);
+    display: flex;
+    align-items: center;
+    height: 60px;
+    justify-content: center;
+    
+
+}
+
+.nav-container {
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.nav-btn-list {
+    display: flex;
+    list-style-type: none;
+    width: 200px;
+    justify-content: space-evenly;
+    text-decoration: none;
+}
+
+.nav-btn {
+    text-decoration: none;
+    color: var(--mainWhite);
+    padding: 5px;
+}
+
+.material-icons {
+    color: var(--mainWhite);
+    margin: 10px;
+}
