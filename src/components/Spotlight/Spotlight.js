@@ -1,7 +1,7 @@
-function Error404() {
+function Hero() {
     return(
         <h1>Hello, world</h1>
     )
 }
 
-export default Error404;
+export default Hero;

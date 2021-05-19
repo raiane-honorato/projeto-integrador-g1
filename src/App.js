@@ -1,17 +1,11 @@
-import Formulario from './components/Forms'
-import Routes from './routes'
-
-import './App.css';
+import Routes from "./routes";
 
 function App() {
   return (
     <>
-
-      <Routes/>        
-
+      <Routes />
     </>
   );
 }
 
 export default App;
-

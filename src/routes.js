@@ -1,6 +1,6 @@
 import {Route, BrowserRouter, Switch} from 'react-router-dom';
 
-import Navbar from './components/Navbar';
+import Navbar from './components/Navbar/Navbar';
 import Home from './pages/Home';
 import Search from './pages/Search';
 import Login from './pages/Login';
@@ -17,7 +17,7 @@ function Routes() {
             <Switch>
                 <Route path='/' component = {Home} exact/>
                 <Route path='/search' component = {Search}/>
-                <Route path='/login' exact component = {Login}/>
+                <Route path='/login' component = {Login}/>
                 <Route path='/register_user'  component = {RegisterUser}/>
                 <Route path='/register_instituition'  component = {RegisterInstitution}/> 
                 <Route path = '*' component = {Error404} />
