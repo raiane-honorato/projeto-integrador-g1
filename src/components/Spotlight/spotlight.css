@@ -1,0 +1,18 @@
+.spotlight-section {
+  height:35rem;
+} 
+
+
+.spotlight-section-one {
+  background-color: var(--mainGrey);
+}
+
+.spotlight-section-two {
+  background-color: var(--thirdColor);
+}
+
+
+.spotlight-title {
+  font-size: 5rem;
+  margin: 0;
+}
