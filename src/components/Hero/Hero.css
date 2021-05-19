@@ -33,7 +33,11 @@
       cursor: pointer;
   }
 
-   
+  .hero-btn:hover {
+    filter: brightness(1.2);
+ 
+  }
+  
   #hero-btn-volunteer {
     background-color: #18CA8B;
     color: var(--mainBlack);
@@ -45,19 +49,9 @@
       transition: .5s;
   }
 
-  #hero-btn-institution:hover {
-    color: var(--mainWhite);
-    text-shadow: 1px 1px 5px var(--mainBlack);
-  }
-
-  #hero-btn-volunteer:hover {
-   color: var(--mainWhite);
-   text-shadow: 1px 1px 5px var(--mainBlack);
-   
-  }
-
-  p {
+  .hero-p {
       color: var(--mainWhite);
       font-size: 2rem;
-      width: 85%;
+      width: 55%;
+      text-shadow: 5px 5px 5px var(--mainBlack);
   }
