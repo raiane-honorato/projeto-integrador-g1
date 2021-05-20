@@ -21,13 +21,14 @@
   font-size: 2.5rem;
   text-align: center;
   font-weight: 500;
+  margin: 4rem 0;
 } 
  
 .habilities-grid { 
   display: grid; 
   grid-template-columns: repeat(auto-fit, minmax(301px, 1fr));
   gap:2rem 1rem;
-  margin-bottom: 2rem;
+  margin-bottom: 4rem;
   font-family: 'Poppins', sans-serif;
 }
 
@@ -41,7 +42,7 @@
 
 .hability-img {
   width: 12rem;
-  margin-right: 2rem;
+  margin-right: 1rem;
 }
 
                    /* Secção de vagas em destaque */
@@ -55,7 +56,7 @@
 }
 .spotlight-section-two h2 {
   font-size: 2.5rem;
-  margin: 2rem 0 4rem 0;
+  margin: 4rem 0;
   font-weight: 500;
 }
 
@@ -64,8 +65,11 @@
 .job-cards {
   width: 100%;
   max-width: 1200px;
-  display: flex;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+  gap: 2rem;
+  margin-bottom: 4rem;
+
 }
 
 .card {
@@ -73,12 +77,20 @@
   grid-template-columns: 1fr 1fr;
   font-family: 'Poppins', sans-serif;
   background-color: var(--mainWhite);
-  margin: 2rem;
+  margin: 2rem 0 0 0;
   border-radius:10px;
   width:100%;
   max-width: 43rem;
   height: 30rem;
-  box-shadow: 5px 5px 10px black;
+  transition: transform var(--mainTransition);
+  box-shadow: 5px 5px 10px  var(--mainBlack);
+  cursor: pointer;
+
+}
+
+.card:hover {
+  background-color: rgb(255, 132, 132);
+  transform: scale(0.97);
 
 }
 
@@ -104,4 +116,5 @@
   font-size: 1.5rem;
   font-family: 'Playfair Display', serif;
 }
+
 

@@ -64,9 +64,11 @@ function Spotlight() {
         </div>
       </section>
       <section className="spotlight-section spotlight-section-two">
-        <h2>Vagas Disponíveis</h2>
+        <h2>As mais desejadas...</h2>
         <div className="job-cards">
+      
           <div className="card">
+            
             <div class="card-image-div">
               <img
                 className="card-image"
@@ -77,12 +79,38 @@ function Spotlight() {
             <div className="card-content">
               <h3 className="job-title">Professor(a) de Música</h3>
               <p className="job-description">
-                <strong>Sobre a vaga: </strong>A professora ou professor irá conduzir os alunos e alunos a experiências sensoriais únicas por meio de sessões com o violão.
+                <strong>Sobre a vaga: </strong>A professora ou professor irá
+                conduzir os alunos e alunos a experiências sensoriais únicas por
+                meio de sessões com o violão.
               </p>
               <p className="job-schedule">
                 <strong>Horários: </strong>Turno verspestino. Oito (8) horas por
                 semana.
               </p>
+              <p><strong>Categoria: </strong> Música</p>
+            </div>
+          </div>
+  
+          <div className="card">
+            <div class="card-image-div">
+              <img
+                className="card-image"
+                alt="orphanatofalt"
+                src="https://images.unsplash.com/photo-1518148750009-25b2522df9c2?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1534&q=80"
+              />
+            </div>
+            <div className="card-content">
+              <h3 className="job-title">Cozinheira(o)</h3>
+              <p className="job-description">
+                <strong>Sobre a vaga: </strong>Comida baiana, moquecas, lasanha.
+                Precisamos de tudo isso e das sobremesas também. Colabore
+                conosco.
+              </p>
+              <p className="job-schedule">
+                <strong>Horários: </strong>Turno verspestino. Oito (8) horas por
+                semana.
+              </p>
+              <p><strong>Categoria: </strong> Culinária</p>
             </div>
           </div>
 
@@ -97,12 +125,38 @@ function Spotlight() {
             <div className="card-content">
               <h3 className="job-title">Cozinheira(o)</h3>
               <p className="job-description">
-                <strong>Sobre a vaga: </strong>Comida baiana, moquecas, lasanha. Precisamos de tudo isso e das sobremesas também. Colabore conosco.
+                <strong>Sobre a vaga: </strong>Comida baiana, moquecas, lasanha.
+                Precisamos de tudo isso e das sobremesas também. Colabore
+                conosco.
               </p>
               <p className="job-schedule">
                 <strong>Horários: </strong>Turno verspestino. Oito (8) horas por
                 semana.
               </p>
+              <p><strong>Categoria: </strong> Música</p>
+            </div>
+          </div>
+
+          <div className="card">
+            <div class="card-image-div">
+              <img
+                className="card-image"
+                alt="orphanatofalt"
+                src="https://images.unsplash.com/photo-1518148750009-25b2522df9c2?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1534&q=80"
+              />
+            </div>
+            <div className="card-content">
+              <h3 className="job-title">Cozinheira(o)</h3>
+              <p className="job-description">
+                <strong>Sobre a vaga: </strong>Comida baiana, moquecas, lasanha.
+                Precisamos de tudo isso e das sobremesas também. Colabore
+                conosco.
+              </p>
+              <p className="job-schedule">
+                <strong>Horários: </strong>Turno verspestino. Oito (8) horas por
+                semana.
+              </p>
+              <p><strong>Categoria: </strong> Culinária</p>
             </div>
           </div>
         </div>
