@@ -1,7 +1,7 @@
-function Hero() {
+function Spotlight() {
     return(
         <h1>Hello, world</h1>
     )
 }
 
-export default Hero;
+export default Spotlight;
