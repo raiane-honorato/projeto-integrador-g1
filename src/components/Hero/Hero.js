@@ -1,7 +1,4 @@
-import Rellax from "rellax";
 import "./Hero.css";
-
-const rellax = new Rellax('.rellax');
 
 function Hero() {
   return (
