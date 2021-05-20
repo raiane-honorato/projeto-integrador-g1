@@ -1,44 +1,59 @@
 .hero {
     min-height: calc(100vh - 60px);
-    background: url("https://images.unsplash.com/photo-1469571486292-0ba58a3f068b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=750&q=80") center/cover no-repeat;
+    background: url("../../img/image.png") center/cover no-repeat;
     display: flex;
-    align-items:flex-end;
+    align-items:center;
     justify-content: center;
+    background-attachment: fixed;
+    
   }
 
   .hero-container {
       letter-spacing: var(--mainSpacing);
       padding: 80px;
-      width: 70vw;
+      width: 100%;
+      max-width: 1200px;
+   
   }
 
   .hero-title {
       text-transform: uppercase;
-      font-size: 3rem;
+      font-size: 5rem;
       color: var(--mainWhite);
       text-shadow: 5px 5px 5px var(--mainBlack);
+      margin-top: -1.5rem;
   }
 
   .hero-btn {
-      height: 40px;
-      width: 180px;
-      margin: 30px;
-      font-size: 1.05rem;
+      height: 4rem;
+      width: 240px;
+      margin: 1rem 0.5rem;
+      font-size: 1.2rem;
+      font-family: 'Poppins', sans-serif;
       padding: 10px;
       border: none;
-      border-radius: 10px;
-  }
-
-  #hero-btn-volunteer {
-    background-color: #18CA8B;
-    color: var(--mainBlack);
-  }
-
-  #hero-btn-institution {
-      background-color: #efcb2b;
+      border-radius: 2rem;
+      cursor: pointer;
       color: var(--mainBlack);
   }
 
-  p {
+  .hero-btn:hover {
+    filter: brightness(1.2);
+ 
+  }
+  
+  #hero-btn-volunteer {
+    background-color: var(--secondColor);
+  }
+
+  #hero-btn-institution {
+      background-color:var(--fourthColor);
+      transition: .5s;
+  }
+
+  .hero-p {
       color: var(--mainWhite);
+      font-size: 2rem;
+      width: 55%;
+      text-shadow: 5px 5px 5px var(--mainBlack);
   }

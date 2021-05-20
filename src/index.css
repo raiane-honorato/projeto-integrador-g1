@@ -1,8 +1,6 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: 'Playfair Display', serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -14,9 +12,9 @@ code {
 
 :root {
   --primaryColor: #1a535cff;
-  --secondColor: #4ecdc5;
+  --secondColor: #18CA8B;;
   --thirdColor: #ff6b6bff;
-  --fourthColor: #ffe66dff;
+  --fourthColor: #efcb2bff;
 
   --mainWhite: #f7fff7ff;
   --mainBlack: #222;
