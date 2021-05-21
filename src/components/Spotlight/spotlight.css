@@ -1,5 +1,4 @@
 .spotlight-section {
-  min-height: 38rem;
   display: flex;
   justify-content: center;
 }
@@ -14,7 +13,7 @@
   display: flex;
   flex-direction:column;
   width: 100%;
-  max-width: 1200px;
+  max-width: 1000px;
 }
 
 .spotlight-section-one-content h2 {
@@ -26,23 +25,24 @@
  
 .habilities-grid { 
   display: grid; 
-  grid-template-columns: repeat(auto-fit, minmax(301px, 1fr));
-  gap:2rem 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap:1rem 1rem;
   margin-bottom: 4rem;
   font-family: 'Poppins', sans-serif;
 }
 
 .hability-img-div {
   display: flex;
-  align-items: center;
-  justify-content: center;
+  align-items:center;
+  justify-content:flex-start;
   margin: .5rem;
   cursor: pointer;
 }
 
 .hability-img {
-  width: 12rem;
+  width: 4rem;
   margin-right: 1rem;
+  max-height: 3rem;
 }
 
                    /* Secção de vagas em destaque */
@@ -81,7 +81,7 @@
   border-radius:10px;
   width:100%;
   max-width: 43rem;
-  height: 30rem;
+  
   transition: transform var(--mainTransition);
   box-shadow: 5px 5px 10px  var(--mainBlack);
   cursor: pointer;
@@ -96,23 +96,24 @@
 
 .card-image-div {
   display: flex;
-  flex-grow: 1;
   margin-right: 1rem;
+  align-items: center;
 }
 
 .card-image {
   width:100%;
   border-radius: 10px 0 0 10px;
   object-fit: cover;
+  height: 180px;
 }
 
 .card-content {
-  padding: 1rem;
+  padding: 0 1rem;
 }
 
 .card-content h3 {
   text-align: center;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
   font-size: 1.5rem;
   font-family: 'Playfair Display', serif;
 }

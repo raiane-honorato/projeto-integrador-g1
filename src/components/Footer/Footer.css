@@ -1,0 +1,47 @@
+/* general settings */
+
+.footer-container {
+    background-color: var(--mainGrey);
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    padding: 2rem 0;
+}
+
+#footer-column-c1 {
+    width: 600px;
+    display: flex;
+    gap: 50px;
+    align-items: center;
+
+}
+
+#footer-column-c2 {
+    width: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* first column settings */
+
+.footer-logo {
+    height: 70px;
+}
+
+/* second column settings */
+
+.social-media-list { 
+    padding: 0px;
+    list-style-type: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+.social-media-icon {
+    margin: 10px;
+    cursor: pointer;
+}
+

@@ -8,6 +8,10 @@ import music from "../../img/music.svg";
 import sports from "../../img/sports.svg";
 import teacher from "../../img/teacher.svg";
 import workout from "../../img/workout.svg";
+import ecologial_cause from "../../img/ecological_cause.svg";
+import meditation from "../../img/meditation.svg";
+import personal from "../../img/personal.svg";
+
 
 function Spotlight() {
   return (
@@ -60,10 +64,26 @@ function Spotlight() {
               <img className="hability-img" src={sports} alt="Esportes" />
               Esportes
             </div>
+            <div className="hability-img-div">
+              <img className="hability-img" src={ecologial_cause} alt="Meio-ambiente" />
+              Meio-ambiente
+            </div>
+            <div className="hability-img-div">
+              <img className="hability-img" src={meditation} alt="Meditação" />
+              Meditação
+            </div>
+            <div className="hability-img-div">
+              <img className="hability-img" src={personal} alt="personal" />
+              Atividades físicas
+            </div>
           </div>
         </div>
       </section>
       <section className="spotlight-section spotlight-section-two">
+
+
+    {/* Vagas em destaque */}
+
         <h2>As mais desejadas...</h2>
         <div className="job-cards">
       
@@ -78,11 +98,7 @@ function Spotlight() {
             </div>
             <div className="card-content">
               <h3 className="job-title">Professor(a) de Música</h3>
-              <p className="job-description">
-                <strong>Sobre a vaga: </strong>A professora ou professor irá
-                conduzir os alunos e alunos a experiências sensoriais únicas por
-                meio de sessões com o violão.
-              </p>
+              
               <p className="job-schedule">
                 <strong>Horários: </strong>Turno verspestino. Oito (8) horas por
                 semana.
@@ -101,11 +117,7 @@ function Spotlight() {
             </div>
             <div className="card-content">
               <h3 className="job-title">Cozinheira(o)</h3>
-              <p className="job-description">
-                <strong>Sobre a vaga: </strong>Comida baiana, moquecas, lasanha.
-                Precisamos de tudo isso e das sobremesas também. Colabore
-                conosco.
-              </p>
+              
               <p className="job-schedule">
                 <strong>Horários: </strong>Turno verspestino. Oito (8) horas por
                 semana.
@@ -124,11 +136,7 @@ function Spotlight() {
             </div>
             <div className="card-content">
               <h3 className="job-title">Cozinheira(o)</h3>
-              <p className="job-description">
-                <strong>Sobre a vaga: </strong>Comida baiana, moquecas, lasanha.
-                Precisamos de tudo isso e das sobremesas também. Colabore
-                conosco.
-              </p>
+             
               <p className="job-schedule">
                 <strong>Horários: </strong>Turno verspestino. Oito (8) horas por
                 semana.
@@ -147,11 +155,7 @@ function Spotlight() {
             </div>
             <div className="card-content">
               <h3 className="job-title">Cozinheira(o)</h3>
-              <p className="job-description">
-                <strong>Sobre a vaga: </strong>Comida baiana, moquecas, lasanha.
-                Precisamos de tudo isso e das sobremesas também. Colabore
-                conosco.
-              </p>
+             
               <p className="job-schedule">
                 <strong>Horários: </strong>Turno verspestino. Oito (8) horas por
                 semana.

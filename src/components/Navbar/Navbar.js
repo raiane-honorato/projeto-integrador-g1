@@ -1,11 +1,13 @@
 import {Link, NavLink} from 'react-router-dom';
 import "./Navbar.css";
+import miniLogo from '../../img/mini-logo-white.png';
 
 function Navbar() {
     return(
         <nav className ="navbar">
             <div className = "nav-container">
-            <span className ="material-icons material-icons-outlined">favorite_border</span>
+            <img src={miniLogo} className="nav-logo" alt="logo-corrente-do-bem"></img>
+            {/* <span className ="material-icons material-icons-outlined">favorite_border</span> */}
             <ul className ="nav-btn-list">
                 <li>
                     <NavLink to = "/" className ="nav-btn" exact>Home</NavLink>
