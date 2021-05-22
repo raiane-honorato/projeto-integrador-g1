@@ -1,13 +1,14 @@
 import {Link, NavLink} from 'react-router-dom';
 import "./Navbar.css";
 import miniLogo from '../../img/mini-logo-white.png';
+import SearchBar from '../SearchBar/SearchBar';
 
 function Navbar() {
     return(
         <nav className ="navbar">
             <div className = "nav-container">
             <img src={miniLogo} className="nav-logo" alt="logo-corrente-do-bem"></img>
-            {/* <span className ="material-icons material-icons-outlined">favorite_border</span> */}
+            <SearchBar />
             <ul className ="nav-btn-list">
                 <li>
                     <NavLink to = "/" className ="nav-btn" exact>Home</NavLink>

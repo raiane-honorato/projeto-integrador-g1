@@ -1,0 +1,29 @@
+#search-input {
+  padding: .8rem .5rem;
+  border: none;
+  border-radius: 20px;
+  width: 20rem;
+  position:relative;
+}
+
+.buttonSearch {
+  position: absolute;
+  border-radius: 50%;
+  border: none;
+  background-color: var(--thirdColor);
+  right: 600px; 
+  top: 14px;
+  width:2rem;
+  height: 2rem;
+  cursor: pointer;
+ 
+}
+
+#search-input, .buttonSearch:focus {
+  outline: none;
+}
+
+.lupa {
+  color: var(--mainWhite);
+}
+

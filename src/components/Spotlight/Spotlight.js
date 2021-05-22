@@ -24,11 +24,11 @@ function Spotlight() {
               <img className="hability-img" src={barber} alt="Barbearia" />
               Barbearia
             </div>
-            <div className="hability-img-div">
+            <div style={{order: 3}} className="hability-img-div">
               <img className="hability-img" src={artist} alt="Artes" />
               Artes
             </div>
-            <div className="hability-img-div">
+            <div style={{order: 5}}  className="hability-img-div">
               <img className="hability-img" src={dev} alt="Programação" />
               Programação
             </div>
@@ -36,11 +36,11 @@ function Spotlight() {
               <img className="hability-img" src={music} alt="Música" />
               Música
             </div>
-            <div className="hability-img-div">
+            <div style={{order: 1}} className="hability-img-div">
               <img className="hability-img" src={cooking} alt="Culinária" />
               Culinária
             </div>
-            <div className="hability-img-div">
+            <div style={{order: 6}} className="hability-img-div">
               <img
                 className="hability-img"
                 src={medical_care}
@@ -52,15 +52,15 @@ function Spotlight() {
               <img className="hability-img" src={teacher} alt="Educação" />
               Educação
             </div>
-            <div className="hability-img-div">
-              <img
+            <div style={{order: 4}}  className="hability-img-div">
+              <img                
                 className="hability-img"
                 src={workout}
                 alt="Dança e Musculação"
               />
               Dança
             </div>
-            <div className="hability-img-div">
+            <div style={{order: 7}} className="hability-img-div">
               <img className="hability-img" src={sports} alt="Esportes" />
               Esportes
             </div>
@@ -68,11 +68,11 @@ function Spotlight() {
               <img className="hability-img" src={ecologial_cause} alt="Meio-ambiente" />
               Meio-ambiente
             </div>
-            <div className="hability-img-div">
+            <div style={{order: 2}} className="hability-img-div">
               <img className="hability-img" src={meditation} alt="Meditação" />
               Meditação
             </div>
-            <div className="hability-img-div">
+            <div style={{order: 8}}  className="hability-img-div">
               <img className="hability-img" src={personal} alt="personal" />
               Atividades físicas
             </div>

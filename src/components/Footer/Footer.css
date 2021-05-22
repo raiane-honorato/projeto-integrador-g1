@@ -3,13 +3,16 @@
 .footer-container {
     background-color: var(--mainGrey);
     display: flex;
+    align-items: center;
     justify-content: space-around;
     flex-wrap: wrap;
     padding: 2rem 0;
+    width: 100%;
+
 }
 
 #footer-column-c1 {
-    width: 600px;
+    /* width: 600px; */
     display: flex;
     gap: 50px;
     align-items: center;
@@ -17,7 +20,7 @@
 }
 
 #footer-column-c2 {
-    width: 200px;
+    /* width: 200px; */
     display: flex;
     justify-content: center;
     align-items: center;
