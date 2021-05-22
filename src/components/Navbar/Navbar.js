@@ -4,7 +4,9 @@ import miniLogo from '../../img/mini-logo-white.png';
 
 function Navbar() {
     return(
+        <>
         <nav className ="navbar">
+            
             <div className = "nav-container">
             <img src={miniLogo} className="nav-logo" alt="logo-corrente-do-bem"></img>
             {/* <span className ="material-icons material-icons-outlined">favorite_border</span> */}
@@ -22,6 +24,8 @@ function Navbar() {
             </ul>
             </div>
         </nav>
+
+        </>
     )
 }
 

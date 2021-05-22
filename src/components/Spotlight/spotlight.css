@@ -118,4 +118,11 @@
   font-family: 'Playfair Display', serif;
 }
 
-
+.spotlight-projectcart-hability {
+  margin:5px;
+  padding: 2px 5px;
+  border-radius: 5px;
+  font-size: .8rem;
+  background-color: var(--tranparentBackground);
+  
+}

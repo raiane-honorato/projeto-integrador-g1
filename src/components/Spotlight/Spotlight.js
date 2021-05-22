@@ -1,4 +1,7 @@
+//styling
 import "./spotlight.css";
+
+//images
 import barber from "../../img/barber.svg";
 import artist from "../../img/artist2.svg";
 import dev from "../../img/dev.svg";
@@ -12,10 +15,17 @@ import ecologial_cause from "../../img/ecological_cause.svg";
 import meditation from "../../img/meditation.svg";
 import personal from "../../img/personal.svg";
 
+//data
+import projects from "../../data/projects.json";
+
+//components
+import ProjectCart from "./ProjectCart";
 
 function Spotlight() {
+
   return (
     <>
+      {/* Habilities */}
       <section className="spotlight-section spotlight-section-one">
         <div className="spotlight-section-one-content">
           <h2>Deixe suas habilidades aflorarem...</h2>
@@ -79,90 +89,20 @@ function Spotlight() {
           </div>
         </div>
       </section>
+
+      {/* Spotlight projects */}
+
+
       <section className="spotlight-section spotlight-section-two">
-
-
-    {/* Vagas em destaque */}
 
         <h2>As mais desejadas...</h2>
         <div className="job-cards">
-      
-          <div className="card">
-            
-            <div class="card-image-div">
-              <img
-                className="card-image"
-                alt="orphanatofalt"
-                src="https://images.unsplash.com/photo-1445985543470-41fba5c3144a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1500&q=80"
-              />
-            </div>
-            <div className="card-content">
-              <h3 className="job-title">Professor(a) de Música</h3>
-              
-              <p className="job-schedule">
-                <strong>Horários: </strong>Turno verspestino. Oito (8) horas por
-                semana.
-              </p>
-              <p><strong>Categoria: </strong> Música</p>
-            </div>
-          </div>
-  
-          <div className="card">
-            <div class="card-image-div">
-              <img
-                className="card-image"
-                alt="orphanatofalt"
-                src="https://images.unsplash.com/photo-1518148750009-25b2522df9c2?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1534&q=80"
-              />
-            </div>
-            <div className="card-content">
-              <h3 className="job-title">Cozinheira(o)</h3>
-              
-              <p className="job-schedule">
-                <strong>Horários: </strong>Turno verspestino. Oito (8) horas por
-                semana.
-              </p>
-              <p><strong>Categoria: </strong> Culinária</p>
-            </div>
-          </div>
+          <ProjectCart project={projects.projects[0]} />
+          <ProjectCart project={projects.projects[1]} />
+          <ProjectCart project={projects.projects[2]} />
+          <ProjectCart project={projects.projects[3]} />
 
-          <div className="card">
-            <div class="card-image-div">
-              <img
-                className="card-image"
-                alt="orphanatofalt"
-                src="https://images.unsplash.com/photo-1518148750009-25b2522df9c2?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1534&q=80"
-              />
-            </div>
-            <div className="card-content">
-              <h3 className="job-title">Cozinheira(o)</h3>
-             
-              <p className="job-schedule">
-                <strong>Horários: </strong>Turno verspestino. Oito (8) horas por
-                semana.
-              </p>
-              <p><strong>Categoria: </strong> Música</p>
-            </div>
-          </div>
 
-          <div className="card">
-            <div class="card-image-div">
-              <img
-                className="card-image"
-                alt="orphanatofalt"
-                src="https://images.unsplash.com/photo-1518148750009-25b2522df9c2?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1534&q=80"
-              />
-            </div>
-            <div className="card-content">
-              <h3 className="job-title">Cozinheira(o)</h3>
-             
-              <p className="job-schedule">
-                <strong>Horários: </strong>Turno verspestino. Oito (8) horas por
-                semana.
-              </p>
-              <p><strong>Categoria: </strong> Culinária</p>
-            </div>
-          </div>
         </div>
       </section>
     </>
