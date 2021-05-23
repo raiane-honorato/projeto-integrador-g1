@@ -2,7 +2,7 @@ import './searchBar.css';
 
 function SearchBar() {
   return (
-    <div>
+    <div className='searchBlock'>
       <label placeholder="search"></label>
       <input type="text" id="search-input" placeholder='Procure uma vaga' />
       <button className='buttonSearch'>
