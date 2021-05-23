@@ -47,7 +47,7 @@ function Spotlight() {
       {/* Spotlight projects */}
 
       <section className="spotlight-section spotlight-section-two">
-        <h2>As mais desejadas...</h2>
+        <h2>As vagas mais desejadas...</h2>
         <div className="job-cards">
           {projects.map((project) => (
             <ProjectCart project={project} />
