@@ -13,8 +13,9 @@ code {
 
 :root {
   --primaryColor: #1a535cff;
-  --secondColor: #18CA8B;;
+  --secondColor: #18CA8B;
   --thirdColor: #d44242;
+  --thirdColorLight: #e75959;
   --fourthColor: #efcb2bff;
   --tranparentBackground: #18ca8cb0; 
 

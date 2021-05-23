@@ -4,7 +4,7 @@ function SearchBar() {
   return (
     <div className='searchBlock'>
       <label placeholder="search"></label>
-      <input type="text" id="search-input" placeholder='Procure uma vaga' />
+      <input type="text" id="search-input" placeholder='Procure sua vaga' />
       <button className='buttonSearch'>
         <span className="material-icons lupa icons-outlined">search</span>
       </button>

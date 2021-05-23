@@ -35,10 +35,26 @@
     text-decoration: none;
     color: var(--mainWhite);
     padding: 5px;
+    
 }
+
+.nav-btn-list li {
+   position: relative;
+   margin: 0 1rem;
+  
+}
+
+.nav-btn-list li a {
+    transition: 500m    s;
+}
+
+.nav-btn-list li a:hover {
+    color: var(--secondColor);
+ }
 
 .nav-logo {
     color: var(--mainWhite);
     margin: 10px;
+    margin-right: 2rem;
     height: 50px;
 }

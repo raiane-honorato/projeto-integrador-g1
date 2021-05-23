@@ -25,7 +25,7 @@
   float: right;
   border-radius: 50%;
   border: none;
-  background-color: var(--thirdColor);
+  background-color: var(--thirdColorLight);
   width:2rem;
   height: 2rem;
   cursor: pointer;
