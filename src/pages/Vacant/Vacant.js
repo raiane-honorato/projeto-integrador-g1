@@ -14,7 +14,7 @@ function Vacant() {
     },[]) 
   return (
     <>
-    {vagas.map(vaga => (
+    {vagas && vagas.map(vaga => (
       <div className='vacant-container'>
       <div className='vacant-header'>
         <img src='https://source.unsplash.com/random' alt='vaga'/>
