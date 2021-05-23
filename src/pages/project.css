@@ -1,4 +1,4 @@
-.vacant-container {
+.project-container {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -8,13 +8,13 @@
   max-width: 75rem;
 }
 
-.vacant-header {
+.project-header {
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
 }
 
-.vacant-header img {
+.project-header img {
   width: 50%;
 }
