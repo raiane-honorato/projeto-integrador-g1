@@ -1,0 +1,20 @@
+.vacant-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin: 2rem auto;
+  width: 100%;
+  max-width: 75rem;
+}
+
+.vacant-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.vacant-header img {
+  width: 50%;
+}
