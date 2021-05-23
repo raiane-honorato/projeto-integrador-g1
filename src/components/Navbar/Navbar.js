@@ -5,7 +5,9 @@ import SearchBar from '../SearchBar/SearchBar';
 
 function Navbar() {
     return(
+        <>
         <nav className ="navbar">
+            
             <div className = "nav-container">
             <img src={miniLogo} className="nav-logo" alt="logo-corrente-do-bem"></img>
             <SearchBar />
@@ -23,6 +25,8 @@ function Navbar() {
             </ul>
             </div>
         </nav>
+
+        </>
     )
 }
 

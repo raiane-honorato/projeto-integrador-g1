@@ -58,6 +58,8 @@
   font-size: 2.5rem;
   margin: 4rem 0;
   font-weight: 500;
+  color: var(--mainWhite);
+  text-shadow: 2px 2px rgb(29, 29, 29);
 }
 
       /* ---   Especificações dos cards  ---- */
@@ -80,7 +82,7 @@
   margin: 2rem 0 0 0;
   border-radius:10px;
   width:100%;
-  max-width: 43rem;
+  max-width: 40rem;
   
   transition: transform var(--mainTransition);
   box-shadow: 5px 5px 10px  var(--mainBlack);
@@ -89,7 +91,7 @@
 }
 
 .card:hover {
-  background-color: rgb(255, 132, 132);
+  background-color: var(--mainGrey);
   transform: scale(0.97);
 
 }
@@ -119,4 +121,11 @@
   font-family: 'Playfair Display', serif;
 }
 
-
+.spotlight-projectcart-hability {
+  margin:5px;
+  padding: 2px 5px;
+  border-radius: 5px;
+  font-size: .8rem;
+  background-color: var(--tranparentBackground);
+  
+}
