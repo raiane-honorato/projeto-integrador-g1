@@ -18,6 +18,11 @@
     justify-content: space-between;
 }
 
+.nav-container div {
+   display:flex;
+   align-items: center;
+}
+
 .nav-btn-list {
     display: flex;
     list-style-type: none;

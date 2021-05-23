@@ -10,15 +10,15 @@
 
   .hero-container {
       letter-spacing: var(--mainSpacing);
-      padding: 80px;
+      padding: 5rem;
       width: 100%;
-      max-width: 1200px;
+      max-width: 75rem;
    
   }
 
   .hero-title {
       text-transform: uppercase;
-      font-size: 5rem;
+      font-size: 4rem;
       color: var(--mainWhite);
       text-shadow: 5px 5px 5px var(--mainBlack);
       margin-top: -1.5rem;
@@ -26,7 +26,7 @@
 
   .hero-btn {
       height: 4rem;
-      width: 240px;
+      width: 15rem;
       margin: 1rem 0.5rem;
       font-size: 1.2rem;
       font-family: 'Poppins', sans-serif;

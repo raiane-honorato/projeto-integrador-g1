@@ -9,20 +9,22 @@ function Navbar() {
         <nav className ="navbar">
             
             <div className = "nav-container">
-            <img src={miniLogo} className="nav-logo" alt="logo-corrente-do-bem"></img>
-            <SearchBar />
-            <ul className ="nav-btn-list">
-                <li>
-                    <NavLink to = "/" className ="nav-btn" exact>Home</NavLink>
-                </li>
-                <li> 
-                    <NavLink to = "/search" className ="nav-btn">Pesquisa</NavLink>
-                </li>
-                <li>
-                    <NavLink to = "/login" className ="nav-btn">Login</NavLink>
-                </li>
+                <div>
+                    <img src={miniLogo} className="nav-logo" alt="logo-corrente-do-bem"></img>
+                    <ul className ="nav-btn-list">
+                        <li>
+                            <NavLink to = "/" className ="nav-btn" exact>Home</NavLink>
+                        </li>
+                        <li> 
+                            <NavLink to = "/search" className ="nav-btn">Pesquisa</NavLink>
+                        </li>
+                        <li>
+                            <NavLink to = "/login" className ="nav-btn">Login</NavLink>
+                        </li>
 
-            </ul>
+                    </ul>
+                </div>                
+                <SearchBar />
             </div>
         </nav>
 

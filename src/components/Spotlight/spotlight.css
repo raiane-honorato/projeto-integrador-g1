@@ -21,6 +21,8 @@
   text-align: center;
   font-weight: 500;
   margin: 4rem 0;
+  color: var(--thirdColor);
+  text-shadow: 2px 2px var(--mainWhite);
 } 
  
 .habilities-grid { 
@@ -59,7 +61,7 @@
   margin: 4rem 0;
   font-weight: 500;
   color: var(--mainWhite);
-  text-shadow: 2px 2px rgb(29, 29, 29);
+  text-shadow: 1px 1px #1d1d1d;
 }
 
       /* ---   Especificações dos cards  ---- */
