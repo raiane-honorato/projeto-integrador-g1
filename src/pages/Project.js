@@ -26,7 +26,7 @@ function ProjectPage() {
           .map((vaga) => (
             <div className="project-container">
               <div className="project-header">
-                <img src="https://source.unsplash.com/random" alt="vaga" />
+                <img src={vaga.img} alt="vaga" />
                 <h2>{vaga.title}</h2>
               </div>
               <div className="project-provider">
