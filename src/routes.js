@@ -6,7 +6,7 @@ import Search from "./pages/Search";
 import RegisterUser from "./pages/RegisterUser";
 import RegisterInstitution from "./pages/RegisterInstitution";
 import Error404 from "./pages/Error404";
-import ProjectPage from "./pages/Project";
+import ProjectPage from "./pages/Project/Project";
 import Login from './pages/Login/Login';
 
 function Routes() {

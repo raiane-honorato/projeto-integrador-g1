@@ -4,7 +4,7 @@ import { TextField, Button } from "@material-ui/core";
 function Login() {
   return (
     <div className="container-first">
-      <div className="firts-column">
+      <div className="first-column">
         <h2 className="title"> Login</h2>
         <form className="form">
           <div className="form-group">

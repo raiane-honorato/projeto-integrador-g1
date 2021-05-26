@@ -50,7 +50,7 @@
                    /* Secção de vagas em destaque */
 
 .spotlight-section-two {
-  background-color: var(--thirdColor);
+  background-color: var(--primaryColor);
   display:flex;
   flex-direction: column;
   justify-content: flex-start;

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import Footer from "../components/Footer/Footer";
+import Footer from "../../components/Footer/Footer";
 import './project.css';
 
 function ProjectPage() {

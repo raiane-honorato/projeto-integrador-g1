@@ -6,9 +6,21 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+/* ScrollBar */
+/* Works on Chrome, Edge, and Safari */
+
+*::-webkit-scrollbar {
+  width: 0.675rem;
+}
+
+*::-webkit-scrollbar-track {
+  background:var(--mainGrey);
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: var(--tranparentBackground);
+  border-radius: 0.5rem;
+
 }
 
 :root {
