@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Footer from "../../components/Footer/Footer";
+import Navbar from "../../components/Navbar/Navbar";
 import './project.css';
 
 function ProjectPage() {
@@ -19,7 +20,8 @@ function ProjectPage() {
   }, []);
 
   return (
-    <>
+    <div id='page-container'>
+    <Navbar/>
       {vagas &&
         vagas
           .filter((vaga) => vaga.id === +projectId)
@@ -42,7 +44,7 @@ function ProjectPage() {
             </div>
           ))}
       <Footer />
-    </>
+    </div>
   );
 }
 

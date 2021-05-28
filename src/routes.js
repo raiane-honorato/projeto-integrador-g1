@@ -1,6 +1,5 @@
 import {Route, BrowserRouter, Switch} from 'react-router-dom';
 
-import Navbar from "./components/Navbar/Navbar";
 import Home from "./pages/Home";
 import Search from "./pages/Search";
 import RegisterUser from "./pages/RegisterUser";
@@ -12,8 +11,6 @@ import Login from './pages/Login/Login';
 function Routes() {
   return (
     <BrowserRouter>
-      <Navbar />
-      <div className="container-xl">
         <Switch>
           <Route path="/" component={Home} exact />
           <Route path="/search" component={Search} />
@@ -26,7 +23,6 @@ function Routes() {
           />
           <Route path="*" component={Error404} />
         </Switch>
-      </div>
     </BrowserRouter>
   );
 }

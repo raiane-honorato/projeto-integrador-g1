@@ -1,8 +1,11 @@
 // import Navbar from "../Navbar/Navbar";
+import Navbar from "../Navbar/Navbar";
 import "./Hero.css";
 
 function Hero() {
   return (  
+    <div className='nav-plus-hero'>
+    <Navbar />
     <header className="hero">
       <div className="hero-container">
         <h2 className="hero-title" >Corrente do bem</h2>
@@ -18,6 +21,7 @@ function Hero() {
         </button>
       </div>
     </header>
+    </div>
   );
 }
 
