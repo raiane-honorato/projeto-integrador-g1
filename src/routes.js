@@ -8,6 +8,7 @@ import RegisterInstitution from "./pages/RegisterInstitution";
 import Error404 from "./pages/Error404";
 import ProjectPage from "./pages/Project";
 import Login from './pages/Login/Login';
+import  Footer  from "./components/Footer/Footer";
 
 function Routes() {
   return (
@@ -27,6 +28,7 @@ function Routes() {
           <Route path="*" component={Error404} />
         </Switch>
       </div>
+      <Footer/>
     </BrowserRouter>
   );
 }

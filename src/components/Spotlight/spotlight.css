@@ -135,7 +135,7 @@
   
 }
 
-a {
+.spotlight-card-container {
   text-decoration: none !important;
   color: var(--mainBlack);
 }
