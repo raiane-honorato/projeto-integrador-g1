@@ -44,12 +44,13 @@
 
 .nav-btn-list li {
    position: relative;
-   margin: 0 1rem;
+   margin: 0 1.5rem;
+   font-size: 1.2rem;
   
 }
 
 .nav-btn-list li a {
-    transition: 500m    s;
+    transition: 500ms;
 }
 
 .nav-btn-list li a:hover {
@@ -59,6 +60,6 @@
 .nav-logo {
     color: var(--mainWhite);
     margin: 10px;
-    margin-right: 2rem;
+    margin-right: 4rem;
     height: 50px;
 }

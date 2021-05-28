@@ -24,6 +24,7 @@ body {
 
 :root {
   --primaryColor: #1a535cff;
+  --primaryColorLight: #1c6b77;
   --secondColor: #18ca8b;
   --thirdColor: #d44242;
   --thirdColorLight: #e75959;

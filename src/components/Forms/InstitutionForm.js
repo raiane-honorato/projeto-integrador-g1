@@ -1,5 +1,6 @@
 import { useState } from "react";
 import MaskedInput from "./formComponents/MaskedInput";
+import './userform.css';
 
 function InstFormulario() {
   const [values, setValues] = useState({});
@@ -19,6 +20,7 @@ function InstFormulario() {
 
   return (
     <>
+      <h1 className='instituition-form-title'>Cadastre sua Instituição</h1>
       <form className="instForm">
         <div className="dados-base">
           <div className="inputs">

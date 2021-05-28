@@ -9,7 +9,7 @@ function Navbar() {
   const [navbar, setNavbar] = useState(false);
 
   function changeBackground() {
-    window.scrollY >= 100 ? setNavbar(true) : setNavbar(false)
+      window.scrollY >= 70 ? setNavbar(true) : setNavbar(false);    
   }
 
   window.addEventListener('scroll', changeBackground)
@@ -31,11 +31,11 @@ function Navbar() {
                 </NavLink>
               </li>
               <li>
-                <NavLink to="/search" className="nav-btn">
-                  Pesquisa
+                <NavLink to="/register_user" className="nav-btn">
+                  Cadastro
                 </NavLink>
               </li>
-              <li>
+              <li className='login'>
                 <NavLink to="/login" className="nav-btn">
                   Login
                 </NavLink>

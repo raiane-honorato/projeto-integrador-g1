@@ -81,6 +81,7 @@ function Formulario() {
 
   return (
     <>
+      <h1 className='user-form-title'>Crie sua conta</h1>
       <form
         className="formCadastro"
         id="form1"
