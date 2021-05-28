@@ -87,7 +87,7 @@ function Formulario() {
         onSubmit={(e) => handleSubmit(e)}
       >
         <div className="dados-pessoais">
-          <h3>Dados pessoais</h3>
+          <h2>Dados pessoais</h2>
           <div className="inputs">
             <label htmlFor="completeName">Nome Completo:</label>
             <input
@@ -130,7 +130,7 @@ function Formulario() {
         </div>
 
         <div className="cadastrais">
-          <h3>Dados cadastrais</h3>
+          <h2>Dados cadastrais</h2>
           <div className="inputs">
             <label htmlFor="contatNumber">Telefone:</label>
             <MaskedInput

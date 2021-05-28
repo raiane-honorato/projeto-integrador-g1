@@ -8,7 +8,12 @@
   color: var(--mainWhite);  
 }
 
+form h2 {
+  color: var(--secondColor)
+}
+
 .inputs {
+  font-family: 'Poppins', sans-serif;
   margin-bottom: 1rem;
   display: flex;
   flex-direction: column;
@@ -17,13 +22,39 @@
 
 input, #completeName, #email {
   padding: .5rem;
-  border: 10px;
+  border-radius: 5px;
+  border: none;
 }
 
 .inputs label {
   margin-bottom: .5rem;
 }
 
+.checkBox {
+  font-size: .8rem;
+}
+
 .botoes {
-  margin: 1.5rem 0;
+  /* margin: 1.5rem 0; */
+  display: flex;
+  width: 50%;
+  justify-content: flex-end
+
+}
+
+.btnCadastro {
+  height: 3rem;
+  width: 10rem;
+  margin: 1rem 0.5rem;
+  font-size: 1.2rem;
+  font-family: 'Poppins', sans-serif;
+  border: none;
+  border-radius: 2rem;
+  cursor: pointer;
+  background-color: var(--secondColor);
+}
+
+.btnCadastro:hover {
+  filter: brightness(1.2);
+
 }
