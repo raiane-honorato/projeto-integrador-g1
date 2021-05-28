@@ -6,16 +6,6 @@ function Formulario(){
 
     const [values, setValues] = useState({})
 
-    // console.log(values.nome.length)
-    
-    // const pegaTamanho = values.nome
-    // console.log(pegaTamanho.length)
-
-    // let nome = ''
-    // let email = ''
-    // let senha =''
-    // let confirmSenha = ''
-
     const blocklist = [
         'puta',
         'merda',
@@ -23,32 +13,7 @@ function Formulario(){
         'karalho',
         'caralho'
         ]
-
-
-    // function pegaNome(event){
-    //     nome = event.target.value
-    // }
-
-    // function pegaCpf(event){
-    //     cpf = event.target.value
-    // }
-
-    // function pegaContato(event){
-    //     contato = event.target.value
-    // }
-
-    // function pegaEmail(event){
-    //     email = event.target.value
-    // }
-
-    // function pegaSenha(event){
-    //     senha = event.target.value
-    // }
-
-    // function pegaConfSenha(event){
-    //     confirmSenha = event.target.value
-    // }
-
+        
     function handleChange(event){
         setValues({
             ...values,
@@ -205,7 +170,7 @@ function Formulario(){
                 </div>
 
                 <div className="botoes">
-                <input  type="submit" value="Cadastrar" className="btnCadastro"/>
+                    <input  type="submit" value="Cadastrar" className="btnCadastro"/>
                 </div>
 
 

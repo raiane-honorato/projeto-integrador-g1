@@ -1,0 +1,141 @@
+.spotlight-section {
+  display: flex;
+  justify-content: center;
+}
+  
+                  /* Secção de habilidades mais requisitadas */
+
+.spotlight-section-one {
+  background-color: var(--mainGrey);
+}
+
+.spotlight-section-one-content {
+  display: flex;
+  flex-direction:column;
+  width: 100%;
+  max-width: 1000px;
+}
+
+.spotlight-section-one-content h2 {
+  font-size: 2.5rem;
+  text-align: center;
+  font-weight: 500;
+  margin: 4rem 0;
+  color: var(--mainBlack);
+  text-shadow: 1px 1px var(--mainWhite);
+} 
+ 
+.habilities-grid { 
+  display: grid; 
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap:1rem 0;
+  margin-bottom: 4rem;
+  font-family: 'Poppins', sans-serif;
+}
+
+.hability-img-div {
+  display: flex;
+  align-items:center;
+  justify-content:flex-start;
+  margin: .5rem;
+  cursor: pointer;
+}
+
+.hability-img {
+  width: 4rem;
+  margin-right: 1rem;
+  max-height: 3rem;
+}
+
+                   /* Secção de vagas em destaque */
+
+.spotlight-section-two {
+  background-color: var(--thirdColor);
+  display:flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+.spotlight-section-two h2 {
+  font-size: 2.5rem;
+  margin: 4rem 0;
+  font-weight: 500;
+  color: var(--mainWhite);
+  text-shadow: 1px 1px #1d1d1d;
+}
+
+      /* ---   Especificações dos cards  ---- */
+
+.job-cards {
+  width: 100%;
+  max-width: 1200px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+  gap: 2rem;
+  margin-bottom: 4rem;
+
+}
+
+.card {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  font-family: 'Poppins', sans-serif;
+  background-color: var(--mainWhite);
+  margin: 2rem 0 0 0;
+  border-radius:10px;
+  width:100%;
+  max-width: 40rem;
+  
+  transition: transform var(--mainTransition);
+  box-shadow: 5px 5px 10px  var(--mainBlack);
+  cursor: pointer;
+
+}
+
+.card:hover {
+  background-color: var(--mainGrey);
+  transform: scale(0.97);
+
+}
+
+.card-image-div {
+  margin-right: 1rem;
+  max-height: 12rem;
+
+}
+
+.card-image {
+  width:100%;
+  height: 100%;
+  border-radius: 10px 0 0 10px;
+  object-fit: cover;
+
+}
+
+.card-content {
+  padding: 0 1rem;
+  text-decoration: none;
+}
+
+.card-content h3 {
+  text-align: center;
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+  font-family: 'Playfair Display', serif;
+  text-decoration: none;
+}
+
+.spotlight-projectcart-hability {
+  margin:5px;
+  padding: 2px 5px;
+  border-radius: 5px;
+  font-size: .8rem;
+  background-color: var(--tranparentBackground);
+  text-decoration: none;
+  
+}
+
+a {
+  text-decoration: none !important;
+  color: var(--mainBlack);
+}

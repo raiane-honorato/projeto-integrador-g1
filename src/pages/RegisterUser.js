@@ -1,7 +1,9 @@
-import Formulario from '../components/Forms'
+import Formulario from '../components/Forms/UserForm'
 
 function RegisterUser(){
     <Formulario />
 }
 
 export default Formulario
+
+
