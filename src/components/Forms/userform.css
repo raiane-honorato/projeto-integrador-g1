@@ -1,0 +1,29 @@
+.formCadastro {
+  display: flex;
+  flex-direction: column;
+  margin: 2rem auto;
+  width: 100%;
+  max-width: 75rem;
+  flex-grow: 1;
+  color: var(--mainWhite);  
+}
+
+.inputs {
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+}
+
+input, #completeName, #email {
+  padding: .5rem;
+  border: 10px;
+}
+
+.inputs label {
+  margin-bottom: .5rem;
+}
+
+.botoes {
+  margin: 1.5rem 0;
+}

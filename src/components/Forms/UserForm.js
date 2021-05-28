@@ -1,0 +1,205 @@
+import { useState } from "react";
+import MaskedInput from "./formComponents/MaskedInput";
+import './userform.css';
+
+function Formulario() {
+  const [values, setValues] = useState({});
+
+  const blocklist = ["puta", "merda", "shit", "karalho", "caralho"];
+
+  function handleChange(event) {
+    setValues({
+      ...values,
+      [event.target.name]: event.target.value,
+    });
+  }
+
+  function teste() {
+    if (values.nome != undefined) {
+      console.log(values.nome.length);
+    }
+  }
+
+  function handleSubmit(event) {
+    const nome = values.nome;
+    const email = values.email;
+    const senha = values.senha;
+    const confirmSenha = values.confSenha;
+
+    const nomeSemEspaco = nome.trim();
+
+    const emailSemEspaco = email.trim();
+    const senhaSemEspaco = senha.trim();
+    const confSenhaSemEspaco = confirmSenha.trim();
+
+    const nomeESobrenome = nomeSemEspaco
+      .split(" ")
+      .filter((nome) => nome !== "" || nome !== "");
+
+    const nomeImproprio = blocklist
+      .map((palavra) => nomeESobrenome.includes(palavra))
+      .find((elemento) => elemento === true);
+
+    if (nomeImproprio) {
+      alert("Nome Invalido!");
+      event.preventDefault();
+      return;
+    }
+
+    if (values.nome.length < 2) {
+      alert("Favor colocar nome e sobrenome");
+      event.preventDefault();
+      return;
+    }
+
+    if ((nomeSemEspaco.length < 3) | (nomeSemEspaco.length > 100)) {
+      alert("Campo Nome deve conter entre 3 e 100 caracteres");
+      event.preventDefault();
+      return;
+    }
+
+    if ((emailSemEspaco.length < 6) | (emailSemEspaco.length > 100)) {
+      alert("Campo Email deve conter entre 6 e 100 caracteres");
+      event.preventDefault();
+      return;
+    }
+
+    if ((senhaSemEspaco.length < 4) | (senhaSemEspaco.length > 15)) {
+      alert("Campo Senha deve conter entre 4 e 15 caracteres");
+      event.preventDefault();
+      return;
+    }
+
+    if (confSenhaSemEspaco != senhaSemEspaco) {
+      alert("Os campos de Senha e Confirmação de Senha estão diferentes");
+      event.preventDefault();
+      return;
+    }
+
+    alert("cadastrou");
+  }
+
+  return (
+    <>
+      <form
+        className="formCadastro"
+        id="form1"
+        onSubmit={(e) => handleSubmit(e)}
+      >
+        <div className="dados-pessoais">
+          <h3>Dados pessoais</h3>
+          <div className="inputs">
+            <label htmlFor="completeName">Nome Completo:</label>
+            <input
+              type="text"
+              id="completeName"
+              name="nome"
+              minLength="3"
+              maxLength="100"
+              value={values.nome}
+              onChange={handleChange}
+              onBlur={teste}
+              required
+            />
+          </div>
+
+          <div className="inputs">
+            <label htmlFor="cpfNumber">CPF:</label>
+            <MaskedInput
+              name="cpf"
+              id="cpfNumber"
+              mask="999.999.999-99"
+              value={values.cpf}
+              onChange={handleChange}
+            />
+          </div>
+
+          <div className="inputs">
+            <label htmlFor="dataNasc">Data de Nascimento:</label>
+            <input
+              type="date"
+              id="dataNasc"
+              name="dataNasc"
+              value={values.dataNasc}
+              onChange={handleChange}
+              required
+            />
+          </div>
+
+          <div className="teste"></div>
+        </div>
+
+        <div className="cadastrais">
+          <h3>Dados cadastrais</h3>
+          <div className="inputs">
+            <label htmlFor="contatNumber">Telefone:</label>
+            <MaskedInput
+              name="contatNumber"
+              id="contatNumber"
+              mask="(99) 9 9999-9999"
+              value={values.contatNumber}
+              onChange={handleChange}
+            />
+          </div>
+
+          <div className="inputs">
+            <label htmlFor="email">E-Mail:</label>
+            <input
+              type="text"
+              id="email"
+              name="email"
+              minLength="6"
+              maxLength="100"
+              value={values.email}
+              onChange={handleChange}
+              required
+            />
+          </div>
+
+          <div className="inputs">
+            <label htmlFor="senha">Senha:</label>
+            <input
+              type="password"
+              id="senha"
+              name="senha"
+              minLength="4"
+              maxLength="15"
+              value={values.senha}
+              onChange={handleChange}
+              required
+            />
+          </div>
+
+          <div className="inputs">
+            <label htmlFor="confSenha">Confirmar Senha:</label>
+            <input
+              type="password"
+              id="confSenha"
+              name="confSenha"
+              minLength="4"
+              maxLength="15"
+              value={values.confSenha}
+              onChange={handleChange}
+              required
+            />
+          </div>
+
+          <div className="checkBox">
+            <input type="checkbox" id="terms" name="terms" />{" "}
+            <label htmlFor="terms">Aceito os termos de uso</label>
+            <br />
+            <input type="checkbox" id="notify" name="notify" />{" "}
+            <label htmlFor="notify">Receber notificações</label>
+            <br />
+          </div>
+        </div>
+
+        <div className="botoes">
+          <input type="submit" value="Cadastrar" className="btnCadastro" />
+        </div>
+      </form>
+    </>
+  )
+}
+
+export default Formulario;

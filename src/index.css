@@ -1,7 +1,7 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: 'Playfair Display', serif;
+  font-family: "Playfair Display", serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -14,22 +14,21 @@ body {
 }
 
 *::-webkit-scrollbar-track {
-  background:var(--mainGrey);
+  background: var(--mainGrey);
 }
 
 *::-webkit-scrollbar-thumb {
   background-color: var(--tranparentBackground);
   border-radius: 0.5rem;
-
 }
 
 :root {
   --primaryColor: #1a535cff;
-  --secondColor: #18CA8B;
+  --secondColor: #18ca8b;
   --thirdColor: #d44242;
   --thirdColorLight: #e75959;
   --fourthColor: #efcb2bff;
-  --tranparentBackground: #18ca8cb0; 
+  --tranparentBackground: #18ca8cb0;
 
   --mainWhite: #f7fff7ff;
   --mainBlack: #222;
@@ -42,3 +41,6 @@ input[type="text" i] {
   padding: 0;
 }
 
+input:focus, textarea:focus, select:focus{
+  outline: none;
+}

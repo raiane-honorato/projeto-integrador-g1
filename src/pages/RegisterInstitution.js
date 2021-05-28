@@ -1,6 +1,8 @@
+import InstFormulario from '../components/Forms/InstitutionForm'
+
 function RegisterInstitution() {
     return(
-        <h1>Hello, world</h1>
+        <InstFormulario />
     )
 }
 
