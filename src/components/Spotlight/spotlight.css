@@ -85,7 +85,7 @@
   border-radius:10px;
   width:100%;
   max-width: 40rem;
-  
+  min-height: 190px;
   transition: transform var(--mainTransition);
   box-shadow: 5px 5px 10px  var(--mainBlack);
   cursor: pointer;

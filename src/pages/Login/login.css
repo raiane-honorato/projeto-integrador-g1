@@ -15,9 +15,11 @@
 .firts-column{
     background-color: var(--mainWhite);
     width: 20rem;
-    height: 15rem;
+    height: 20rem;
     min-height: 300px;
     min-width: 250px;
+    max-width: 300px;
+    max-height: 400px;
     align-items: center;
     display: flex;
     justify-content: center;
