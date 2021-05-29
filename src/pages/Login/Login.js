@@ -1,12 +1,11 @@
 import "./login.css";
 import { TextField, Button } from "@material-ui/core";
-import Navbar from "../../components/Navbar/Navbar";
+
 
 function Login() {
   return (
     <>     
       <div className='login-container'>
-      <Navbar />
         <div className="container-first">
           <div className="first-column">
             <h2 className="title"> Login</h2>
