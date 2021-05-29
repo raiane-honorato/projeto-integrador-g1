@@ -8,7 +8,6 @@ import Error404 from "./pages/Error404";
 import ProjectPage from "./pages/Project/Project";
 import Login from "./pages/Login/Login";
 
-
 function Routes() {
   return (
     <BrowserRouter>

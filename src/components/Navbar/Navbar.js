@@ -12,7 +12,8 @@ function Navbar() {
       window.scrollY >= 70 ? setNavbar(true) : setNavbar(false);    
   }
 
-  window.addEventListener('scroll', changeBackground)
+    window.addEventListener('scroll', changeBackground)
+
 
   return (
     <>

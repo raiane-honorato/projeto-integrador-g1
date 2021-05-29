@@ -2,11 +2,11 @@ import { TextField, Button } from "@material-ui/core";
 import { Link, NavLink } from "react-router-dom";
 
 
-function LoginComponent(props) {
+function ForgotComponent(props) {
 
   return (
         <div className="firts-column">
-        <h2 className="title"> Login</h2>
+        <h2 className="title"> Recuparação de senha</h2>
         <form className="form">
           <div className="form-group">
             <TextField
@@ -15,31 +15,22 @@ function LoginComponent(props) {
               placeholder="E-mail"
             />
           </div>
-          <div className="form-group">
-            <TextField
-              className="form-control"
-              type="password"
-              placeholder="Senha"
-            />
-          </div>
+
           <Button
             style={{ marginTop: "20px" }}
             variant="contained"
-            className="buttonLogin"
+            className="buttonForgot"
             color="primary"
           >
-            Entrar
+            Recuperar senha
           </Button>
         </form>
-        <div className="register-group">
-          <span>Não possui conta?</span>
-          <NavLink to = '/register_user'>Registre-se</NavLink>
-        </div>
         <div className="password-group">
-          <NavLink to = "/login" onClick = {(event) => props.setStatePass(true)}>Esqueci minha senha</NavLink>
+          <NavLink to = "/login"  onClick = {(event) => props.setStatePass(false)}>Voltar para login</NavLink>
         </div>
+
       </div>
     )
 }
 
-export default LoginComponent;
+export default ForgotComponent;

@@ -146,7 +146,7 @@ function Formulario() {
           <div className="inputs">
             <label htmlFor="email">E-Mail:</label>
             <input
-              type="text"
+              type="email"
               id="email"
               name="email"
               minLength="6"

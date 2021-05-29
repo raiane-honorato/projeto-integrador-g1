@@ -1,8 +1,5 @@
-.login-container {
-    background: url("../../img/background-login.png") no-repeat;
-    background-size: cover;
-    /* display: flex; */
-    height: 100vh;
+.loginContainer {
+    background-color: var(--primaryColor);
 }
 
 .container-first{
@@ -11,7 +8,8 @@
     align-items: center;
     width: 100%;
     height: 91vh;
-  
+    background: url("../../img/background-login.png") no-repeat;
+    background-size: cover;
 }
 
 .firts-column{
@@ -43,13 +41,13 @@
     font-size: 15px !important;
 }
 
-.buttonLogin{
+.buttonLogin, .buttonForgot{
     border-radius: 15px;
     margin-top: 12px;
     align-items: center;
     text-align: center;
     margin-left: 30px;
-    width: 100px;
+    min-width: 100px;
     background-color: var(--primaryColor) !important;
     letter-spacing: var(--mainSpacing) !important;
     
