@@ -1,12 +1,23 @@
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import "./Navbar.css";
 import miniLogo from "../../img/mini-logo-white.png";
 import SearchBar from "../SearchBar/SearchBar";
+import { useState } from "react";
 
 function Navbar() {
+
+  const [navbar, setNavbar] = useState(false);
+
+  function changeBackground() {
+      window.scrollY >= 70 ? setNavbar(true) : setNavbar(false);    
+  }
+
+    window.addEventListener('scroll', changeBackground)
+
+
   return (
     <>
-      <nav className="navbar">
+      <nav className={navbar ? 'navbar active' : 'navbar'}>
         <div className="nav-container">
           <div>
             <img
@@ -21,11 +32,11 @@ function Navbar() {
                 </NavLink>
               </li>
               <li>
-                <NavLink to="/search" className="nav-btn">
-                  Pesquisa
+                <NavLink to="/register_user" className="nav-btn">
+                  Cadastro
                 </NavLink>
               </li>
-              <li>
+              <li className='login'>
                 <NavLink to="/login" className="nav-btn">
                   Login
                 </NavLink>

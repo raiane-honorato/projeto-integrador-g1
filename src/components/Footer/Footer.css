@@ -1,13 +1,21 @@
 /* general settings */
 
-.footer-container {
+footer {
     background-color: var(--mainGrey);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.footer-container {
+
     display: flex;
     align-items: center;
     justify-content: space-around;
     flex-wrap: wrap;
     padding: 2rem 0;
     width: 100%;
+    max-width: 75rem;
 
 }
 
