@@ -36,6 +36,9 @@ body {
   --mainGrey: #ececec;
   --mainSpacing: 0.1rem;
   --mainTransition: all 0.3s linear;
+
+  --firstFont: 'Playfair Display', serif;
+  --secondFont: 'Poppins', sans-serif;
 }
 
 input[type="text" i] {

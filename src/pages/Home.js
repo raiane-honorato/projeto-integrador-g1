@@ -7,7 +7,6 @@ function Home() {
         <>
         <Hero/>
         <Spotlight/>
-        <Footer/>
         </>
     )
 }
