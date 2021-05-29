@@ -48,9 +48,8 @@ function InstFormulario() {
               maxLength="180"
               value={values.resumo}
               onChange={handleSubmit}
-              minLength="3"
-              maxLength="100"
               required
+
             />
           </div>
 
@@ -104,7 +103,6 @@ function InstFormulario() {
           </div>
         </div>
 
-        <hr />
 
         <div className="contatos">
           <div className="inputs">
@@ -146,7 +144,7 @@ function InstFormulario() {
           </div>
 
           <div className="inputs">
-            <label htmlFor="facebook">facebook</label>
+            <label htmlFor="facebook">Facebook (URL)</label>
             <input
               type="url"
               id="facebook"
@@ -159,7 +157,7 @@ function InstFormulario() {
           </div>
 
           <div className="inputs">
-            <label htmlFor="instagram">instagram</label>
+            <label htmlFor="instagram">Instagram (URL)</label>
             <input
               type="url"
               id="instagram"
@@ -172,7 +170,7 @@ function InstFormulario() {
           </div>
         </div>
 
-        <hr />
+    
 
         <div className="sobre">
           <div className="inputs">
@@ -185,9 +183,7 @@ function InstFormulario() {
               minLength="10"
               maxLength="180"
               value={values.descricao}
-              onChange={handleSubmit}
-              minLength="3"
-              maxLength="100"
+              onChange={handleSubmit}           
               required
             />
           </div>

@@ -30,6 +30,7 @@ body {
   --thirdColorLight: #e75959;
   --fourthColor: #efcb2bff;
   --tranparentBackground: #18ca8cb0;
+  --formBackground: rgba(26, 83, 92, 0.7);
 
   --mainWhite: #f7fff7ff;
   --mainBlack: #222;

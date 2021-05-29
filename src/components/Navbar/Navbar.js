@@ -4,16 +4,17 @@ import miniLogo from "../../img/mini-logo-white.png";
 import SearchBar from "../SearchBar/SearchBar";
 import { useState } from "react";
 
+
 function Navbar() {
 
   const [navbar, setNavbar] = useState(false);
 
+
   function changeBackground() {
-      window.scrollY >= 70 ? setNavbar(true) : setNavbar(false);    
-  }
+    window.scrollY >= 70 ? setNavbar(true) : setNavbar(false);  
+  }  
 
-    window.addEventListener('scroll', changeBackground)
-
+  window.addEventListener('scroll', changeBackground)
 
   return (
     <>

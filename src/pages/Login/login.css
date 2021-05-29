@@ -1,6 +1,6 @@
-.loginContainer {
+/* .loginContainer {
     background-color: var(--primaryColor);
-}
+} */
 
 .container-first{
     display: flex;
@@ -14,8 +14,8 @@
 
 .firts-column{
     background-color: var(--mainWhite);
-    width: 30vw;
-    height: 40vh;
+    width: 20rem;
+    height: 15rem;
     min-height: 300px;
     min-width: 250px;
     align-items: center;

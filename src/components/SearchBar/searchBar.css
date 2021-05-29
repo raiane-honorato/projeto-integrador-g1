@@ -34,16 +34,18 @@
 .searchBlock:hover {
   padding: .8rem .5rem;
   box-shadow: 1px 1px 3px var(--mainWhite);
-  border: 2px solid var(--secondColor);
+
 }
 
 .searchBlock:hover>#search-input {
   width: 15rem;
   padding: .8rem .5rem;
+  
 }
 
 #search-input, .buttonSearch:focus {
   outline: none;
+  
 }
 
 .lupa {
