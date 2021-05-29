@@ -5,20 +5,13 @@ import SearchBar from "../SearchBar/SearchBar";
 import { useState } from "react";
 
 
-function Navbar() {
-
-  const [navbar, setNavbar] = useState(false);
-
-
-  function changeBackground() {
-    window.scrollY >= 70 ? setNavbar(true) : setNavbar(false);  
-  }  
+function Navbar({navbarTransparent, changeBackground}) {
 
   window.addEventListener('scroll', changeBackground)
 
   return (
     <>
-      <nav className={navbar ? 'navbar active' : 'navbar'}>
+      <nav className="navbar" id={ navbarTransparent ? 'navbarTransparent' : '' }>
         <div className="nav-container">
           <div>
             <img

@@ -1,12 +1,20 @@
+import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import Navbar from "../Navbar/Navbar";
 import "./Hero.css";
 
 function Hero() {
 
+  const [navbarTransparent, setNavbarTransparent] = useState(true);
+
+
+  function changeBackground() {
+    window.scrollY >= 70 ? setNavbarTransparent(false) : setNavbarTransparent(true);  
+  }  
+  
     return (
     <div className="nav-plus-hero">
-      <Navbar/>
+      <Navbar navbarTransparent={navbarTransparent} changeBackground={changeBackground}/>
       <header className="hero">
         <div className="hero-container">
           <h2 className="hero-title">Corrente do bem</h2>

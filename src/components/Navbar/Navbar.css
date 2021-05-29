@@ -10,8 +10,8 @@
     z-index: 100;
 }
 
-.navbar.active {
-    background-color: var(--primaryColor);
+#navbarTransparent{
+    background-color: transparent;
 }
 
 .nav-container {
