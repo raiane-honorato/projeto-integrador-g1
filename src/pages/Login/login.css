@@ -37,13 +37,13 @@
     font-size: 15px !important;
 }
 
-.buttonLogin{
+.buttonLogin, .buttonForgot{
     border-radius: 15px;
     margin-top: 12px;
     align-items: center;
     text-align: center;
     margin-left: 30px;
-    width: 100px;
+    min-width: 100px;
     background-color: var(--primaryColor) !important;
     letter-spacing: var(--mainSpacing) !important;
     
@@ -55,7 +55,7 @@
     align-items: center;
 }
 
-.firts-column a,span {
+.firts-column a, .firts-column span {
     display: inline-block;
     padding-left: 5px;
     font-family: var(--secondFont) !important;
