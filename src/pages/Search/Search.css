@@ -82,3 +82,42 @@
   .search-settings-button:hover{
       color:var(--primaryColor)
   }
+
+
+  /* pagination buttons */
+
+  .search-pagination-container{
+      margin-top: 5rem;
+      display: flex;
+      justify-content: center;
+  }
+  .paginationBttns {
+      width: 80%;
+      height: 40px;
+      list-style:none;
+      display: flex;
+      justify-content: center;
+      padding: 0;
+  }
+
+  .paginationBttns a {
+      padding: 10px;
+      margin: 10px;
+      color: var(--secondColor);
+      cursor: pointer;
+      font-family: var(--secondFont);
+  }
+
+  .paginationBttns a:hover {
+    border-radius: 20px;
+    border: 1px solid var(--secondColor);
+    color: var(--mainWhite);
+    background-color: var(--secondColor);
+  }
+
+  .paginationActive a{
+    border-radius: 20px;
+    border: 1px solid var(--secondColor);
+    color: var(--mainWhite);
+    background-color: var(--secondColor);
+  }

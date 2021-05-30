@@ -9,7 +9,7 @@
     "institution_name": "Associação Médicos do Mundo",
     "description": "Precisamos de um desenvolvedor Front e Back, que venha integrar nosso time e redesenhar nosso site e criar o portal do(a) voluntário(a), irá atuar com MKT e RH.",
     "hability": ["coding", "UX"],
-    "cause": ["human rights", "health"],
+    "cause": ["direitos humanos", "saúde"],
     "popularity": 40
   },
   {
@@ -21,8 +21,8 @@
     "institution_id": 2,
     "institution_name": "Iracambi Research Center",
     "description": "Buscamos voluntários(as) para apoiar em nossos projetos de conservação da Mata Atlântica no Sul da Serra do Brigadeiro, MG.",
-    "hability": [],
-    "cause": ["environment"],
+    "hability": ["reflorestamento"],
+    "cause": ["conservação ambiental"],
     "popularity": 30
   },
   {
@@ -34,8 +34,8 @@
     "institution_id": 3,
     "institution_name": "Ospália coletivo de palhaços",
     "description": "Precisamos de palhaços/as voluntários, iniciado na palhaçaria e que toquem instrumentos harmônicos, para atuar em hospitais, asilos, comunidades e etc",
-    "hability": ["arts", "music", "acting"],
-    "cause": ["elderly", "children", "health"],
+    "hability": ["artes", "música", "atuação"],
+    "cause": ["idosos", "crianças", "saúde"],
     "popularity": 50
   },
   {
@@ -47,8 +47,8 @@
     "institution_id": 4,
     "institution_name": "Ensinaê",
     "description": "Buscamos voluntários(as) que desejam dar aulas para jovens que procuram apoio na área de matemática, voltada para vestibulares e ENEM. Vamos juntos!",
-    "hability": ["teaching", "mathematics"],
-    "cause": ["education"],
+    "hability": ["educação", "matemática"],
+    "cause": ["educação"],
     "popularity": 10
   },
   {
@@ -56,17 +56,17 @@
     "title": "Digital Influencer",
     "img": "https://blog.depositphotos.com/wp-content/uploads/2020/01/Make-Your-Pet-Instagram-Famous-With-These-7-Tips-2.jpg",
     "local_type": "remote",
-    "address": "São Paulo, SP",
+    "address": "Vitória, ES",
     "institution_id": 5,
     "institution_name": "Amigos e bichos",
     "description": "Estamos precisando de alguém com experiência em redes sociais para gerar mais engajamento e apoio para nossa ONG.",
     "hability": [],
-    "cause": ["animal protection"],
+    "cause": ["proteção animal"],
     "popularity": 80
   },
   {
     "id": 6,
-    "title": "Dentista",
+    "title": "Dentista (o)",
     "img": "https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
     "local_type": "presencial",
     "address": "Recife, PE",
@@ -74,7 +74,85 @@
     "institution_name": "Dentistas Unidos",
     "description": "Estamos precisando de alguém com experiência em periodontia.",
     "hability": [],
-    "cause": ["health"],
+    "cause": ["saúde"],
     "popularity": 70
+  },
+  {
+    "id": 7,
+    "title": "Instrutor(a) de Academia",
+    "img": "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+    "local_type": "local",
+    "address": "Salvador, BA",
+    "institution_id": 7,
+    "institution_name": "Projeto Zambelê",
+    "description": "Buscamos voluntários(as) que desejam dar aulas para idosos que precisam de exercícios para controle da saúde!",
+    "hability": ["malhação", "dança"],
+    "cause": ["educação"],
+    "popularity": 30
+  },
+  {
+    "id": 8,
+    "title": "Professor(a) de Música",
+    "img": "https://images.unsplash.com/photo-1524650359799-842906ca1c06?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+    "local_type": "local",
+    "address": "Manaus, AM",
+    "institution_id": 8,
+    "institution_name": "Violeiros da Esperança",
+    "description": "Buscamos voluntários(as) que desejam dar aulas para jovens que procuram apoio na área de matemática, voltada para vestibulares e ENEM. Vamos juntos!",
+    "hability": ["música"],
+    "cause": ["educação"],
+    "popularity": 45
+  },
+  {
+    "id": 9,
+    "title": "Médicas(os)",
+    "img": "https://images.unsplash.com/photo-1551601651-2a8555f1a136?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=772&q=80",
+    "local_type": "local",
+    "address": "Rio de Janeiro, RJ",
+    "institution_id": 9,
+    "institution_name": "Saúde para Todos",
+    "description": "Buscamos voluntários(as) que desejam dar aulas para jovens que procuram apoio na área de matemática, voltada para vestibulares e ENEM. Vamos juntos!",
+    "hability": ["medicina", "saúde"],
+    "cause": ["saúde"],
+    "popularity": 90
+  },
+  {
+    "id": 10,
+    "title": "Cozinheiro(a)",
+    "img": "https://images.unsplash.com/photo-1507048331197-7d4ac70811cf?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1267&q=80",
+    "local_type": "local",
+    "address": "Rio Grande do Norte, RN",
+    "institution_id": 10,
+    "institution_name": "Cozinhando Amor",
+    "description": "Buscamos voluntários(as) que desejam dar aulas para jovens que procuram apoio na área de matemática, voltada para vestibulares e ENEM. Vamos juntos!",
+    "hability": ["cozinha", "alimenatação"],
+    "cause": ["social"],
+    "popularity": 60
+  },
+  {
+    "id": 11,
+    "title": "Professor(a) de Surf",
+    "img": "https://images.unsplash.com/photo-1601387271717-b57efaabad61?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+    "local_type": "local",
+    "address": "Praia do Francês, AL",
+    "institution_id": 11,
+    "institution_name": "SurfSolidário",
+    "description": "Buscamos voluntários(as) que desejam dar aulas para jovens que procuram apoio na área de matemática, voltada para vestibulares e ENEM. Vamos juntos!",
+    "hability": ["esportes", "surf"],
+    "cause": ["esportes"],
+    "popularity": 11
+  },
+  {
+    "id": 12,
+    "title": "Grafiteira",
+    "img": "https://images.unsplash.com/photo-1499237882915-ce9a55013b83?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+    "local_type": "remote",
+    "address": "Porto Alegre, RS",
+    "institution_id": 12,
+    "institution_name": "Grafite Livre",
+    "description": "Buscamos voluntários(as) que desejam dar aulas para jovens que procuram apoio na área de matemática, voltada para vestibulares e ENEM. Vamos juntos!",
+    "hability": ["artes"],
+    "cause": ["artes"],
+    "popularity": 23
   }
 ]

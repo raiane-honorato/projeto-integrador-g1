@@ -32,6 +32,10 @@ function Spotlight() {
       .catch(erro => alert(`Erro ao obter lista de habilidades: ${erro}`))
   },[])
 
+  //order project list by popularity
+  projects.sort((a,b) => {return(b.popularity - a.popularity)});
+  let popularProjects = projects.slice(0,4);
+
   return (
     <>
       <section className="spotlight-section spotlight-section-one">
@@ -57,7 +61,7 @@ function Spotlight() {
       <section className="spotlight-section spotlight-section-two">
         <h2>As vagas mais desejadas...</h2>
         <div className="job-cards">
-          {projects.map((project) => (
+          {popularProjects.map((project) => (
             <ProjectCart project={project} key = {`spotlight-${project.id}`} />
           ))}
         </div>
