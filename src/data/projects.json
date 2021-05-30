@@ -60,13 +60,13 @@
     "institution_id": 5,
     "institution_name": "Amigos e bichos",
     "description": "Estamos precisando de alguém com experiência em redes sociais para gerar mais engajamento e apoio para nossa ONG.",
-    "hability": [],
+    "hability": ["web", "frontend", "react"],
     "cause": ["proteção animal"],
     "popularity": 80
   },
   {
     "id": 6,
-    "title": "Dentista (o)",
+    "title": "Dentista(o)",
     "img": "https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
     "local_type": "presencial",
     "address": "Recife, PE",
@@ -75,7 +75,7 @@
     "description": "Estamos precisando de alguém com experiência em periodontia.",
     "hability": [],
     "cause": ["saúde"],
-    "popularity": 70
+    "popularity": 40
   },
   {
     "id": 7,
@@ -125,7 +125,7 @@
     "institution_id": 10,
     "institution_name": "Cozinhando Amor",
     "description": "Buscamos voluntários(as) que desejam dar aulas para jovens que procuram apoio na área de matemática, voltada para vestibulares e ENEM. Vamos juntos!",
-    "hability": ["cozinha", "alimenatação"],
+    "hability": ["cozinha", "alimentação"],
     "cause": ["social"],
     "popularity": 60
   },
@@ -153,6 +153,6 @@
     "description": "Buscamos voluntários(as) que desejam dar aulas para jovens que procuram apoio na área de matemática, voltada para vestibulares e ENEM. Vamos juntos!",
     "hability": ["artes"],
     "cause": ["artes"],
-    "popularity": 23
+    "popularity": 90
   }
 ]

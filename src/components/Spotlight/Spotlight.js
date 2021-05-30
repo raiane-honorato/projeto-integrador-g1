@@ -35,7 +35,8 @@ function Spotlight() {
   //order project list by popularity
   projects.sort((a,b) => {return(b.popularity - a.popularity)});
   let popularProjects = projects.slice(0,4);
-
+  console.log(popularProjects)
+  
   return (
     <>
       <section className="spotlight-section spotlight-section-one">
