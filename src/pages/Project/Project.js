@@ -3,21 +3,22 @@ import { useParams } from "react-router-dom";
 import Footer from "../../components/Footer/Footer";
 import Navbar from "../../components/Navbar/Navbar";
 import "./project.css";
+import projects from "../../data/projects.json"
 
 function ProjectPage() {
   const parameter = useParams();
   const projectId = parameter.id;
 
-  const [vagas, setVagas] = useState([]);
+  const [vagas, setVagas] = useState(projects);
 
-  useEffect(() => {
-    fetch(
-      `https://raw.githubusercontent.com/felipeblobo/felipeblobo.github.io/main/projects.json`
-    )
-      .then((res) => res.json())
-      .then((res) => setVagas(res))
-      .catch((erro) => alert(`Erro ao obter dados sobre a vaga: ${erro}`));
-  }, []);
+  // useEffect(() => {
+  //   fetch(
+  //     `https://raw.githubusercontent.com/felipeblobo/felipeblobo.github.io/main/projects.json`
+  //   )
+  //     .then((res) => res.json())
+  //     .then((res) => setVagas(res))
+  //     .catch((erro) => alert(`Erro ao obter dados sobre a vaga: ${erro}`));
+  // }, []);
 
   return (
     <div id="page-container">
