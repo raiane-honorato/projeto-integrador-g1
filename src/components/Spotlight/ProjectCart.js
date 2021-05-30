@@ -6,7 +6,7 @@ function ProjectCart(props) {
         <NavLink to={`/project/${props.project["id"]}`} key = {props.project["id"]} className = "spotlight-card-container">
         <div className="card">
             
-            <div class="card-image-div">
+            <div className="card-image-div">
               <img
                 className="card-image"
                 alt={props.project["title"]}
@@ -20,8 +20,8 @@ function ProjectCart(props) {
               {props.project["institution_name"]}
               </p>
               {
-                  props.project['hability'].map(hability => (
-                      <span class="spotlight-projectcart-hability">{hability}</span>
+                  props.project['hability'].map((hability,index) => (
+                      <span className="spotlight-projectcart-hability" key={index} >{hability}</span>
                   ))
               }
             </div>
