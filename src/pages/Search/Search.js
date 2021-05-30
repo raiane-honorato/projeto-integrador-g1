@@ -35,7 +35,7 @@ function Search() {
 
     //pagination
     const [pageNumber, setPageNumber] = useState(0);
-    const projectsPerPage = 9;
+    const projectsPerPage = 10;
     const projectsViewd = pageNumber * projectsPerPage;
     const pageCount = Math.ceil(filteredProjects.length / projectsPerPage)
     const displayProjects = filteredProjects.slice(projectsViewd, projectsViewd + projectsPerPage)

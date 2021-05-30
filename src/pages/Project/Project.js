@@ -42,18 +42,21 @@ function ProjectPage() {
                   </div>
                   <div className="project-details">
                     <p>{vaga.description}</p>
-                    <div className='habilities'>
-                     {vaga.hability && (<span>Habilidades:</span>)}
-                     {vaga.hability && vaga.hability.map(hability => (
-                        <span key={hability}>{hability}</span>
-                      ))}
+                    <div className="habilities">
+                      {vaga.hability && <span>Habilidades:</span>}
+                      {vaga.hability &&
+                        vaga.hability.map((hability) => (
+                          <span key={hability}>{hability}</span>
+                        ))}
                     </div>
-                    <div className='causes'>
+                    <div className="causes">
                       <span>Causas:</span>
-                      {vaga.cause && vaga.cause.map(cause => (
-                        <span key={cause}>{cause}</span>
-                      ))}
+                      {vaga.cause &&
+                        vaga.cause.map((cause) => (
+                          <span key={cause}>{cause}</span>
+                        ))}
                     </div>
+                  <button className='project-btn'>Quero a Vaga</button>
                   </div>
                 </div>
               </div>
