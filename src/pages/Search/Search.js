@@ -2,6 +2,7 @@ import React from "react";
 import { useLocation } from "react-router-dom";
 import "./Search.css";
 import { useState } from "react";
+import ReactPaginate from "react-paginate";
 
 import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Footer/Footer";
@@ -10,23 +11,41 @@ import projects from "../../data/projects.json";
 import ProjectCart from "../../components/Spotlight/ProjectCart";
 
 function Search() {
-
+    
+    // q search parameter
     const {search} = useLocation();
     const searchParams = new URLSearchParams(search);
     const q = searchParams.get('q');
 
+    //filter project list by q parameter
     const filteredProjects = projects.filter((project) =>  
         (
-            (project['title'].toLowerCase().indexOf(q.toLowerCase()) > -1) ||
-            (project['address'].toLowerCase().indexOf(q.toLowerCase()) > -1) ||
-            (project['institution_name'].toLowerCase().indexOf(q.toLowerCase()) > -1) ||
-            (project['hability'].toString().toLowerCase().indexOf(q.toLowerCase()) > -1)    
-            
+            (project['title'].toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").indexOf(q.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "")) > -1) ||
+            (project['address'].toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").indexOf(q.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "")) > -1) ||
+            (project['institution_name'].toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").indexOf(q.toLowerCase()) > -1) ||
+            (project['hability'].toString().toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").indexOf(q.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "")) > -1)             
         )
-
     )
-
+    //order project list by popularity
+    filteredProjects.sort((a,b) => {return(b.popularity - a.popularity)})
+    
+    // filter states
     const [locationTypeState, setLocationTypeState] = useState(false);
+
+
+    //pagination
+    const [pageNumber, setPageNumber] = useState(0);
+    const projectsPerPage = 10;
+    const projectsViewd = pageNumber * projectsPerPage;
+    const pageCount = Math.ceil(filteredProjects.length / projectsPerPage)
+    const displayProjects = filteredProjects.slice(projectsViewd, projectsViewd + projectsPerPage)
+    .map(project => {
+       return (<ProjectCart project = {project} key = {`search-${project.id}`}/>)
+    });
+    const changePage = ( {selected} ) => {
+        setPageNumber(selected);
+    };
+
 
     return(
         <>
@@ -74,9 +93,21 @@ function Search() {
             </div>
 
             <div className="search-card-container">
-                {filteredProjects.map(project => (
-                    <ProjectCart project = {project} key = {`search-${project.id}`}/>
-                ))}
+                {displayProjects}
+            </div>
+            <div className="search-pagination-container">
+                <ReactPaginate 
+                    previousLabel = {"Anterior"}
+                    nextLabel = {"Próximo"}
+                    pageCount = {pageCount}
+                    onPageChange={changePage}
+                    containerClassName={"paginationBttns"}
+                    previousLinkClassName={"previousBttn"}
+                    nextLinkClassName={"nextBttn"}
+                    disabledClassName={"paginationDisabled"}
+                    activeClassName={"paginationActive"}
+                    
+                />
             </div>
         </div>
 
