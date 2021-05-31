@@ -64,8 +64,8 @@ function Search() {
 
                 <div className = "search-filter-button-div address">
                     <button className = "search-filter-button address">Cidade</button>
-                </div>
-
+                </div>                    
+                
                 <div className="search-filter-button-div location-type">
                     <button className = "search-filter-button location-type" onClick = {() => {
                         setLocationTypeState(!locationTypeState)

@@ -8,11 +8,11 @@
 .formCadastro, .instForm {
   margin: 2rem auto 8rem;
   width: 100%;
-  max-width: 40rem;
+  max-width: 35rem;
   flex-grow: 1;
   color: var(--mainBlack);
   background-color: var(--mainWhite);
-  padding: 2rem 4rem;
+  padding: 1rem 2rem;
   border-radius: 1rem;
   box-shadow: 2px 2px 10px black;
 }
@@ -21,6 +21,8 @@ form h2 {
   color: var(--secondColor);
   font-weight: bold;
   font-size: 1.5rem;
+  text-align: center;
+  
 }
 
 .inputs {
@@ -37,7 +39,7 @@ form h2 {
 #contatNumber,
 #senha,
 #confSenha {
-  padding: 0.7rem;
+  padding: 0.5rem;
   border-radius: 5px;
   border: none;
   box-shadow: 1px 1px 4px #9c9c9c;
@@ -68,27 +70,43 @@ form h2 {
   font-size: 0.9rem;
 }
 
-.botoes {
+.btn-div {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
+  margin-top: 1rem;
 }
 
-.btnCadastro {
+.btn-form {
   height: 3rem;
-  width: 10rem;
+  width: 8rem;
   margin: 1rem 0.5rem;
   font-size: 1.2rem;
   font-family: "Poppins", sans-serif;
   border: none;
   border-radius: 2rem;
   cursor: pointer;
+ 
+}
+
+.btn-previous {
+
+  background-color: var(--thirdColor);
+}
+
+.btn-submit, .btn-next {
+
   background-color: var(--secondColor);
 }
 
-.btnCadastro:hover {
+.btn-submit:hover, .btn-previous:hover, .btn-next:hover {
   filter: brightness(1.2);
 }
 
+.step-guide {
+  text-align: center;
+}
+
+ 
 
 /* Formulário da Instituição  */
 
