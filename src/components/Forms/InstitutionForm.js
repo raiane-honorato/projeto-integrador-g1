@@ -52,6 +52,13 @@ function InstFormulario() {
     <>
       <h1 className="instituition-form-title">Cadastre sua Instituição</h1>
       <form className="instForm">
+
+        <h2>{steps[currentStep].title}</h2>
+           <p className="step-guide">
+            {currentStep + 1} de {steps.length}
+          </p>
+
+
         {steps[currentStep].id === "dados-base" && (
           <div className="dados-base">
             <div className="inputs">
