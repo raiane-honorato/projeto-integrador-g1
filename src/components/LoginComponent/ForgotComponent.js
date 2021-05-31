@@ -6,7 +6,7 @@ function ForgotComponent(props) {
 
   return (
         <div className="firts-column">
-        <h2 className="title"> Recuparação de senha</h2>
+        <h2 className="title"> Recuperação de senha</h2>
         <form className="form">
           <div className="form-group">
             <TextField

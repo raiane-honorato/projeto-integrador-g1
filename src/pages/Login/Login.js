@@ -11,7 +11,6 @@ function Login() {
 
   const [changePass, setChangePass] = useState(false);  
 
-  console.log(!changePass)
   return (
     <div className="loginContainer">
     <Navbar />

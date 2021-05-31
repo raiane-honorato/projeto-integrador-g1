@@ -1,4 +1,3 @@
 # Projeto Integrador
 
-
-Atualizando para teste
+Projeto integrador realizado durante o Curso Fullstack da Digital House.

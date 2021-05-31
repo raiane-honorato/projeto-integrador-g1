@@ -4,20 +4,14 @@ import miniLogo from "../../img/mini-logo-white.png";
 import SearchBar from "../SearchBar/SearchBar";
 import { useState } from "react";
 
-function Navbar() {
 
-  const [navbar, setNavbar] = useState(false);
+function Navbar({navbarTransparent, changeBackground}) {
 
-  function changeBackground() {
-      window.scrollY >= 70 ? setNavbar(true) : setNavbar(false);    
-  }
-
-    window.addEventListener('scroll', changeBackground)
-
+  window.addEventListener('scroll', changeBackground)
 
   return (
     <>
-      <nav className={navbar ? 'navbar active' : 'navbar'}>
+      <nav className="navbar" id={ navbarTransparent ? 'navbarTransparent' : '' }>
         <div className="nav-container">
           <div>
             <img

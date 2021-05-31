@@ -1,57 +1,138 @@
-import { useState } from "react";
-import MaskedInput from "./formComponents/MaskedInput";
+import { useState, useEffect } from "react";
+import InputMask from "react-input-mask";
 import './userform.css';
 
-function InstFormulario() {
-  const [values, setValues] = useState({});
-//   const [count, setCount] = useState({})
+function useFormik({ initialValues, validate }){
 
-  const blocklist = ["puta", "merda", "shit", "karalho", "caralho"];
+  const [ touched, setTouchedFields ] = useState({})
+  const [ errors, setErrors ] = useState({})
+  const [ values, setValues ] = useState(initialValues)
 
-  function handleChange(event) {
+  useEffect(() =>{
+      validateValues(values)
+  }, [values])
+
+  function handleChange(event){
+
+    const fieldName = event.target.getAttribute('name')
+    const value = event.target.value
+
     setValues({
       ...values,
-      [event.target.name]: event.target.value,
-    });
+      [fieldName] : value
+    })
+
     
+
   }
 
-  function handleSubmit(event) {
-    // event.preventDefault();
+  function handleBlur(event){
+    const fieldName = event.target.getAttribute('name')
+    setTouchedFields({
+      ...touched,
+      [fieldName] : true
+      })
+  }
 
-    const nome = values.ongName
-    const resumo = values.resumo
-    const endereco = values.endereco
-    const causas = values.causas
-    const numBeneficiados = values.numBeneficiados
-    const cnpj = values.cnpjNumber
-    const telOng = values.telOng
-    const email = values.email
-    const site = values.urlSite
-    const facebook = values.facebook
-    const instagram = values.instagram
-    const descricao = values.descricao
+  function validateValues(values){
+      setErrors(validate(values))
+  }
 
+  return {
+    values,
+    errors,
+    touched,
+    handleBlur,
+    setErrors,
+    handleChange
+  }
 
-    const nomeCompleto = nome.trim().split(" ").filter((nome) => nome !== "" || nome !== "")
+}
 
-    const nomeImproprio = blocklist
-    .map((palavra) => nomeCompleto.includes(palavra))
-    .find((elemento) => elemento === true);
+// -------------------------------------------------------------------------------
 
-    if (nomeImproprio) {
-        alert("Nome Invalido!");
-        event.preventDefault();
-        return;
+function InstFormulario() {
+
+  const onlyNumbers = (str) => str.replace(/[^0-9]/g, "");
+  
+  const formik = useFormik({
+    initialValues:{
+      ongName: '',
+      resumo: '',
+      cnpjNumber: '',
+      endereco:'',
+      causas:'',
+      numBeneficiados:'',
+      telOng: '',
+      urlSite: '',
+      facebook: '',
+      instagram: '',
+      descricao: '',
+      email: '',
+      senha: '',
+      confSenha: ''
+    },
+    validate: function(values){
+
+      const cnpj = onlyNumbers(values.cnpjNumber)
+      const tel = onlyNumbers(values.telOng)
+    
+
+      const errors = {}
+
+      if(values.ongName.length < 3 | values.ongName.length >100){
+        errors.ongName = "Nome Invalido"
       }
 
-  }
+      if(values.resumo.length < 5 | values.resumo.length > 100){
+        errors.resumo = "Texto invalido"
+      }
+
+      if(values.endereco.length < 3 | values.endereco.length > 150){
+        errors.endereco = "Endereço invalido"
+      }
+
+      if(cnpj.length < 14){
+        errors.cnpjNumber = "CNPJ invalido"
+      }
+    
+      if(values.causas.length < 3 ){
+        errors.causas = "Causa invalida"
+      }
+
+      if(tel.length < 10 | tel.length > 11){
+        errors.telOng = "Telefone invalido"
+      }
+
+      if(values.descricao.length < 5 | values.descricao.length > 520){
+        errors.descricao = "Texto invalido"
+      }
+
+      if(!values.email.includes('@') | values.email.lengthh < 7){
+        errors.email = "Email invalido"
+     }
+
+      if(values.senha.length < 8 | values.senha.length > 15){
+        errors.senha = "Senha invalida"
+      }
+
+      if(values.confSenha != values.senha | values.confSenha == undefined){
+        errors.confSenha = "Senha invalida"
+      }
+
+
+      return errors
+    }
+  })
 
   return (
     <>
       <h1 className='instituition-form-title'>Cadastre sua Instituição</h1>
 
-      <form className="instForm" onSubmit={(e) => handleSubmit(e)}>
+      <form className="instForm"
+        onSubmit={(event) => {
+        event.preventDefault()
+      }}>
         <div className="dados-base">
           <div className="inputs">
             <label htmlFor="nomeOng">Nome da Ong</label>
@@ -59,12 +140,16 @@ function InstFormulario() {
               type="text"
               name="ongName"
               id="ongName"
-              value={values.ongName}
-              onChange={handleChange}
+              value={formik.values.ongName}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               minLength="3"
               maxLength="100"
               required
             />
+             {formik.touched.ongName && 
+            formik.errors.ongName && 
+            <span className="formikError">{formik.errors.ongName}</span>}
           </div>
 
           <div className="inputs">
@@ -77,12 +162,16 @@ function InstFormulario() {
               cols="50"
               minLength="10"
               maxLength="180"
-              value={values.resumo}
-              onChange={handleChange}
-              minLength="3"
+              value={formik.values.resumo}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              minLength="5"
               maxLength="100"
               required
             />
+             {formik.touched.resumo && 
+            formik.errors.resumo && 
+            <span className="formikError">{formik.errors.resumo}</span>}
           </div>
 
           <div className="inputs">
@@ -91,12 +180,16 @@ function InstFormulario() {
               type="text"
               name="endereco"
               id="endereco"
-              value={values.endereco}
-              onChange={handleChange}
+              value={formik.values.endereco}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               minLength="3"
               maxLength="100"
               required
             />
+             {formik.touched.endereco && 
+            formik.errors.endereco && 
+            <span className="formikError">{formik.errors.endereco}</span>}
           </div>
 
           <div className="inputs">
@@ -105,10 +198,14 @@ function InstFormulario() {
               type="text"
               name="causas"
               id="causas"
-              value={values.causas}
-              onChange={handleChange}
+              value={formik.values.causas}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               required
             />
+             {formik.touched.causas && 
+            formik.errors.causas && 
+            <span className="formikError">{formik.errors.causas}</span>}
           </div>
 
           <div className="inputs">
@@ -117,54 +214,50 @@ function InstFormulario() {
               type="text"
               name="numBeneficiados"
               id="numBeneficiados"
-              value={values.numBeneficiados}
-              onChange={handleChange}
-              required
+              value={formik.values.numBeneficiados}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
             />
+             {formik.touched.numBeneficiados && 
+            formik.errors.numBeneficiados && 
+            <span className="formikError">{formik.errors.numBeneficiados}</span>}
           </div>
+
+        <hr />
+
 
           <div className="inputs">
             <label htmlFor="cnpjNumber">CNPJ</label>
-            <MaskedInput
+            <InputMask
               name="cnpjNumber"
               id="cnpjNumber"
               mask="99.999.999/9999-99"
-              value={values.cnpjNumber}
-              onChange={handleChange}
+              value={formik.values.cnpjNumber}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
             />
+             {formik.touched.cnpjNumber && 
+            formik.errors.cnpjNumber && 
+            <span className="formikError">{formik.errors.cnpjNumber}</span>}
           </div>
         </div>
 
-        <hr />
 
         <div className="contatos">
           <div className="inputs">
             <label htmlFor="telOng">Telefone</label>
-            <MaskedInput
+            <InputMask
               name="telOng"
               id="telOng"
               mask="(99) 9 9999-9999"
-              value={values.telOng}
-              onChange={handleChange}
+              value={formik.values.telOng}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
             />
+             {formik.touched.telOng && 
+            formik.errors.telOng && 
+            <span className="formikError">{formik.errors.telOng}</span>}
           </div>
-
-          <div className="inputs">
-            <label htmlFor="email">E-Mail</label>
-            <input
-              type="text"
-              id="email"
-              name="email"
-              minLength="6"
-              maxLength="100"
-              value={values.email}
-              onChange={handleChange}
-              required
-            />
-          </div>
-
-
-
 
 
           <div className="inputs">
@@ -175,35 +268,47 @@ function InstFormulario() {
               name="urlSite"
               minLength="5"
               maxLength="100"
-              value={values.urlSite}
-              onChange={handleChange}
+              value={formik.values.urlSite}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
             />
+             {formik.touched.urlSite && 
+            formik.errors.urlSite && 
+            <span className="formikError">{formik.errors.urlSite}</span>}
           </div>
 
           <div className="inputs">
-            <label htmlFor="facebook">facebook</label>
+            <label htmlFor="facebook">Facebook (URL)</label>
             <input
               type="url"
               id="facebook"
               name="facebook"
               minLength="5"
               maxLength="100"
-              value={values.facebook}
-              onChange={handleChange}
+              value={formik.values.facebook}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
             />
+             {formik.touched.facebook && 
+            formik.errors.facebook && 
+            <span className="formikError">{formik.errors.facebook}</span>}
           </div>
 
           <div className="inputs">
-            <label htmlFor="instagram">instagram</label>
+            <label htmlFor="instagram">Instagram (URL)</label>
             <input
               type="url"
               id="instagram"
               name="instagram"
               minLength="5"
               maxLength="100"
-              value={values.instagram}
-              onChange={handleChange}
+              value={formik.values.instagram}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
             />
+             {formik.touched.instagram && 
+            formik.errors.instagram && 
+            <span className="formikError">{formik.errors.instagram}</span>}
           </div>
         </div>
 
@@ -217,16 +322,38 @@ function InstFormulario() {
               cols="50"
               minLength="10"
               maxLength="180"
-              value={values.descricao}
-              onChange={handleChange}
-              minLength="3"
-              maxLength="100"
+              value={formik.values.descricao}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              minLength="5"
+              maxLength="520"
               required
             />
+             {formik.touched.descricao && 
+            formik.errors.descricao && 
+            <span className="formikError">{formik.errors.descricao}</span>}
           </div>
         </div>
-
+        
         <hr />
+
+          <div className="inputs">
+            <label htmlFor="email">E-Mail</label>
+            <input
+              type="text"
+              id="email"
+              name="email"
+              minLength="6"
+              maxLength="100"
+              value={formik.values.email}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              required
+            />
+             {formik.touched.email && 
+            formik.errors.email && 
+            <span className="formikError">{formik.errors.email}</span>}
+          </div>
 
         <div className="inputs">
             <label htmlFor="senha">Senha:</label>
@@ -236,10 +363,14 @@ function InstFormulario() {
               name="senha"
               minLength="4"
               maxLength="15"
-              value={values.senha}
-              onChange={handleChange}
+              value={formik.values.senha}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               required
             />
+             {formik.touched.senha && 
+            formik.errors.senha && 
+            <span className="formikError">{formik.errors.senha}</span>}
           </div>
 
           <div className="inputs">
@@ -250,10 +381,14 @@ function InstFormulario() {
               name="confSenha"
               minLength="4"
               maxLength="15"
-              value={values.confSenha}
-              onChange={handleChange}
+              value={formik.values.confSenha}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               required
             />
+             {formik.touched.confSenha && 
+            formik.errors.confSenha && 
+            <span className="formikError">{formik.errors.confSenha}</span>}
           </div>
 
         <div className="buttons">

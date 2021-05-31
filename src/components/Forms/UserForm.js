@@ -11,11 +11,6 @@ function useFormik({ initialValues, validate }){
   const [ errors, setErrors ] = useState({})
   const [ values, setValues ] = useState(initialValues)
 
-
-  // function onlyNumbers(str){
-  //   str.replace(/[^0-9]/g, "");
-  // }
-
   useEffect(() =>{
       validateValues(values)
   }, [values])

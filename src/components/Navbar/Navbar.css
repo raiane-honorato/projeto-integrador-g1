@@ -1,7 +1,7 @@
 .navbar {
     position: sticky;
     top: 0;
-    background-color: transparent;
+    background-color: var(--primaryColor);
     display: flex;
     align-items: center;
     height: 5rem;
@@ -10,8 +10,8 @@
     z-index: 100;
 }
 
-.navbar.active {
-    background-color: var(--primaryColor);
+#navbarTransparent{
+    background-color: transparent;
 }
 
 .nav-container {
