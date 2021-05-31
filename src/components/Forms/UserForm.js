@@ -1,83 +1,116 @@
-import { useState } from "react";
-import MaskedInput from "./formComponents/MaskedInput";
+import { useState, useEffect } from "react";
+import InputMask from "react-input-mask";
+// import MaskedInput from "./formComponents/MaskedInput";
 import './userform.css';
 
-function Formulario() {
-  const [values, setValues] = useState({});
 
-  const blocklist = ["puta", "merda", "shit", "karalho", "caralho"];
+// -------------------------------------------------------------------------------
+function useFormik({ initialValues, validate }){
 
-  function handleChange(event) {
+  const [ touched, setTouchedFields ] = useState({})
+  const [ errors, setErrors ] = useState({})
+  const [ values, setValues ] = useState(initialValues)
+
+
+  // function onlyNumbers(str){
+  //   str.replace(/[^0-9]/g, "");
+  // }
+
+  useEffect(() =>{
+      validateValues(values)
+  }, [values])
+
+  function handleChange(event){
+
+    const fieldName = event.target.getAttribute('name')
+    const value = event.target.value
+
     setValues({
       ...values,
-      [event.target.name]: event.target.value,
-    });
+      [fieldName] : value
+    })
+
   }
 
-  function teste() {
-    if (values.nome != undefined) {
-      console.log(values.nome.length);
-    }
+  function handleBlur(event){
+    const fieldName = event.target.getAttribute('name')
+    setTouchedFields({
+      ...touched,
+      [fieldName] : true
+      })
   }
 
-  function handleSubmit(event) {
-    const nome = values.nome;
-    const email = values.email;
-    const senha = values.senha;
-    const confirmSenha = values.confSenha;
-
-    const nomeSemEspaco = nome.trim();
-
-    const emailSemEspaco = email.trim();
-    const senhaSemEspaco = senha.trim();
-    const confSenhaSemEspaco = confirmSenha.trim();
-
-    const nomeESobrenome = nomeSemEspaco
-      .split(" ")
-      .filter((nome) => nome !== "" || nome !== "");
-
-    const nomeImproprio = blocklist
-      .map((palavra) => nomeESobrenome.includes(palavra))
-      .find((elemento) => elemento === true);
-
-    if (nomeImproprio) {
-      alert("Nome Invalido!");
-      event.preventDefault();
-      return;
-    }
-
-    if (values.nome.length < 2) {
-      alert("Favor colocar nome e sobrenome");
-      event.preventDefault();
-      return;
-    }
-
-    if ((nomeSemEspaco.length < 3) | (nomeSemEspaco.length > 100)) {
-      alert("Campo Nome deve conter entre 3 e 100 caracteres");
-      event.preventDefault();
-      return;
-    }
-
-    if ((emailSemEspaco.length < 6) | (emailSemEspaco.length > 100)) {
-      alert("Campo Email deve conter entre 6 e 100 caracteres");
-      event.preventDefault();
-      return;
-    }
-
-    if ((senhaSemEspaco.length < 4) | (senhaSemEspaco.length > 15)) {
-      alert("Campo Senha deve conter entre 4 e 15 caracteres");
-      event.preventDefault();
-      return;
-    }
-
-    if (confSenhaSemEspaco != senhaSemEspaco) {
-      alert("Os campos de Senha e Confirmação de Senha estão diferentes");
-      event.preventDefault();
-      return;
-    }
-
-    alert("cadastrou");
+  function validateValues(values){
+      setErrors(validate(values))
   }
+
+  return {
+    values,
+    errors,
+    touched,
+    handleBlur,
+    setErrors,
+    handleChange
+  }
+
+}
+
+// -------------------------------------------------------------------------------
+
+function Formulario() {
+
+  const onlyNumbers = (str) => str.replace(/[^0-9]/g, "");
+  
+  const formik = useFormik({
+    initialValues:{
+      userName: '',
+      cpfNumber: '',
+      dataNasc: '',
+      contatNumber: '',
+      email: '',
+      senha: '',
+      confSenha: ''
+    },
+    validate: function(values){
+
+      const cpf = onlyNumbers(values.cpfNumber)
+      const tel = onlyNumbers(values.contatNumber)
+      console.log(cpf)
+
+      const errors = {}
+
+      if(values.userName.length < 3 | values.userName.length >100){
+        errors.userName = "Nome Invalido"
+      }
+
+      if(cpf.length < 11){
+        errors.cpfNumber = "CPF invalido"
+      }
+    
+      if(values.dataNasc.length == undefined){
+        errors.dataNasc = "Data invalida"
+      }
+
+      if(tel.length < 10 | tel.length > 11){
+        errors.contatNumber = "Telefone invalido"
+      }
+
+      if(!values.email.includes('@') | values.email.lengthh < 7){
+        errors.email = "Email invalido"
+     }
+
+      if(values.senha.length < 8 | values.senha.length > 15){
+        errors.senha = "Senha invalida"
+      }
+
+      if(values.confSenha != values.senha | values.confSenha == undefined){
+        errors.confSenha = "Senha invalida"
+      }
+
+
+      return errors
+    }
+  })
 
   return (
     <>
@@ -85,34 +118,43 @@ function Formulario() {
       <form
         className="formCadastro"
         id="form1"
-        onSubmit={(e) => handleSubmit(e)}
+        onSubmit={(event) => {
+          event.preventDefault()
+        }}
       >
         <div className="dados-pessoais">
           <h2>Dados pessoais</h2>
           <div className="inputs">
-            <label htmlFor="completeName">Nome Completo:</label>
+            <label htmlFor="userName">Nome Completo:</label>
             <input
               type="text"
-              id="completeName"
-              name="nome"
+              id="userName"
+              name="userName"
               minLength="3"
               maxLength="100"
-              value={values.nome}
-              onChange={handleChange}
-              onBlur={teste}
+              value={formik.values.userName}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               required
             />
+            {formik.touched.userName && 
+            formik.errors.userName && 
+            <span className="formikError">{formik.errors.userName}</span>}
           </div>
 
           <div className="inputs">
             <label htmlFor="cpfNumber">CPF:</label>
-            <MaskedInput
-              name="cpf"
+            <InputMask
+              name="cpfNumber"
               id="cpfNumber"
               mask="999.999.999-99"
-              value={values.cpf}
-              onChange={handleChange}
+              value={formik.values.cpfNumber}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
             />
+            {formik.touched.cpfNumber && 
+            formik.errors.cpfNumber && 
+            <span className="formikError">{formik.errors.cpfNumber}</span>}
           </div>
 
           <div className="inputs">
@@ -121,10 +163,14 @@ function Formulario() {
               type="date"
               id="dataNasc"
               name="dataNasc"
-              value={values.dataNasc}
-              onChange={handleChange}
+              value={formik.values.dataNasc}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               required
             />
+            {formik.touched.dataNasc && 
+            formik.errors.dataNasc && 
+            <span className="formikError">{formik.errors.dataNasc}</span>}
           </div>
 
           <div className="teste"></div>
@@ -134,13 +180,17 @@ function Formulario() {
           <h2>Dados cadastrais</h2>
           <div className="inputs">
             <label htmlFor="contatNumber">Telefone:</label>
-            <MaskedInput
+            <InputMask
               name="contatNumber"
               id="contatNumber"
               mask="(99) 9 9999-9999"
-              value={values.contatNumber}
-              onChange={handleChange}
+              value={formik.values.contatNumber}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
             />
+            {formik.touched.contatNumber && 
+            formik.errors.contatNumber && 
+            <span className="formikError">{formik.errors.contatNumber}</span>}
           </div>
 
           <div className="inputs">
@@ -151,10 +201,14 @@ function Formulario() {
               name="email"
               minLength="6"
               maxLength="100"
-              value={values.email}
-              onChange={handleChange}
+              value={formik.values.email}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               required
             />
+            {formik.touched.email && 
+            formik.errors.email && 
+            <span className="formikError">{formik.errors.email}</span>}
           </div>
 
           <div className="inputs">
@@ -163,12 +217,16 @@ function Formulario() {
               type="password"
               id="senha"
               name="senha"
-              minLength="4"
+              minLength="8"
               maxLength="15"
-              value={values.senha}
-              onChange={handleChange}
+              value={formik.values.senha}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               required
             />
+            {formik.touched.senha && 
+            formik.errors.senha && 
+            <span className="formikError">{formik.errors.senha}</span>}
           </div>
 
           <div className="inputs">
@@ -177,18 +235,24 @@ function Formulario() {
               type="password"
               id="confSenha"
               name="confSenha"
-              minLength="4"
+              minLength="8"
               maxLength="15"
-              value={values.confSenha}
-              onChange={handleChange}
+              value={formik.values.confSenha}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               required
             />
+            {formik.touched.confSenha && 
+            formik.errors.confSenha && 
+            <span className="formikError">{formik.errors.confSenha}</span>}
           </div>
 
           <div className="checkBox">
-            <input type="checkbox" id="terms" name="terms" />{" "}
+            <input type="checkbox" id="terms" name="terms" required/>{" "}
             <label htmlFor="terms">Aceito os termos de uso</label>
+
             <br />
+
             <input type="checkbox" id="notify" name="notify" />{" "}
             <label htmlFor="notify">Receber notificações</label>
             <br />

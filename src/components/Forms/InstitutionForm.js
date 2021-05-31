@@ -4,6 +4,7 @@ import './userform.css';
 
 function InstFormulario() {
   const [values, setValues] = useState({});
+//   const [count, setCount] = useState({})
 
   const blocklist = ["puta", "merda", "shit", "karalho", "caralho"];
 
@@ -12,16 +13,45 @@ function InstFormulario() {
       ...values,
       [event.target.name]: event.target.value,
     });
+    
   }
 
   function handleSubmit(event) {
-    event.preventDefault();
+    // event.preventDefault();
+
+    const nome = values.ongName
+    const resumo = values.resumo
+    const endereco = values.endereco
+    const causas = values.causas
+    const numBeneficiados = values.numBeneficiados
+    const cnpj = values.cnpjNumber
+    const telOng = values.telOng
+    const email = values.email
+    const site = values.urlSite
+    const facebook = values.facebook
+    const instagram = values.instagram
+    const descricao = values.descricao
+
+
+    const nomeCompleto = nome.trim().split(" ").filter((nome) => nome !== "" || nome !== "")
+
+    const nomeImproprio = blocklist
+    .map((palavra) => nomeCompleto.includes(palavra))
+    .find((elemento) => elemento === true);
+
+    if (nomeImproprio) {
+        alert("Nome Invalido!");
+        event.preventDefault();
+        return;
+      }
+
   }
 
   return (
     <>
       <h1 className='instituition-form-title'>Cadastre sua Instituição</h1>
-      <form className="instForm">
+
+      <form className="instForm" onSubmit={(e) => handleSubmit(e)}>
         <div className="dados-base">
           <div className="inputs">
             <label htmlFor="nomeOng">Nome da Ong</label>
@@ -29,8 +59,8 @@ function InstFormulario() {
               type="text"
               name="ongName"
               id="ongName"
-              value={values.name}
-              onChange={handleSubmit}
+              value={values.ongName}
+              onChange={handleChange}
               minLength="3"
               maxLength="100"
               required
@@ -39,6 +69,7 @@ function InstFormulario() {
 
           <div className="inputs">
             <label htmlFor="resumo">Resumo da Ong</label>
+            {/* {tamanho && <p className="errors-input">{tamanho}</p>} */}
             <textarea
               name="resumo"
               id="resumo"
@@ -47,7 +78,7 @@ function InstFormulario() {
               minLength="10"
               maxLength="180"
               value={values.resumo}
-              onChange={handleSubmit}
+              onChange={handleChange}
               minLength="3"
               maxLength="100"
               required
@@ -61,7 +92,7 @@ function InstFormulario() {
               name="endereco"
               id="endereco"
               value={values.endereco}
-              onChange={handleSubmit}
+              onChange={handleChange}
               minLength="3"
               maxLength="100"
               required
@@ -75,7 +106,7 @@ function InstFormulario() {
               name="causas"
               id="causas"
               value={values.causas}
-              onChange={handleSubmit}
+              onChange={handleChange}
               required
             />
           </div>
@@ -83,22 +114,22 @@ function InstFormulario() {
           <div className="inputs">
             <label htmlFor="numBeneficiados">Numero de Beneficiádos</label>
             <input
-              type="number"
+              type="text"
               name="numBeneficiados"
               id="numBeneficiados"
               value={values.numBeneficiados}
-              onChange={handleSubmit}
+              onChange={handleChange}
               required
             />
           </div>
 
           <div className="inputs">
-            <label htmlFor="cnpj">CNPJ</label>
+            <label htmlFor="cnpjNumber">CNPJ</label>
             <MaskedInput
-              name="cnpj"
-              id="cnpj"
+              name="cnpjNumber"
+              id="cnpjNumber"
               mask="99.999.999/9999-99"
-              value={values.cnpj}
+              value={values.cnpjNumber}
               onChange={handleChange}
             />
           </div>
@@ -132,15 +163,19 @@ function InstFormulario() {
             />
           </div>
 
+
+
+
+
           <div className="inputs">
-            <label htmlFor="site">Site</label>
+            <label htmlFor="urlSite">Site</label>
             <input
               type="url"
-              id="site"
-              name="site"
+              id="urlSite"
+              name="urlSite"
               minLength="5"
               maxLength="100"
-              value={values.site}
+              value={values.urlSite}
               onChange={handleChange}
             />
           </div>
@@ -172,8 +207,6 @@ function InstFormulario() {
           </div>
         </div>
 
-        <hr />
-
         <div className="sobre">
           <div className="inputs">
             <label htmlFor="descricao">Descrição da Ong</label>
@@ -185,7 +218,7 @@ function InstFormulario() {
               minLength="10"
               maxLength="180"
               value={values.descricao}
-              onChange={handleSubmit}
+              onChange={handleChange}
               minLength="3"
               maxLength="100"
               required
@@ -193,10 +226,42 @@ function InstFormulario() {
           </div>
         </div>
 
+        <hr />
+
+        <div className="inputs">
+            <label htmlFor="senha">Senha:</label>
+            <input
+              type="password"
+              id="senha"
+              name="senha"
+              minLength="4"
+              maxLength="15"
+              value={values.senha}
+              onChange={handleChange}
+              required
+            />
+          </div>
+
+          <div className="inputs">
+            <label htmlFor="confSenha">Confirmar Senha:</label>
+            <input
+              type="password"
+              id="confSenha"
+              name="confSenha"
+              minLength="4"
+              maxLength="15"
+              value={values.confSenha}
+              onChange={handleChange}
+              required
+            />
+          </div>
+
         <div className="buttons">
           <div className="inputs">
             <input type="submit" value="Cadastrar" className="btnCadastro" />
           </div>
+
+
         </div>
       </form>
     </>
