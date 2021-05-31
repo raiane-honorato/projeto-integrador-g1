@@ -9,7 +9,7 @@ import "./spotlight.css";
 // import medical_care from "../../img/medical_care.svg";
 // import music from "../../img/music.svg";
 // import sports from "../../img/sports.svg";
-// import teacher from "../../img/teacher.svg";
+import educacao from "../../img/teacher.svg";
 // import workout from "../../img/workout.svg";
 // import ecologial_cause from "../../img/ecological_cause.svg";
 // import meditation from "../../img/meditation.svg";
