@@ -8,7 +8,7 @@ import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Footer/Footer";
 
 import projects from "../../data/projects.json";
-import ProjectCart from "../../components/Spotlight/ProjectCart";
+import ProjectCart from "../../components/ProjectCart/ProjectCart";
 
 function Search() {
     
@@ -49,9 +49,7 @@ function Search() {
 
     return(
         <>
-        <div className = "search-nav-container">
             <Navbar />
-        </div>
 
         <div className = "search-container">
 

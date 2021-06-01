@@ -64,3 +64,8 @@
     margin-right: 4rem;
     height: 50px;
 }
+
+.nav-responsive-menu {
+    color: var(--mainWhite);
+    visibility: hidden;
+}

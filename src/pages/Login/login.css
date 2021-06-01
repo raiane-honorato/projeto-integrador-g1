@@ -11,6 +11,7 @@
     background: url("../../img/background-login.png") no-repeat;
     background-size: cover;
     flex-grow: 1;
+    min-height: calc(100vh - 60px);
 }
 
 .firts-column{

@@ -19,7 +19,7 @@ import educacao from "../../img/teacher.svg";
 import projects from "../../data/projects.json";
 
 //components
-import ProjectCart from "./ProjectCart";
+import ProjectCart from "../ProjectCart/ProjectCart";
 import { useEffect, useState } from "react";
 
 function Spotlight() {

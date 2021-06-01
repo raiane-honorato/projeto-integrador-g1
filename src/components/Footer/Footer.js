@@ -16,12 +16,14 @@ function Footer() {
             src={fullLogo}
             alt="logo-corrente-do-bem"
           ></img>
+        </div>
+        <div className="footer-column" id="footer-column-c2">
           <p className="footer-description">
             Transforme o mundo por meio da solidariedade. Seja mais um elo dessa
             corrente.
           </p>
         </div>
-        <div className="footer-column" id="footer-column-c2">
+        <div className="footer-column" id="footer-column-c3">
           <ul className="social-media-list">
             <li className="social-media-icon">
               <FontAwesomeIcon icon={faYoutube} size="2x" alt="YouTube" />

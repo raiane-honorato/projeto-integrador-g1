@@ -2,6 +2,9 @@ import { NavLink } from "react-router-dom";
 import "./Navbar.css";
 import miniLogo from "../../img/mini-logo-white.png";
 import SearchBar from "../SearchBar/SearchBar";
+import { faBars } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 
 
 function Navbar({navbarTransparent, changeBackground}) {
@@ -37,6 +40,12 @@ function Navbar({navbarTransparent, changeBackground}) {
             </ul>
           </div>
           <SearchBar />
+        {/* <FontAwesomeIcon className="nav-responsive-menu"
+                icon={ faBars }
+                size="2x"
+                alt="Menu"
+
+              /> */}
         </div>
       </nav>
     </>

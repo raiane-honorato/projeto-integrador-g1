@@ -1,5 +1,6 @@
 .search-nav-container {
     background-color: var(--primaryColor);
+    position:sticky;
 }
 
 .search-container{
@@ -14,7 +15,10 @@
 .search-card-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
-  gap: 2rem;
+    gap: 2rem;
+    justify-content: center;
+    align-items: center;
+    justify-items: center;
 }
 
 .search-filter-container{
