@@ -9,7 +9,7 @@ function Hero() {
 
 
   function changeBackground() {
-    window.scrollY >= 70 ? setNavbarTransparent(false) : setNavbarTransparent(true);  
+    window.scrollY < 70 ? setNavbarTransparent(true) : setNavbarTransparent(false);  
   }  
   
     return (

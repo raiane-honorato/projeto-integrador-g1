@@ -4,12 +4,12 @@ import InputMask from "react-input-mask";
 import './userform.css';
 
 
-// -------------------------------------------------------------------------------
 function useFormik({ initialValues, validate }){
 
   const [ touched, setTouchedFields ] = useState({})
   const [ errors, setErrors ] = useState({})
   const [ values, setValues ] = useState(initialValues)
+  
 
   useEffect(() =>{
       validateValues(values)
@@ -50,9 +50,11 @@ function useFormik({ initialValues, validate }){
 
 }
 
-// -------------------------------------------------------------------------------
+
 
 function Formulario() {
+
+  const [currentStep, setCurrentStep] = useState(0);
 
   const onlyNumbers = (str) => str.replace(/[^0-9]/g, "");
   
@@ -107,9 +109,34 @@ function Formulario() {
     }
   })
 
+  function handleNextStep() {
+    setCurrentStep((prevStep) => prevStep + 1 )
+  }
+
+
+  function handlePreviousStep(){
+    setCurrentStep((prevStep) => prevStep -1 )
+  }
+
+  // formulário multi etapas
+
+  const steps =[
+
+    {
+      id: 'personal-data',
+      title: 'Dados Pessoais'
+    },
+    {
+      id: 'registration-data',
+      title: 'Dados Cadastrais'
+    }
+  ]
+
   return (
     <>
       <h1 className='user-form-title'>Crie sua conta</h1>
+
+
       <form
         className="formCadastro"
         id="form1"
@@ -117,8 +144,14 @@ function Formulario() {
           event.preventDefault()
         }}
       >
+           <h2>{steps[currentStep].title}</h2>
+           <p className="step-guide">
+            {currentStep + 1} de {steps.length}
+          </p>
+
+        {steps[currentStep].id === 'personal-data' && (
         <div className="dados-pessoais">
-          <h2>Dados pessoais</h2>
+          {/* <h2>Dados pessoais</h2> */}
           <div className="inputs">
             <label htmlFor="userName">Nome Completo:</label>
             <input
@@ -170,9 +203,11 @@ function Formulario() {
 
           <div className="teste"></div>
         </div>
+        )}
 
+        {steps[currentStep].id == 'registration-data' && (
         <div className="cadastrais">
-          <h2>Dados cadastrais</h2>
+          {/* <h2>Dados cadastrais</h2> */}
           <div className="inputs">
             <label htmlFor="contatNumber">Telefone:</label>
             <InputMask
@@ -253,10 +288,36 @@ function Formulario() {
             <br />
           </div>
         </div>
+        )}
 
-        <div className="botoes">
-          <input type="submit" value="Cadastrar" className="btnCadastro" />
+      {currentStep < steps.length - 1 && (
+        <button 
+          className="btn-form btn-next" 
+          type="button" 
+          onClick={handleNextStep}
+        >
+          Próximo
+        </button>
+      )}
+
+      {currentStep === steps.length - 1 && (
+        <div className='btn-div'>
+          <button 
+            className="btn-form btn-previous" 
+            type="button" 
+            onClick={handlePreviousStep}
+          >
+            Voltar
+          </button>
+
+
+          <button className="btn-form btn-submit" type="submit">
+            Cadastrar
+          </button>
         </div>
+      )}
+
+       
       </form>
     </>
   )

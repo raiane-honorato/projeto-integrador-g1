@@ -2,7 +2,6 @@ import { NavLink } from "react-router-dom";
 import "./Navbar.css";
 import miniLogo from "../../img/mini-logo-white.png";
 import SearchBar from "../SearchBar/SearchBar";
-import { useState } from "react";
 
 
 function Navbar({navbarTransparent, changeBackground}) {
