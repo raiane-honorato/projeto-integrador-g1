@@ -108,8 +108,8 @@ function InstFormulario() {
       }
 
       if (
-        (values.confSenha != values.senha) |
-        (values.confSenha == undefined)
+        (values.confSenha !== values.senha) |
+        (values.confSenha === undefined)
       ) {
         errors.confSenha = "Senha invalida";
       }
@@ -197,8 +197,6 @@ function InstFormulario() {
                 value={formik.values.resumo}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
-                minLength="5"
-                maxLength="100"
                 required
               />
               {formik.touched.resumo && formik.errors.resumo && (
@@ -359,9 +357,7 @@ function InstFormulario() {
                 maxLength="180"
                 value={formik.values.descricao}
                 onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                minLength="5"
-                maxLength="520"
+                onBlur={formik.handleBlur}            
                 required
               />
               {formik.touched.descricao && formik.errors.descricao && (

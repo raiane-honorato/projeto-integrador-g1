@@ -84,7 +84,7 @@ function Formulario() {
         errors.cpfNumber = "CPF invalido"
       }
     
-      if(values.dataNasc.length == undefined){
+      if(values.dataNasc.length === undefined){
         errors.dataNasc = "Data invalida"
       }
 
@@ -100,7 +100,7 @@ function Formulario() {
         errors.senha = "Senha invalida"
       }
 
-      if(values.confSenha != values.senha | values.confSenha == undefined){
+      if(values.confSenha !== values.senha | values.confSenha === undefined){
         errors.confSenha = "Senha invalida"
       }
 
@@ -205,7 +205,7 @@ function Formulario() {
         </div>
         )}
 
-        {steps[currentStep].id == 'registration-data' && (
+        {steps[currentStep].id === 'registration-data' && (
         <div className="cadastrais">
           {/* <h2>Dados cadastrais</h2> */}
           <div className="inputs">
