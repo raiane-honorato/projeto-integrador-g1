@@ -59,3 +59,10 @@
       width: 55%;
       text-shadow: 5px 5px 5px var(--mainBlack);
   }
+
+  @media only screen and (max-width: 600px) {
+    .hero-title {
+        text-transform: uppercase;
+        font-size: 3rem;
+    }
+  }

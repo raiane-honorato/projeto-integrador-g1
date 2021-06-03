@@ -9,7 +9,19 @@ function ProjectPage() {
   const parameter = useParams();
   const projectId = parameter.id;
 
-  const [vagas, setVagas] = useState(projects.projects);
+  const [vagas, setVagas] = useState();
+
+  //get data from localhost port 8000
+  useEffect( () => {
+    fetch(`http://localhost:8000/projects`)
+    .then(res => res.json())
+    .then(res => {
+      setVagas(res)
+      console.log(res)
+    })
+    .catch(erro => alert(`Erro ao obter lista de projetos: ${erro}`))
+},[]
+)
 
   // useEffect(() => {
   //   fetch(

@@ -46,10 +46,6 @@ function Spotlight() {
   },[]
   )
 
-  //order project list by popularity
-  // const projectsList = projects;
-  // projectsList.sort((a,b) => {return(b.popularity - a.popularity)});
-  // let popularProjects = projectsList.slice(0,4);
   
   return (
     <>
