@@ -1,8 +1,13 @@
 import { TextField, Button } from "@material-ui/core";
+import { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
+import { AuthContext } from "../../context/auth";
 
 
 function LoginComponent(props) {
+
+  const { user } = useContext(AuthContext)
+
 
   return (
         <div className="firts-column">
@@ -13,6 +18,7 @@ function LoginComponent(props) {
               className="form-control"
               type="email"
               placeholder="E-mail"
+              value={user.name}
             />
           </div>
           <div className="form-group">
