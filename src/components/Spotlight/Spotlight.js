@@ -16,7 +16,7 @@ import educacao from "../../img/teacher.svg";
 // import personal from "../../img/personal.svg";
 
 //data
-import projects from "../../data/projects.json";
+//import projects from "../../data/projects.json";
 
 //components
 import ProjectCart from "../ProjectCart/ProjectCart";
@@ -32,9 +32,24 @@ function Spotlight() {
       .catch(erro => alert(`Erro ao obter lista de habilidades: ${erro}`))
   },[])
 
+  //getting project list from JSON server on 8000
+  const [projects, setProjects] = useState(null);
+  
+  useEffect( () => {
+    fetch(" http://localhost:8000/projects")
+    .then(res => res.json())
+    .then(res => {
+      setProjects(res)
+      console.log(res)
+    })
+    .catch(erro => alert(`Erro ao obter lista de projetos: ${erro}`))
+  },[]
+  )
+
   //order project list by popularity
-  projects.sort((a,b) => {return(b.popularity - a.popularity)});
-  let popularProjects = projects.slice(0,4);
+  // const projectsList = projects;
+  // projectsList.sort((a,b) => {return(b.popularity - a.popularity)});
+  // let popularProjects = projectsList.slice(0,4);
   
   return (
     <>
@@ -61,7 +76,12 @@ function Spotlight() {
       <section className="spotlight-section spotlight-section-two">
         <h2>As vagas mais desejadas...</h2>
         <div className="job-cards">
-          {popularProjects.map((project) => (
+          {
+          projects &&
+          
+          projects.sort((a,b) => {return(b.popularity - a.popularity)})
+          .slice(0,4)
+          .map((project) => (
             <ProjectCart project={project} key = {`spotlight-${project.id}`} />
           ))}
         </div>

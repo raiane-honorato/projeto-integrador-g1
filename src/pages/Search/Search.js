@@ -1,16 +1,29 @@
 import React from "react";
 import { useLocation } from "react-router-dom";
 import "./Search.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ReactPaginate from "react-paginate";
 
 import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Footer/Footer";
 
-import projects from "../../data/projects.json";
+//import projects from "../../data/projects.json";
 import ProjectCart from "../../components/ProjectCart/ProjectCart";
 
 function Search() {
+
+      //getting project list from JSON server on 8000
+    const [projects, setProjects] = useState(null);
+    
+    useEffect( () => {
+        fetch(" http://localhost:8000/projects")
+        .then(res => res.json())
+        .then(res => {
+            setProjects(res)
+        })
+        .catch(erro => alert(`Erro ao obter lista de projetos: ${erro}`))
+    },[]
+    )
     
     // q search parameter
     const {search} = useLocation();
@@ -18,32 +31,45 @@ function Search() {
     const q = searchParams.get('q');
 
     //filter project list by q parameter
-    const filteredProjects = projects.filter((project) =>  
+    const [filteredProjects, setFilteredProjects] = useState(null);
+
+    useEffect(() => {
+        projects && setFilteredProjects( projects.filter((project) =>  
         (
             (project['title'].toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").indexOf(q.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "")) > -1) ||
             (project['address'].toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").indexOf(q.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "")) > -1) ||
             (project['institution_name'].toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").indexOf(q.toLowerCase()) > -1) ||
             (project['hability'].toString().toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").indexOf(q.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "")) > -1)             
-        )
+        )).sort((a,b) => {return(b.popularity - a.popularity)})
     )
-    //order project list by popularity
-    filteredProjects.sort((a,b) => {return(b.popularity - a.popularity)})
+    },[projects, q])
     
     // filter states
     const [locationTypeState, setLocationTypeState] = useState(false);
 
-
     //pagination
     const [pageNumber, setPageNumber] = useState(0);
+    const [pageCount, setPageCount] = useState(0);
+    const [displayProjects, setDisplayProjects] = useState(null);
+    
     const projectsPerPage = 10;
-    const projectsViewd = pageNumber * projectsPerPage;
-    const pageCount = Math.ceil(filteredProjects.length / projectsPerPage)
-    const displayProjects = filteredProjects.slice(projectsViewd, projectsViewd + projectsPerPage)
+    const [projectsViewd,setProjectsViewd] = useState(pageNumber * projectsPerPage);
+
+    useEffect( () => {
+        filteredProjects && setPageCount(Math.ceil(filteredProjects.length / projectsPerPage))
+    },[filteredProjects])
+
+    useEffect( () => {
+        filteredProjects && setDisplayProjects(filteredProjects.slice(projectsViewd, projectsViewd + projectsPerPage)
     .map(project => {
        return (<ProjectCart project = {project} key = {`search-${project.id}`}/>)
-    });
+    }))
+    },[filteredProjects, projectsViewd])
+
+    
     const changePage = ( {selected} ) => {
         setPageNumber(selected);
+        setProjectsViewd( selected * projectsPerPage)
     };
 
 
@@ -55,7 +81,7 @@ function Search() {
 
             <h2 className="search-title">Explore oportunidades de voluntariado</h2>
             <span className = "summary-results">
-                {`${filteredProjects.length} ${filteredProjects.length === 1 ? 'resultado' : 'resultados'}`}
+                {filteredProjects && `${filteredProjects.length} ${filteredProjects.length === 1 ? 'resultado' : 'resultados'}`}
             </span>
 
             <div className = "search-filter-container">
@@ -91,10 +117,10 @@ function Search() {
             </div>
 
             <div className="search-card-container">
-                {displayProjects}
+                {filteredProjects && displayProjects}
             </div>
             <div className="search-pagination-container">
-                <ReactPaginate 
+               {filteredProjects && <ReactPaginate 
                     previousLabel = {"Anterior"}
                     nextLabel = {"Próximo"}
                     pageCount = {pageCount}
@@ -105,7 +131,7 @@ function Search() {
                     disabledClassName={"paginationDisabled"}
                     activeClassName={"paginationActive"}
                     
-                />
+                />}
             </div>
         </div>
 

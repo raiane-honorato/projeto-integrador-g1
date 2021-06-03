@@ -9,7 +9,7 @@ function ProjectPage() {
   const parameter = useParams();
   const projectId = parameter.id;
 
-  const [vagas, setVagas] = useState(projects);
+  const [vagas, setVagas] = useState(projects.projects);
 
   // useEffect(() => {
   //   fetch(
