@@ -1,12 +1,15 @@
 import { TextField, Button } from "@material-ui/core";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../../context/auth";
 
 
 function LoginComponent(props) {
 
-  const { user } = useContext(AuthContext)
+  const { someone } = useContext(AuthContext)
+
+  const [userEmail, setUserEmail] = useState('');
+  const [password, setPassword] = useState('');
 
 
   return (
@@ -18,7 +21,8 @@ function LoginComponent(props) {
               className="form-control"
               type="email"
               placeholder="E-mail"
-              value={user.name}
+              value={userEmail}
+              onChange={(e) => {setUserEmail(e.target.value)}}
             />
           </div>
           <div className="form-group">
@@ -26,6 +30,8 @@ function LoginComponent(props) {
               className="form-control"
               type="password"
               placeholder="Senha"
+              value={password}
+              onChange={(e) => {setPassword(e.target.value)}}
             />
           </div>
           <Button
