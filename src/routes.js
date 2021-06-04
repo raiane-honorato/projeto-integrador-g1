@@ -7,13 +7,14 @@ import RegisterInstitution from "./pages/RegisterInstituition/RegisterInstitutio
 import Error404 from "./pages/Error/Error404";
 import ProjectPage from "./pages/Project/Project";
 import Login from "./pages/Login/Login";
+import PrivateRoute from "./privateRoute/Private";
 
 function Routes() {
   return (
     <BrowserRouter>
       <Switch>
         <Route path="/" component={Home} exact />
-        <Route path="/search" component={Search} />
+        <PrivateRoute path="/search" component={Search} />
         <Route path="/login" component={Login} />
         <Route path="/register_user" component={RegisterUser} />
         <Route path="/project/:id" component={ProjectPage} />

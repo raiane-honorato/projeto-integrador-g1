@@ -1,20 +1,45 @@
 import { TextField, Button } from "@material-ui/core";
 import { useContext, useState } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useHistory } from "react-router-dom";
 import { AuthContext } from "../../context/auth";
 
 
 function LoginComponent(props) {
-
-  
   const [userEmail, setUserEmail] = useState('');
   const [password, setPassword] = useState('');
+  const {setToken} = useContext(AuthContext);
+  const history = useHistory();
+  
 
+  function login (userEmail, password) {
+    if (userEmail === 'admin@gmail.com' && password === 'admin') {
+      return { token: '1234'}
+    } else {
+      return { error: 'Usuário ou senha inválido!'}
+    }
+
+  }
+  
+  function onSubmit(event) {
+    event.preventDefault();
+    console.log('submeteu')
+    const { token } = login(userEmail, password);
+
+    if (token) {
+      console.log('logado')
+      setToken(token)
+      return history.push('/')
+    }
+
+    setUserEmail('');
+    setPassword('');
+
+  }
 
   return (
         <div className="firts-column">
         <h2 className="title"> Login</h2>
-        <form className="form">
+        <form className="form" onSubmit={onSubmit}>
           <div className="form-group">
             <TextField
               className="form-control"
@@ -34,6 +59,7 @@ function LoginComponent(props) {
             />
           </div>
           <Button
+            type='submit'
             style={{ marginTop: "20px" }}
             variant="contained"
             className="buttonLogin"
