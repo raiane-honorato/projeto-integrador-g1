@@ -145,13 +145,13 @@ function Formulario() {
         }}
       >
            <h2>{steps[currentStep].title}</h2>
+           <hr className='hr-style'/>
            <p className="step-guide">
             {currentStep + 1} de {steps.length}
           </p>
 
         {steps[currentStep].id === 'personal-data' && (
         <div className="dados-pessoais">
-          {/* <h2>Dados pessoais</h2> */}
           <div className="inputs">
             <label htmlFor="userName">Nome Completo:</label>
             <input

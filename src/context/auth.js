@@ -1,14 +1,11 @@
 import { createContext } from "react";
 
-const AuthContext = createContext({
-  token: null,
-  setToken: () => {}
-});
+const AuthContext = createContext({});
 
 const AuthProvider = ({ children }) => {
 
   return (
-    <AuthContext.Provider value={{ token, setToken }}>
+    <AuthContext.Provider >
         {children}
     </AuthContext.Provider>
   );

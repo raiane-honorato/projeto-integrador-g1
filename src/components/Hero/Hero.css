@@ -34,7 +34,7 @@
       font-family: 'Poppins', sans-serif;
       padding: 10px;
       border: none;
-      border-radius: 2rem;
+      border-radius: .2rem;
       cursor: pointer;
       color: var(--mainBlack);
   }

@@ -23,15 +23,6 @@ function ProjectPage() {
 },[]
 )
 
-  // useEffect(() => {
-  //   fetch(
-  //     `https://raw.githubusercontent.com/felipeblobo/felipeblobo.github.io/main/projects.json`
-  //   )
-  //     .then((res) => res.json())
-  //     .then((res) => setVagas(res))
-  //     .catch((erro) => alert(`Erro ao obter dados sobre a vaga: ${erro}`));
-  // }, []);
-
   return (
     <div id="page-container">
       <Navbar />
@@ -42,7 +33,9 @@ function ProjectPage() {
             <div key={vaga.id} className="project-container">
               <div className="project-title">
                 <h2>{vaga.title}</h2>
+               
               </div>
+         
               <div className="grid-project">
                 <div className="project-image-div">
                   <img src={vaga.img} alt="vaga" />
@@ -50,6 +43,7 @@ function ProjectPage() {
                 <div className="project-information">
                   <div className="project-provider">
                     <h3>{vaga.institution_name}</h3>
+                    <hr/>
                     <span>Cidade: {vaga.address}</span>
                     <span>Remoto: {vaga.local_type}</span>
                   </div>
