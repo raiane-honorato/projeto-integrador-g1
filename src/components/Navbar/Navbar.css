@@ -26,21 +26,51 @@
 .nav-container div {
    display:flex;
    align-items: center;
+   
 }
 
 .nav-btn-list {
     display: flex;
     list-style-type: none;
-    width: 200px;
-    justify-content: space-evenly;
+    width:6rem;
+    justify-content: center;
+    align-items: center;
     text-decoration: none;
 }
 
 .nav-btn {
-    text-decoration: none;
-    color: var(--mainWhite);
+    text-decoration: none;    
+    color: white;
     padding: 5px;
     
+}
+
+#login {
+    
+    background-color: var(--primaryColor);
+    padding:.5rem 2rem;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.3s;
+}
+
+#login:hover {
+background-image: linear-gradient(110deg, #18ca8b, #1c6b77);
+
+}
+
+.login {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.login span {
+    display: inline;
+    margin-left: .5rem;
 }
 
 .nav-btn-list li {
@@ -54,9 +84,7 @@
     transition: 500ms;
 }
 
-.nav-btn-list li a:hover {
-    color: var(--secondColor);
- }
+
 
 .nav-logo {
     color: var(--mainWhite);
