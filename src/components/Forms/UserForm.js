@@ -133,10 +133,8 @@ function Formulario() {
   ]
 
   return (
-    <>
+    <div className='container-useform'>
       <h1 className='user-form-title'>Crie sua conta</h1>
-
-
       <form
         className="formCadastro"
         id="form1"
@@ -319,7 +317,7 @@ function Formulario() {
 
        
       </form>
-    </>
+    </div>
   )
 }
 

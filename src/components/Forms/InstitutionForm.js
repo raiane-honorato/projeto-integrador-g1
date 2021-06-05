@@ -150,9 +150,8 @@ function InstFormulario() {
   ];
 
   return (
-    <>
+    <div>
       <h1 className="instituition-form-title">Cadastre sua Instituição</h1>
-
       <form
         className="instForm"
         onSubmit={(event) => {
@@ -451,7 +450,7 @@ function InstFormulario() {
           )}
         </div>
       </form>
-    </>
+    </div>
   );
 }
 

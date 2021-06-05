@@ -3,7 +3,6 @@ import { useParams } from "react-router-dom";
 import Footer from "../../components/Footer/Footer";
 import Navbar from "../../components/Navbar/Navbar";
 import "./project.css";
-import projects from "../../data/projects.json"
 
 function ProjectPage() {
   const parameter = useParams();
@@ -17,7 +16,6 @@ function ProjectPage() {
     .then(res => res.json())
     .then(res => {
       setVagas(res)
-      console.log(res)
     })
     .catch(erro => alert(`Erro ao obter lista de projetos: ${erro}`))
 },[]

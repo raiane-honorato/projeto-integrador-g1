@@ -24,7 +24,7 @@ function Navbar({ navbarTransparent, changeBackground }) {
             <li className="login">
               <NavLink to="/login" className="nav-btn" id="login">
               Entrar
-                <span class="material-icons material-icons-outlined">login</span>
+                <span className="material-icons material-icons-outlined">login</span>
                 
               </NavLink>
             </li>

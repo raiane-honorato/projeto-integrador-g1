@@ -47,17 +47,19 @@
 
 #login {
     
-    background-color: var(--primaryColor);
+    /* background-color: var(--primaryColor); */
     padding:.5rem 2rem;
+    border: 1px solid var(--secondColor);
     border-radius: 5px;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: 0.3s;
+    transition: all 1s ease;
 }
 
 #login:hover {
 background-image: linear-gradient(110deg, #18ca8b, #1c6b77);
+border: none;
 
 }
 
@@ -76,7 +78,7 @@ background-image: linear-gradient(110deg, #18ca8b, #1c6b77);
 .nav-btn-list li {
    position: relative;
    margin: 0 1.5rem;
-   font-size: 1.2rem;
+   font-size: 1rem;
   
 }
 

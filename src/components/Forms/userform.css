@@ -1,3 +1,10 @@
+.container-useform {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center
+}
+
 .user-form-title, .instituition-form-title {
   text-align: center;
   font-size: 2.5rem;
@@ -9,16 +16,17 @@
   margin: 2rem auto 8rem;
   width: 100%;
   max-width: 35rem;
+  max-height: 35rem;
   flex-grow: 1;
   color: var(--mainBlack);
-  background-color: var(--mainWhite);
+  background-color: var(--formBackground);
   padding: 1rem 2rem;
   border-radius: 1rem;
-  box-shadow: 2px 2px 10px black;
+  /* box-shadow: 1px 1px 5px black; */
 }
 
 form h2 {
-  color: var(--secondColor);
+  color: var(--mainBlack);
   font-weight: bold;
   font-size: 1.5rem;
   text-align: center;
