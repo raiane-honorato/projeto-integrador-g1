@@ -16,17 +16,14 @@ function Navbar({navbarTransparent, changeBackground}) {
       <nav className="navbar" id={ navbarTransparent ? 'navbarTransparent' : '' }>
         <div className="nav-container">
           <div>
+          <NavLink to="/" className="nav-btn" exact>
             <img
               src={miniLogo}
               className="nav-logo"
               alt="logo-corrente-do-bem"
             ></img>
-            <ul className="nav-btn-list">
-              <li>
-                <NavLink to="/" className="nav-btn" exact>
-                  Home
                 </NavLink>
-              </li>
+            <ul className="nav-btn-list">
               <li>
                 <NavLink to="/register_user" className="nav-btn">
                   Cadastro
