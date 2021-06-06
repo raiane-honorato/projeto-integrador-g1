@@ -22,3 +22,28 @@
 .profile-other-data span {
   font-weight: 500;
 }
+
+.personal-data p {
+  margin: 0;
+}
+
+.project-data-details {
+  padding: 1rem;
+  margin: 1rem 0;
+  background-color:var(--mainGrey);
+  border-radius: 10px;
+}
+
+.project-data-details p {
+  display: inline;
+  padding: 0.4rem;
+  border-radius: 5px;
+}
+
+.greenCard {
+  background-color:var(--secondColor);
+}
+
+.redCard {
+  background-color:var(--thirdColorLight );
+}

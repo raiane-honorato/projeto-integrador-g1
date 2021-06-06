@@ -328,28 +328,28 @@
     "user_id":1,
     "project_id":1,
     "subs_date":"11/05/2021",
-    "subscription_status":"pending"
+    "subscription_status":"Pendente"
   },
   {
     "id":2,
     "user_id":1,
     "project_id":3,
     "subs_date":"11/05/2021",
-    "subscription_status":"accepted"
+    "subscription_status":"Aceita"
   },
   {
     "id":3,
     "user_id":2,
     "project_id":5,
     "subs_date":"11/05/2021",
-    "subscription_status":"refused"
+    "subscription_status":"Recusada"
   },
   {
     "id":4,
     "user_id":2,
     "project_id":3,
     "subs_date":"11/05/2021",
-    "subscription_status":"canceled"
+    "subscription_status":"Cancelada"
   }
 
 
