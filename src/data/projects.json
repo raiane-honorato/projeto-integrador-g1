@@ -295,7 +295,8 @@
 "user": [
   {
     "id":1,
-    "name":"João voluntário",
+    "name":"João Francisco",
+    "img": "https://images.generated.photos/F1kxr3TrJUtSpjC9N3jfcWsTMEx7RvAuAHkJwWyaGCo/rs:fit:512:512/wm:0.95:sowe:18:18:0.33/Z3M6Ly9nZW5lcmF0/ZWQtcGhvdG9zL3Yz/XzA1OTczODYuanBn.jpg",
     "CPF": "55555555555",
     "birth_date": "11/05/1996",
     "phone": "99999999999",
@@ -303,7 +304,8 @@
   },
   {
     "id":2,
-    "name":"Maria voluntária",
+    "name":"Maria de Andrade",
+    "img": "https://images.generated.photos/J_Gbcl-lngf5B7taH6d5MCA8s64uJQr7XGmTJIPYhoQ/rs:fit:512:512/wm:0.95:sowe:18:18:0.33/Z3M6Ly9nZW5lcmF0/ZWQtcGhvdG9zL3Yz/XzAzMDc2MDguanBn.jpg",
     "CPF": "55555555555",
     "birth_date": "11/05/1996",
     "phone": "99999999999",
@@ -311,7 +313,8 @@
   },
   {
     "id":3,
-    "name":"Joana voluntária",
+    "name":"Joana Dark",
+    "img": "https://images.generated.photos/rJd3R3BRwCiELbXbxPSDKsxhGEF3SJqAQuaIxmqkxAI/rs:fit:512:512/wm:0.95:sowe:18:18:0.33/Z3M6Ly9nZW5lcmF0/ZWQtcGhvdG9zL3Yz/XzA1OTU4ODIuanBn.jpg",
     "CPF": "55555555555",
     "birth_date": "11/05/1996",
     "phone": "99999999999",
@@ -325,28 +328,28 @@
     "user_id":1,
     "project_id":1,
     "subs_date":"11/05/2021",
-    "subscription_status":"pending"
+    "subscription_status":"Pendente"
   },
   {
     "id":2,
     "user_id":1,
     "project_id":3,
     "subs_date":"11/05/2021",
-    "subscription_status":"accepted"
+    "subscription_status":"Aceita"
   },
   {
     "id":3,
     "user_id":2,
     "project_id":5,
     "subs_date":"11/05/2021",
-    "subscription_status":"refused"
+    "subscription_status":"Recusada"
   },
   {
     "id":4,
     "user_id":2,
     "project_id":3,
     "subs_date":"11/05/2021",
-    "subscription_status":"canceled"
+    "subscription_status":"Cancelada"
   }
 
 

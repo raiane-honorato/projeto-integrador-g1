@@ -21,7 +21,7 @@
   text-align: center;
   font-weight: 500;
   margin: 4rem 0;
-  color: var(--mainBlack);
+  color: var(--primaryColor);
   text-shadow: 1px 1px var(--mainWhite);
 } 
  

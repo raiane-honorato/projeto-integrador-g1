@@ -1,17 +1,22 @@
-import Footer from "../../components/Footer/Footer";
+import { NavLink } from "react-router-dom";
 import InstFormulario from "../../components/Forms/InstitutionForm";
-import Navbar from "../../components/Navbar/Navbar";
+import fullLogo from "../../img//logo-color.png";
 import "./registerinstitution.css";
 
 function RegisterInstitution() {
   return (
-    
-      <div className="instituition-register-container">
-        <Navbar />
-        <InstFormulario />
-        <Footer />
+    <div className="instituition-register-container">
+      <div className="instituition-register-image-div">
+        <NavLink to="/" className="nav-btn" exact>
+          <img
+            className="footer-logo"
+            src={fullLogo}
+            alt="logo-corrente-do-bem"
+          ></img>
+        </NavLink>
       </div>
-    
+      <InstFormulario />
+    </div>
   );
 }
 

@@ -1,6 +1,6 @@
 .searchBlock {
   position: absolute;
-  right: 6%;
+  left: 15%;
   height: 1.5rem;
   background-color: white;
   border: none;
@@ -50,4 +50,14 @@
 
 .lupa {
   color: var(--mainWhite);
+}
+
+
+@media (min-width: 1441px)  {
+
+  .searchBlock {
+
+    left: 25%;
+  }
+
 }

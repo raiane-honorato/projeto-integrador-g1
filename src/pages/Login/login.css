@@ -56,6 +56,10 @@
     letter-spacing: var(--mainSpacing) !important;
     
 }
+.buttonLogin:hover, .buttonForgot:hover {
+    background-image: linear-gradient(110deg, #18ca8b, #1c6b77);
+
+}
 
 .form {
     display: flex;

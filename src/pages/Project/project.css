@@ -29,9 +29,16 @@
   margin-top: 2rem;
 }
 
+
+.project-image-div {
+  max-height: 450px;
+
+}
+
 .project-image-div img {
   width: 100%;
-  border-radius: 10px;
+  height: 100%;
+  object-fit:contain
 }
 
 
@@ -44,6 +51,12 @@
 
 .project-provider h3 {
   font-family: var(--firstFont);
+  margin-bottom: 0px;
+
+}
+
+.project-provider hr {
+  margin-top:10px;
 }
 
 .project-provider span {
@@ -91,7 +104,7 @@
   font-size: 1.2rem;
   font-family: "Poppins", sans-serif;
   border: none;
-  border-radius: 2rem;
+  border-radius: .2rem;
   cursor: pointer;
   background-color: var(--primaryColorLight);
   color: var(--mainWhite);

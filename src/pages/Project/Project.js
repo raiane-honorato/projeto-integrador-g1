@@ -3,7 +3,6 @@ import { useParams } from "react-router-dom";
 import Footer from "../../components/Footer/Footer";
 import Navbar from "../../components/Navbar/Navbar";
 import "./project.css";
-import projects from "../../data/projects.json"
 
 function ProjectPage() {
   const parameter = useParams();
@@ -17,20 +16,10 @@ function ProjectPage() {
     .then(res => res.json())
     .then(res => {
       setVagas(res)
-      console.log(res)
     })
     .catch(erro => alert(`Erro ao obter lista de projetos: ${erro}`))
 },[]
 )
-
-  // useEffect(() => {
-  //   fetch(
-  //     `https://raw.githubusercontent.com/felipeblobo/felipeblobo.github.io/main/projects.json`
-  //   )
-  //     .then((res) => res.json())
-  //     .then((res) => setVagas(res))
-  //     .catch((erro) => alert(`Erro ao obter dados sobre a vaga: ${erro}`));
-  // }, []);
 
   return (
     <div id="page-container">
@@ -42,7 +31,9 @@ function ProjectPage() {
             <div key={vaga.id} className="project-container">
               <div className="project-title">
                 <h2>{vaga.title}</h2>
+               
               </div>
+         
               <div className="grid-project">
                 <div className="project-image-div">
                   <img src={vaga.img} alt="vaga" />
@@ -50,6 +41,7 @@ function ProjectPage() {
                 <div className="project-information">
                   <div className="project-provider">
                     <h3>{vaga.institution_name}</h3>
+                    <hr/>
                     <span>Cidade: {vaga.address}</span>
                     <span>Remoto: {vaga.local_type}</span>
                   </div>

@@ -1,14 +1,23 @@
+import { NavLink } from "react-router-dom";
 import Formulario from "../../components/Forms/UserForm";
-import Navbar from "../../components/Navbar/Navbar";
-import Footer from "../../components/Footer/Footer";
+import fullLogo from '../../img//logo-color.png';
 import './registeruser.css';
+
 
 function RegisterUser() {
   return (
-    <div className='user-register-container'>
-      <Navbar />
+    <div className='user-register-container'>  
+      <div className='user-register-image-div'>
+        <NavLink to="/" className="nav-btn" exact>
+          <img
+            className="footer-logo"
+            src={fullLogo}
+            alt="logo-corrente-do-bem"
+          ></img>
+        </NavLink>        
+      </div>         
       <Formulario />
-      <Footer />
+      
     </div>
   );
 }

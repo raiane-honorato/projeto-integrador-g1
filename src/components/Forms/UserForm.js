@@ -133,10 +133,8 @@ function Formulario() {
   ]
 
   return (
-    <>
+    <div className='container-useform'>
       <h1 className='user-form-title'>Crie sua conta</h1>
-
-
       <form
         className="formCadastro"
         id="form1"
@@ -145,13 +143,13 @@ function Formulario() {
         }}
       >
            <h2>{steps[currentStep].title}</h2>
+           <hr className='hr-style'/>
            <p className="step-guide">
             {currentStep + 1} de {steps.length}
           </p>
 
         {steps[currentStep].id === 'personal-data' && (
         <div className="dados-pessoais">
-          {/* <h2>Dados pessoais</h2> */}
           <div className="inputs">
             <label htmlFor="userName">Nome Completo:</label>
             <input
@@ -319,7 +317,7 @@ function Formulario() {
 
        
       </form>
-    </>
+    </div>
   )
 }
 
