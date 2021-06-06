@@ -12,7 +12,7 @@ function SearchBar() {
       <input 
       type="text" 
       id="search-input" 
-      placeholder='Procure sua vaga'
+      placeholder='Palavra chave ou habilidade'
       onChange = {(event) => {setQ(event.target.value)}}
       onKeyPress = {(event) => {
         if (event.key === 'Enter'){

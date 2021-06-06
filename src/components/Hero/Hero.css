@@ -65,4 +65,8 @@
         text-transform: uppercase;
         font-size: 3rem;
     }
+
+    .hero-container {
+        padding: 30px;
+    }
   }

@@ -2,45 +2,68 @@ import { NavLink } from "react-router-dom";
 import "./Navbar.css";
 import miniLogo from "../../img/mini-logo-white.png";
 import SearchBar from "../SearchBar/SearchBar";
+import { faBars } from "@fortawesome/free-solid-svg-icons";
+import { faUserAlt } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useState } from "react";
 
 function Navbar({ navbarTransparent, changeBackground }) {
   window.addEventListener("scroll", changeBackground);
+
+  const [activeLogin, setActiveLogin] = useState(false);
 
   return (
     <>
       <nav className="navbar" id={navbarTransparent ? "navbarTransparent" : ""}>
         <div className="nav-container">
-          <div>
-          <NavLink to="/" className="nav-btn" exact>
+
+          <NavLink to="/" className="nav-logo" exact>
             <img
               src={miniLogo}
               className="nav-logo"
               alt="logo-corrente-do-bem"
             ></img>
-                </NavLink>
-            <ul className="nav-btn-list">
-              <li>
-                <NavLink to="/register_user" className="nav-btn">
-                  Cadastro
-                </NavLink>
-              </li>
-              <li className='login'>
-                <NavLink to="/login" className="nav-btn">
-                  Login
-                </NavLink>
-              </li>
-            </ul>
-          </div>
-          <SearchBar />
-          <ul className="nav-btn-list">
-            <li className="login">
-              <NavLink to="/login" className="nav-btn" id="login">
-              Entrar
-                <span className="material-icons material-icons-outlined">login</span>
+          </NavLink>
+
+          <SearchBar/>
+
+          
+          <div className="nav-login-container">
+           
+              <div className="nav-btn-login" onClick = {() => setActiveLogin(!activeLogin)}>
+              
+                <FontAwesomeIcon className="nav-login-icon" id="nav-logo-menu"
+                  icon={ faBars }
+                  size="1x"
+                  alt="Menu"
+                />
+                <FontAwesomeIcon className="nav-login-icon" id="nav-logo-user"
+                  icon={ faUserAlt }
+                  size="1x"
+                  alt="Menu"
+                />
                 
-              </NavLink>
-            </li>
-          </ul>
+              </div>
+              <div className = {activeLogin ? "" : "set-vis"}>
+                <div className ="nav-login-dropdown">
+                  <ul className = "nav-btn-list">
+                    <li className = "nav-btn">
+                      <NavLink to="/login"><b>Entrar</b></NavLink>
+                    </li>
+                    <li className = "nav-btn">
+                      <NavLink to="/register_user">Cadastrar-se</NavLink>
+                    </li>
+                    <div className="nav-dropdown-line"></div>
+                    <li className = "nav-btn">
+                      <NavLink to="/register_institution">Seja uma instituição</NavLink>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            
+          </div>
+
+          
         </div>
       </nav>
     </>
