@@ -20,7 +20,7 @@ function Routes() {
         <Route path="/register_user" component={RegisterUser} />
         <PrivateRoute path='/user/:id' component={Profile} />
         <Route path="/project/:id" component={ProjectPage} />
-        <Route path="/register_institution" component={RegisterInstitution} />
+        <Route path="/register_instituition" component={RegisterInstitution} />
         <Route path="*" component={Error404} />
       </Switch>
     </BrowserRouter>

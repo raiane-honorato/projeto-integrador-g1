@@ -1,20 +1,6 @@
 //styling
 import "./spotlight.css";
 
-//images
-// import barber from "../../img/barber.svg";
-// import artist from "../../img/artist2.svg";
-// import dev from "../../img/dev.svg";
-// import cooking from "../../img/cooking.svg";
-// import medical_care from "../../img/medical_care.svg";
-// import music from "../../img/music.svg";
-// import sports from "../../img/sports.svg";
-import educacao from "../../img/teacher.svg";
-// import workout from "../../img/workout.svg";
-// import ecologial_cause from "../../img/ecological_cause.svg";
-// import meditation from "../../img/meditation.svg";
-// import personal from "../../img/personal.svg";
-
 //data
 //import projects from "../../data/projects.json";
 
@@ -57,7 +43,7 @@ function Spotlight() {
               <div key={hability.id} className="hability-img-div">
                 <img
                   className="hability-img"
-                  src={hability["img_src"]}
+                  src={hability.img_src}
                   alt={hability.name}
                 />
                 {hability.name}
