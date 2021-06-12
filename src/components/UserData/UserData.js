@@ -1,14 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Fragment } from "react";
 import { useParams } from "react-router";
+import { AuthContext } from "../../context/auth";
 import "./userdata.css";
 
 function UserData() {
   const parameter = useParams();
   const userId = parameter.id;
-  const [user, setUser] = useState("");
   const [subscriptions, setSubscriptions] = useState("");
   const [projects, setProjects] = useState("");
+  const { user, setUser } = useContext(AuthContext);
 
 
   useEffect(() => {

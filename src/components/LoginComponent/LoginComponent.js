@@ -25,13 +25,14 @@ function LoginComponent(props) {
     const { token } = login(userEmail, password);
 
     if (token) {
-      console.log("logado");
+     
       setToken(token);
       return history.push("/");
     }
 
     setUserEmail("");
     setPassword("");
+    alert('Senha ou usuário inválidos!')
   }
 
   return (

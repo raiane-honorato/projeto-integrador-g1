@@ -5,12 +5,19 @@ import SearchBar from "../SearchBar/SearchBar";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 import { faUserAlt } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { AuthContext } from "../../context/auth";
+import dev from "../../img/dev.svg";
+
 
 function Navbar({ navbarTransparent, changeBackground }) {
   window.addEventListener("scroll", changeBackground);
 
   const [activeLogin, setActiveLogin] = useState(false);
+  const { user,token } = useContext(AuthContext);
+  
+
+  console.log(token)
 
   return (
     <>
@@ -37,11 +44,14 @@ function Navbar({ navbarTransparent, changeBackground }) {
                   size="1x"
                   alt="Menu"
                 />
-                <FontAwesomeIcon className="nav-login-icon" id="nav-logo-user"
-                  icon={ faUserAlt }
-                  size="1x"
-                  alt="Menu"
-                />
+                {!token ? 
+                    <FontAwesomeIcon className="nav-login-icon" id="nav-logo-user"
+                    icon={ faUserAlt }
+                    size="1x"
+                    alt="Menu"
+                  /> : 
+                  <img className='profile-picture' src={ user.img } alt="desenvolvedor" />
+                }
                 
               </div>
               <div className = {activeLogin ? "" : "set-vis"}>

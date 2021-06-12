@@ -1,0 +1,6 @@
+.main-container-InstitutionProfile {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+

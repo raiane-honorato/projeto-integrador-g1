@@ -8,7 +8,7 @@ function RegisterUser() {
   return (
     <div className='user-register-container'>  
       <div className='user-register-image-div'>
-        <NavLink to="/" className="nav-btn" exact>
+        <NavLink to="/" exact>
           <img
             className="footer-logo"
             src={fullLogo}

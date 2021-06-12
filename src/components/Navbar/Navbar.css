@@ -59,6 +59,11 @@
     padding: 6px;
 }
 
+.profile-picture {
+    width: 2.5rem;
+    border-radius: 50%;
+}
+
 .nav-login-dropdown {
     position: absolute;
     z-index: 10;

@@ -7,7 +7,7 @@ function RegisterInstitution() {
   return (
     <div className="instituition-register-container">
       <div className="instituition-register-image-div">
-        <NavLink to="/" className="nav-btn" exact>
+        <NavLink to="/" exact>
           <img
             className="footer-logo"
             src={fullLogo}
