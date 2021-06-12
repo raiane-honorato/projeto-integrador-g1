@@ -12,3 +12,42 @@
   grid-template-columns: 1fr 1fr;
   gap: 5rem;
 }
+
+.institution-basic-information h1 {
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.institution-basic-information span {
+  font-size: .8rem;
+  font-weight:300;
+}
+
+.institution-other-information {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin-top: 1rem;
+}
+
+.institution-social-media { 
+  padding: 0px;
+  list-style-type: none;
+  display: flex;
+  align-items: center;
+  margin-top: 1rem;
+
+}
+
+.institution-social-media-icon {
+  margin-right: 1rem;
+  cursor: pointer;
+  height: .5rem;
+}
+
+
+.institution-social-media-icon a {
+  text-decoration: none;
+  color: black;
+
+}
