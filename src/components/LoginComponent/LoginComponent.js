@@ -4,10 +4,10 @@ import { NavLink, useHistory } from "react-router-dom";
 import { AuthContext } from "../../context/auth";
 
 function LoginComponent(props) {
-  const [userEmail, setUserEmail] = useState("");
-  const [password, setPassword] = useState("");
   const { setToken } = useContext(AuthContext);
   const history = useHistory();
+  const [userEmail, setUserEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   function login(userEmail, password) {
     if (userEmail === "joao@joao.com") {
@@ -21,7 +21,6 @@ function LoginComponent(props) {
 
   function onSubmit(event) {
     event.preventDefault();
-    console.log("submeteu");
     const { token } = login(userEmail, password);
 
     if (token) {
@@ -34,6 +33,7 @@ function LoginComponent(props) {
     setPassword("");
     alert('Senha ou usuário inválidos!')
   }
+
 
   return (
     <div className="firts-column">

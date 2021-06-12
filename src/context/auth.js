@@ -7,6 +7,7 @@ const AuthContext = createContext({
 });
 
 const AuthProvider = ({ children }) => {
+  
   const [token, setToken] = useStorage('token');
   const [user, setUser] = useState("");
 
@@ -16,7 +17,8 @@ const AuthProvider = ({ children }) => {
         token,
         setToken,
         user,
-        setUser
+        setUser,
+        
       }}
     >
       {children}

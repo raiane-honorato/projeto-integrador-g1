@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 import "./Navbar.css";
 import miniLogo from "../../img/mini-logo-white.png";
 import SearchBar from "../SearchBar/SearchBar";
@@ -7,23 +7,25 @@ import { faUserAlt } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useContext, useState } from "react";
 import { AuthContext } from "../../context/auth";
-import dev from "../../img/dev.svg";
-
 
 function Navbar({ navbarTransparent, changeBackground }) {
   window.addEventListener("scroll", changeBackground);
 
   const [activeLogin, setActiveLogin] = useState(false);
-  const { user,token } = useContext(AuthContext);
-  
+  const { user, token, setToken} = useContext(AuthContext);
+  const history = useHistory();
 
-  console.log(token)
+  const signOut = (event) => {
+    event.preventDefault();    
+    setToken("");
+    alert('Usuário deslogado!')
+    return history.push("/");
+  }
 
   return (
     <>
       <nav className="navbar" id={navbarTransparent ? "navbarTransparent" : ""}>
         <div className="nav-container">
-
           <NavLink to="/" className="nav-logo" exact>
             <img
               src={miniLogo}
@@ -32,48 +34,63 @@ function Navbar({ navbarTransparent, changeBackground }) {
             ></img>
           </NavLink>
 
-          <SearchBar/>
+          <SearchBar />
 
-          
           <div className="nav-login-container">
-           
-              <div className="nav-btn-login" onClick = {() => setActiveLogin(!activeLogin)}>
-              
-                <FontAwesomeIcon className="nav-login-icon" id="nav-logo-menu"
-                  icon={ faBars }
+            <div
+              className="nav-btn-login"
+              onClick={() => setActiveLogin(!activeLogin)}
+            >
+              <FontAwesomeIcon
+                className="nav-login-icon"
+                id="nav-logo-menu"
+                icon={faBars}
+                size="1x"
+                alt="Menu"
+              />
+              {!token ? (
+                <FontAwesomeIcon
+                  className="nav-login-icon"
+                  id="nav-logo-user"
+                  icon={faUserAlt}
                   size="1x"
                   alt="Menu"
                 />
-                {!token ? 
-                    <FontAwesomeIcon className="nav-login-icon" id="nav-logo-user"
-                    icon={ faUserAlt }
-                    size="1x"
-                    alt="Menu"
-                  /> : 
-                  <img className='profile-picture' src={ user.img } alt="desenvolvedor" />
-                }
-                
+              ) : (
+                <img
+                  className="profile-picture"
+                  src={user.img}
+                  alt="desenvolvedor"
+                />
+              )}
+            </div>
+            <div className={activeLogin ? "" : "set-vis"}>
+              <div className="nav-login-dropdown">
+                <ul className="nav-btn-list">
+                  <li className="nav-btn">
+                    {!token ?
+                     ( <NavLink to="/login">
+                        <b>Entrar</b>
+                      </NavLink>  )
+                      :
+                      ( <NavLink to='/' onClick={signOut}>
+                      <b>Sair</b>
+                    </NavLink>  )
+                    }
+                  </li>
+                  <li className="nav-btn">
+                    <NavLink to="/register_user">Cadastrar-se</NavLink>
+                  </li>
+                  <div className="nav-dropdown-line"></div>
+                  <li className="nav-btn">
+                    <NavLink to="/register_institution">
+                      Seja uma instituição
+                    </NavLink>
+                  </li>
+                </ul>
               </div>
-              <div className = {activeLogin ? "" : "set-vis"}>
-                <div className ="nav-login-dropdown">
-                  <ul className = "nav-btn-list">
-                    <li className = "nav-btn">
-                      <NavLink to="/login"><b>Entrar</b></NavLink>
-                    </li>
-                    <li className = "nav-btn">
-                      <NavLink to="/register_user">Cadastrar-se</NavLink>
-                    </li>
-                    <div className="nav-dropdown-line"></div>
-                    <li className = "nav-btn">
-                      <NavLink to="/register_institution">Seja uma instituição</NavLink>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            
+            </div>
           </div>
-
-          
         </div>
       </nav>
     </>
