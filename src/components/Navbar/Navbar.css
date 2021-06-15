@@ -10,6 +10,15 @@
     z-index: 100;
 }
 
+.nav-overlay {
+    position: fixed;
+    top:0;
+    bottom:0;
+    left: 0;
+    right: 0;
+    z-index: 99;
+}
+
 #navbarTransparent{
     background-color: transparent;
     
@@ -61,12 +70,19 @@
 
 .profile-picture {
     width: 2.5rem;
+    height: 2.5rem;
+    object-fit: cover;
     border-radius: 50%;
 }
 
+.nav-set-vis {
+    visibility: hidden;
+}
+
+
 .nav-login-dropdown {
     position: absolute;
-    z-index: 10;
+    z-index: 150;
     background-color: var(--mainWhite);
     top: 2.8rem;
     left: -200%;

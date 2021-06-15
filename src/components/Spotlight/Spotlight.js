@@ -12,14 +12,14 @@ function Spotlight() {
   const [habilities, setHabilities] = useState();
 
   useEffect(() => {
-      fetch('https://raw.githubusercontent.com/felipeblobo/felipeblobo.github.io/main/habilities.json')
+      fetch('http://localhost:8000/hability')
       .then(res => res.json())
       .then(res => setHabilities(res))
       .catch(erro => alert(`Erro ao obter lista de habilidades: ${erro}`))
   },[])
 
   //getting project list from JSON server on 8000
-  const [projects, setProjects] = useState(null);
+  const [projects, setProjects] = useState();
   
   useEffect( () => {
     fetch(" http://localhost:8000/projects")

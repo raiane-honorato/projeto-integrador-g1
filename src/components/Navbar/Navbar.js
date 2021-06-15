@@ -7,17 +7,21 @@ import { faUserAlt } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useContext, useState } from "react";
 import { AuthContext } from "../../context/auth";
+import DropLoggedUser from "./Nav-Dropdown/DropLoggedUser";
+import DropNotLogged from "./Nav-Dropdown/DropNotLogged";
+import DropLoggedInstitution from "./Nav-Dropdown/DropLoggedInstitution";
 
 function Navbar({ navbarTransparent, changeBackground }) {
   window.addEventListener("scroll", changeBackground);
 
   const [activeLogin, setActiveLogin] = useState(false);
-  const { user, token, setToken} = useContext(AuthContext);
+  const { user, token, setToken, setUser} = useContext(AuthContext);
   const history = useHistory();
 
   const signOut = (event) => {
     event.preventDefault();    
     setToken("");
+    setUser("");
     alert('Usuário deslogado!')
     return history.push("/");
   }
@@ -60,39 +64,63 @@ function Navbar({ navbarTransparent, changeBackground }) {
                 <img
                   className="profile-picture"
                   src={user.img}
-                  alt="desenvolvedor"
+                  alt="profile-img"
                 />
               )}
             </div>
-            <div className={activeLogin ? "" : "set-vis"}>
+            <div className={activeLogin ? "" : "nav-set-vis"}>
               <div className="nav-login-dropdown">
-                <ul className="nav-btn-list">
-                  <li className="nav-btn">
+                {!token ? 
+                <DropNotLogged /> : 
+                (user.type == 1 ? <DropLoggedUser /> : <DropLoggedInstitution/>)
+                }
+                {/* <ul className="nav-btn-list">
                     {!token ?
-                     ( <NavLink to="/login">
+                  (
+                    <>
+                    <li className="nav-btn">
+                      <NavLink to="/login">
                         <b>Entrar</b>
-                      </NavLink>  )
+                      </NavLink> 
+                    </li> 
+                    <li className="nav-btn">
+                      <NavLink to="/register_user">Cadastrar-se</NavLink>
+                    </li>  
+                </>                    
+                  )
                       :
-                      ( <NavLink to='/' onClick={signOut}>
-                      <b>Sair</b>
-                    </NavLink>  )
+                  ( 
+                    <>
+                    <li className="nav-btn">
+                      <NavLink to={user.type == 1 ? `/user/${user.id}` : `/institution/${user.institution_id}`}>
+                        <b>{user.type == 1 ? "Perfil" : "Página da instituição"}</b>
+                      </NavLink>  
+                    </li>
+                    <li className="nav-btn">
+                      <NavLink to='/' onClick={signOut}>
+                        Sair
+                      </NavLink>  
+                    </li>
+                    </>
+                  )
                     }
-                  </li>
-                  <li className="nav-btn">
-                    <NavLink to="/register_user">Cadastrar-se</NavLink>
-                  </li>
+
                   <div className="nav-dropdown-line"></div>
                   <li className="nav-btn">
                     <NavLink to="/register_institution">
                       Seja uma instituição
                     </NavLink>
                   </li>
-                </ul>
+                </ul> */}
               </div>
             </div>
           </div>
         </div>
       </nav>
+      <div 
+      className={activeLogin ? "nav-overlay" : "nav-overlay nav-set-vis"}
+      onClick={() => setActiveLogin(!activeLogin)}
+      ></div>
     </>
   );
 }

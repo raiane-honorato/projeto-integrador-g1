@@ -8,11 +8,35 @@ function LoginComponent(props) {
   const history = useHistory();
   const [userEmail, setUserEmail] = useState("");
   const [password, setPassword] = useState("");
+  const { user, setUser } = useContext(AuthContext);
 
   function login(userEmail, password) {
     if (userEmail === "joao@joao.com") {
+
+      const userId = "1";
+
+      fetch(`http://localhost:8000/user/${userId}`)
+      .then((res) => res.json())
+      .then((res) => {
+        setUser(res);
+      })
+      .then(res => console.log(user))
+      .catch((erro) => alert("Não foi possível localizar este usuário."));
+
       return { token: "1234" };
     } else if (userEmail === "medicos@medicos.com") {
+
+      const userId = "4";
+
+      fetch(`http://localhost:8000/user/${userId}`)
+      .then((res) => res.json())
+      .then((res) => {
+        setUser(res);
+      })
+      .then(res => console.log(user))
+      .catch((erro) => alert("Não foi possível localizar este usuário."));
+
+
       return { token: "5678" };
     } else {
       return { error: "Usuário ou senha inválido!" };
@@ -26,7 +50,14 @@ function LoginComponent(props) {
     if (token) {
      
       setToken(token);
+
+      const userId = "1";
+
+      console.log(user);
+
       return history.push("/");
+
+
     }
 
     setUserEmail("");
