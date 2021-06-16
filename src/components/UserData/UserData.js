@@ -3,6 +3,7 @@ import { Fragment } from "react";
 import { useParams } from "react-router";
 import { AuthContext } from "../../context/auth";
 import "./userdata.css";
+import UserSubscriptionCart from "./UserSubscriptionCart";
 
 function UserData() {
   const parameter = useParams();
@@ -12,9 +13,6 @@ function UserData() {
   const { user } = useContext(AuthContext);
 
   const [pageUser, setPageUser] = useState("");
-
-
-  console.log(user);
 
   useEffect(() => {
     if( user.id === userId) {
@@ -39,15 +37,7 @@ function UserData() {
       .catch(erro => alert('Não foi possível obter os projetos do usuário.'))
   }, [userId]);
 
-  useEffect(() => {
-    
-      fetch(`http://localhost:8000/projects`)
-    .then((res) => res.json())
-    .then((res) => {
-      setProjects(res);
-    })
-    .catch(erro => alert('Não foi possível obter os detalhes dos projetos do usuário.'))
-  },[])
+
 
   return (
     <div className="userdata-container">
@@ -75,16 +65,11 @@ function UserData() {
               <h2>Projetos</h2>}
               {subscriptions && user.id == pageUser.id &&
                subscriptions.map((subscription) => (
-                      <div className='project-data-details'  key={subscription.id}>
-                        <div>{projects && projects.filter((project) => project.id === subscription.project_id)
-                        .map((project) => (
-                          <Fragment key={project.id}>
-                            <h3>{project.title} em {project.institution_name}</h3>                           
-                          </Fragment>
-                        ))}</div>
-                         <p className={(subscription.subscription_status === 'Aceita') ? 'greenCard' : 'redCard'}>Situação da inscrição: {subscription.subscription_status}</p>
-                      </div>
-                  ))}
+                 
+                 <UserSubscriptionCart subscription = {subscription} />
+
+                  ))
+                  }
             </div>
           </div>
         </>

@@ -20,7 +20,7 @@ function ProjectCart(props) {
       
       fetch(`http://localhost:8000/hability/${hability_id}`)
       .then(res => res.json())
-      .then(res => setHabilities([res]))
+      .then(res => setHabilities([...habilities, res]))
       .catch(erro => alert(`Erro ao obter lista de habilidades: ${erro}`))
     }
 
@@ -48,10 +48,10 @@ function ProjectCart(props) {
             <h3 className="job-title">{props.project["title"]}</h3>
 
             <p className="job-schedule">{institution && institution.institution_name}</p>
-            {props.project["hability_id"].map((hability, index) => (
+            {habilities && habilities.map((hability, index) => (
               <span className="spotlight-projectcart-hability" key={index}>
                 {
-                  hability
+                  hability.name
                 }
               </span>
             ))}
