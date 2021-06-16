@@ -2,6 +2,7 @@
   "projects": [
   {
     "id": 1,
+    "status":1,
     "title": "FullStack para WebSite",
     "img": "http://clubedosgeeks.com.br/wp-content/uploads/2016/04/FullStack-Image.jpg",
     "local_type": "remoto",
@@ -13,6 +14,7 @@
   },
   {
     "id": 2,
+    "status":1,
     "title": "Conservação da Mata Atlântica",
     "img": "https://aconteceunovale.com.br/portal/wp-content/uploads/2015/08/parque_serra_do_brigadeiro_1.jpg",
     "local_type": "local",
@@ -24,6 +26,7 @@
   },
   {
     "id": 3,
+    "status":1,
     "title": "Palhaços(as) Voluntários(as)",
     "img": "https://www.doutoresdaalegria.org.br/wp-content/uploads/2013/12/de-quem-e-o-pai-1.jpg",
     "local_type": "local",
@@ -35,6 +38,7 @@
   },
   {
     "id": 4,
+    "status":1,
     "title": "Professor(a) de Matemática",
     "img": "https://image.freepik.com/free-psd/math-teacher-showing-formulas-board_23-2148272785.jpg",
     "local_type": "remoto",
@@ -46,6 +50,7 @@
   },
   {
     "id": 5,
+    "status":1,
     "title": "Digital Influencer",
     "img": "https://blog.depositphotos.com/wp-content/uploads/2020/01/Make-Your-Pet-Instagram-Famous-With-These-7-Tips-2.jpg",
     "local_type": "remoto",
@@ -57,6 +62,7 @@
   },
   {
     "id": 6,
+    "status":2,
     "title": "Dentista(o)",
     "img": "https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
     "local_type": "local",
@@ -68,6 +74,7 @@
   },
   {
     "id": 7,
+    "status":1,
     "title": "Instrutor(a) de Academia",
     "img": "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
     "local_type": "local",
@@ -79,6 +86,7 @@
   },
   {
     "id": 8,
+    "status":1,
     "title": "Professor(a) de Música",
     "img": "https://images.unsplash.com/photo-1524650359799-842906ca1c06?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
     "local_type": "local",
@@ -90,6 +98,7 @@
   },
   {
     "id": 9,
+    "status":1,
     "title": "Médicas(os)",
     "img": "https://images.unsplash.com/photo-1551601651-2a8555f1a136?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=772&q=80",
     "local_type": "local",
@@ -101,6 +110,7 @@
   },
   {
     "id": 10,
+    "status":2,
     "title": "Cozinheiro(a)",
     "img": "https://images.unsplash.com/photo-1507048331197-7d4ac70811cf?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1267&q=80",
     "local_type": "local",
@@ -112,6 +122,7 @@
   },
   {
     "id": 11,
+    "status":1,
     "title": "Professor(a) de Surf",
     "img": "https://images.unsplash.com/photo-1601387271717-b57efaabad61?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
     "local_type": "local",
@@ -123,6 +134,7 @@
   },
   {
     "id": 12,
+    "status":1,
     "title": "Grafiteira",
     "img": "https://images.unsplash.com/photo-1491225063580-7e097e87dcb2?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1351&q=80",
     "local_type": "remoto",

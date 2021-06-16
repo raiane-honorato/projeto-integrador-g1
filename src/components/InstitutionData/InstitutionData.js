@@ -9,6 +9,7 @@ function InstitutionData() {
   const parameter = useParams();
   const institutionId = parameter.id;
   const [institution, setInstitution] = useState("");
+  const [causes, setCauses] = useState([]);
 
   useEffect(() => {
     fetch(`http://localhost:8000/institution/${institutionId}`)
@@ -21,9 +22,45 @@ function InstitutionData() {
       );
   }, [institutionId]);
 
+  useEffect(() => {
+    institution && 
+    institution.cause_id.map( (cause_id) => {
+      
+      fetch(`http://localhost:8000/cause/${cause_id}`)
+      .then(res => res.json())
+      .then(res => {
+        const newCauseList = causes.concat(res)
+        setCauses(newCauseList)
+        console.log(causes)
+      })
+      .catch(erro => alert(`Erro ao obter lista de causas: ${erro}`))
+    }
+
+    )
+  }
+  ,[institution]);
+
+ // useEffect(() => {console.log(causes)},[causes]) 
+
   return (
     <div className="institution-data-profile">
       {institution && (
+        <>
+        <div className = "institution-first-section-profile">
+          <img className = "institution-profile-pic" src = {institution.img} />
+          <div>
+            <span className = "institution-city">{`${institution.city}, ${institution.state}`}</span>
+            <h2 className = "institution-name">{institution.institution_name}</h2>
+            <p className = "institution-summary">{institution.summary}</p>
+            {causes &&
+            causes.map(cause => (
+              <>
+              <span className = "institution-cause-bullet-point"></span>
+              <span className = "institution-cause" key = {`cause-${cause.id}`}>{cause.name}</span>
+              </>
+            ))}
+          </div>
+        </div>
         <div className='institution-grid-container'>
           <div className='institution-basic-information'>
             <h1>{institution.institution_name}</h1>
@@ -46,7 +83,7 @@ function InstitutionData() {
               <strong>Site: </strong> <a href={institution.site} target='_blank' rel="noreferrer"> {institution.site}</a>  
               <div className="institution-social-media">                 
                   <div className="institution-social-media-icon">
-                    <a href={institution.site} target='_blank' rel="noreferrer"><FontAwesomeIcon icon={faInstagram} size="2x" alt="Instagram" /></a>
+                    <a href={institution.instagram} target='_blank' rel="noreferrer"><FontAwesomeIcon icon={faInstagram} size="2x" alt="Instagram" /></a>
                   </div>      
                   <div className="institution-social-media-icon">
                     <a href={institution.facebook} target='_blank' rel="noreferrer"> <FontAwesomeIcon
@@ -59,6 +96,7 @@ function InstitutionData() {
               </div>
           </div>     
         </div>
+        </>
       )}
     </div>
   );

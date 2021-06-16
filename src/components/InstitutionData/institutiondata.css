@@ -6,6 +6,48 @@
   font-family: var(--secondFont);
 }
 
+.institution-first-section-profile{
+  margin-top: 10rem;
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+}
+
+.institution-profile-pic {
+  height: 10rem;
+  width: 10rem;
+  border-radius: 100%;
+  box-shadow: 2px 5px 4px var(--mainBlack);
+  object-fit: cover;
+}
+
+.institution-city {
+  font-size: 0.8rem;
+  color: var(--secondColor);
+}
+
+.institution-name {
+  margin: .5rem 0rem 0.5rem 0rem;
+}
+
+.institution-summary {
+  margin: .5rem 0rem 0.5rem 0rem;
+}
+
+.institution-cause {
+  font-size: 0.8rem;
+  display:inline;
+  margin-left: 0.5rem;
+}
+
+.institution-cause-bullet-point {
+  background-color: var(--thirdColor);
+  border-radius: 100%;
+  width: .4rem;
+  height: .4rem;
+  margin-left: 2rem;
+  display: inline-block;
+}
 
 .institution-grid-container {
   display: grid;
