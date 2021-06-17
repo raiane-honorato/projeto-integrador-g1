@@ -1,13 +1,15 @@
 .institution-data-profile {
   flex-grow: 1;
   width: 100%;
+  height: auto;
   max-width: 75rem;
   margin: 0 auto;
   font-family: var(--secondFont);
 }
 
 .institution-first-section-profile{
-  margin-top: 10rem;
+  margin-top: 5rem;
+  margin-bottom: 2rem;
   display: flex;
   gap: 2rem;
   align-items: center;
@@ -51,7 +53,7 @@
 
 .institution-grid-container {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1.4fr 1fr;
   gap: 5rem;
 }
 
@@ -70,6 +72,7 @@
   flex-direction: column;
   justify-content: flex-start;
   margin-top: 1rem;
+  background-color: var(--mainGrey);
 }
 
 .institution-social-media { 

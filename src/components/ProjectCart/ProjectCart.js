@@ -16,15 +16,17 @@ function ProjectCart(props) {
   ,[]);
 
   useEffect(() => {
-    props.project.hability_id.map( (hability_id) => {
+    let requests = props.project.hability_id.map( (hability_id) => {
       
-      fetch(`http://localhost:8000/hability/${hability_id}`)
+      return fetch(`http://localhost:8000/hability/${hability_id}`)
       .then(res => res.json())
-      .then(res => setHabilities([...habilities, res]))
-      .catch(erro => alert(`Erro ao obter lista de habilidades: ${erro}`))
-    }
+    })
 
-    )
+    Promise.all(requests)
+    .then(res => setHabilities(res))
+    .catch(erro => alert(`Erro ao obter lista de habilidades: ${erro}`))
+
+    
   }
   ,[]);
 

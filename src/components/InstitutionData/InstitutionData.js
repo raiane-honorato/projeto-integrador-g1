@@ -23,24 +23,22 @@ function InstitutionData() {
   }, [institutionId]);
 
   useEffect(() => {
-    institution && 
-    institution.cause_id.map( (cause_id) => {
+  
+    let requests = institution && (institution.cause_id.map( (cause_id) => {
       
-      fetch(`http://localhost:8000/cause/${cause_id}`)
+      return (fetch(`http://localhost:8000/cause/${cause_id}`)
       .then(res => res.json())
-      .then(res => {
-        const newCauseList = causes.concat(res)
-        setCauses(newCauseList)
-        console.log(causes)
-      })
-      .catch(erro => alert(`Erro ao obter lista de causas: ${erro}`))
+      )
     }
+    ))
 
-    )
+    Promise.all(requests)
+    .then(p => setCauses(p))
+    .catch(err => alert("Não foi possível obter as causas"))
+
   }
   ,[institution]);
 
- // useEffect(() => {console.log(causes)},[causes]) 
 
   return (
     <div className="institution-data-profile">
@@ -63,9 +61,8 @@ function InstitutionData() {
         </div>
         <div className='institution-grid-container'>
           <div className='institution-basic-information'>
-            <h1>{institution.institution_name}</h1>
-            <span>CNPJ: {institution.cnpj}</span>
-            <p>{institution.summary}</p>
+
+            <h3>Sobre a Instituição</h3>
             <p>{institution.bio}</p>
           </div>  
           <div className='institution-other-information'>
