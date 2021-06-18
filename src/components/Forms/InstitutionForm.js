@@ -53,7 +53,7 @@ function InstForm() {
       ongName: "",
       resumo: "",
       cnpjNumber: "",
-      endereco: "",
+      cep: "",
       causas: "",
       numBeneficiados: "",
       telOng: "",
@@ -79,8 +79,8 @@ function InstForm() {
         errors.resumo = "Texto invalido";
       }
 
-      if ((values.endereco.length < 3) | (values.endereco.length > 150)) {
-        errors.endereco = "Endereço invalido";
+      if (values.cep.length !== 8) {
+        errors.cep = "CEP Inválido";
       }
 
       if (cnpj.length < 14) {
@@ -130,6 +130,10 @@ function InstForm() {
     {
       id: "dados-base1",
       title: "Sobre a ONG",
+    },
+    {
+      id: "endereco",
+      title: "Endereço",
     },
     {
       id: "dados-base2",
@@ -202,22 +206,100 @@ function InstForm() {
                 <span className="formikError">{formik.errors.resumo}</span>
               )}
             </div>
-
+          </div>
+        )}
+        {steps[currentStep].id === "endereco" && (
+          <div className="endereco">
             <div className="inputs">
-              <label htmlFor="endereco">Endereço</label>
+              <label htmlFor="cep">CEP</label>
               <input
-                type="text"
-                name="endereco"
-                id="endereco"
-                value={formik.values.endereco}
+                type="number"
+                name="cep"
+                id="cep"
+                value={formik.values.cep}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
-                minLength="3"
-                maxLength="100"
+                minLength="8"
+                maxLength="8"
                 required
               />
-              {formik.touched.endereco && formik.errors.endereco && (
-                <span className="formikError">{formik.errors.endereco}</span>
+              {formik.touched.cep && formik.errors.cep && (
+                <span className="formikError">{formik.errors.cep}</span>
+              )}
+            </div>
+            <div className="inputs">
+              <label htmlFor="rua">Rua</label>
+              <input
+                type="text"
+                name="rua"
+                id="rua"
+                value={formik.values.rua}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                required
+              />
+              {formik.touched.rua && formik.errors.rua && (
+                <span className="formikError">{formik.errors.rua}</span>
+              )}
+            </div>
+            <div className="inputs">
+              <label htmlFor="bairro">Bairro</label>
+              <input
+                type="text"
+                name="bairro"
+                id="bairro"
+                value={formik.values.bairro}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                required
+              />
+              {formik.touched.bairro && formik.errors.bairro && (
+                <span className="formikError">{formik.errors.bairro}</span>
+              )}
+            </div>
+            <div className="inputs">
+              <label htmlFor="numero">Número</label>
+              <input
+                type="text"
+                name="numero"
+                id="numero"
+                value={formik.values.numero}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                required
+              />
+              {formik.touched.numero && formik.errors.numero && (
+                <span className="formikError">{formik.errors.numero}</span>
+              )}
+            </div>
+            <div className="inputs">
+              <label htmlFor="cidade">Cidade</label>
+              <input
+                type="text"
+                name="cidade"
+                id="cidade"
+                value={formik.values.cidade}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                required
+              />
+              {formik.touched.cidade && formik.errors.cidade && (
+                <span className="formikError">{formik.errors.cidade}</span>
+              )}
+            </div>
+            <div className="inputs">
+              <label htmlFor="estado">Estado</label>
+              <input
+                type="text"
+                name="estado"
+                id="estado"
+                value={formik.values.estado}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                required
+              />
+              {formik.touched.estado && formik.errors.estado && (
+                <span className="formikError">{formik.errors.estado}</span>
               )}
             </div>
           </div>
@@ -356,7 +438,7 @@ function InstForm() {
                 maxLength="180"
                 value={formik.values.descricao}
                 onChange={formik.handleChange}
-                onBlur={formik.handleBlur}            
+                onBlur={formik.handleBlur}
                 required
               />
               {formik.touched.descricao && formik.errors.descricao && (
