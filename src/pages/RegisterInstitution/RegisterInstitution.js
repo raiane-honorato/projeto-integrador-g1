@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import InstFormulario from "../../components/Forms/InstitutionForm";
+import InstForm from "../../components/Forms/InstitutionForm";
 import fullLogo from "../../img//logo-color.png";
 import "./registerinstitution.css";
 
@@ -15,7 +15,7 @@ function RegisterInstitution() {
           ></img>
         </NavLink>
       </div>
-      <InstFormulario />
+      <InstForm />
     </div>
   );
 }

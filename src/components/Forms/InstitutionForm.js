@@ -43,7 +43,7 @@ function useFormik({ initialValues, validate }) {
   };
 }
 
-function InstFormulario() {
+function InstForm() {
   const [currentStep, setCurrentStep] = useState(0);
 
   const onlyNumbers = (str) => str.replace(/[^0-9]/g, "");
@@ -454,4 +454,4 @@ function InstFormulario() {
   );
 }
 
-export default InstFormulario;
+export default InstForm;

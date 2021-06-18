@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import Formulario from "../../components/Forms/UserForm";
+import UserForm from "../../components/Forms/UserForm";
 import fullLogo from '../../img//logo-color.png';
 import './registeruser.css';
 
@@ -16,7 +16,7 @@ function RegisterUser() {
           ></img>
         </NavLink>        
       </div>         
-      <Formulario />
+      <UserForm />
       
     </div>
   );

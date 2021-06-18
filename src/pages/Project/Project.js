@@ -9,6 +9,7 @@ function ProjectPage() {
   const projectId = parameter.id;
 
   const [vagas, setVagas] = useState();
+  const [cause, setCause] = useState();
 
   //get data from localhost port 8000
   useEffect( () => {
@@ -20,6 +21,19 @@ function ProjectPage() {
     .catch(erro => alert(`Erro ao obter lista de projetos: ${erro}`))
 },[]
 )
+
+//  //get data from localhost port 8000
+//  useEffect(() => {
+//   fetch(`http://localhost:8000/cause/`)
+//   .then(res => res.json())
+//   .then(res => {
+//     setCause(res)
+//   })
+//   .catch(erro => alert(`Erro ao obter lista de causas: ${erro}`))
+// },[]
+// )
+
+
 
   return (
     <div id="page-container">
@@ -56,8 +70,8 @@ function ProjectPage() {
                     </div>
                     <div className="causes">
                       <span>Causas:</span>
-                      {vaga.cause &&
-                        vaga.cause.map((cause) => (
+                      {vaga.cause_id &&
+                        vaga.cause_id.map((cause) => (
                           <span key={cause}>{cause}</span>
                         ))}
                     </div>

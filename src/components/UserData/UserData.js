@@ -1,5 +1,4 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Fragment } from "react";
 import { useParams } from "react-router";
 import { AuthContext } from "../../context/auth";
 import "./userdata.css";
@@ -9,7 +8,6 @@ function UserData() {
   const parameter = useParams();
   const userId = parameter.id;
   const [subscriptions, setSubscriptions] = useState("");
-  const [projects, setProjects] = useState("");
   const { user } = useContext(AuthContext);
 
   const [pageUser, setPageUser] = useState("");
@@ -61,9 +59,9 @@ function UserData() {
               </p>
             </div>
             <div className='projects-data'>
-              {user.id == pageUser.id &&
+              {user.id === pageUser.id &&
               <h2>Projetos</h2>}
-              {subscriptions && user.id == pageUser.id &&
+              {subscriptions && user.id === pageUser.id &&
                subscriptions.map((subscription) => (
                  
                  <UserSubscriptionCart subscription = {subscription} />

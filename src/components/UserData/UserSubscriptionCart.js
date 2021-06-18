@@ -1,7 +1,5 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Fragment } from "react";
-import { useParams } from "react-router";
-import { AuthContext } from "../../context/auth";
 import "./userdata.css";
 
 function UserSubscriptionCart({subscription}) {
@@ -16,7 +14,7 @@ function UserSubscriptionCart({subscription}) {
             setProject(res);
           })
           .catch(erro => alert('Não foi possível obter os projetos do usuário.'))
-      }, []);
+      }, [subscription.project_id]);
 
     //getting project's institution data
     const [institution, setInstitution] = useState();

@@ -3,7 +3,7 @@ import { AuthContext } from "../../../context/auth";
 import { useContext } from "react";
 
 function DropLoggedUser() {
-    const { user, token, setToken, setUser} = useContext(AuthContext);
+    const { user, setToken, setUser} = useContext(AuthContext);
     const history = useHistory();
 
     const signOut = (event) => {

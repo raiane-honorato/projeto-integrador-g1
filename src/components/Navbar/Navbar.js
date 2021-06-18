@@ -72,7 +72,7 @@ function Navbar({ navbarTransparent, changeBackground }) {
               <div className="nav-login-dropdown">
                 {!token ? 
                 <DropNotLogged /> : 
-                (user.type == 1 ? <DropLoggedUser /> : <DropLoggedInstitution/>)
+                (user.type === 1 ? <DropLoggedUser /> : <DropLoggedInstitution/>)
                 }
                 {/* <ul className="nav-btn-list">
                     {!token ?
