@@ -6,11 +6,36 @@ function useFormik({ initialValues, validate }) {
   const [touched, setTouchedFields] = useState({});
   const [errors, setErrors] = useState({});
   const [values, setValues] = useState(initialValues);
+  const [cep, setCep] = useState('');
 
   useEffect(() => {
     validateValues(values);
   }, [values]);
 
+  useEffect(() => {
+    if (cep.length > 7)
+    fetch(`https://viacep.com.br/ws/${cep}/json/`)
+      .then((response) => response.json())
+      .then((response) => setValues({
+        ...values,
+        rua: response.logradouro,
+        bairro: response.bairro,
+        cidade: response.localidade,
+        estado: response.uf
+      }))
+      .catch((error) => console.log(`Não foi possível obter o endereço do CEP informado! Erro:${error}`));
+
+  }, [cep]);
+
+  function searchingData(e) {
+    setCep(e.target.value);
+  }  
+
+  function fillingForm({ target }) {
+    const {id, value} = target;
+    setValues({...values, [id]: value})
+  }
+  
   function handleChange(event) {
     const fieldName = event.target.getAttribute("name");
     const value = event.target.value;
@@ -40,11 +65,15 @@ function useFormik({ initialValues, validate }) {
     handleBlur,
     setErrors,
     handleChange,
+    cep,
+    searchingData,
+    fillingForm
   };
 }
 
 function InstForm() {
   const [currentStep, setCurrentStep] = useState(0);
+
 
   const onlyNumbers = (str) => str.replace(/[^0-9]/g, "");
 
@@ -53,7 +82,11 @@ function InstForm() {
       ongName: "",
       resumo: "",
       cnpjNumber: "",
-      cep: "",
+      rua: "",
+      bairro: "",
+      numero: "",
+      cidade:"",
+      estado:"",
       causas: "",
       numBeneficiados: "",
       telOng: "",
@@ -77,10 +110,6 @@ function InstForm() {
 
       if ((values.resumo.length < 5) | (values.resumo.length > 100)) {
         errors.resumo = "Texto invalido";
-      }
-
-      if (values.cep.length !== 8) {
-        errors.cep = "CEP Inválido";
       }
 
       if (cnpj.length < 14) {
@@ -216,8 +245,8 @@ function InstForm() {
                 type="number"
                 name="cep"
                 id="cep"
-                value={formik.values.cep}
-                onChange={formik.handleChange}
+                value={formik.cep}
+                onChange={formik.searchingData}
                 onBlur={formik.handleBlur}
                 minLength="8"
                 maxLength="8"
@@ -234,7 +263,7 @@ function InstForm() {
                 name="rua"
                 id="rua"
                 value={formik.values.rua}
-                onChange={formik.handleChange}
+                onChange={formik.fillingForm}
                 onBlur={formik.handleBlur}
                 required
               />
@@ -249,7 +278,7 @@ function InstForm() {
                 name="bairro"
                 id="bairro"
                 value={formik.values.bairro}
-                onChange={formik.handleChange}
+                onChange={formik.fillingForm}
                 onBlur={formik.handleBlur}
                 required
               />
@@ -279,7 +308,7 @@ function InstForm() {
                 name="cidade"
                 id="cidade"
                 value={formik.values.cidade}
-                onChange={formik.handleChange}
+                onChange={formik.fillingForm}
                 onBlur={formik.handleBlur}
                 required
               />
@@ -294,7 +323,7 @@ function InstForm() {
                 name="estado"
                 id="estado"
                 value={formik.values.estado}
-                onChange={formik.handleChange}
+                onChange={formik.fillingForm}
                 onBlur={formik.handleBlur}
                 required
               />
