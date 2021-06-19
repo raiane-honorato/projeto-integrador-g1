@@ -4,12 +4,14 @@ import "./institutiondata.css";
 import { faFacebookSquare } from "@fortawesome/free-brands-svg-icons";
 import { faInstagram } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import ProjectCart from "../ProjectCart/ProjectCart";
 
 function InstitutionData() {
   const parameter = useParams();
   const institutionId = parameter.id;
   const [institution, setInstitution] = useState("");
   const [causes, setCauses] = useState([]);
+  const [projects, setProjects] = useState("");
 
   useEffect(() => {
     fetch(`http://localhost:8000/institution/${institutionId}`)
@@ -21,6 +23,19 @@ function InstitutionData() {
         alert("Não foi possível obter dados dessa instituição.")
       );
   }, [institutionId]);
+
+  useEffect(() => {
+    fetch(`http://localhost:8000/projects/?institution_id=${institutionId}`)
+      .then((res) => res.json())
+      .then((res) => {
+        setProjects(res);
+      })
+      .catch((erro) =>
+        alert("Não foi possível obter dados dessa instituição.")
+      );
+  }, [institutionId]);
+
+  useEffect(() => console.log(projects),[projects])
 
   useEffect(() => {
   
@@ -60,38 +75,48 @@ function InstitutionData() {
           </div>
         </div>
         <div className='institution-grid-container'>
-          <div className='institution-basic-information'>
+          
+          <div className='institution-project-list'>
+            <h3>Projetos de voluntariado</h3>
+              {
+                projects && projects.map(project => <ProjectCart project = {project} key = {`search-${project.id}`}/>)
+              }
 
-            <h3>Sobre a Instituição</h3>
-            <p>{institution.bio}</p>
           </div>  
-          <div className='institution-other-information'>
-            <div className="institution-address">
-              <h3>Endereço</h3>      
-              <span>{institution.street}, </span>     
-              <span>{institution.address_number},  </span>     
-              <span>{institution.complement}</span>     
-              <span>{institution.city}</span>   
-              <span>, {institution.state}.</span>    
-            </div>
-            <div className="institution-social-contacts">
-              <h3>Contatos</h3>   
-              <p><strong>Telefone: </strong>{institution.phone}</p>
-              <strong>Site: </strong> <a href={institution.site} target='_blank' rel="noreferrer"> {institution.site}</a>  
-              <div className="institution-social-media">                 
-                  <div className="institution-social-media-icon">
-                    <a href={institution.instagram} target='_blank' rel="noreferrer"><FontAwesomeIcon icon={faInstagram} size="2x" alt="Instagram" /></a>
-                  </div>      
-                  <div className="institution-social-media-icon">
-                    <a href={institution.facebook} target='_blank' rel="noreferrer"> <FontAwesomeIcon
-                    icon={faFacebookSquare}
-                    size="2x"
-                    alt="Facebook"
-                  /></a>
-                  </div>                                  
-                </div>
+          
+          <div className="institution-second-column"> 
+            <div className='institution-information'>
+              <div className="institution-address">
+                <h3>Endereço</h3>      
+                <span>{institution.street}, </span>     
+                <span>{institution.address_number},  </span>     
+                <span>{institution.complement}</span>     
+                <span>{institution.city}</span>   
+                <span>, {institution.state}.</span>    
               </div>
-          </div>     
+              <div className="institution-social-contacts">
+                <h3>Contatos</h3>   
+                <p><strong>Telefone: </strong>{institution.phone}</p>
+                <strong>Site: </strong> <a href={institution.site} target='_blank' rel="noreferrer"> {institution.site}</a>  
+                <div className="institution-social-media">                 
+                    <div className="institution-social-media-icon">
+                      <a href={institution.instagram} target='_blank' rel="noreferrer"><FontAwesomeIcon icon={faInstagram} size="2x" alt="Instagram" /></a>
+                    </div>      
+                    <div className="institution-social-media-icon">
+                      <a href={institution.facebook} target='_blank' rel="noreferrer"> <FontAwesomeIcon
+                      icon={faFacebookSquare}
+                      size="2x"
+                      alt="Facebook"
+                    /></a>
+                    </div>                                  
+                  </div>
+                </div>
+            </div>
+            <div className='institution-information'>
+              <h3>Sobre a Instituição</h3>
+              <p>{institution.bio}</p>
+            </div>  
+          </div>    
         </div>
         </>
       )}
