@@ -74,44 +74,7 @@ function Navbar({ navbarTransparent, changeBackground }) {
                 <DropNotLogged /> : 
                 (user.type == 1 ? <DropLoggedUser /> : <DropLoggedInstitution/>)
                 }
-                {/* <ul className="nav-btn-list">
-                    {!token ?
-                  (
-                    <>
-                    <li className="nav-btn">
-                      <NavLink to="/login">
-                        <b>Entrar</b>
-                      </NavLink> 
-                    </li> 
-                    <li className="nav-btn">
-                      <NavLink to="/register_user">Cadastrar-se</NavLink>
-                    </li>  
-                </>                    
-                  )
-                      :
-                  ( 
-                    <>
-                    <li className="nav-btn">
-                      <NavLink to={user.type == 1 ? `/user/${user.id}` : `/institution/${user.institution_id}`}>
-                        <b>{user.type == 1 ? "Perfil" : "Página da instituição"}</b>
-                      </NavLink>  
-                    </li>
-                    <li className="nav-btn">
-                      <NavLink to='/' onClick={signOut}>
-                        Sair
-                      </NavLink>  
-                    </li>
-                    </>
-                  )
-                    }
 
-                  <div className="nav-dropdown-line"></div>
-                  <li className="nav-btn">
-                    <NavLink to="/register_institution">
-                      Seja uma instituição
-                    </NavLink>
-                  </li>
-                </ul> */}
               </div>
             </div>
           </div>
