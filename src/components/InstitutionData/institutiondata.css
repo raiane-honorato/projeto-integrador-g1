@@ -13,6 +13,11 @@
   display: flex;
   gap: 2rem;
   align-items: center;
+  background-color: var(--secondColor);
+  color:var(--mainWhite);
+  padding: 1rem;
+  box-shadow: 1rem 1rem 1rem var(--mainGrey);
+  border-radius: 1rem;
 }
 
 .institution-profile-pic {
@@ -25,7 +30,7 @@
 
 .institution-city {
   font-size: 0.8rem;
-  color: var(--secondColor);
+  color: var(--primaryColor);
 }
 
 .institution-name {
@@ -53,8 +58,15 @@
 
 .institution-grid-container {
   display: grid;
-  grid-template-columns: 1.4fr 1fr;
+  grid-template-columns: 2.5fr 1fr;
   gap: 5rem;
+}
+
+.institution-project-list{
+  background-color: rgba(247, 247, 247, 0.788);
+  padding: 0.5rem 2rem;
+  border-radius: 1rem;
+  margin-bottom: 2rem;
 }
 
 .institution-basic-information h1 {
@@ -67,20 +79,25 @@
   font-weight:300;
 }
 
-.institution-other-information {
+.institution-information {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  margin-top: 1rem;
-  background-color: var(--mainGrey);
+  padding: .5rem 2rem;
+  border-radius: 1rem;
+  background-color: rgba(247, 247, 247, 0.788);
+  max-height: 60rem;
+  margin-bottom: 2rem;
 }
 
 .institution-social-media { 
   padding: 0px;
   list-style-type: none;
   display: flex;
-  align-items: center;
+  align-items: top;
   margin-top: 1rem;
+  height: 32px;
+  margin-bottom: 1rem;
 
 }
 
