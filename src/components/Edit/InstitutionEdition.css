@@ -9,7 +9,7 @@
     padding: .5rem 2rem;
     border-radius: 1rem;
     background-color: rgba(247, 247, 247);
-    max-height: 60rem;
+    max-height: calc(100vh - 10rem);
     margin-bottom: 2rem;
   overflow: hidden;
   }
@@ -30,6 +30,9 @@
 
   .institution-first-edition-window-body {
       margin: 2rem 0rem;
+      overflow: hidden;
+      overflow-y: scroll;
+      max-height: calc(100vh - 20rem);
   }
   
   .institution-edition-save{ 
