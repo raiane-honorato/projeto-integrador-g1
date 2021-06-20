@@ -3,7 +3,7 @@ import { Route, BrowserRouter, Switch } from "react-router-dom";
 import Home from "./pages/Home";
 import Search from "./pages/Search/Search";
 import RegisterUser from "./pages/RegisterUser/RegisterUser";
-import RegisterInstitution from "./pages/RegisterInstituition/RegisterInstitution";
+import RegisterInstitution from "./pages/RegisterInstitution/RegisterInstitution";
 import Error404 from "./pages/Error/Error404";
 import ProjectPage from "./pages/Project/Project";
 import Login from "./pages/Login/Login";
@@ -12,6 +12,9 @@ import Profile from "./pages/Profile/Profile";
 import TermosVoluntariado from "./pages/Termos/TermosVoluntariado"
 import TermosDePrivacidade from "./pages/Termos/TermosDePrvacidade";
 import RegisterJob from "./components/RegisterJob/RegisterJob";
+
+import InstituitionProfile from "./pages/InstitutionProfile/InstituitionProfile";
+
 
 function Routes() {
   return (
@@ -22,6 +25,7 @@ function Routes() {
         <Route path="/login" component={Login} />
         <Route path="/register_user" component={RegisterUser} />
         <PrivateRoute path='/user/:id' component={Profile} />
+        <PrivateRoute path='/institution/:id' component={InstituitionProfile} />
         <Route path="/project/:id" component={ProjectPage} />
         <Route path="/register_institution" component={RegisterInstitution} />
         <Route path="/termos/voluntariado" component={TermosVoluntariado} />

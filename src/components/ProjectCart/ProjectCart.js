@@ -1,12 +1,41 @@
+import { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import "./ProjectCart.css";
 
 function ProjectCart(props) {
+
+  const [institution, setInstitution] = useState();
+  const [habilities, setHabilities] = useState([]);
+
+  useEffect(() => {
+    fetch(`http://localhost:8000/institution/${props.project.institution_id}`)
+    .then(res => res.json())
+    .then(res => setInstitution(res))
+    .catch(erro => alert(`Erro ao obter lista de habilidades: ${erro}`))
+  }
+  ,[]);
+
+  useEffect(() => {
+    let requests = props.project.hability_id.map( (hability_id) => {
+      
+      return fetch(`http://localhost:8000/hability/${hability_id}`)
+      .then(res => res.json())
+    })
+
+    Promise.all(requests)
+    .then(res => setHabilities(res))
+    .catch(erro => alert(`Erro ao obter lista de habilidades: ${erro}`))
+
+    
+  }
+  ,[]);
+
+
   return (
     <>
       <NavLink
         to={`/project/${props.project["id"]}`}
-        key={props.project["id"]}
+        key={`card-${props.project["id"]}`}
         className="spotlight-card-container"
       >
         <div className="card">
@@ -20,10 +49,12 @@ function ProjectCart(props) {
           <div className="card-content">
             <h3 className="job-title">{props.project["title"]}</h3>
 
-            <p className="job-schedule">{props.project["institution_name"]}</p>
-            {props.project["hability"].map((hability, index) => (
+            <p className="job-schedule">{institution && institution.institution_name}</p>
+            {habilities && habilities.map((hability, index) => (
               <span className="spotlight-projectcart-hability" key={index}>
-                {hability}
+                {
+                  hability.name
+                }
               </span>
             ))}
           </div>

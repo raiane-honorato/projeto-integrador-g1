@@ -1,4 +1,4 @@
-
+import './RegisterJob.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
 
 const RegisterJob = ( {children} ) => {

@@ -36,10 +36,7 @@ function Search() {
     useEffect(() => {
         projects && setFilteredProjects( projects.filter((project) =>  
         (
-            (project['title'].toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").indexOf(q.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "")) > -1) ||
-            (project['address'].toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").indexOf(q.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "")) > -1) ||
-            (project['institution_name'].toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").indexOf(q.toLowerCase()) > -1) ||
-            (project['hability'].toString().toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").indexOf(q.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "")) > -1)             
+            (project['title'].toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").indexOf(q.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "")) > -1)          
         )).sort((a,b) => {return(b.popularity - a.popularity)})
     )
     },[projects, q])

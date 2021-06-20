@@ -27,7 +27,7 @@ function Hero() {
               Seja um voluntário
             </button>
           </NavLink>
-          <NavLink to="/register_instituition">
+          <NavLink to="/register_institution">
           <button className="hero-btn" id="hero-btn-institution">
             Seja uma instituição
           </button>

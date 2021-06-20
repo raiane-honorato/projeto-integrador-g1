@@ -22,7 +22,10 @@ function SearchBar() {
       
       <button 
       className='buttonSearch' 
-      onClick = {() => {history.push(`/search/?q=${q}`)}}>
+      onClick = {(event) => {
+        event.preventDefault();
+        history.push(`/search/?q=${q}`);
+        }}>
         <span className="material-icons lupa icons-outlined">search</span>
       </button>
 

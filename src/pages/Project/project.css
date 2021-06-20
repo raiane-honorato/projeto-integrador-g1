@@ -114,3 +114,25 @@
 .project-btn:hover {
   filter: brightness(.9); 
 }
+
+
+/* -------------------------------------------------------------------------- */
+
+.modal{
+  width: 100%;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 30;
+  background-color: rgba(0,0,0,.80);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.container{
+  background-color: #fff;   
+  color: #000;
+  width: 60%;
+  height: 60%;
+}
