@@ -8,7 +8,7 @@ import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import ProjectCart from "../ProjectCart/ProjectCart";
 import EditButton from "../Edit/EditButton";
-import InstitutionFirstEdition from "../Edit/InstitutionFirstEdition";
+import InstitutionEdition from "../Edit/InstitutionEdition";
 
 
 function InstitutionData() {
@@ -146,7 +146,15 @@ function InstitutionData() {
       }}
       > </div>
 
-      {firstEditState && <InstitutionFirstEdition setStatePass = {setFirstEditState} institution = {institution} causes = {causes} />}
+      {(firstEditState || secondEditState || thirdEditState) && 
+      <InstitutionEdition 
+      firstEditState = {firstEditState}
+      secondEditState = {secondEditState}
+      thirdEditState = {thirdEditState}
+      setStatePass = {firstEditState? setFirstEditState: secondEditState ? setSecondEditState : thirdEditState? setThirdEditState : ""} 
+      setStateInstitution = {setInstitution} 
+      institution = {institution} 
+      causes = {causes} />}
 
     </>
   );
