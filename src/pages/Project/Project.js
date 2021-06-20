@@ -3,12 +3,14 @@ import { useParams } from "react-router-dom";
 import Footer from "../../components/Footer/Footer";
 import Navbar from "../../components/Navbar/Navbar";
 import "./project.css";
+import RegisterJob from "../../components/RegisterJob/RegisterJob";
 
 function ProjectPage() {
   const parameter = useParams();
   const projectId = parameter.id;
-
   const [vagas, setVagas] = useState();
+
+  const [isModalVisible, setIsModalVisible] = useState(false)
 
   //get data from localhost port 8000
   useEffect( () => {
@@ -18,8 +20,8 @@ function ProjectPage() {
       setVagas(res)
     })
     .catch(erro => alert(`Erro ao obter lista de projetos: ${erro}`))
-},[]
-)
+    },[]
+  )
 
   return (
     <div id="page-container">
@@ -61,7 +63,8 @@ function ProjectPage() {
                           <span key={cause}>{cause}</span>
                         ))}
                     </div>
-                  <button className='project-btn'>Quero a Vaga</button>
+                  <button className='project-btn' onClick={() => setIsModalVisible(true)}>Quero a Vaga</button>
+                  {isModalVisible ? <RegisterJob><h2>Salve</h2></RegisterJob> : null}
                   </div>
                 </div>
               </div>

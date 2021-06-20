@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import InputMask from "react-input-mask";
+import { NavLink } from "react-router-dom";
 // import MaskedInput from "./formComponents/MaskedInput";
 import './userform.css';
 
@@ -277,7 +278,7 @@ function Formulario() {
 
           <div className="checkBox">
             <input type="checkbox" id="terms" name="terms" required/>{" "}
-            <label htmlFor="terms">Aceito os termos de uso</label>
+            <label htmlFor="terms"><NavLink to="/termos/privacidade" target="_blank">Aceito os termos de uso</NavLink></label>
 
             <br />
 
