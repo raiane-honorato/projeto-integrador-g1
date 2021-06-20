@@ -209,8 +209,8 @@
       "cep": "01306010",
       "city": "São Paulo",
       "state": "SP",
-      "street": "R. Paim",
-      "address_number": 420,
+      "street": "R. Augusta",
+      "address_number": "2840",
       "complement": null,
       "summary": "Somos médicos do mundo",
       "cause_id": [
@@ -221,7 +221,8 @@
       "site": "https://medicospelavidacovid19.com.br/",
       "facebook": "https://www.facebook.com/medicojovem",
       "instagram": "https://www.instagram.com/medicospelavidacovid19/",
-      "bio": "No final de 2015, inspirado pelo médico americano Dr. Jim Withers - um dos precursores da medicina de rua - o médico neurologista e professor Dr. Mário Guimarães, começou a atender a população em situação de rua e vulnerabilidade na cidade de são Paulo. Inicialmente sozinho, aos poucos passou a ser acompanhado por seus alunos de medicina. Dr Mário decidiu realizar esta ação ao observar o número crescente de pessoas desabrigadas em seu trajeto do metrô ao trabalho."
+      "bio": "No final de 2015, inspirado pelo médico americano Dr. Jim Withers - um dos precursores da medicina de rua - o médico neurologista e professor Dr. Mário Guimarães, começou a atender a população em situação de rua e vulnerabilidade na cidade de são Paulo. Inicialmente sozinho, aos poucos passou a ser acompanhado por seus alunos de medicina. Dr Mário decidiu realizar esta ação ao observar o número crescente de pessoas desabrigadas em seu trajeto do metrô ao trabalho.",
+      "telOng": "(__) _ ____-____"
     },
     {
       "id": 2,

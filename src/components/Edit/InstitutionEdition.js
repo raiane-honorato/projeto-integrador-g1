@@ -2,7 +2,10 @@ import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {useState, useEffect, useRef } from "react";
 import InputMask from "react-input-mask";
-import "./InstitutionFirstEdition.css"
+import "./InstitutionEdition.css"
+import InstitutionFirstEditionBody from "./InstitutionFirstEditionBody";
+import InstitutionSecondEditionBody from "./InstitutionSecondEditionBody";
+import InstitutionThirdEditionBody from "./InstitutionThirdEditionBody";
 
 //form function
 function useFormik({ initialValues, validate }) {
@@ -46,7 +49,7 @@ function useFormik({ initialValues, validate }) {
     };
   }
 
-function InstitutionFirstEdition(props) {
+function InstitutionEdition(props) {
 
     //dealing with outside click to close the component
     let windowRef = useRef();
@@ -65,32 +68,28 @@ function InstitutionFirstEdition(props) {
 
     //setting the form
     const formik = useFormik({
-        initialValues: {
-          ongName: props.institution.institution_name,
-          resumo: props.institution.summary,
-          city: props.institution.city,
-          state: props.institution.state,
-          causas: props.causes
-        },
+        initialValues: 
+            props.institution
+        ,
         validate: function (values) {
 
           const errors = {};
     
-          if ((values.ongName.length < 3) | (values.ongName.length > 100)) {
-            errors.ongName = "Nome Invalido";
+          if ((values.institution_name.length < 3) | (values.institution_name.length > 100)) {
+            errors.institution_name = "Nome Invalido";
           }
     
-          if ((values.resumo.length < 5) | (values.resumo.length > 100)) {
-            errors.resumo = "Texto invalido";
+          if ((values.summary.length < 5) | (values.summary.length > 100)) {
+            errors.summary = "Texto invalido";
           }
     
           if ((values.city.length < 3) | (values.city.length > 150)) {
-            errors.endereco = "Endereço invalido";
+            errors.city = "Endereço invalido";
           }
 
-          if (values.causas.length < 3) {
-            errors.causas = "Causa invalida";
-          }
+        //   if (values.causes.length < 3) {
+        //     errors.causes = "Causa invalida";
+        //   }
     
           return errors;
         },
@@ -98,17 +97,11 @@ function InstitutionFirstEdition(props) {
 
       //saving information
       const handleSave = () => {
-        const institution_name = formik.values.ongName;
-        const institution_summary = formik.values.resumo;
-        console.log(institution_name)
         fetch(`http://localhost:8000/institution/${props.institution.id}`, 
         {
             method: "PATCH",
             headers: {"Content-type": "application/json"},
-            body: JSON.stringify({
-                "institution_name":institution_name,
-                "summary":institution_summary
-            })
+            body: JSON.stringify(formik.values)
         })
       .then((res) => res.json())
       .then((res) => {
@@ -129,47 +122,11 @@ function InstitutionFirstEdition(props) {
                 <h3>Editar informações</h3>
                 <FontAwesomeIcon className = "institution-edition-close-btn" icon = {faTimes} onClick = {() => props.setStatePass(false)}/>
                 </div>
-                <div className = "institution-first-edition-window-body">
-                    
-                    <div className="inputs">
-                        <label htmlFor="nomeOng">Nome da instituição</label>
-                        <input
-                            type="text"
-                            name="ongName"
-                            id="ongName"
-                            value={formik.values.ongName}
-                            onChange={formik.handleChange}
-                            onBlur={formik.handleBlur}
-                            minLength="3"
-                            maxLength="100"
-                            required
-                        />
-                        {formik.touched.ongName && formik.errors.ongName && (
-                            <span className="formikError">{formik.errors.ongName}</span>
-                        )}
-                    </div>
 
-                    <div className="inputs">
-                        <label htmlFor="resumo">Resumo da instituição</label>
-                        <textarea
-                            name="resumo"
-                            id="resumo"
-                            rows="3"
-                            cols="50"
-                            minLength="10"
-                            maxLength="180"
-                            value={formik.values.resumo}
-                            onChange={formik.handleChange}
-                            onBlur={formik.handleBlur}
-                            required
-                        />
-                        {formik.touched.resumo && formik.errors.resumo && (
-                            <span className="formikError">{formik.errors.resumo}</span>
-                        )}
-                    </div>
-
-
-                </div>
+                {props.firstEditState && <InstitutionFirstEditionBody formik = {formik}/>}
+                {props.secondEditState && <InstitutionSecondEditionBody formik = {formik}/>}
+                {props.thirdEditState && <InstitutionThirdEditionBody formik = {formik}/>}
+                
                 <div className = "institution-first-edition-window-footer">
                     <button className = "institution-edition-save" onClick = {handleSave}>Salvar</button>
                 </div>
@@ -179,4 +136,4 @@ function InstitutionFirstEdition(props) {
 
 }
 
-export default InstitutionFirstEdition;
+export default InstitutionEdition;
