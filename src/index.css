@@ -36,6 +36,7 @@ body {
   --mainWhite: #f7fff7ff;
   --mainBlack: #222;
   --mainGrey: #ececec;
+  --secondGrey: rgb(172, 172, 172);
   --mainSpacing: 0.1rem;
   --mainTransition: all 0.3s linear;
 

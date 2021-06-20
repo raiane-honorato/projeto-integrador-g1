@@ -199,7 +199,7 @@ function InstForm() {
         {steps[currentStep].id === "dados-base1" && (
           <div className="dados-base1">
             <div className="inputs">
-              <label htmlFor="nomeOng">Nome da Ong</label>
+              <label htmlFor="nomeOng">Nome da instituição</label>
               <input
                 type="text"
                 name="ongName"
@@ -217,8 +217,7 @@ function InstForm() {
             </div>
 
             <div className="inputs">
-              <label htmlFor="resumo">Resumo da Ong</label>
-              {/* {tamanho && <p className="errors-input">{tamanho}</p>} */}
+              <label htmlFor="resumo">Resumo da instituição</label>
               <textarea
                 name="resumo"
                 id="resumo"
