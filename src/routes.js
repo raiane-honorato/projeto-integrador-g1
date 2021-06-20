@@ -10,6 +10,8 @@ import Login from "./pages/Login/Login";
 import PrivateRoute from "./privateRoute/Private";
 import Profile from "./pages/Profile/Profile";
 import InstituitionProfile from "./pages/InstitutionProfile/InstituitionProfile";
+import ManageProjects from "./pages/ManageProjects/ManageProjects";
+import ManageProject from "./pages/ManageProject/ManageProject";
 
 function Routes() {
   return (
@@ -21,6 +23,8 @@ function Routes() {
         <Route path="/register_user" component={RegisterUser} />
         <PrivateRoute path='/user/:id' component={Profile} />
         <PrivateRoute path='/institution/:id' component={InstituitionProfile} />
+        <PrivateRoute path='/manage_projects' component={ManageProjects} exact/>
+        <PrivateRoute path='/manage_project/:id' component={ManageProject} />
         <Route path="/project/:id" component={ProjectPage} />
         <Route path="/register_institution" component={RegisterInstitution} />
         <Route path="*" component={Error404} />

@@ -22,7 +22,7 @@ function DropLoggedInstitution() {
             </NavLink>  
         </li>
         <li className="nav-btn">
-            <NavLink to='/'>
+            <NavLink to={`/manage_projects`}>
             Gerenciar projetos
             </NavLink>  
         </li>
