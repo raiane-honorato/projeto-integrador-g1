@@ -14,6 +14,8 @@ import TermosDePrivacidade from "./pages/Termos/TermosDePrvacidade";
 import RegisterJob from "./components/RegisterJob/RegisterJob";
 
 import InstituitionProfile from "./pages/InstitutionProfile/InstituitionProfile";
+import ManageProjects from "./pages/ManageProjects/ManageProjects";
+import ManageProject from "./pages/ManageProject/ManageProject";
 
 
 function Routes() {
@@ -26,6 +28,8 @@ function Routes() {
         <Route path="/register_user" component={RegisterUser} />
         <PrivateRoute path='/user/:id' component={Profile} />
         <PrivateRoute path='/institution/:id' component={InstituitionProfile} />
+        <PrivateRoute path='/manage_projects' component={ManageProjects} exact/>
+        <PrivateRoute path='/manage_project/:id' component={ManageProject} />
         <Route path="/project/:id" component={ProjectPage} />
         <Route path="/register_institution" component={RegisterInstitution} />
         <Route path="/termos/voluntariado" component={TermosVoluntariado} />
