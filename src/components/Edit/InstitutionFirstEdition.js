@@ -4,7 +4,7 @@ import {useState, useEffect, useRef } from "react";
 import InputMask from "react-input-mask";
 import "./InstitutionFirstEdition.css"
 
-//formulary function
+//form function
 function useFormik({ initialValues, validate }) {
     const [touched, setTouchedFields] = useState({});
     const [errors, setErrors] = useState({});
@@ -96,6 +96,31 @@ function InstitutionFirstEdition(props) {
         },
       });
 
+      //saving information
+      const handleSave = () => {
+        const institution_name = formik.values.ongName;
+        const institution_summary = formik.values.resumo;
+        console.log(institution_name)
+        fetch(`http://localhost:8000/institution/${props.institution.id}`, 
+        {
+            method: "PATCH",
+            headers: {"Content-type": "application/json"},
+            body: JSON.stringify({
+                "institution_name":institution_name,
+                "summary":institution_summary
+            })
+        })
+      .then((res) => res.json())
+      .then((res) => {
+        props.setStateInstitution(res);
+        props.setStatePass(false);
+      })
+      .catch((erro) =>
+        alert("Não foi possível atualizar.")
+      );
+
+      }
+
     return (
 
         <div className = "institution-edition-container institution-set-vis">
@@ -146,7 +171,7 @@ function InstitutionFirstEdition(props) {
 
                 </div>
                 <div className = "institution-first-edition-window-footer">
-                    <button className = "institution-edition-save">Salvar</button>
+                    <button className = "institution-edition-save" onClick = {handleSave}>Salvar</button>
                 </div>
             </div>
         </div>

@@ -146,7 +146,7 @@ function InstitutionData() {
       }}
       > </div>
 
-      {firstEditState && <InstitutionFirstEdition setStatePass = {setFirstEditState} institution = {institution} causes = {causes} />}
+      {firstEditState && <InstitutionFirstEdition setStatePass = {setFirstEditState} setStateInstitution = {setInstitution} institution = {institution} causes = {causes} />}
 
     </>
   );
