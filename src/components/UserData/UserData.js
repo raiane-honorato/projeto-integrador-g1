@@ -13,7 +13,7 @@ function UserData() {
   const [pageUser, setPageUser] = useState("");
 
   useEffect(() => {
-    if( user.id === userId) {
+    if(user.id === userId) {
       setPageUser(user);
       return
     } else {      
@@ -24,7 +24,7 @@ function UserData() {
         })
         .catch((erro) => alert("Não foi possível localizar este usuário."));
     }
-    }, [userId]);
+    }, [user, userId]);
 
   useEffect(() => {
     fetch(`http://localhost:8000/subscription?user_id=${userId}`)
@@ -35,8 +35,6 @@ function UserData() {
       .catch(erro => alert('Não foi possível obter os projetos do usuário.'))
   }, [userId]);
 
-
-
   return (
     <div className="userdata-container">
       {user && (
@@ -44,6 +42,12 @@ function UserData() {
           <div className="profile-basic-information">
             <img src={pageUser.img} alt="Foto do usuário" />
             <h1>{pageUser.name}</h1>
+            {user.id === pageUser.id &&
+            <div className='profileEdition'>
+              <span class="material-icons material-icons-outlined">settings</span>
+              <span>Editar Perfil</span>
+            </div>
+            }
           </div>
           <div className="profile-other-data">
             <div className='personal-data'>
@@ -62,10 +66,8 @@ function UserData() {
               {user.id === pageUser.id &&
               <h2>Projetos</h2>}
               {subscriptions && user.id === pageUser.id &&
-               subscriptions.map((subscription) => (
-                 
+               subscriptions.map((subscription) => (                 
                  <UserSubscriptionCart subscription = {subscription} />
-
                   ))
                   }
             </div>

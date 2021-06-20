@@ -9,6 +9,7 @@ import ProjectPage from "./pages/Project/Project";
 import Login from "./pages/Login/Login";
 import PrivateRoute from "./privateRoute/Private";
 import Profile from "./pages/Profile/Profile";
+import ProfileEdition from "./pages/ProfileEdition/ProfileEdition";
 import InstituitionProfile from "./pages/InstitutionProfile/InstituitionProfile";
 
 function Routes() {
@@ -19,7 +20,8 @@ function Routes() {
         <Route path="/search" component={Search} />
         <Route path="/login" component={Login} />
         <Route path="/register_user" component={RegisterUser} />
-        <PrivateRoute path='/user/:id' component={Profile} />
+        <PrivateRoute path='/user/:id' component={Profile} exact />
+        <PrivateRoute path='/user/:id/edit' component={ProfileEdition} />
         <PrivateRoute path='/institution/:id' component={InstituitionProfile} />
         <Route path="/project/:id" component={ProjectPage} />
         <Route path="/register_institution" component={RegisterInstitution} />
