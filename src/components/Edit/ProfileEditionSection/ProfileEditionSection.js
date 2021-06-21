@@ -8,7 +8,6 @@ function useFormik({ initialValues, validate }) {
   const [touched, setTouchedFields] = useState({});
   const [errors, setErrors] = useState({});
   const [values, setValues] = useState(initialValues);
-  
 
   useEffect(() => {
     validateValues(values);
@@ -47,28 +46,25 @@ function useFormik({ initialValues, validate }) {
 }
 
 function ProfileEditionSection(props) {
-  
   //dealing with outside click to close the component
   let windowRef = useRef();
 
   useEffect(() => {
     let handler = (event) => {
-            if(!windowRef.current.contains(event.target)){
-                props.setStatePass(false)}
-            }
+      if (!windowRef.current.contains(event.target)) {
+        props.setStatePass(false);
+      }
+    };
     document.addEventListener("mousedown", handler);
 
     return () => {
-        document.removeEventListener("mousedown", handler)
-    }
-})
-
-
+      document.removeEventListener("mousedown", handler);
+    };
+  });
 
   const formik = useFormik({
     initialValues: props.pageUser,
     validate: function (values) {
-      
       const errors = {};
 
       if ((values.name.length < 3) | (values.name.length > 100)) {
@@ -106,43 +102,43 @@ function ProfileEditionSection(props) {
     },
   });
 
-
-   //saving information
-   const handleSave = () => {
-    fetch(`http://localhost:8000/user/${props.pageUser.id}`, 
-    {
-        method: "PATCH",
-        headers: {"Content-type": "application/json"},
-        body: JSON.stringify(formik.values)
+  //saving information
+  const handleSave = () => {
+    fetch(`http://localhost:8000/user/${props.pageUser.id}`, {
+      method: "PATCH",
+      headers: { "Content-type": "application/json" },
+      body: JSON.stringify(formik.values),
     })
-  .then((res) => res.json())
-  .then((res) => {
-    props.setStateInstitution(res);
-    props.setStatePass(false);
-  })
-  .catch((erro) =>
-    alert("Não foi possível atualizar.")
-  );
-
-  }
-  
+      .then((res) => res.json())
+      .then((res) => {
+        props.setPageUser(res);
+        props.setStatePass(false);
+        alert("Usuário atualizado.")
+      })
+      .catch((erro) => alert("Não foi possível atualizar."));
+  };
 
   return (
-    <div className = "user-edition-container user-set-vis">
-            <div ref = {windowRef} className = "user-first-edition-window">
-                <div className = "user-first-edition-window-header">
-                <h3>Editar informações</h3>
-                <FontAwesomeIcon className = "institution-edition-close-btn" icon = {faTimes} onClick = {() => props.setStatePass(false)}/>
-                </div>
-
-                {props.firstEditState && <UserFirstEditionBody formik = {formik}/>}
-                               
-                <div className = "user-first-edition-window-footer">
-                    <button className = "user-edition-save" onClick = {handleSave}>Salvar</button>
-                </div>
-            </div>
+    <div className="user-edition-container user-set-vis">
+      <div ref={windowRef} className="user-first-edition-window">
+        <div className="user-first-edition-window-header">
+          <h3>Editar informações</h3>
+          <FontAwesomeIcon
+            className="institution-edition-close-btn"
+            icon={faTimes}
+            onClick={() => props.setStatePass(false)}
+          />
         </div>
-   
+
+        {props.firstEditState && <UserFirstEditionBody formik={formik} />}
+
+        <div className="user-first-edition-window-footer">
+          <button className="user-edition-save" onClick={handleSave}>
+            Salvar
+          </button>
+        </div>
+      </div>
+    </div>
   );
 }
 
