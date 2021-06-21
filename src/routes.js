@@ -9,7 +9,6 @@ import ProjectPage from "./pages/Project/Project";
 import Login from "./pages/Login/Login";
 import PrivateRoute from "./privateRoute/Private";
 import Profile from "./pages/Profile/Profile";
-import ProfileEdition from "./pages/ProfileEdition/ProfileEdition";
 import InstituitionProfile from "./pages/InstitutionProfile/InstituitionProfile";
 import ManageProjects from "./pages/ManageProjects/ManageProjects";
 import ManageProject from "./pages/ManageProject/ManageProject";
@@ -23,7 +22,6 @@ function Routes() {
         <Route path="/login" component={Login} />
         <Route path="/register_user" component={RegisterUser} />
         <PrivateRoute path='/user/:id' component={Profile} exact />
-        <PrivateRoute path='/user/:id/edit' component={ProfileEdition} />
         <PrivateRoute path='/institution/:id' component={InstituitionProfile} />
         <PrivateRoute path='/manage_projects' component={ManageProjects} exact/>
         <PrivateRoute path='/manage_project/:id' component={ManageProject} />

@@ -59,3 +59,38 @@
 .redCard {
   background-color:var(--thirdColorLight );
 }
+
+.first-edition-box {
+  display: flex;
+  align-items: center;
+}
+
+.user-first-edit {
+  margin-left: 2rem;
+}
+
+.user-overlay {
+  background-color: rgba(0, 0, 0, 0.322);
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  z-index: 103;
+  visibility: hidden;
+}
+
+.user-set-vis {
+  visibility: visible !important;
+}
+.user-edition-container {
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  visibility: hidden;
+  z-index: 104;
+  overflow: visible;
+}

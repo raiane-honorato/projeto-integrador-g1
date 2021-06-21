@@ -4,7 +4,6 @@ import { useParams } from "react-router";
 import "./institutiondata.css";
 import { faFacebookSquare } from "@fortawesome/free-brands-svg-icons";
 import { faInstagram } from "@fortawesome/free-brands-svg-icons";
-import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import ProjectCart from "../ProjectCart/ProjectCart";
 import EditButton from "../Edit/EditButton";
@@ -46,8 +45,6 @@ function InstitutionData() {
       );
   }, [institutionId]);
 
-  useEffect(() => console.log(user),[])
-
   useEffect(() => {
   
     let requests = institution && (institution.cause_id.map( (cause_id) => {
@@ -72,9 +69,9 @@ function InstitutionData() {
       {institution && (
         <>
         <div className = "institution-first-section-profile">
-          {user.institution_id == institutionId && <EditButton editClass = "institution-first-edit" setStatePass = {setFirstEditState}/>}
+          {user.institution_id === institutionId && <EditButton editClass = "institution-first-edit" setStatePass = {setFirstEditState}/>}
           <img className = "institution-profile-pic" src = {institution.img} />
-          <div>
+          <div> 
             <span className = "institution-city">{`${institution.city}, ${institution.state}`}</span>
             <h2 className = "institution-name">{institution.institution_name}</h2>
             <p className = "institution-summary">{institution.summary}</p>

@@ -8,40 +8,63 @@ function ProjectPage() {
   const parameter = useParams();
   const projectId = parameter.id;
 
-  const [vagas, setVagas] = useState();
-  const [cause, setCause] = useState();
+  const [vaga, setVaga] = useState();
+  const [causes, setCauses] = useState([]);
+  const [habilities, setHabilities] = useState([]);
 
   //get data from localhost port 8000
-  useEffect( () => {
-    fetch(`http://localhost:8000/projects`)
+  useEffect(() => {
+    fetch(`http://localhost:8000/projects/${projectId}`)
     .then(res => res.json())
     .then(res => {
-      setVagas(res)
+      setVaga(res)
     })
     .catch(erro => alert(`Erro ao obter lista de projetos: ${erro}`))
 },[]
 )
 
-//  //get data from localhost port 8000
-//  useEffect(() => {
-//   fetch(`http://localhost:8000/cause/`)
-//   .then(res => res.json())
-//   .then(res => {
-//     setCause(res)
-//   })
-//   .catch(erro => alert(`Erro ao obter lista de causas: ${erro}`))
-// },[]
-// )
+useEffect(() => {
+  
+    let requests = vaga && (vaga.cause_id.map( (cause_id) => {
+    
+    return (fetch(`http://localhost:8000/cause/${cause_id}`)
+    .then(res => res.json())
+    )
+  }
+  ))
+
+  Promise.all(requests)
+  .then(p => setCauses(p))
+  .catch(err => console.log(err))
+
+}
+,[vaga]);
+
+
+useEffect(() => {
+  
+  let requests2 = vaga && (vaga.hability_id.map( (hability_id) => {
+    
+    return (fetch(`http://localhost:8000/cause/${hability_id}`)
+    .then(res => res.json())
+    )
+  }
+  ))
+
+  Promise.all(requests2)
+  .then(p => setHabilities(p))
+  .catch(err => console.log(err))
+
+}
+,[vaga]);
 
 
 
   return (
     <div id="page-container">
       <Navbar />
-      {vagas &&
-        vagas
-          .filter((vaga) => vaga.id === +projectId)
-          .map((vaga) => (
+      {vaga &&
+       (
             <div key={vaga.id} className="project-container">
               <div className="project-title">
                 <h2>{vaga.title}</h2>
@@ -62,17 +85,17 @@ function ProjectPage() {
                   <div className="project-details">
                     <p>{vaga.description}</p>
                     <div className="habilities">
-                      {vaga.hability && <span>Habilidades:</span>}
-                      {vaga.hability &&
-                        vaga.hability.map((hability) => (
-                          <span key={hability}>{hability}</span>
+                      {habilities && <span>Habilidades:</span>}
+                      {habilities &&
+                        habilities.map((hability) => (
+                          <span key={hability.id}>{hability.name}</span>
                         ))}
                     </div>
                     <div className="causes">
                       <span>Causas:</span>
-                      {vaga.cause_id &&
-                        vaga.cause_id.map((cause) => (
-                          <span key={cause}>{cause}</span>
+                      {causes &&
+                        causes.map((cause) => (
+                          <span key={cause.id}>{cause.name}</span>
                         ))}
                     </div>
                   <button className='project-btn'>Quero a Vaga</button>
@@ -80,7 +103,7 @@ function ProjectPage() {
                 </div>
               </div>
             </div>
-          ))}
+          )}
       <Footer />
     </div>
   );

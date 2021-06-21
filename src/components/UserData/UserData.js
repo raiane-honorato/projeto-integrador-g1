@@ -3,6 +3,8 @@ import { useParams } from "react-router";
 import { AuthContext } from "../../context/auth";
 import "./userdata.css";
 import UserSubscriptionCart from "./UserSubscriptionCart";
+import EditButton from "../Edit/EditButton";
+import ProfileEditionSection from "../Edit/ProfileEditionSection/ProfileEditionSection";
 
 function UserData() {
   const parameter = useParams();
@@ -11,6 +13,9 @@ function UserData() {
   const { user } = useContext(AuthContext);
 
   const [pageUser, setPageUser] = useState("");
+
+   //states of content edition
+   const [firstEditState, setFirstEditState] = useState(false);
 
   useEffect(() => {
     if(user.id === userId) {
@@ -45,13 +50,17 @@ function UserData() {
             {user.id === pageUser.id &&
             <div className='profileEdition'>
               <span class="material-icons material-icons-outlined">settings</span>
-              <span>Editar Perfil</span>
+              <span>Completar Perfil</span>
             </div>
             }
           </div>
           <div className="profile-other-data">
             <div className='personal-data'>
-              <h2>Dados pessoais</h2>
+              <div className='first-edition-box'>
+                <h2>Dados pessoais</h2>
+                {user.id === pageUser.id && <EditButton editClass = "user-first-edit" setStatePass = {setFirstEditState}/>}
+              </div>
+              
               <p>
                 <span>Data de Nascimento:</span> {pageUser.birth_date}
               </p>
@@ -74,7 +83,22 @@ function UserData() {
           </div>
         </>
       )}
+       <div 
+      className = {`user-overlay ${(firstEditState) ? "user-set-vis" : ""}`}
+      onClick = {() => {
+        setFirstEditState(false)
+      }}
+      > </div>
+
+      {(firstEditState) && 
+      <ProfileEditionSection
+      firstEditState = {firstEditState}
+      setStatePass = {firstEditState? setFirstEditState : ""} 
+      setPageUser = {setPageUser} 
+      pageUser = {pageUser} 
+     />}
     </div>
+    
   );
 }
 

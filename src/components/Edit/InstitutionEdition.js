@@ -1,8 +1,7 @@
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {useState, useEffect, useRef } from "react";
-import InputMask from "react-input-mask";
-import "./InstitutionEdition.css"
+import "./InstitutionEdition.css";
 import InstitutionFirstEditionBody from "./InstitutionFirstEditionBody";
 import InstitutionSecondEditionBody from "./InstitutionSecondEditionBody";
 import InstitutionThirdEditionBody from "./InstitutionThirdEditionBody";
