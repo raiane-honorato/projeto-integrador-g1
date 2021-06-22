@@ -3,6 +3,7 @@ import { useState, useEffect, useRef } from "react";
 import "./profileEditionSection.css";
 import UserFirstEditionBody from "./UserFirstEditionBody";
 import UserSecondEditionBody from "./UserSecondEditionBody";
+import UserThirdEditionBody from './UserThirdEditionBody';
 
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 
@@ -117,17 +118,6 @@ function ProfileEditionSection(props) {
         errors.email = "Email inválido";
       }
 
-      // if ((values.senha.length < 8) | (values.senha.length > 15)) {
-      //   errors.senha = "Senha invalida";
-      // }
-
-      // if (
-      //   (values.confSenha !== values.senha) |
-      //   (values.confSenha === undefined)
-      // ) {
-      //   errors.confSenha = "Senha invalida";
-      // }
-
       return errors;
     },
   });
@@ -162,6 +152,7 @@ function ProfileEditionSection(props) {
 
         {props.firstEditState && <UserFirstEditionBody formik={formik} />}
         {props.secondEditState && <UserSecondEditionBody formik={formik} />}
+        {props.thirdEditState && <UserThirdEditionBody formik={formik} />}
 
         <div className="user-first-edition-window-footer">
           <button className="user-edition-save" onClick={handleSave}>

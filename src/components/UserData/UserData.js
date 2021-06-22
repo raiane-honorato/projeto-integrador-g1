@@ -17,6 +17,7 @@ function UserData() {
   //states of content edition
   const [firstEditState, setFirstEditState] = useState(false);
   const [secondEditState, setSecondEditState] = useState(false);
+  const [thirdEditState, setThirdEditState] = useState(false);
 
   useEffect(() => {
     if (user.id === userId) {
@@ -49,13 +50,22 @@ function UserData() {
             <img src={pageUser.img} alt="Foto do usuário" />
             <h1>{pageUser.name}</h1>
             {user.id === pageUser.id && (
+              <>
               <div className="profileEdition">
                 <EditButton
                   editClass="user-first-edit"
-                  setStatePass={setSecondEditState}
+                  setStatePass={setThirdEditState}
                 />
-                <span>Completar Perfil</span>
+                <span>Causas e Habilidades</span>
               </div>
+              <div className="profileEdition">
+              <EditButton
+                editClass="user-first-edit"
+                setStatePass={setSecondEditState}
+              />
+              <span>Inserir Endereço</span>
+            </div>
+            </>
             )}
           </div>
           <div className="profile-other-data">
@@ -124,15 +134,18 @@ function UserData() {
         {" "}
       </div>
 
-      {(firstEditState || secondEditState) && (
+      {(firstEditState || secondEditState || thirdEditState) && (
         <ProfileEditionSection
           firstEditState={firstEditState}
           secondEditState={secondEditState}
+          thirdEditState={thirdEditState}
           setStatePass={
             firstEditState
               ? setFirstEditState
               : secondEditState
               ? setSecondEditState
+              : thirdEditState
+              ? setThirdEditState
               : ""
           }
           setPageUser={setPageUser}
