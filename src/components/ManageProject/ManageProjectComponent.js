@@ -1,13 +1,16 @@
 import { useEffect, useState, useContext } from "react";
 import { NavLink } from "react-router-dom";
+import { AuthContext } from "../../context/auth";
 import "./ManageProjectComponent.css";
 
 import { faEye, faPen, faBan } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import ManageProjectSubscription from "./ManageProjectSubscription";
 
 function ManageProjectComponent({projectId}) {
-
+  const { user } = useContext(AuthContext);
   const [project, setProject] = useState();
+  const [subscriptons, setSubscriptions] = useState();
 
   useEffect(() => {
     fetch(`http://localhost:8000/projects/${projectId}`)
@@ -20,9 +23,22 @@ function ManageProjectComponent({projectId}) {
       );
   }, []);
 
+  useEffect(() => {
+    fetch(`http://localhost:8000/subscription/?project_id=${projectId}`)
+    .then((res) => res.json())
+    .then((res) => {
+      setSubscriptions(res);
+    })
+    .catch((erro) =>
+      alert("Não foi possível obter inscrições.")
+    )
+
+},[])
+
+
   return (
     <div className = "manage-project-page">
-        {project &&
+        {project && project.institution_id == user.institution_id &&
         
         <div className = "manage-project-container">
           <div className = "manage-project-header">
@@ -60,6 +76,8 @@ function ManageProjectComponent({projectId}) {
 
           </div> 
           
+          {subscriptons && subscriptons.map(subscription => <ManageProjectSubscription subscription = {subscription} />)
+        }
 
         </div>
         }
