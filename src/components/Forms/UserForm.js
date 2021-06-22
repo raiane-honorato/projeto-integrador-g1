@@ -52,7 +52,7 @@ function UserForm() {
     initialValues: {
       userName: "",
       cpfNumber: "",
-      dataNasc: "",
+      birth_date: "",
       contatNumber: "",
       email: "",
       senha: "",
@@ -73,8 +73,8 @@ function UserForm() {
         errors.cpfNumber = "CPF invalido";
       }
 
-      if (values.dataNasc.length === undefined) {
-        errors.dataNasc = "Data invalida";
+      if (values.birth_date.length === undefined) {
+        errors.birth_date = "Data invalida";
       }
 
       if ((tel.length < 10) | (tel.length > 11)) {
@@ -173,18 +173,18 @@ function UserForm() {
             </div>
 
             <div className="inputs">
-              <label htmlFor="dataNasc">Data de Nascimento:</label>
+              <label htmlFor="birth_date">Data de Nascimento:</label>
               <input
                 type="date"
-                id="dataNasc"
-                name="dataNasc"
-                value={formik.values.dataNasc}
+                id="birth_date"
+                name="birth_date"
+                value={formik.values.birth_date}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 required
               />
-              {formik.touched.dataNasc && formik.errors.dataNasc && (
-                <span className="formikError">{formik.errors.dataNasc}</span>
+              {formik.touched.birth_date && formik.errors.birth_date && (
+                <span className="formikError">{formik.errors.birth_date}</span>
               )}
             </div>
 

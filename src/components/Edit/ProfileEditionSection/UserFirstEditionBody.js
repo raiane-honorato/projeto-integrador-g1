@@ -1,4 +1,5 @@
 import InputMask from "react-input-mask";
+import './userFirstEdition.css';
 
 function UserFirstEditionBody({ formik }) {
   return (

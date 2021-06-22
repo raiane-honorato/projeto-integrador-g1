@@ -51,7 +51,7 @@ form h2 {
 #cpfNumber,
 #userName,
 #email,
-#dataNasc,
+#birth_date,
 #contatNumber,
 #senha,
 #confSenha,
@@ -116,7 +116,7 @@ hr{
   color: rgb(255, 0, 0);
 }
 
-#dataNasc {
+#birth_date {
   min-width: 12rem;
 }
 
@@ -128,7 +128,7 @@ hr{
 #cpfNumber:focus,
 #completeName:focus,
 #email:focus,
-#dataNasc:focus,
+#birth_date:focus,
 #contatNumber:focus,
 #senha:focus,
 #confSenha:focus {
