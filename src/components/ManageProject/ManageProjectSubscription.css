@@ -1,0 +1,79 @@
+.manage-project-subscription-container {
+    padding: 2rem 5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-family: var(--secondFont);
+}
+
+.manage-project-subscription-img-title {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+}
+
+.manage-project-subscription-img {
+    width: 5rem;
+    height: 5rem;
+    object-fit: cover;
+    border-radius: 100%;
+}
+
+.manage-project-substription-name-email-phone {
+    display: flex;
+    flex-direction: column;
+}
+
+.manage-project-substription-name-email-phone a {
+    margin: 0;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.manage-project-substription-name-email-phone p {
+    margin: 0;
+    font-size: .8rem;
+}
+
+.manage-project-subscription-date-status-manage-btn {
+    display: flex;
+    align-items: center;
+    gap: 4rem;
+}
+
+.manage-project-subscription-date {
+    margin: 0;
+    color: rgb(37, 37, 37);
+}
+
+.manage-project-subscription-status{
+    display: flex;
+    gap: .6rem;
+    align-items: center;
+}
+
+.manage-project-subscription-bullet-point {
+    background-color: var(--thirdColor);
+    border-radius: 100%;
+    width: .4rem;
+    height: .4rem;
+    margin-left: 2rem;
+    display: inline-block;
+}
+
+.manage-project-subscription-change-status{
+    background-color: var(--secondColor);
+    height: 2rem;
+    margin: 1rem 0.5rem;
+    font-size: 1.1rem;
+    font-family: 'Poppins', sans-serif;
+    padding: .3rem 1rem;
+    border: none;
+    border-radius: .2rem;
+    cursor: pointer;
+    color: var(--mainWhite);
+    display: flex;
+    gap: .5rem;
+    align-items: center;
+    text-decoration: none;
+}
