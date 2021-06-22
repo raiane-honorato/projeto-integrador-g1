@@ -14,14 +14,15 @@ function UserData() {
 
   const [pageUser, setPageUser] = useState("");
 
-   //states of content edition
-   const [firstEditState, setFirstEditState] = useState(false);
+  //states of content edition
+  const [firstEditState, setFirstEditState] = useState(false);
+  const [secondEditState, setSecondEditState] = useState(false);
 
   useEffect(() => {
-    if(user.id === userId) {
+    if (user.id === userId) {
       setPageUser(user);
-      return
-    } else {      
+      return;
+    } else {
       fetch(`http://localhost:8000/user/${userId}`)
         .then((res) => res.json())
         .then((res) => {
@@ -29,7 +30,7 @@ function UserData() {
         })
         .catch((erro) => alert("Não foi possível localizar este usuário."));
     }
-    }, [user, userId]);
+  }, [user, userId]);
 
   useEffect(() => {
     fetch(`http://localhost:8000/subscription?user_id=${userId}`)
@@ -37,7 +38,7 @@ function UserData() {
       .then((res) => {
         setSubscriptions(res);
       })
-      .catch(erro => alert('Não foi possível obter os projetos do usuário.'))
+      .catch((erro) => alert("Não foi possível obter os projetos do usuário."));
   }, [userId]);
 
   return (
@@ -47,58 +48,98 @@ function UserData() {
           <div className="profile-basic-information">
             <img src={pageUser.img} alt="Foto do usuário" />
             <h1>{pageUser.name}</h1>
-            {user.id === pageUser.id &&
-            <div className='profileEdition'>
-              <span class="material-icons material-icons-outlined">settings</span>
-              <span>Completar Perfil</span>
-            </div>
-            }
+            {user.id === pageUser.id && (
+              <div className="profileEdition">
+                <EditButton
+                  editClass="user-first-edit"
+                  setStatePass={setSecondEditState}
+                />
+                <span>Completar Perfil</span>
+              </div>
+            )}
           </div>
           <div className="profile-other-data">
-            <div className='personal-data'>
-              <div className='first-edition-box'>
+            <div className="personal-data">
+              <div className="first-edition-box">
                 <h2>Dados pessoais</h2>
-                {user.id === pageUser.id && <EditButton editClass = "user-first-edit" setStatePass = {setFirstEditState}/>}
+                {user.id === pageUser.id && (
+                  <EditButton
+                    editClass="user-first-edit"
+                    setStatePass={setFirstEditState}
+                  />
+                )}
               </div>
-              
-              <p>
-                <span>Data de Nascimento:</span> {pageUser.birth_date}
-              </p>
-              <p>
-                <span>Telefone:</span> {pageUser.phone}
-              </p>
-              <p>
-                <span>Email:</span> {pageUser.email}
-              </p>
+              <div className='section-personal-data'>
+
+              <div className="first-section-personal-data">
+                <p>
+                  <span>Data de Nascimento:</span> {pageUser.birth_date}
+                </p>
+                <p>
+                  <span>Telefone:</span> {pageUser.phone}
+                </p>
+                <p>
+                  <span>Email:</span> {pageUser.email}
+                </p>
+              </div>
+              <div className="second-section-personal-data">
+                <p>
+                  <span>Rua:</span> {pageUser.rua}
+                </p>
+                <p>
+                  <span>Número:</span> {pageUser.numero}
+                </p>
+                <p>
+                  <span>Bairro:</span> {pageUser.bairro}
+                </p>
+                <p>
+                  <span>Cidade:</span> {pageUser.cidade}
+                </p>
+                <p>
+                  <span>Estado:</span> {pageUser.estado}
+                </p>
+              </div>
+              </div>
             </div>
-            <div className='projects-data'>
-              {user.id === pageUser.id &&
-              <h2>Projetos</h2>}
-              {subscriptions && user.id === pageUser.id &&
-               subscriptions.map((subscription) => (                 
-                 <UserSubscriptionCart subscription = {subscription} />
-                  ))
-                  }
+            <div className="projects-data">
+              {user.id === pageUser.id && <h2>Projetos</h2>}
+              {subscriptions &&
+                user.id === pageUser.id &&
+                subscriptions.map((subscription) => (
+                  <UserSubscriptionCart subscription={subscription} />
+                ))}
             </div>
           </div>
         </>
       )}
-       <div 
-      className = {`user-overlay ${(firstEditState) ? "user-set-vis" : ""}`}
-      onClick = {() => {
-        setFirstEditState(false)
-      }}
-      > </div>
+      <div
+        className={`user-overlay ${
+          firstEditState || secondEditState ? "user-set-vis" : ""
+        }`}
+        onClick={() => {
+          setFirstEditState(false);
+          setSecondEditState(false);
+        }}
+      >
+        {" "}
+      </div>
 
-      {(firstEditState) && 
-      <ProfileEditionSection
-      firstEditState = {firstEditState}
-      setStatePass = {firstEditState? setFirstEditState : ""} 
-      setPageUser = {setPageUser} 
-      pageUser = {pageUser} 
-     />}
+      {(firstEditState || secondEditState) && (
+        <ProfileEditionSection
+          firstEditState={firstEditState}
+          secondEditState={secondEditState}
+          setStatePass={
+            firstEditState
+              ? setFirstEditState
+              : secondEditState
+              ? setSecondEditState
+              : ""
+          }
+          setPageUser={setPageUser}
+          pageUser={pageUser}
+        />
+      )}
     </div>
-    
   );
 }
 

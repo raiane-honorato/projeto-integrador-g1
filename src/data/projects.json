@@ -578,7 +578,12 @@
       "email": "joao@joao.com",
       "institution_id": null,
       "dataNasc": "1986-10-10",
-      "contatNumber": "(99) 9 9999-9999"
+      "contatNumber": "(99) 9 9999-9999",
+      "rua": "Rua do Beija-Flor",
+      "bairro": "Imbuí",
+      "cidade": "Salvador",
+      "estado": "BA",
+      "numero": "106"
     },
     {
       "id": 2,

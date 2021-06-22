@@ -1,0 +1,10 @@
+.endereco {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  width: 100%;
+  max-width: 35rem;
+  margin-top: 1rem;
+}

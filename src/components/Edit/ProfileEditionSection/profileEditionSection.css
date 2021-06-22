@@ -11,7 +11,7 @@
   background-color: rgba(247, 247, 247);
   max-height: calc(100vh - 10rem);
   margin-bottom: 2rem;
-overflow: hidden;
+  overflow: hidden;
 }
 
 .user-first-edition-window-header{

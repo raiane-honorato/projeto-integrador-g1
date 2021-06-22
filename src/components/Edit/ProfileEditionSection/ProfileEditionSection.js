@@ -2,16 +2,43 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState, useEffect, useRef } from "react";
 import "./profileEditionSection.css";
 import UserFirstEditionBody from "./UserFirstEditionBody";
+import UserSecondEditionBody from "./UserSecondEditionBody";
+
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 
 function useFormik({ initialValues, validate }) {
   const [touched, setTouchedFields] = useState({});
   const [errors, setErrors] = useState({});
   const [values, setValues] = useState(initialValues);
+  const [cep, setCep] = useState('');
 
   useEffect(() => {
     validateValues(values);
   }, [values]);
+
+  useEffect(() => {
+    if (cep.length > 7)
+    fetch(`https://viacep.com.br/ws/${cep}/json/`)
+      .then((response) => response.json())
+      .then((response) => setValues({
+        ...values,
+        rua: response.logradouro,
+        bairro: response.bairro,
+        cidade: response.localidade,
+        estado: response.uf
+      }))
+      .catch((error) => console.log(`Não foi possível obter o endereço do CEP informado! Erro:${error}`));
+
+  }, [cep]);
+
+  function searchingData(e) {
+    setCep(e.target.value);
+  }  
+
+  function fillingForm({ target }) {
+    const {id, value} = target;
+    setValues({...values, [id]: value})
+  }
 
   function handleChange(event) {
     const fieldName = event.target.getAttribute("name");
@@ -42,6 +69,9 @@ function useFormik({ initialValues, validate }) {
     handleBlur,
     setErrors,
     handleChange,
+    cep,
+    searchingData,
+    fillingForm
   };
 }
 
@@ -131,6 +161,7 @@ function ProfileEditionSection(props) {
         </div>
 
         {props.firstEditState && <UserFirstEditionBody formik={formik} />}
+        {props.secondEditState && <UserSecondEditionBody formik={formik} />}
 
         <div className="user-first-edition-window-footer">
           <button className="user-edition-save" onClick={handleSave}>

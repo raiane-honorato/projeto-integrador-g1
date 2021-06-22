@@ -336,7 +336,7 @@ function InstForm() {
           <div className="dados-base2">
             <div className="inputs">
               <label htmlFor="causas">Causas</label>
-              <input
+              <select
                 type="text"
                 name="causas"
                 id="causas"
@@ -344,7 +344,19 @@ function InstForm() {
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 required
-              />
+              >
+                <option selected disabled value='escolha'>Escolha uma causa</option>
+                <option value="saude">Saúde</option>
+                <option value="meio ambiente">Meio Ambiente</option>
+                <option value="mulheres">Mulheres</option>
+                <option value="arte e cultura">Arte e Cultura</option>
+                <option value="educação">Educação</option>
+                <option value="direitos humanos">Direitos Humanos</option>
+                <option value="criancas">Crianças</option>
+                <option value="idosos">Idosos</option>
+                <option value="proteção animal">Proteção Animal</option>
+                <option value="refugiados">Refugiados</option>
+              </select>
               {formik.touched.causas && formik.errors.causas && (
                 <span className="formikError">{formik.errors.causas}</span>
               )}

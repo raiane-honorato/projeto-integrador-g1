@@ -65,6 +65,14 @@
   align-items: center;
 }
 
+.section-personal-data {
+  display: flex;
+}
+
+.first-section-personal-data {
+  margin-right: 4rem;
+}
+
 .user-first-edit {
   margin-left: 2rem;
 }
