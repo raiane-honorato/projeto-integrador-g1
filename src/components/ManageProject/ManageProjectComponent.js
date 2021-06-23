@@ -1,6 +1,8 @@
 import { useEffect, useState, useContext } from "react";
 import { NavLink } from "react-router-dom";
 import { AuthContext } from "../../context/auth";
+import ProjectEdition from "../Edit/ProjectEditSection/ProjectEdition";
+import CloseProject from "../Edit/ProjectEditSection/CloseProject";
 import "./ManageProjectComponent.css";
 
 import { faEye, faPen, faBan } from "@fortawesome/free-solid-svg-icons";
@@ -11,6 +13,9 @@ function ManageProjectComponent({projectId}) {
   const { user } = useContext(AuthContext);
   const [project, setProject] = useState();
   const [subscriptons, setSubscriptions] = useState();
+  const [editProject,setEditProject] = useState(false);
+  const [closeProject, setCloseProject] = useState(false);
+
 
   useEffect(() => {
     fetch(`http://localhost:8000/projects/${projectId}`)
@@ -40,6 +45,7 @@ function ManageProjectComponent({projectId}) {
     <div className = "manage-project-page">
         {project && project.institution_id == user.institution_id &&
         
+        <>
         <div className = "manage-project-container">
           <div className = "manage-project-header">
             
@@ -62,24 +68,52 @@ function ManageProjectComponent({projectId}) {
                 <span>Visualizar</span>
               </NavLink>
 
-              <button className = "manage-project-button view-project">
+              {
+                project.status == 1 &&
+                <button className = "manage-project-button view-project" onClick = {() => setEditProject(true)}>
                 <FontAwesomeIcon icon = {faPen} />
                 <span>Editar</span>
-              </button>
+              </button>}
 
-              <button className = "manage-project-button delete-project">
+              {
+                project.status == 1 &&
+                <button className = "manage-project-button close-project" onClick = {() => {setCloseProject(true)}}>
                 <FontAwesomeIcon icon = {faBan} />
                 <span>Encerrar</span>
-              </button>
+              </button>}
 
             </div>
 
           </div> 
           
-          {subscriptons && subscriptons.map(subscription => <ManageProjectSubscription subscription = {subscription} />)
+          {subscriptons && 
+          (subscriptons.length >= 1) ? 
+          subscriptons.map(subscription => <ManageProjectSubscription subscription = {subscription} />) :
+          <p className = "manage-project-no-subscriptions">Ainda não há inscrições</p>
         }
 
         </div>
+
+        <div
+        className={`institution-overlay ${
+          (editProject || closeProject)
+            ? "institution-set-vis"
+            : ""
+        }`}
+        onClick={() => {
+          setEditProject(false);
+          setCloseProject(false);
+
+        }}
+      >
+        {" "}
+      </div>
+
+        {editProject && <ProjectEdition setStatePass = {setEditProject} project = {project} setStateProject = {setProject} />}
+        {closeProject && <CloseProject setStatePass = {setCloseProject} project = {project} setStateProject = {setProject} subscriptions = {subscriptons}/>}
+
+        </>
+
         }
     </div>
   )

@@ -138,18 +138,4 @@
   visibility: hidden;
 }
 
-.institution-set-vis {
-  visibility: visible !important;
-}
-.institution-edition-container {
-  position: fixed;
-  height: 100%;
-  width: 100%;
-  top: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  visibility: hidden;
-  z-index: 104;
-  overflow: visible;
-}
+

@@ -1,7 +1,7 @@
-.institution-set-vis {
+.project-set-vis {
   visibility: visible !important;
 }
-.institution-edition-container {
+.project-edition-container {
   position: fixed;
   height: 100%;
   width: 100%;
@@ -14,11 +14,12 @@
   overflow: visible;
 }
 
-.institution-first-edition-window{
+
+.project-edition-window{
     position: fixed;
     z-index: 1040;
     top:10rem;
-    min-width: 35rem;
+    min-width: 55rem;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -30,7 +31,7 @@
   overflow: hidden;
   }
   
-  .institution-first-edition-window-header{
+  .project-edition-window-header{
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -38,20 +39,32 @@
     
   
   }
-  .institution-first-edition-window-header h3{
+  .project-edition-window-header h3{
     display: inline;
     font-family: var(--secondFont);
     margin: 0;
   }
 
-  .institution-first-edition-window-body {
+  .project-edition-window-body {
       margin: 2rem 0rem;
+      padding-right: 2rem;
       overflow: hidden;
       overflow-y: scroll;
       max-height: calc(100vh - 20rem);
   }
+
+  .manage-project-img-edit {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .project-edit-img {
+    height: 6rem !important;
+    width: 6rem !important;
+  }
   
-  .institution-edition-save{ 
+  .project-edition-save{ 
     background-color: var(--secondColor);
     height: 2rem;
     width: 5rem;
@@ -65,10 +78,10 @@
     color: var(--mainBlack);
   }
 
-  .institution-edition-save:hover{
+  .project-edition-save:hover{
     filter: brightness(1.2);
   }
 
-  .institution-edition-close-btn {
+  .project-edition-close-btn {
       cursor: pointer;
   }

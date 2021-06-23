@@ -76,6 +76,14 @@
     background-color: var(--secondColor);
 }
 
-.delete-project {
-    background-color: rgb(204, 49, 49);
+.close-project {
+    background-color: var(--mainRed);
+}
+
+.manage-project-no-subscriptions {
+    margin-top: 2rem;
+    font-family: var(--secondFont);
+    text-align: center;
+    font-size: 1.2rem;
+    color: var(--secondGrey);
 }

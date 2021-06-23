@@ -43,6 +43,7 @@ function UserData() {
   }, [userId]);
 
   return (
+    <>
     <div className="userdata-container">
       {user && (
         <>
@@ -122,17 +123,6 @@ function UserData() {
           </div>
         </>
       )}
-      <div
-        className={`user-overlay ${
-          firstEditState || secondEditState ? "user-set-vis" : ""
-        }`}
-        onClick={() => {
-          setFirstEditState(false);
-          setSecondEditState(false);
-        }}
-      >
-        {" "}
-      </div>
 
       {(firstEditState || secondEditState || thirdEditState) && (
         <ProfileEditionSection
@@ -152,7 +142,21 @@ function UserData() {
           pageUser={pageUser}
         />
       )}
+
+
     </div>
+
+      <div
+        className={`user-overlay ${firstEditState || secondEditState ? "user-set-vis" : ""
+          }`}
+        onClick={() => {
+          setFirstEditState(false);
+          setSecondEditState(false);
+        }}
+      >
+        {" "}
+      </div>
+</>
   );
 }
 
