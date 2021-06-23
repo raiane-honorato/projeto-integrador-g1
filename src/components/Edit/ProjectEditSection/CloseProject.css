@@ -1,0 +1,98 @@
+.project-set-vis {
+    visibility: visible !important;
+  }
+  .project-closing-container {
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    visibility: hidden;
+    z-index: 104;
+    overflow: visible;
+  }
+  
+  
+  .project-closing-window{
+      position: fixed;
+      z-index: 1040;
+      top:10rem;
+      min-width: 25rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      padding: .5rem 2rem;
+      border-radius: 1rem;
+      background-color: rgba(247, 247, 247);
+      max-height: calc(100vh - 10rem);
+      margin-bottom: 2rem;
+    overflow: hidden;
+    }
+    
+    .project-closing-window-header{
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--secondGrey);
+      
+    
+    }
+    .project-closing-window-header h3{
+      display: inline;
+      font-family: var(--secondFont);
+      margin: 0;
+    }
+  
+    .project-closing-window-body {
+        margin: 2rem 0rem;
+        padding-right: 2rem;
+        overflow: hidden;
+        overflow-y: scroll;
+        max-height: calc(100vh - 20rem);
+    }
+
+    .project-closing-window-body p {
+        font-family: var(--secondFont);
+    }
+
+    .project-first-closing-window-footer {
+        display: flex;
+        gap: 1rem;
+    }
+
+    
+    .project-closing-btn{ 
+      background-color: var(--secondColor);
+      max-height: 2.5rem;
+      min-width: 5rem;
+      margin: 1rem 0.5rem;
+      font-size: 1.1rem;
+      font-family: 'Poppins', sans-serif;
+      align-items: center;
+      padding: .5rem;
+      border: none;
+      border-radius: .2rem;
+      cursor: pointer;
+      color: var(--mainBlack);
+    }
+
+    .cancel-project {
+        background-color: var(--mainRed);
+        color: var(--mainWhite);
+    }
+
+    .no-cancel-project {
+        background-color: rgba(247, 247, 247);
+        color: var(--secondColor);
+        border: 1px solid var(--secondColor);
+    }
+  
+    .project-closing-save:hover{
+      filter: brightness(1.2);
+    }
+  
+    .project-closing-close-btn {
+        cursor: pointer;
+    }

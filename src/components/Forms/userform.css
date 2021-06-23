@@ -70,8 +70,9 @@ form h2 {
 #city,
 #address_number,
 #street,
-#bio {
-  padding: 0.7rem;
+#bio,
+.aplication-form-fields {
+  padding: 0.7rem !important;
   border-radius: 5px;
   border: none;
   box-shadow: 1px 1px 4px #9c9c9c;

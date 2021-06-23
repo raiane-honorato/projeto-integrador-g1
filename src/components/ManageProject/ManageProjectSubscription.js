@@ -20,9 +20,6 @@ function ManageProjectSubscription({subscription}) {
 
     },[])
 
-    useEffect(() => {
-        console.log(user)
-    },[user])
 
     return(
         <div className = "manage-project-subscription-container">
