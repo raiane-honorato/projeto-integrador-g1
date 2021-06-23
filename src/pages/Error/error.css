@@ -1,0 +1,26 @@
+.error-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.error-main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.error-main h1 {
+  margin-bottom: 0;
+}
+
+.error-main p {
+  font-family: var(--secondFont)
+}
+
+.error-image {
+  width: 100%;
+  max-width: 40em;
+}

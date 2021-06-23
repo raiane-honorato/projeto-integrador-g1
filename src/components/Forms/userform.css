@@ -1,0 +1,206 @@
+.container-useform {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center
+}
+
+.user-form-title, .instituition-form-title {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 0;
+  color: var(--mainBlack);
+}
+
+.formCadastro, .instForm {
+  margin: 2rem auto 8rem;
+  width: 100%;
+  max-width: 35rem;
+  max-height: 35rem;
+  flex-grow: 1;
+  color: var(--mainBlack);
+  background-color: var(--formBackground);
+  padding: 1rem 2rem;
+  border-radius: 1rem;
+  /* box-shadow: 1px 1px 5px black; */
+}
+
+form h2 {
+  color: var(--mainBlack);
+  font-weight: bold;
+  font-size: 1.5rem;
+  text-align: center;
+  margin-bottom: .5rem;
+  
+}
+
+.hr-style {
+  margin: 0 8rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.inputs {
+  font-family: "Poppins", sans-serif;
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+#cpfNumber,
+#userName,
+#email,
+#birth_date,
+#contatNumber,
+#senha,
+#confSenha,
+#ongName,
+#resumo,
+#causas,
+#numBeneficiados,
+#cnpjNumber,
+#telOng,
+#urlSite,
+#facebook,
+#instagram,
+#descricao,
+#phone,
+#state,
+#city,
+#address_number,
+#street,
+#bio {
+  padding: 0.7rem;
+  border-radius: 5px;
+  border: none;
+  box-shadow: 1px 1px 4px #9c9c9c;
+  font-family: "Poppins", sans-serif;
+  font-size: 1rem;
+}
+
+
+.endereco {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+#cep,
+#rua,
+#bairro,
+#cidade,
+#estado,
+#numero {
+  
+  padding: 0.5rem;
+  width: 14rem;
+  border-radius: 5px;
+  border: none;
+  box-shadow: 1px 1px 4px #9c9c9c;
+  font-family: "Poppins", sans-serif;
+  font-size: 1rem;
+}
+
+hr{
+  color: #bdb9b9;
+}
+
+#resumo,
+#descricao {
+  resize: none;
+}
+
+.formikError{
+  color: rgb(255, 0, 0);
+}
+
+#birth_date {
+  min-width: 12rem;
+}
+
+.inputs label {
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+}
+
+#cpfNumber:focus,
+#completeName:focus,
+#email:focus,
+#birth_date:focus,
+#contatNumber:focus,
+#senha:focus,
+#confSenha:focus {
+  border: 1px solid var(--secondColor);
+}
+
+hr {
+  margin-top: 2.5rem;
+  margin-bottom: 2rem;
+}
+
+.checkBox {
+  font-size: 0.9rem;
+}
+
+.btn-div {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1rem;
+}
+
+.btn-form {
+  height: 3rem;
+  width: 8rem;
+  margin: 1rem 0.5rem;
+  font-size: 1.2rem;
+  font-family: "Poppins", sans-serif;
+  border: none;
+  border-radius: .2rem;
+  cursor: pointer;
+ 
+}
+
+.btn-previous {
+
+  background-color: var(--thirdColor);
+}
+
+.btn-submit, .btn-next {
+
+  background-color: var(--secondColor);
+}
+
+.btn-submit:hover, .btn-previous:hover, .btn-next:hover {
+  filter: brightness(1.2);
+}
+
+.step-guide {
+  text-align: center;
+}
+
+ 
+
+/* Formulário da Instituição  */
+
+#ongName,
+#resumo,
+#endereco,
+#causas,
+#numBeneficiados,
+#cnpj,
+#telOng,
+#email,
+#site,
+#instagram,
+#descricao,
+#facebook
+{
+  padding: 0.7rem;
+  border-radius: 5px;
+  border: none;
+  box-shadow: 1px 1px 4px #9c9c9c;
+  font-family: "Poppins", sans-serif;
+  font-size: 1rem;
+}

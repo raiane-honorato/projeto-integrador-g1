@@ -1,0 +1,14 @@
+.edit-button {
+    padding: 0.5rem;
+    color: var(--secondGrey);
+    border-radius: 100%;
+    cursor: pointer;
+    transition: var(--mainTransition);
+}
+
+.edit-button:hover{
+    background-color: var(--primaryColor);
+    color: var(--mainWhite);
+    transform: scale(0.97);
+}
+

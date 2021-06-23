@@ -1,32 +1,53 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: 'Playfair Display', serif;
+  font-family: "Playfair Display", serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+/* ScrollBar */
+/* Works on Chrome, Edge, and Safari */
+
+*::-webkit-scrollbar {
+  width: 0.675rem;
+}
+
+*::-webkit-scrollbar-track {
+  background: var(--mainGrey);
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: var(--tranparentBackground);
+  border-radius: 0.5rem;
 }
 
 :root {
   --primaryColor: #1a535cff;
-  --secondColor: #18CA8B;
+  --primaryColorLight: #1c6b77;
+  --secondColor: #18ca8b;
   --thirdColor: #d44242;
   --thirdColorLight: #e75959;
   --fourthColor: #efcb2bff;
-  --tranparentBackground: #18ca8cb0; 
+  --tranparentBackground: #18ca8cb0;
+  --formBackground: #A6CECE;
+  
 
   --mainWhite: #f7fff7ff;
   --mainBlack: #222;
   --mainGrey: #ececec;
+  --secondGrey: rgb(172, 172, 172);
   --mainSpacing: 0.1rem;
   --mainTransition: all 0.3s linear;
+
+  --firstFont: 'Playfair Display', serif;
+  --secondFont: 'Poppins', sans-serif;
 }
 
 input[type="text" i] {
   padding: 0;
 }
 
+input:focus, textarea:focus, select:focus{
+  outline: none;
+}

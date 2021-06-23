@@ -1,34 +1,84 @@
+.loginContainer {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
 .container-first{
     display: flex;
-    justify-content: end;
+    justify-content: center;
     align-items: center;
-    width: 100%;
-    height: 91vh;
     background: url("../../img/background-login.png") no-repeat;
     background-size: cover;
+    flex-grow: 1;
+    min-height: calc(100vh - 60px);
 }
 
 .firts-column{
-    margin-left: 60px;
+    background-color: var(--mainWhite);
+    width: 20rem;
+    height: 20rem;
+    min-height: 300px;
+    min-width: 250px;
+    max-width: 300px;
+    max-height: 400px;
     align-items: center;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    border-radius: 10px;
+    box-shadow: 5px 5px 5px var(--mainBlack);
+    padding: 30px 10px;
      
 }
 
 .title{
 
     text-align: center;
+    font-family: var(--firstFont);
+    letter-spacing: var(--mainSpacing);
 }
 
-form-control{
-    margin-top: 15%;
+.form-control{
+    margin-top: 10px !important;
+    font-family: var(--secondFont) !important;
+    font-size: 15px !important;
 }
 
-.buttonLogin{
+.buttonLogin, .buttonForgot{
     border-radius: 15px;
     margin-top: 12px;
     align-items: center;
     text-align: center;
     margin-left: 30px;
-    width: 100px;
+    min-width: 100px;
+    background-color: var(--primaryColor) !important;
+    letter-spacing: var(--mainSpacing) !important;
     
+}
+.buttonLogin:hover, .buttonForgot:hover {
+    background-image: linear-gradient(110deg, #18ca8b, #1c6b77);
+
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.firts-column a, .firts-column span {
+    display: inline-block;
+    padding-left: 5px;
+    font-family: var(--secondFont) !important;
+    
+}
+
+.register-group {
+    margin-top: 20px;
+    font-size: .8rem;
+}
+.password-group{ 
+    margin-top: 10px;
+    font-size: .8rem;
 }

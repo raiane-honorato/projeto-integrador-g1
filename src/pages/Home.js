@@ -1,13 +1,15 @@
+
 import Footer from '../components/Footer/Footer'
 import Hero from '../components/Hero/Hero'
 import Spotlight from '../components/Spotlight/Spotlight'
 
 function Home() {
-    return(
+
+      return(
         <>
-        <Hero/>
+        <Hero />
         <Spotlight/>
-        <Footer/>
+        <Footer />
         </>
     )
 }
