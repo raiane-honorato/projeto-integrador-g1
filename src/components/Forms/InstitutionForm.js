@@ -1,12 +1,18 @@
 import { useState, useEffect } from "react";
 import InputMask from "react-input-mask";
 import "./userform.css";
+import Select, { components } from "react-select";
+import {
+  SortableContainer,
+  SortableElement,
+  sortableHandle,
+} from "react-sortable-hoc";
 
 function useFormik({ initialValues, validate }) {
   const [touched, setTouchedFields] = useState({});
   const [errors, setErrors] = useState({});
   const [values, setValues] = useState(initialValues);
-  const [cep, setCep] = useState('');
+  const [cep, setCep] = useState("");
 
   useEffect(() => {
     validateValues(values);
@@ -14,28 +20,33 @@ function useFormik({ initialValues, validate }) {
 
   useEffect(() => {
     if (cep.length > 7)
-    fetch(`https://viacep.com.br/ws/${cep}/json/`)
-      .then((response) => response.json())
-      .then((response) => setValues({
-        ...values,
-        rua: response.logradouro,
-        bairro: response.bairro,
-        cidade: response.localidade,
-        estado: response.uf
-      }))
-      .catch((error) => console.log(`Não foi possível obter o endereço do CEP informado! Erro:${error}`));
-
+      fetch(`https://viacep.com.br/ws/${cep}/json/`)
+        .then((response) => response.json())
+        .then((response) =>
+          setValues({
+            ...values,
+            rua: response.logradouro,
+            bairro: response.bairro,
+            cidade: response.localidade,
+            estado: response.uf,
+          })
+        )
+        .catch((error) =>
+          console.log(
+            `Não foi possível obter o endereço do CEP informado! Erro:${error}`
+          )
+        );
   }, [cep]);
 
   function searchingData(e) {
     setCep(e.target.value);
-  }  
+  }
 
   function fillingForm({ target }) {
-    const {id, value} = target;
-    setValues({...values, [id]: value})
+    const { id, value } = target;
+    setValues({ ...values, [id]: value });
   }
-  
+
   function handleChange(event) {
     const fieldName = event.target.getAttribute("name");
     const value = event.target.value;
@@ -67,13 +78,59 @@ function useFormik({ initialValues, validate }) {
     handleChange,
     cep,
     searchingData,
-    fillingForm
+    fillingForm,
   };
 }
 
+function arrayMove(array, from, to) {
+  array = array.slice();
+  array.splice(to < 0 ? array.length + to : to, 0, array.splice(from, 1)[0]);
+  return array;
+}
+
+const SortableMultiValue = SortableElement((props) => {
+  const onMouseDown = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+  };
+  const innerProps = { ...props.innerProps, onMouseDown };
+  return <components.MultiValue {...props} innerProps={innerProps} />;
+});
+
+const SortableMultiValueLabel = sortableHandle((props) => (
+  <components.MultiValueLabel {...props} />
+));
+
+const SortableSelect = SortableContainer(Select);
+
+const causeOptions = [
+  {value:'saude', label: 'Saúde'},
+  {value:'meio ambiente', label: 'Meio Ambiente'},
+  {value:'mulheres', label: 'Mulheres'},
+  {value:'arte e cultura', label: 'Arte e Cultura'},
+  {value:'educação', label: 'Educação'},
+  {value:'direitos humanos', label: 'Direitos Humanos'},
+  {value:'crianças', label: 'Crianças'},
+  {value:'idosos', label: 'Idosos'},
+  {value:'proteção animal', label: 'Proteção Animal'},
+  {value:'refugiados', label: 'Refugiados'},
+]
+
+
 function InstForm() {
   const [currentStep, setCurrentStep] = useState(0);
+  const [selected, setSelected] = useState([]);
 
+  const onChange = (selectedOptions) => setSelected(selectedOptions);
+
+  const onSortEnd = ({ oldIndex, newIndex }) => {
+    const newValue = arrayMove(selected, oldIndex, newIndex);
+    setSelected(newValue);
+    console.log(
+      "Values sorted:",
+      newValue.map((i) => i.value)
+    );
+  };
 
   const onlyNumbers = (str) => str.replace(/[^0-9]/g, "");
 
@@ -85,8 +142,8 @@ function InstForm() {
       rua: "",
       bairro: "",
       numero: "",
-      cidade:"",
-      estado:"",
+      cidade: "",
+      estado: "",
       causas: "",
       numBeneficiados: "",
       telOng: "",
@@ -335,31 +392,27 @@ function InstForm() {
         {steps[currentStep].id === "dados-base2" && (
           <div className="dados-base2">
             <div className="inputs">
-              <label htmlFor="causas">Causas</label>
-              <select
-                type="text"
-                name="causas"
-                id="causas"
-                value={formik.values.causas}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                required
-              >
-                <option selected disabled value='escolha'>Escolha uma causa</option>
-                <option value="saude">Saúde</option>
-                <option value="meio ambiente">Meio Ambiente</option>
-                <option value="mulheres">Mulheres</option>
-                <option value="arte e cultura">Arte e Cultura</option>
-                <option value="educação">Educação</option>
-                <option value="direitos humanos">Direitos Humanos</option>
-                <option value="criancas">Crianças</option>
-                <option value="idosos">Idosos</option>
-                <option value="proteção animal">Proteção Animal</option>
-                <option value="refugiados">Refugiados</option>
-              </select>
-              {formik.touched.causas && formik.errors.causas && (
-                <span className="formikError">{formik.errors.causas}</span>
-              )}
+              <label>Causas</label>
+              <SortableSelect
+                className='causesInput'
+                useDragHandle
+                // react-sortable-hoc props:
+                axis="xy"
+                onSortEnd={onSortEnd}
+                distance={4}
+                // small fix for https://github.com/clauderic/react-sortable-hoc/pull/352:
+                getHelperDimensions={({ node }) => node.getBoundingClientRect()}
+                // react-select props:
+                isMulti
+                options={causeOptions}
+                value={selected}
+                onChange={onChange}
+                components={{
+                  MultiValue: SortableMultiValue,
+                  MultiValueLabel: SortableMultiValueLabel,
+                }}
+                closeMenuOnSelect={false}
+              />
             </div>
 
             <div className="inputs">
