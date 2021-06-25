@@ -23,10 +23,10 @@ function useFormik({ initialValues, validate }) {
       .then((response) => response.json())
       .then((response) => setValues({
         ...values,
-        rua: response.logradouro,
+        street: response.logradouro,
         bairro: response.bairro,
-        cidade: response.localidade,
-        estado: response.uf
+        city: response.localidade,
+        state: response.uf
       }))
       .catch((error) => console.log(`Não foi possível obter o endereço do CEP informado! Erro:${error}`));
 

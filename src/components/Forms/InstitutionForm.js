@@ -25,10 +25,10 @@ function useFormik({ initialValues, validate }) {
         .then((response) =>
           setValues({
             ...values,
-            rua: response.logradouro,
+            street: response.logradouro,
             bairro: response.bairro,
-            cidade: response.localidade,
-            estado: response.uf,
+            city: response.localidade,
+            state: response.uf,
           })
         )
         .catch((error) =>
@@ -136,37 +136,37 @@ function InstForm() {
 
   const formik = useFormik({
     initialValues: {
-      ongName: "",
-      resumo: "",
+      institution_name: "",
+      summary: "",
       cnpjNumber: "",
-      rua: "",
+      street: "",
       bairro: "",
-      numero: "",
-      cidade: "",
-      estado: "",
+      address_number: "",
+      city: "",
+      state: "",
       causas: "",
       numBeneficiados: "",
-      telOng: "",
-      urlSite: "",
+      phone: "",
+      site: "",
       facebook: "",
       instagram: "",
-      descricao: "",
+      bio: "",
       email: "",
       senha: "",
       confSenha: "",
     },
     validate: function (values) {
       const cnpj = onlyNumbers(values.cnpjNumber);
-      const tel = onlyNumbers(values.telOng);
+      const tel = onlyNumbers(values.phone);
 
       const errors = {};
 
-      if ((values.ongName.length < 3) | (values.ongName.length > 100)) {
-        errors.ongName = "Nome Invalido";
+      if ((values.institution_name.length < 3) | (values.institution_name.length > 100)) {
+        errors.institution_name = "Nome Invalido";
       }
 
-      if ((values.resumo.length < 5) | (values.resumo.length > 100)) {
-        errors.resumo = "Texto invalido";
+      if ((values.summary.length < 5) | (values.summary.length > 100)) {
+        errors.summary = "Texto invalido";
       }
 
       if (cnpj.length < 14) {
@@ -178,11 +178,11 @@ function InstForm() {
       }
 
       if ((tel.length < 10) | (tel.length > 11)) {
-        errors.telOng = "Telefone invalido";
+        errors.phone = "Telefone invalido";
       }
 
-      if ((values.descricao.length < 5) | (values.descricao.length > 520)) {
-        errors.descricao = "Texto invalido";
+      if ((values.bio.length < 5) | (values.bio.length > 520)) {
+        errors.bio = "Texto invalido";
       }
 
       if (!values.email.includes("@") | (values.email.lengthh < 7)) {
@@ -259,36 +259,36 @@ function InstForm() {
               <label htmlFor="nomeOng">Nome da instituição</label>
               <input
                 type="text"
-                name="ongName"
-                id="ongName"
-                value={formik.values.ongName}
+                name="institution_name"
+                id="institution_name"
+                value={formik.values.institution_name}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 minLength="3"
                 maxLength="100"
                 required
               />
-              {formik.touched.ongName && formik.errors.ongName && (
-                <span className="formikError">{formik.errors.ongName}</span>
+              {formik.touched.institution_name && formik.errors.institution_name && (
+                <span className="formikError">{formik.errors.institution_name}</span>
               )}
             </div>
 
             <div className="inputs">
-              <label htmlFor="resumo">Resumo da instituição</label>
+              <label htmlFor="summary">Resumo da instituição</label>
               <textarea
-                name="resumo"
+                name="summary"
                 id="resumo"
                 rows="3"
                 cols="50"
                 minLength="10"
                 maxLength="180"
-                value={formik.values.resumo}
+                value={formik.values.summary}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 required
               />
-              {formik.touched.resumo && formik.errors.resumo && (
-                <span className="formikError">{formik.errors.resumo}</span>
+              {formik.touched.summary && formik.errors.summary && (
+                <span className="formikError">{formik.errors.summary}</span>
               )}
             </div>
           </div>
@@ -313,18 +313,18 @@ function InstForm() {
               )}
             </div>
             <div className="inputs">
-              <label htmlFor="rua">Rua</label>
+              <label htmlFor="street">Rua</label>
               <input
                 type="text"
-                name="rua"
-                id="rua"
-                value={formik.values.rua}
+                name="street"
+                id="street"
+                value={formik.values.street}
                 onChange={formik.fillingForm}
                 onBlur={formik.handleBlur}
                 required
               />
-              {formik.touched.rua && formik.errors.rua && (
-                <span className="formikError">{formik.errors.rua}</span>
+              {formik.touched.street && formik.errors.street && (
+                <span className="formikError">{formik.errors.street}</span>
               )}
             </div>
             <div className="inputs">
@@ -343,48 +343,48 @@ function InstForm() {
               )}
             </div>
             <div className="inputs">
-              <label htmlFor="numero">Número</label>
+              <label htmlFor="address_number">Número</label>
               <input
                 type="text"
-                name="numero"
-                id="numero"
-                value={formik.values.numero}
+                name="address_number"
+                id="address_number"
+                value={formik.values.address_number}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 required
               />
-              {formik.touched.numero && formik.errors.numero && (
-                <span className="formikError">{formik.errors.numero}</span>
+              {formik.touched.address_number && formik.errors.address_number && (
+                <span className="formikError">{formik.errors.address_number}</span>
               )}
             </div>
             <div className="inputs">
-              <label htmlFor="cidade">Cidade</label>
+              <label htmlFor="city">Cidade</label>
               <input
                 type="text"
-                name="cidade"
-                id="cidade"
-                value={formik.values.cidade}
+                name="city"
+                id="city"
+                value={formik.values.city}
                 onChange={formik.fillingForm}
                 onBlur={formik.handleBlur}
                 required
               />
-              {formik.touched.cidade && formik.errors.cidade && (
-                <span className="formikError">{formik.errors.cidade}</span>
+              {formik.touched.city && formik.errors.city && (
+                <span className="formikError">{formik.errors.city}</span>
               )}
             </div>
             <div className="inputs">
-              <label htmlFor="estado">Estado</label>
+              <label htmlFor="state">Estado</label>
               <input
                 type="text"
-                name="estado"
-                id="estado"
-                value={formik.values.estado}
+                name="state"
+                id="state"
+                value={formik.values.state}
                 onChange={formik.fillingForm}
                 onBlur={formik.handleBlur}
                 required
               />
-              {formik.touched.estado && formik.errors.estado && (
-                <span className="formikError">{formik.errors.estado}</span>
+              {formik.touched.state && formik.errors.state && (
+                <span className="formikError">{formik.errors.state}</span>
               )}
             </div>
           </div>
@@ -416,7 +416,7 @@ function InstForm() {
             </div>
 
             <div className="inputs">
-              <label htmlFor="numBeneficiados">Numero de Beneficiádos</label>
+              <label htmlFor="numBeneficiados">Número de Beneficiádos</label>
               <input
                 type="number"
                 name="numBeneficiados"
@@ -452,34 +452,34 @@ function InstForm() {
         {steps[currentStep].id === "contatos" && (
           <div className="contatos">
             <div className="inputs">
-              <label htmlFor="telOng">Telefone</label>
+              <label htmlFor="phone">Telefone</label>
               <InputMask
-                name="telOng"
-                id="telOng"
+                name="phone"
+                id="phone"
                 mask="(99) 9 9999-9999"
-                value={formik.values.telOng}
+                value={formik.values.phone}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
               />
-              {formik.touched.telOng && formik.errors.telOng && (
-                <span className="formikError">{formik.errors.telOng}</span>
+              {formik.touched.phone && formik.errors.phone && (
+                <span className="formikError">{formik.errors.phone}</span>
               )}
             </div>
 
             <div className="inputs">
-              <label htmlFor="urlSite">Site</label>
+              <label htmlFor="site">Site</label>
               <input
                 type="url"
-                id="urlSite"
-                name="urlSite"
+                id="site"
+                name="site"
                 minLength="5"
                 maxLength="100"
-                value={formik.values.urlSite}
+                value={formik.values.site}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
               />
-              {formik.touched.urlSite && formik.errors.urlSite && (
-                <span className="formikError">{formik.errors.urlSite}</span>
+              {formik.touched.site && formik.errors.site && (
+                <span className="formikError">{formik.errors.site}</span>
               )}
             </div>
 
@@ -521,21 +521,21 @@ function InstForm() {
         {steps[currentStep].id === "sobre" && (
           <div className="sobre">
             <div className="inputs">
-              <label htmlFor="descricao">Descrição da Ong</label>
+              <label htmlFor="bio">Descrição da Ong</label>
               <textarea
-                name="descricao"
-                id="descricao"
+                name="bio"
+                id="bio"
                 rows="6"
                 cols="50"
                 minLength="10"
                 maxLength="180"
-                value={formik.values.descricao}
+                value={formik.values.bio}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 required
               />
-              {formik.touched.descricao && formik.errors.descricao && (
-                <span className="formikError">{formik.errors.descricao}</span>
+              {formik.touched.bio && formik.errors.bio && (
+                <span className="formikError">{formik.errors.bio}</span>
               )}
             </div>
           </div>

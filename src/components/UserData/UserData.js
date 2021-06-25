@@ -95,19 +95,19 @@ function UserData() {
               </div>
               <div className="second-section-personal-data">
                 <p>
-                  <span>Rua:</span> {pageUser.rua}
+                  <span>Rua:</span> {pageUser.street}
                 </p>
                 <p>
-                  <span>Número:</span> {pageUser.numero}
+                  <span>Número:</span> {pageUser.address_number}
                 </p>
                 <p>
                   <span>Bairro:</span> {pageUser.bairro}
                 </p>
                 <p>
-                  <span>Cidade:</span> {pageUser.cidade}
+                  <span>Cidade:</span> {pageUser.city}
                 </p>
                 <p>
-                  <span>Estado:</span> {pageUser.estado}
+                  <span>Estado:</span> {pageUser.state}
                 </p>
               </div>
               </div>
@@ -147,11 +147,12 @@ function UserData() {
     </div>
 
       <div
-        className={`user-overlay ${firstEditState || secondEditState ? "user-set-vis" : ""
+        className={`user-overlay ${firstEditState || secondEditState || thirdEditState ? "user-set-vis" : ""
           }`}
         onClick={() => {
           setFirstEditState(false);
           setSecondEditState(false);
+          setThirdEditState(false);
         }}
       >
         {" "}
