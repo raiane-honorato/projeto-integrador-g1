@@ -8,6 +8,7 @@
   max-width: 310px;
   padding: .8rem .5rem;
   box-shadow: 1px 1px 3px var(--mainWhite);
+  box-sizing: content-box;
 }
 
 #search-input {

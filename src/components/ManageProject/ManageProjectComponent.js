@@ -5,7 +5,7 @@ import ProjectEdition from "../Edit/ProjectEditSection/ProjectEdition";
 import CloseProject from "../Edit/ProjectEditSection/CloseProject";
 import "./ManageProjectComponent.css";
 
-import { faEye, faPen, faBan } from "@fortawesome/free-solid-svg-icons";
+import { faEye, faPen, faBan, faSearch, faChevronDown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import ManageProjectSubscription from "./ManageProjectSubscription";
 
@@ -85,12 +85,26 @@ function ManageProjectComponent({projectId}) {
             </div>
 
           </div> 
-          
+        <div className = "manage-project-subscriptions-container">
+
+          {subscriptons && <p className = "manage-project-subscriptions-title"><b>{subscriptons.length}</b> inscritos no projeto</p>}
+          <div className="manage-project-search-filter">
+            <div className="manage-project-search-field">
+              <FontAwesomeIcon className="manage-project-icon" icon={faSearch} />
+              <input className="manage-project-search-input" type="text" placeholder="buscar voluntário" />
+            </div>
+            <div className="manage-project-filter-field">
+              <p>Todas as inscrições</p>
+              <FontAwesomeIcon className="manage-project-icon" icon={faChevronDown} />
+            </div>
+          </div>
+
           {subscriptons && 
           (subscriptons.length >= 1) ? 
-          subscriptons.map(subscription => <ManageProjectSubscription subscription = {subscription} />) :
+          subscriptons.map(subscription => <ManageProjectSubscription subscription = {subscription} subscriptions = {subscriptons} setStateSubscriptions = {setSubscriptions} project = {project} />) :
           <p className = "manage-project-no-subscriptions">Ainda não há inscrições</p>
         }
+        </div>
 
         </div>
 
@@ -109,8 +123,8 @@ function ManageProjectComponent({projectId}) {
         {" "}
       </div>
 
-        {editProject && <ProjectEdition setStatePass = {setEditProject} project = {project} setStateProject = {setProject} />}
-        {closeProject && <CloseProject setStatePass = {setCloseProject} project = {project} setStateProject = {setProject} subscriptions = {subscriptons}/>}
+        {editProject && <ProjectEdition setStatePass = {setEditProject} project = {project} setStateProject = {setProject} institutionId = {user.institution_id}/>}
+        {closeProject && <CloseProject setStatePass = {setCloseProject} project = {project} setStateProject = {setProject} subscriptions = {subscriptons} setStateSubscriptions = {setSubscriptions}/>}
 
         </>
 

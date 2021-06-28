@@ -4,6 +4,7 @@
     border-radius: 100%;
     cursor: pointer;
     transition: var(--mainTransition);
+    box-sizing: content-box !important;
 }
 
 .edit-button:hover{

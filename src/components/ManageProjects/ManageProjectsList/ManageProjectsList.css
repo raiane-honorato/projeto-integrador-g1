@@ -21,12 +21,33 @@
     border-bottom: 1px solid var(--secondGrey);
     width: calc(100% - 4rem);
     padding: 1rem 2rem;
+    position: relative;
 }
 
 .manage-projects-header h3{
     font-family: var(--secondFont);
     margin:0rem;
     margin-bottom: 1rem;
+}
+
+.manage-projects-new-project-btn {
+    position: absolute;
+    top: 1rem;
+    right: 2rem;
+    background-color: var(--thirdColor);
+    height: 2rem;
+    margin: 1rem 0.5rem;
+    font-size: 1.1rem;
+    font-family: 'Poppins', sans-serif;
+    padding: .3rem 1rem;
+    border: none;
+    border-radius: .2rem;
+    cursor: pointer;
+    color: var(--mainWhite);
+    display: flex;
+    gap: .5rem;
+    align-items: center;
+    text-decoration: none;
 }
 
 .manage-projects-search-filter {
