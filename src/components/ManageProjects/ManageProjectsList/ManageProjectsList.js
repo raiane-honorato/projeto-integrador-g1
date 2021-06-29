@@ -8,10 +8,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import "./ManageProjectsList.css"
 import ManageProjectsCart from "../ManageProjectsCard/ManageProjectsCard";
+import ProjectCreation from "../../Edit/ProjectEditSection/ProjectCreation";
 
 function ManageProjectsList() {
     const { user } = useContext(AuthContext);
     const [projects, setProjects] = useState("");
+    const [createProject, setCreateProject] = useState(false);
 
     useEffect(() => {
       
@@ -25,15 +27,14 @@ function ManageProjectsList() {
           )
       }, []);
 
-      useEffect(() => console.log(projects),[projects])
-
   return (
+    <>
     <div className = "manage-projects-container">
         <div className = "manage-projects-list-container">
            
             <div className = "manage-projects-header">
               <h3>Gerenciar projetos</h3>
-
+              <button className = "manage-projects-new-project-btn" onClick = {() => {setCreateProject(true)}}>Criar novo projeto</button>
               <div className = "manage-projects-search-filter">
                 <div className="manage-projects-search-field">
                   <FontAwesomeIcon className = "manage-projects-icon" icon = {faSearch} />
@@ -54,6 +55,22 @@ function ManageProjectsList() {
 
         </div>
     </div>
+
+    <div
+        className={`institution-overlay ${
+          (createProject)
+            ? "institution-set-vis"
+            : ""
+        }`}
+        onClick={() => {
+          setCreateProject(false);
+
+        }}
+      ></div>
+
+      {createProject && <ProjectCreation setStatePass = {setCreateProject} institutionId = {user.institution_id}/>}
+        
+    </>
   )
 }
 

@@ -1,3 +1,7 @@
+.manage-project-toast {
+    font-family: var(--secondFont);
+}
+
 .manage-project-subscription-container {
     padding: 2rem 5rem;
     display: flex;
@@ -50,6 +54,7 @@
     display: flex;
     gap: .6rem;
     align-items: center;
+    width: 130px;
 }
 
 .manage-project-subscription-bullet-point {
@@ -57,11 +62,26 @@
     border-radius: 100%;
     width: .4rem;
     height: .4rem;
-    margin-left: 2rem;
     display: inline-block;
 }
 
-.manage-project-subscription-change-status{
+.bullet-green {
+    background-color: var(--primaryColor);
+}
+
+.bullet-grey {
+    background-color: var(--secondGrey);
+}
+
+.bullet-yellow {
+    background-color: var(--fourthColor);
+}
+
+.manage-project-subscription-change-status {
+    position: relative;
+}
+
+.manage-project-subscription-change-status-btn{
     background-color: var(--secondColor);
     height: 2rem;
     margin: 1rem 0.5rem;
@@ -76,4 +96,50 @@
     gap: .5rem;
     align-items: center;
     text-decoration: none;
+}
+
+.canceled-change-status{
+    cursor:default;
+    background-color: var(--mainWhite);
+    color:var(--secondColor);
+    border: 1px solid var(--secondColor);
+}
+
+.manage-project-subscription-change-status-dropdown {
+    position: absolute;
+    left: 10px;
+    min-width: 180px;
+    z-index: 150;
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: rgb(0 0 0 / 15%) 0px 10px 37px !important;
+    border: 0.5px solid rgba(118, 118, 118, 0.28);
+    visibility: inherit;
+}
+
+.manage-project-subscription-change-status-dropdown-list {
+    display: flex;
+    flex-direction: column;
+    list-style-type: none;
+    justify-content: center;
+    align-items: flex-start;
+    text-decoration: none;
+    padding-inline-start: 0px;
+    margin:0px;
+}
+
+.manage-project-subscription-change-status-dropdown-btn {
+    text-decoration: none;    
+    color: var(--primaryColor);
+    padding: .8rem;
+    width: 100%;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+
+.manage-project-subscription-change-status-dropdown-btn:hover {
+    background-color: var(--secondColor);
+    color: var(--mainWhite);
+    transition:var(--mainTransition);
+    opacity: 0.8;
 }

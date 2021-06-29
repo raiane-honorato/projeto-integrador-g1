@@ -3,6 +3,8 @@ import {useState, useEffect, useRef } from "react";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
+import toast, { Toaster } from 'react-hot-toast';
+
 import "./CloseProject.css";
 
 function CloseProject(props) {
@@ -16,23 +18,29 @@ function CloseProject(props) {
             body: JSON.stringify({"status": 2})
         })
       .then((res) => res.json())
+      .then((res) => props.setStateProject(res))
 
-
-      let cancelSubscriptions = props.subscriptions.map( (subscription) => {
-          return fetch(`http://localhost:8000/subscription/${subscription.id}`, 
+        console.log(props.subscriptions)
+      let cancelSubscriptions = props.subscriptions //.filter((subscription) => subscription.subscription_status == "Pendente")
+      .map( (subscription) => {
+          if(subscription.subscription_status == "Pendente") {
+        return fetch(`http://localhost:8000/subscription/${subscription.id}`, 
           {
               method: "PATCH",
               headers: {"Content-type": "application/json"},
-              body: JSON.stringify({"subscription_status": "Cancelada"})
+              body: JSON.stringify({"subscription_status": "Recusada"})
           })
-        .then((res) => res.json())
-      })
+        .then((res) => res.json()) } else {
+            return subscription
+        }
 
-      Promise.all([changeStatus, cancelSubscriptions])
+      })
+      console.log(cancelSubscriptions)
+      Promise.all(cancelSubscriptions)
         .then((p) => {
-            console.log(p)
+            toast.success("Vaga cancelada com sucesso.")
+            props.setStateSubscriptions(p)
             props.setStatePass(false)
-            alert("Vaga cancelada com sucesso.")
         })
     }
 
@@ -55,7 +63,8 @@ function CloseProject(props) {
     })
     useEffect(() => console.log(props.project),[])
     return(
-        
+        <>
+        <div> <Toaster /></div>
         <div className = "project-closing-container project-set-vis">
             <div ref = {windowRef} className = "project-closing-window">
                 <div className = "project-closing-window-header">
@@ -78,6 +87,7 @@ function CloseProject(props) {
                 </div>
             </div>
         </div>
+        </>
     )
 }
 

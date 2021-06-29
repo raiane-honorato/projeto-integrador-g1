@@ -13,9 +13,11 @@ function UserData() {
   const [subscriptions, setSubscriptions] = useState("");
   const { user } = useContext(AuthContext);
   const [pageUser, setPageUser] = useState("");
+  const [causes, setCauses] = useState();
+  const [habilities, setHabilities] = useState();
 
-
-  //states of content edition
+  console.log(causes)
+    //states of content edition
   const [firstEditState, setFirstEditState] = useState(false);
   const [secondEditState, setSecondEditState] = useState(false);
   const [thirdEditState, setThirdEditState] = useState(false);
@@ -43,6 +45,34 @@ function UserData() {
       .catch((erro) => alert("Não foi possível obter os projetos do usuário."));
   }, [userId]);
 
+
+  useEffect(() => {
+    let requests =
+      pageUser.causes &&
+      pageUser.causes.map( async (cause_id) => {
+        const res = await fetch(`http://localhost:8000/cause/${cause_id}`);
+        return await res.json();
+      });
+
+      requests && Promise.all(requests)
+      .then((p) => setCauses(p))
+      .catch((err) => alert("Não foi possível obter as causas"));
+  }, [pageUser]);
+
+
+  useEffect(() => {
+    let requests2 =
+      pageUser.habilities &&
+      pageUser.habilities.map(async (hability_id) => {
+        const res = await fetch(`http://localhost:8000/hability/${hability_id}`);
+        return await res.json();
+      });
+
+      requests2 && Promise.all(requests2)
+      .then((p) => setHabilities(p))
+      .catch((err) => alert("Não foi possível obter as habilidades"));
+  }, [pageUser]);
+
   return (
     <>
     <div className="userdata-container">
@@ -52,6 +82,20 @@ function UserData() {
           <div className="profile-basic-information">
             <img src={pageUser.img} alt="Foto do usuário" />
             <h1>{pageUser.name}</h1>
+            <div className='causes-section'>
+               {causes && <span>Causas:</span>}
+              {causes && causes.map(cause => (
+                <span key={cause.id}>{cause.label}</span>
+              ))}
+            </div>
+
+            <div className='habilities-section'>
+              {habilities && <span>Habilidades:</span>}
+              {habilities && habilities.map(hability => (
+                <span key={hability.id}>{hability.label}</span>
+              ))}
+            </div>
+                     
             {user.id === pageUser.id && (
               <>
               <div className="profileEdition">

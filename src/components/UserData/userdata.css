@@ -24,6 +24,7 @@
   align-items: center;
   cursor: pointer;
 
+  
 }
 
 .profileEdition span:last-child {
@@ -108,4 +109,30 @@
   visibility: hidden;
   z-index: 104;
   overflow: visible;
+}
+
+.habilities-section {
+  margin-bottom: 1rem;
+  margin-top: .5rem;
+}
+
+.habilities-section span:not(:first-child) {
+  
+  margin:5px;
+  padding: 2px 5px;
+  border-radius: 5px;
+  font-size: .8rem;
+  background-color: var(--tranparentBackground);
+  text-decoration: none;
+}
+
+
+.causes-section span:not(:first-child) {
+ 
+  margin:5px;
+  padding: 2px 5px;
+  border-radius: 5px;
+  font-size: .8rem;
+  background-color: var(--thirdColorLight);
+  text-decoration: none;
 }

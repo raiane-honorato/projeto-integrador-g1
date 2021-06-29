@@ -64,7 +64,7 @@ function InstitutionData() {
         {institution && (
           <>
             <div className="institution-first-section-profile">
-              {user.institution_id === institutionId && (
+              {user.institution_id == institutionId && (
                 <EditButton
                   editClass="institution-first-edit"
                   setStatePass={setFirstEditState}
