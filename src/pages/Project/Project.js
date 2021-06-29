@@ -39,7 +39,6 @@ function ProjectPage() {
       .catch((erro) => alert(`Erro ao obter lista de projetos: ${erro}`));
   }, []);
   
-  useEffect(() => {console.log(subscriptions)},[subscriptions])
 
   useEffect(() => {
     institutionId && fetch(`http://localhost:8000/institution/${institutionId}`)

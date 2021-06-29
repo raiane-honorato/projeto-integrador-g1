@@ -4,6 +4,7 @@ import "./profileEditionSection.css";
 import UserFirstEditionBody from "./UserFirstEditionBody";
 import UserSecondEditionBody from "./UserSecondEditionBody";
 import UserThirdEditionBody from './UserThirdEditionBody';
+import toast, { Toaster} from 'react-hot-toast';
 
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 
@@ -133,7 +134,7 @@ function ProfileEditionSection(props) {
       .then((res) => {
         props.setPageUser(res);
         props.setStatePass(false);
-        alert("Usuário atualizado.")
+        toast.success("Usuário atualizado.", {position: "top-right"})
       })
       .catch((erro) => alert("Não foi possível atualizar."));
   };

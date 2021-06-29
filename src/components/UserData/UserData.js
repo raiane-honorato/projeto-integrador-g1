@@ -5,14 +5,15 @@ import "./userdata.css";
 import UserSubscriptionCart from "./UserSubscriptionCart";
 import EditButton from "../Edit/EditButton";
 import ProfileEditionSection from "../Edit/ProfileEditionSection/ProfileEditionSection";
+import { Toaster } from "react-hot-toast";
 
 function UserData() {
   const parameter = useParams();
   const userId = parameter.id;
   const [subscriptions, setSubscriptions] = useState("");
   const { user } = useContext(AuthContext);
-
   const [pageUser, setPageUser] = useState("");
+
 
   //states of content edition
   const [firstEditState, setFirstEditState] = useState(false);
@@ -47,6 +48,7 @@ function UserData() {
     <div className="userdata-container">
       {user && (
         <>
+          <Toaster />
           <div className="profile-basic-information">
             <img src={pageUser.img} alt="Foto do usuário" />
             <h1>{pageUser.name}</h1>
@@ -117,7 +119,7 @@ function UserData() {
               {subscriptions &&
                 user.id === pageUser.id &&
                 subscriptions.map((subscription) => (
-                  <UserSubscriptionCart subscription={subscription} />
+                  <UserSubscriptionCart key={subscription.id} subscription={subscription} subscriptions={subscriptions} setSubscriptions={setSubscriptions}/>
                 ))}
             </div>
           </div>

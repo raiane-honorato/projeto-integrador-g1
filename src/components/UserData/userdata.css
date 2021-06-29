@@ -60,6 +60,13 @@
   background-color:var(--thirdColorLight );
 }
 
+.subscription-situation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
 .first-edition-box {
   display: flex;
   align-items: center;

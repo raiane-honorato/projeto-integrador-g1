@@ -18,15 +18,7 @@ function Navbar({ navbarTransparent, changeBackground }) {
   const { user, token, setToken, setUser} = useContext(AuthContext);
   const history = useHistory();
 
-  const signOut = (event) => {
-    event.preventDefault();    
-    setToken("");
-    setUser("");
-    alert('Usuário deslogado!')
-    return history.push("/");
-  }
-
-  return (
+   return (
     <>
       <nav className="navbar" id={navbarTransparent ? "navbarTransparent" : ""}>
         <div className="nav-container">

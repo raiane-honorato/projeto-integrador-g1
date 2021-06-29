@@ -26,6 +26,10 @@
       margin-top: -1.5rem;
   }
 
+  .hero-buttons {
+      display: flex;
+  }
+  
   .hero-btn {
       height: 4rem;
       width: 15rem;

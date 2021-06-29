@@ -1,8 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Fragment } from "react";
 import "./userdata.css";
+import { AuthContext } from "../../context/auth";
 
-function UserSubscriptionCart({subscription}) {
+function UserSubscriptionCart({subscription, subscriptions, setSubscriptions}) {
+
+    const { user } = useContext(AuthContext);
 
     //getting subscription's project data
     const [project, setProject] = useState();
@@ -30,18 +33,27 @@ function UserSubscriptionCart({subscription}) {
 
     },[project]);
 
+
+    const cancelSubscription = (event) => {
+      event.preventDefault();
+      console.log('oi')
+    }
+
+
     return(
         <div className='project-data-details'  key={subscription.id}>
           <div>{project && institution &&
             <Fragment key={project.id}>
               <h3>{project.title} em {
-
-              institution.institution_name
-
+              institution.institution_name  
               }</h3>                           
             </Fragment>
           }</div>
-           <p className={(subscription.subscription_status === 'Aceita') ? 'greenCard' : 'redCard'}>Situação da inscrição: {subscription.subscription_status}</p>
+          <div className="subscription-situation">
+            <p className={(subscription.subscription_status === 'Aceita') ? 'greenCard' : 'redCard'}>Situação da inscrição: {subscription.subscription_status}</p>
+            <button onClick={cancelSubscription} className="user-subscription-btn"> Cancelar inscrição </button>
+          </div>
+           
         </div>
     )
 
