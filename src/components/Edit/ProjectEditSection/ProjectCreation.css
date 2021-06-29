@@ -1,7 +1,7 @@
 .project-set-vis {
   visibility: visible !important;
 }
-.project-edition-container {
+.project-creation-container {
   position: fixed;
   height: 100%;
   width: 100%;
@@ -15,7 +15,7 @@
 }
 
 
-.project-edition-window{
+.project-creation-window{
     position: fixed;
     z-index: 1040;
     top:10rem;
@@ -31,7 +31,7 @@
   overflow: hidden;
   }
   
-  .project-edition-window-header{
+  .project-creation-window-header{
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -39,13 +39,13 @@
     
   
   }
-  .project-edition-window-header h3{
+  .project-creation-window-header h3{
     display: inline;
     font-family: var(--secondFont);
     margin: 0;
   }
 
-  .project-edition-window-body {
+  .project-creation-window-body {
       margin: 2rem 0rem;
       padding-right: 2rem;
       overflow: hidden;
@@ -64,16 +64,16 @@
     width: 6rem !important;
   }
 
-  .project-habilities-causes-edition {
+  .project-habilities-causes-creation {
     font-family: var(--secondFont) !important;
     margin-bottom: 1rem;
   }
 
-  .project-habilities-causes-edition li:hover{
+  .project-habilities-causes-creation li:hover{
     background-color: var(--secondColor) !important
   }
   
-  .project-edition-save{ 
+  .project-creation-save{ 
     background-color: var(--secondColor);
     height: 2rem;
     width: 5rem;
@@ -87,10 +87,10 @@
     color: var(--mainBlack);
   }
 
-  .project-edition-save:hover{
+  .project-creation-save:hover{
     filter: brightness(1.2);
   }
 
-  .project-edition-close-btn {
+  .project-creation-close-btn {
       cursor: pointer;
   }

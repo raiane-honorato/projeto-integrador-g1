@@ -3,7 +3,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {useState, useEffect, useRef } from "react";
 import { useFormik } from 'formik';
 import Multiselect from 'multiselect-react-dropdown';
-import "./ProjectEdition.css";
+import toast, { Toaster } from 'react-hot-toast';
+import "./ProjectCreation.css";
 
 
 //form function
@@ -48,7 +49,7 @@ import "./ProjectEdition.css";
 //     };
 //   }
 
-function ProjectEdition(props) {
+function ProjectCreation(props) {
 
     //dealing with outside click to close the component
     let windowRef = useRef();
@@ -68,7 +69,16 @@ function ProjectEdition(props) {
     //setting the form
     const formik = useFormik({
         initialValues: 
-            props.project
+        {
+        "status": 1,
+        "title": "",
+        "img": "",
+        "local_type": "remoto",
+        "institution_id": props.institutionId,
+        "description": "",
+        "hability_id": [],
+        "cause_id": [],
+        "popularity": null}
         ,
         validate: function (values) {
 
@@ -89,7 +99,6 @@ function ProjectEdition(props) {
 
       //setting habilities list
       const [habilities, setHabilities] = useState();
-      const [projectHabilities, setProjectHabilities] = useState();
       useEffect(() => {
         fetch(`http://localhost:8000/hability`)
         .then((res) => res.json())
@@ -103,13 +112,6 @@ function ProjectEdition(props) {
 
     },[])
 
-    useEffect(() => {
-        let filteredHabilities = habilities && props.project.hability_id.map((hability_id) => {
-          return habilities.filter(hability => hability.id == hability_id)[0]
-        })
-        setProjectHabilities(filteredHabilities)
-      
-    },[habilities])
 
     //chosen habilities
     let onChangeHability = (selectedList, selectedItem) => {
@@ -134,13 +136,6 @@ function ProjectEdition(props) {
 
     },[])
 
-    useEffect(() => {
-        let filteredCauses = causes && props.project.hability_id.map((hability_id) => {
-          return causes.filter(hability => hability.id == hability_id)[0]
-        })
-        setProjectCauses(filteredCauses)
-      
-    },[causes])
 
     //chosen cause
     let onChangeCause = (selectedList, selectedItem) => {
@@ -150,33 +145,35 @@ function ProjectEdition(props) {
 
       //saving information
       const handleSave = () => {
-        fetch(`http://localhost:8000/projects/${props.project.id}`, 
+        fetch(`http://localhost:8000/projects/`, 
         {
-            method: "PATCH",
+            method: "POST",
             headers: {"Content-type": "application/json"},
             body: JSON.stringify(formik.values)
         })
       .then((res) => res.json())
+      .then(() => {toast.success("Projeto criado com sucesso.")})
       .then((res) => {
-        props.setStateProject(res);
         props.setStatePass(false);
       })
-      .catch((erro) =>
-        alert("Não foi possível atualizar.")
+      .catch((erro) =>{
+        alert("Não foi possível salvar.")
+        console.log(erro)}
       );
 
       }
 
     return (
-
-        <div className = "project-edition-container project-set-vis">
-            <div ref = {windowRef} className = "project-edition-window">
-                <div className = "project-edition-window-header">
+        <>
+        <div className = "manage-project-toast"><Toaster /></div>
+        <div className = "project-creation-container project-set-vis">
+            <div ref = {windowRef} className = "project-creation-window">
+                <div className = "project-creation-window-header">
                 <h3>Editar informações</h3>
-                <FontAwesomeIcon className = "project-edition-close-btn" icon = {faTimes} onClick = {() => props.setStatePass(false)}/>
+                <FontAwesomeIcon className = "project-creation-close-btn" icon = {faTimes} onClick = {() => props.setStatePass(false)}/>
                 </div>
 
-                  <div className = "project-edition-window-body">
+                  <div className = "project-creation-window-body">
                     
                   <div className="inputs">
                       <label htmlFor="title">Nome do projeto</label>
@@ -198,7 +195,6 @@ function ProjectEdition(props) {
                     </div>
                     
                     <div className = "manage-project-img-edit">
-                      <img className = "manage-project-img project-edit-img" src = {props.project.img} />
 
                       <div className="inputs">
                         <label htmlFor="img">Imagem</label>
@@ -220,12 +216,11 @@ function ProjectEdition(props) {
                       </div>
                     </div>
 
-                    <div className = "project-habilities-causes-edition">
+                    <div className = "project-habilities-causes-creation">
                     <label>Habilidades necessárias</label>
                      {habilities && <Multiselect 
                         options = {habilities}
                         displayValue = "name"
-                        selectedValues = {projectHabilities}
                         selectionLimit = "3"
                         placeholder = "Selecione até 3 habilidades"
                         onSelect = {onChangeHability}
@@ -250,7 +245,7 @@ function ProjectEdition(props) {
                       />}
                     </div>
 
-                    <div className = "project-habilities-causes-edition">
+                    <div className = "project-habilities-causes-creation">
                     <label>Causas atreladas</label>
                      {habilities && <Multiselect 
                         options = {causes}
@@ -284,7 +279,7 @@ function ProjectEdition(props) {
                       <label htmlFor="description">Descrição do projeto</label>
                       <textarea
                         type="text"
-                        name="title"
+                        name="description"
                         id="description"
                         className = "aplication-form-fields"
                         value={formik.values.description}
@@ -305,13 +300,14 @@ function ProjectEdition(props) {
 
                   </div>
                 
-                <div className = "project-first-edition-window-footer">
-                    <button className = "project-edition-save" onClick = {handleSave}>Salvar</button>
+                <div className = "project-first-creation-window-footer">
+                    <button className = "project-creation-save" onClick = {handleSave}>Salvar</button>
                 </div>
             </div>
         </div>
+        </>
     )
 
 }
 
-export default ProjectEdition;
+export default ProjectCreation;

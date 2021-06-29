@@ -8,6 +8,7 @@
     justify-content: center;
     font-family: 'Poppins', sans-serif;
     z-index: 100;
+    box-sizing: content-box !important;
 }
 
 .nav-overlay {
@@ -55,11 +56,13 @@
     justify-content: space-around;
     transition: all 1s ease;
     cursor: pointer;
+    box-sizing: content-box !important;
 }
 
 .nav-login-icon {
     padding: 2px 3px;
     margin: 0px 3px;
+    box-sizing: content-box !important;
 }
 
 #nav-logo-user {
