@@ -4,7 +4,7 @@ import "./profileEditionSection.css";
 import UserFirstEditionBody from "./UserFirstEditionBody";
 import UserSecondEditionBody from "./UserSecondEditionBody";
 import UserThirdEditionBody from './UserThirdEditionBody';
-import toast, { Toaster} from 'react-hot-toast';
+import toast from 'react-hot-toast';
 
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 
@@ -31,7 +31,7 @@ function useFormik({ initialValues, validate }) {
       }))
       .catch((error) => console.log(`Não foi possível obter o endereço do CEP informado! Erro:${error}`));
 
-  }, [cep]);
+  }, [values, cep]);
 
   function searchingData(e) {
     setCep(e.target.value);

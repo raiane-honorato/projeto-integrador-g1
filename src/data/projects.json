@@ -13,8 +13,9 @@
         2
       ],
       "cause_id": [
-        1,
-        6
+        8,
+        2,
+        1
       ],
       "popularity": 40
     },
@@ -648,7 +649,7 @@
       "bairro": "Imbuí",
       "city": "Salvador",
       "state": "BA",
-      "address_number": "54",
+      "address_number": "53",
       "causes": [
         2,
         4

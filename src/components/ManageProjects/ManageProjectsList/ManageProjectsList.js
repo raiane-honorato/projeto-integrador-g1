@@ -14,6 +14,7 @@ function ManageProjectsList() {
     const { user } = useContext(AuthContext);
     const [projects, setProjects] = useState("");
     const [createProject, setCreateProject] = useState(false);
+    console.log(projects)
 
     useEffect(() => {
       

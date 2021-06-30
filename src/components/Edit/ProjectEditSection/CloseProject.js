@@ -1,4 +1,4 @@
-import {useState, useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -8,6 +8,7 @@ import toast, { Toaster } from 'react-hot-toast';
 import "./CloseProject.css";
 
 function CloseProject(props) {
+    console.log(props)
 
     let cancelProject = () => {
               //saving information
@@ -20,10 +21,9 @@ function CloseProject(props) {
       .then((res) => res.json())
       .then((res) => props.setStateProject(res))
 
-        console.log(props.subscriptions)
       let cancelSubscriptions = props.subscriptions //.filter((subscription) => subscription.subscription_status == "Pendente")
       .map( (subscription) => {
-          if(subscription.subscription_status == "Pendente") {
+          if(subscription.subscription_status === "Pendente") {
         return fetch(`http://localhost:8000/subscription/${subscription.id}`, 
           {
               method: "PATCH",
@@ -42,10 +42,7 @@ function CloseProject(props) {
             props.setStateSubscriptions(p)
             props.setStatePass(false)
         })
-    }
-
-
-    
+    }    
 
     //dealing with outside click to close the component
     let windowRef = useRef();
@@ -61,7 +58,7 @@ function CloseProject(props) {
             document.removeEventListener("mousedown", handler)
         }
     })
-    useEffect(() => console.log(props.project),[])
+
     return(
         <>
         <div> <Toaster /></div>

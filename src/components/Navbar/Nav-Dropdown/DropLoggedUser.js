@@ -1,7 +1,6 @@
 import { NavLink, useHistory } from "react-router-dom";
 import { AuthContext } from "../../../context/auth";
 import { useContext } from "react";
-import toast, { Toaster } from 'react-hot-toast';
 
 function DropLoggedUser() {
     const { user, setToken, setUser} = useContext(AuthContext);
@@ -15,6 +14,7 @@ function DropLoggedUser() {
       }
 
     return (
+
     <ul className="nav-btn-list">
         <li className="nav-btn">
             <NavLink to={`/user/${user.id}`}>

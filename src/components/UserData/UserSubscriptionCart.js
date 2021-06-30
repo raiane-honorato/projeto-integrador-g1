@@ -2,11 +2,17 @@ import React, { useContext, useEffect, useState } from "react";
 import { Fragment } from "react";
 import "./userdata.css";
 import { AuthContext } from "../../context/auth";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBan } from "@fortawesome/free-solid-svg-icons";
+import CancelUserSubscription from "../Edit/ProfileEditionSection/CancelUserSubscription";
 
-function UserSubscriptionCart({subscription, subscriptions, setSubscriptions}) {
+
+function UserSubscriptionCart({subscription}) {
 
     const { user } = useContext(AuthContext);
-
+    const [cancelSubscription,setCancelSubscription] = useState(false);
+    console.log(subscription.subscription_status)
+    
     //getting subscription's project data
     const [project, setProject] = useState();
 
@@ -33,13 +39,6 @@ function UserSubscriptionCart({subscription, subscriptions, setSubscriptions}) {
 
     },[project]);
 
-
-    const cancelSubscription = (event) => {
-      event.preventDefault();
-      console.log('oi')
-    }
-
-
     return(
         <div className='project-data-details'  key={subscription.id}>
           <div>{project && institution &&
@@ -51,8 +50,27 @@ function UserSubscriptionCart({subscription, subscriptions, setSubscriptions}) {
           }</div>
           <div className="subscription-situation">
             <p className={(subscription.subscription_status === 'Aceita') ? 'greenCard' : 'redCard'}>Situação da inscrição: {subscription.subscription_status}</p>
-            <button onClick={cancelSubscription} className="user-subscription-btn"> Cancelar inscrição </button>
+            {
+                subscription.subscription_status === 'Aceita' &&
+                <button className="user-subscription-btn" onClick = {() => {setCancelSubscription(true)}}>
+                <FontAwesomeIcon icon = {faBan} />
+                <span>Cancelar inscrição</span>
+              </button>}
           </div>
+          <div
+        className={`institution-overlay ${
+          (cancelSubscription)
+            ? "institution-set-vis"
+            : ""
+        }`}
+        onClick={() => {
+          setCancelSubscription(false);
+        }}
+      >
+        {" "}
+      </div>
+
+        {cancelSubscription && <CancelUserSubscription subscription={subscription} setCancelSubscription = {setCancelSubscription} />}
            
         </div>
     )

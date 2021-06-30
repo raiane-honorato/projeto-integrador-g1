@@ -124,3 +124,28 @@
   z-index: 103;
   visibility: hidden;
 }
+
+@media (max-device-width : 600px) {
+
+  .project-container {
+    padding: 0 2rem;
+  }
+
+  .grid-project {
+    display: flex;
+    flex-direction: column;
+    margin-top: 2rem;
+  }
+
+  .project-image-div {
+    max-width: 80%;
+    margin: 0 auto;
+  
+  }
+}
+
+@media (min-device-width : 601px) and (max-device-width : 1100px) {
+  .project-container {
+    padding: 0 2rem;
+  }
+}

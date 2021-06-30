@@ -69,14 +69,14 @@ function ManageProjectComponent({projectId}) {
               </NavLink>
 
               {
-                project.status == 1 &&
+                project.status === 1 &&
                 <button className = "manage-project-button view-project" onClick = {() => setEditProject(true)}>
                 <FontAwesomeIcon icon = {faPen} />
                 <span>Editar</span>
               </button>}
 
               {
-                project.status == 1 &&
+                project.status === 1 &&
                 <button className = "manage-project-button close-project" onClick = {() => {setCloseProject(true)}}>
                 <FontAwesomeIcon icon = {faBan} />
                 <span>Encerrar</span>

@@ -43,7 +43,7 @@ function ManageProjectsCart({project}) {
                 }
                 <div className = "manage-projects-card-subscriptions">
                     <span className = {`manage-projects-card-bullet-point ${project.status == 1 ? "bullet-green" : "bullet-grey"}`}></span>
-                    <p>{project.status == 1 ? "Aberto" : "Encerrado"}</p>
+                    <p>{project.status === 1 ? "Aberto" : "Encerrado"}</p>
                 </div>
                 <NavLink className = "manage-projects-cart-button" to = {`/manage_project/${project.id}`}>
                     <FontAwesomeIcon icon = {faCog} />

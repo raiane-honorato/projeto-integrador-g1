@@ -19,6 +19,8 @@ function ProjectPage() {
   const [subscriptions, setSubscriptions] = useState();
   const [activeSubscription, setActiveSubscription ] = useState(false);
 
+  console.log(activeSubscription)
+
   //get data from localhost port 8000
   useEffect(() => {
     fetch(`http://localhost:8000/projects/${projectId}`)
@@ -111,7 +113,7 @@ function ProjectPage() {
                       <span key={cause.id}>{cause.name}</span>
                     ))}
                 </div>
-                { subscriptions && user.type == 1 && subscriptions.length == 0 &&
+                { subscriptions && user.type === 1 && subscriptions.length === 0 &&
                   <button className="project-btn" onClick = {() => setActiveSubscription(true)}>Quero a vaga</button>}
                 {subscriptions && subscriptions.length > 0 && <p>Você já está inscrito nesta vaga</p>}
               </div>
