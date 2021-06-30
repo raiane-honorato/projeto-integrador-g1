@@ -65,12 +65,22 @@
   }
 
   @media only screen and (max-width: 600px) {
+    
     .hero-title {
         text-transform: uppercase;
         font-size: 3rem;
+        text-align: center;
+    }
+
+    .hero-p {
+        font-size: 1.5rem;
     }
 
     .hero-container {
         padding: 30px;
+    }
+
+    .hero-buttons {
+        flex-wrap: wrap;
     }
   }
