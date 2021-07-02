@@ -168,6 +168,8 @@ function UserData() {
                     <UserSubscriptionCart
                       key={subscription.id}
                       subscription={subscription}
+                      subscriptions={subscriptions}
+                      setSubscriptions={setSubscriptions}
                     />
                   ))}
               </div>

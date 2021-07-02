@@ -7,11 +7,10 @@ import { faBan } from "@fortawesome/free-solid-svg-icons";
 import CancelUserSubscription from "../Edit/ProfileEditionSection/CancelUserSubscription";
 
 
-function UserSubscriptionCart({subscription}) {
+function UserSubscriptionCart({subscription, subscriptions, setSubscriptions}) {
 
     const { user } = useContext(AuthContext);
     const [cancelSubscription,setCancelSubscription] = useState(false);
-    console.log(subscription.subscription_status)
     
     //getting subscription's project data
     const [project, setProject] = useState();
@@ -70,7 +69,7 @@ function UserSubscriptionCart({subscription}) {
         {" "}
       </div>
 
-        {cancelSubscription && <CancelUserSubscription subscription={subscription} setCancelSubscription = {setCancelSubscription} />}
+        {cancelSubscription && <CancelUserSubscription subscription={subscription} subscriptions={subscriptions}  setSubscriptions={setSubscriptions} setCancelSubscription = {setCancelSubscription} />}
            
         </div>
     )

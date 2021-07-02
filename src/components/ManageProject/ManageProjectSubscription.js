@@ -41,7 +41,7 @@ function ManageProjectSubscription({subscription, subscriptions, project, setSta
 
     //change subscription funcion
 
-    const subsIndex = subscriptions.findIndex((element) => element.id == subscription.id )
+    const subsIndex = subscriptions.findIndex((element) => element.id === subscription.id )
     let subsArray = [...subscriptions]
 
     const changeSubscription = (status) => {

@@ -1,4 +1,4 @@
-import {useState, useEffect, useRef, useContext } from "react";
+import { useEffect, useRef, useContext } from "react";
 import { AuthContext } from "../../context/auth";
 
 import { faTimes } from "@fortawesome/free-solid-svg-icons";

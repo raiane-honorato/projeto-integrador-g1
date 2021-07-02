@@ -655,8 +655,8 @@
         4
       ],
       "habilities": [
-        1,
-        4
+        2,
+        3
       ]
     },
     {
@@ -710,7 +710,7 @@
       "user_id": 1,
       "project_id": 1,
       "subs_date": "11/05/2021",
-      "subscription_status": "Aceita"
+      "subscription_status": "Cancelada"
     },
     {
       "id": 2,
