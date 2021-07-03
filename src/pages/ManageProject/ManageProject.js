@@ -21,14 +21,14 @@ function ManageProject() {
 
 
       {/* setting page for volunteer user */}
-      { user.type == 1 &&
+      { user.type === 1 &&
         <div class="error-main">
         <h1>Você não tem acesso a esta página.</h1>
         <p>Faça login como uma instituição para continuar.</p>
         <img className="error-image" src={erroImg} alt="erro" />
       </div>}
 
-        {user.type == 2 && <ManageProjectComponent projectId = {projectId}/>}
+        {user.type === 2 && <ManageProjectComponent projectId = {projectId}/>}
         {/* {user.type == 2 && <ManageProjectComponent projectId = {projectId}/>} */}
 
 
