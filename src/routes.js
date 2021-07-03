@@ -11,8 +11,7 @@ import PrivateRoute from "./privateRoute/Private";
 import Profile from "./pages/Profile/Profile";
 import TermosVoluntariado from "./pages/Termos/TermosVoluntariado"
 import TermosDePrivacidade from "./pages/Termos/TermosDePrvacidade";
-import RegisterJob from "./components/RegisterJob/RegisterJob";
-
+import RegisterJob from "./components/registerJob/RegisterJob";
 import InstituitionProfile from "./pages/InstitutionProfile/InstituitionProfile";
 import ManageProjects from "./pages/ManageProjects/ManageProjects";
 import ManageProject from "./pages/ManageProject/ManageProject";
@@ -34,7 +33,7 @@ function Routes() {
         <Route path="/register_institution" component={RegisterInstitution} />
         <Route path="/termos/voluntariado" component={TermosVoluntariado} />
         <Route path="/termos/privacidade" component={TermosDePrivacidade} />
-        <Route path="/register-job" component={RegisterJob} />
+        <Route path="/register_job" component={RegisterJob} />
         <Route path="*" component={Error404} />
       </Switch>
     </BrowserRouter>

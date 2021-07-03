@@ -1,16 +1,13 @@
-import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useEffect, useState} from "react";
+import { useParams, NavLink } from "react-router-dom";
 import Footer from "../../components/Footer/Footer";
 import Navbar from "../../components/Navbar/Navbar";
 import "./project.css";
-import RegisterJob from "../../components/RegisterJob/RegisterJob";
 
 function ProjectPage() {
   const parameter = useParams();
   const projectId = parameter.id;
   const [vagas, setVagas] = useState();
-
-  const [isModalVisible, setIsModalVisible] = useState(false)
 
   //get data from localhost port 8000
   useEffect( () => {
@@ -63,8 +60,8 @@ function ProjectPage() {
                           <span key={cause}>{cause}</span>
                         ))}
                     </div>
-                  <button className='project-btn' onClick={() => setIsModalVisible(true)}>Quero a Vaga</button>
-                  {isModalVisible ? <RegisterJob><h2>Salve</h2></RegisterJob> : null}
+                  <NavLink to="/register_job"><button className='project-btn'>Quero a Vaga</button></NavLink>
+                
                   </div>
                 </div>
               </div>
