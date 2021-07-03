@@ -224,7 +224,7 @@ function ProjectEdition(props) {
                     <label>Habilidades necessárias</label>
                      {habilities && <Multiselect 
                         options = {habilities}
-                        displayValue = "name"
+                        displayValue = "label"
                         selectedValues = {projectHabilities}
                         selectionLimit = "3"
                         placeholder = "Selecione até 3 habilidades"
@@ -254,7 +254,7 @@ function ProjectEdition(props) {
                     <label>Causas atreladas</label>
                      {habilities && <Multiselect 
                         options = {causes}
-                        displayValue = "name"
+                        displayValue = "label"
                         selectedValues = {projectCauses}
                         selectionLimit = "3"
                         placeholder = "Selecione até 3 habilidades"

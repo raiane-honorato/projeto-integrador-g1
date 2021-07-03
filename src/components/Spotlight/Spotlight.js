@@ -43,9 +43,9 @@ function Spotlight() {
                 <img
                   className="hability-img"
                   src={hability.img_src}
-                  alt={hability.name}
+                  alt={hability.value}
                 />
-                {hability.name}
+                {hability.label}
               </div>
             ))}
           </div>

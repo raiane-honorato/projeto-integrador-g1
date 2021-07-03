@@ -489,146 +489,135 @@
   "cause": [
     {
       "id": 1,
-      "name": "saúde",
       "value": "saude",
-      "label": "Saúde"
+      "label": "Saúde",
+      "img_src": "images/health_cause.svg"
+
     },
     {
       "id": 2,
-      "name": "meio-ambiente",
       "value": "Meio ambiente",
-      "label": "Meio Ambiente"
+      "label": "Meio Ambiente",
+      "img_src": "images/environment_.svg"
     },
     {
       "id": 3,
-      "name": "mulheres",
-      "value": "Mulheres",
-      "label": "Mulheres"
+      "value": "mulheres",
+      "label": "Mulheres",
+      "img_src": "images/women_cause.svg"
     },
     {
       "id": 4,
-      "name": "arte e cultura",
-      "value": "Arte e Cultura",
-      "label": "Arte e Cultura"
+      "value": "arte e cultura",
+      "label": "Arte e Cultura",
+      "img_src": "images/art_cause.svg"
     },
     {
       "id": 5,
-      "name": "educação",
       "value": "Educacao",
-      "label": "Educação"
+      "label": "Educação",
+      "img_src": "images/diversity_cause.svg"
     },
     {
       "id": 6,
-      "name": "direitos humanos",
       "value": "Direitos Humanos",
-      "label": "Direitos Humanos"
+      "label": "Direitos Humanos",
+      "img_src": "images/human_right_cause.svg"
     },
     {
       "id": 7,
-      "name": "crianças",
-      "value": "Crianaas",
-      "label": "Crianças"
+      "value": "Crianças",
+      "label": "Crianças",
+      "img_src": "images/children_cause.svg"
     },
     {
       "id": 8,
-      "name": "idosos",
       "value": "Idosos",
-      "label": "Idosos"
+      "label": "Idosos",
+      "img_src": "images/diversity_cause.svg"
     },
     {
       "id": 9,
-      "name": "proteção animal",
       "value": "Protecao animal",
-      "label": "Proteção animal"
+      "label": "Proteção animal",
+      "img_src": "images/animal_cause.svg"
     },
     {
       "id": 10,
-      "name": "refugiados",
-      "value": "Refugiados",
-      "label": "Refugiados"
+      "value": "Diversidade",
+      "label": "Diversidade",
+      "img_src": "images/diversity_cause.svg"
     }
   ],
   "hability": [
     {
       "id": 1,
-      "name": "Educação",
       "value": "Educacao",
       "label": "Educação",
       "img_src": "images/teacher.svg"
     },
     {
       "id": 2,
-      "name": "Dança",
       "value": "Danca",
       "label": "Dança",
       "img_src": "images/workout.svg"
     },
     {
       "id": 3,
-      "name": "Malhação",
       "value": "Malhacao",
       "label": "Malhação",
       "img_src": "images/personal.svg"
     },
     {
       "id": 4,
-      "name": "Música",
       "value": "Musica",
       "label": "Música",
       "img_src": "images/music.svg"
     },
     {
       "id": 5,
-      "name": "Meditação",
       "label": "Meditação",
       "value": "Meditacao",
       "img_src": "images/meditation.svg"
     },
     {
       "id": 6,
-      "name": "Medicina",
       "label": "Medicina",
       "value": "Medicina",
       "img_src": "images/medical_care.svg"
     },
     {
       "id": 7,
-      "name": "Conservação Ambiental",
       "value": "conservacao",
       "label": "Conservação Ambiental",
       "img_src": "images/ecological_cause.svg"
     },
     {
       "id": 8,
-      "name": "Programação",
       "value": "Programacao",
       "label": "Programação",
       "img_src": "images/dev.svg"
     },
     {
       "id": 9,
-      "name": "Culinária",
       "value": "Culinaria",
       "label": "Culinária",
       "img_src": "images/cooking.svg"
     },
     {
       "id": 10,
-      "name": "Barbearia",
       "value": "Barbearia",
       "label": "Barbearia",
       "img_src": "images/barber.svg"
     },
     {
       "id": 11,
-      "name": "Esportes",
       "value": "Esportes",
       "label": "Esportes",
       "img_src": "images/sports.svg"
     },
     {
       "id": 12,
-      "name": "Artes",
       "value": "Artes",
       "label": "Artes",
       "img_src": "images/artist.svg"
@@ -710,7 +699,7 @@
       "user_id": 1,
       "project_id": 1,
       "subs_date": "11/05/2021",
-      "subscription_status": "Aceita"
+      "subscription_status": "Cancelada"
     },
     {
       "id": 2,
