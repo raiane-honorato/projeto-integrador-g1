@@ -77,6 +77,10 @@
     color: var(--secondColor);
 }
 
+.manage-projects-filter-field-container {
+    position: relative;
+}
+
 .manage-projects-filter-field {
     height: 2rem;
     border:1px solid var(--secondGrey);
@@ -92,4 +96,52 @@
     font-size: 14px;
     color: var(--secondGrey);
 
+}
+
+.manage-projects-filter-dropdown {
+    font-family: var(--secondFont);
+    padding: 1rem 1.2rem;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    margin-top: .4rem;
+    min-width: 180px;
+    z-index: 150;
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: rgb(0 0 0 / 15%) 0px 10px 37px !important;
+    border: 0.5px solid rgba(118, 118, 118, 0.28);
+    visibility: inherit;
+}
+
+.manage-projects-filter-option {
+    margin: .2rem 0rem;
+}
+
+.manage-projects-filter-text {
+    padding-left: .3rem;
+}
+
+.manage-projects-filter-btn-container{
+    display: flex;
+    justify-content: space-between;
+}
+
+.manage-projects-filter-btn {
+    margin-top: 1rem;
+    border: none;
+    cursor:pointer;
+    width: 30%;
+    padding: 0;
+    background-color:initial;
+    color: var(--secondGrey);
+}
+
+#manage-projects-apply-btn {
+    text-decoration: underline;
+    color: var(--mainBlack)
+}
+
+#manage-projects-apply-btn:hover {
+    color: var(--secondColor)
 }
