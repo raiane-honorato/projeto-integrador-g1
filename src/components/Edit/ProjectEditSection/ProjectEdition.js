@@ -197,6 +197,34 @@ function ProjectEdition(props) {
                       )}
                     </div>
                     
+                    <div className="inputs" onChange = {(event) => formik.setFieldValue('local_type',event.target.value)}>
+                      <label>Local do projeto</label>
+                      <div className = "project-creation-local">
+                        <input
+                          type="radio"
+                          name="local_type"
+                          id="local_type_local"
+                          value = "local"
+                          required
+                          checked = {props.project.local_type == "local" ? "checked":null}
+                        />
+                        <label  htmlFor="local_type_local">Local</label>
+                      </div>
+                      
+                      <div className = "project-creation-local">
+                        <input
+                          type="radio"
+                          name="local_type"
+                          id="local_type_remote"
+                          value = "remoto"
+                          required
+                          checked = {props.project.local_type == "remoto" ? "checked":null}
+                        />
+                        
+                        <label htmlFor="local_type_remote">Remoto</label>
+                      </div>
+                    </div>
+
                     <div className = "manage-project-img-edit">
                       <img className = "manage-project-img project-edit-img" src = {props.project.img} />
 
@@ -252,7 +280,7 @@ function ProjectEdition(props) {
 
                     <div className = "project-habilities-causes-edition">
                     <label>Causas atreladas</label>
-                     {habilities && <Multiselect 
+                     {causes && <Multiselect 
                         options = {causes}
                         displayValue = "name"
                         selectedValues = {projectCauses}

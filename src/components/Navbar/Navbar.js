@@ -56,7 +56,7 @@ function Navbar({ navbarTransparent, changeBackground }) {
                   alt="Menu"
                 />
               ) : (
-                <img
+               user && <img
                   className="profile-picture"
                   src={user.img}
                   alt="profile-img"

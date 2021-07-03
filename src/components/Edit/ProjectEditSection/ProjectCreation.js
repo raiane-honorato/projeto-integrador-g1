@@ -73,7 +73,7 @@ function ProjectCreation(props) {
         "status": 1,
         "title": "",
         "img": "",
-        "local_type": "remoto",
+        "local_type": "",
         "institution_id": props.institutionId,
         "description": "",
         "hability_id": [],
@@ -96,6 +96,22 @@ function ProjectCreation(props) {
           return errors;
         },
       });
+
+            //getting institution information
+      const [institution, setInstitution] = useState();
+      useEffect(() => {
+        fetch(`http://localhost:8000/institution/${props.institutionId}`)
+        .then((res) => res.json())
+        .then((res) => {
+          console.log(res)
+            setInstitution(res);
+            return res;
+        })
+        .catch((erro) =>
+          alert("Não foi possível obter dados da instituição.")
+        )
+
+    },[])
 
       //setting habilities list
       const [habilities, setHabilities] = useState();
@@ -122,7 +138,7 @@ function ProjectCreation(props) {
 
       //setting causes list
       const [causes, setCauses] = useState();
-      const [projectCauses, setProjectCauses] = useState();
+      const [institutionCauses, setInstitutionCauses] = useState();
       useEffect(() => {
         fetch(`http://localhost:8000/cause`)
         .then((res) => res.json())
@@ -135,6 +151,16 @@ function ProjectCreation(props) {
         )
 
     },[])
+
+    //institution's causes
+    useEffect(() => {
+      let filteredCauses = causes && institution && institution.cause_id.map((cause_id) => {
+        return causes.filter(cause => cause.id == cause_id)[0]
+      })
+      console.log(filteredCauses)
+      setInstitutionCauses(filteredCauses)
+    
+  },[causes])
 
 
     //chosen cause
@@ -152,8 +178,9 @@ function ProjectCreation(props) {
             body: JSON.stringify(formik.values)
         })
       .then((res) => res.json())
-      .then(() => {toast.success("Projeto criado com sucesso.")})
+      .then((res) => props.setStateProjects([...props.projects, res]) )
       .then((res) => {
+        props.setStateNewProject(true);
         props.setStatePass(false);
       })
       .catch((erro) =>{
@@ -169,7 +196,7 @@ function ProjectCreation(props) {
         <div className = "project-creation-container project-set-vis">
             <div ref = {windowRef} className = "project-creation-window">
                 <div className = "project-creation-window-header">
-                <h3>Editar informações</h3>
+                <h3>Criar novo projeto</h3>
                 <FontAwesomeIcon className = "project-creation-close-btn" icon = {faTimes} onClick = {() => props.setStatePass(false)}/>
                 </div>
 
@@ -192,6 +219,32 @@ function ProjectCreation(props) {
                       {formik.touched.title && formik.errors.title && (
                         <span className="formikError">{formik.errors.title}</span>
                       )}
+                    </div>
+
+                    <div className="inputs" onChange = {(event) => formik.setFieldValue('local_type',event.target.value)}>
+                      <label>Local do projeto</label>
+                      <div className = "project-creation-local">
+                        <input
+                          type="radio"
+                          name="local_type"
+                          id="local_type_local"
+                          value = "local"
+                          required
+                        />
+                        <label  htmlFor="local_type_local">Local</label>
+                      </div>
+                      
+                      <div className = "project-creation-local">
+                        <input
+                          type="radio"
+                          name="local_type"
+                          id="local_type_remote"
+                          value = "remoto"
+                          required
+                        />
+                        
+                        <label htmlFor="local_type_remote">Remoto</label>
+                      </div>
                     </div>
                     
                     <div className = "manage-project-img-edit">
@@ -247,10 +300,10 @@ function ProjectCreation(props) {
 
                     <div className = "project-habilities-causes-creation">
                     <label>Causas atreladas</label>
-                     {habilities && <Multiselect 
+                     {causes && institutionCauses && <Multiselect 
                         options = {causes}
                         displayValue = "name"
-                        selectedValues = {projectCauses}
+                        selectedValues = {institutionCauses}
                         selectionLimit = "3"
                         placeholder = "Selecione até 3 habilidades"
                         onSelect = {onChangeCause}
