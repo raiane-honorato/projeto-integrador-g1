@@ -1,6 +1,7 @@
 import { NavLink, useHistory } from "react-router-dom";
 import { AuthContext } from "../../../context/auth";
 import { useContext } from "react";
+import toast, { Toaster } from 'react-hot-toast';
 
 function DropLoggedInstitution() {
     const { user, setToken, setUser} = useContext(AuthContext);
@@ -10,7 +11,6 @@ function DropLoggedInstitution() {
         event.preventDefault();    
         setToken("");
         setUser("");
-        alert('Usuário deslogado!')
         return history.push("/");
       }
 

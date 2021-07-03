@@ -4,6 +4,7 @@ import "./profileEditionSection.css";
 import UserFirstEditionBody from "./UserFirstEditionBody";
 import UserSecondEditionBody from "./UserSecondEditionBody";
 import UserThirdEditionBody from './UserThirdEditionBody';
+import toast from 'react-hot-toast';
 
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 
@@ -23,14 +24,14 @@ function useFormik({ initialValues, validate }) {
       .then((response) => response.json())
       .then((response) => setValues({
         ...values,
-        rua: response.logradouro,
+        street: response.logradouro,
         bairro: response.bairro,
-        cidade: response.localidade,
-        estado: response.uf
+        city: response.localidade,
+        state: response.uf
       }))
       .catch((error) => console.log(`Não foi possível obter o endereço do CEP informado! Erro:${error}`));
 
-  }, [cep]);
+  }, [values, cep]);
 
   function searchingData(e) {
     setCep(e.target.value);
@@ -133,7 +134,7 @@ function ProfileEditionSection(props) {
       .then((res) => {
         props.setPageUser(res);
         props.setStatePass(false);
-        alert("Usuário atualizado.")
+        toast.success("Usuário atualizado.", {position: "top-right"})
       })
       .catch((erro) => alert("Não foi possível atualizar."));
   };

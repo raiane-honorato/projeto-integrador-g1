@@ -46,6 +46,16 @@ form h2 {
   margin-bottom: 1rem;
   display: flex;
   flex-direction: column;
+  
+}
+
+.causesInput {
+  padding: 0.7rem !important;
+  border-radius: 5px;
+  border: none;
+  box-shadow: 1px 1px 4px #9c9c9c;
+  font-family: "Poppins", sans-serif;
+  font-size: 1rem;
 }
 
 #cpfNumber,
@@ -55,7 +65,7 @@ form h2 {
 #contatNumber,
 #senha,
 #confSenha,
-#ongName,
+#institution_name,
 #resumo,
 #causas,
 #numBeneficiados,
@@ -66,10 +76,6 @@ form h2 {
 #instagram,
 #descricao,
 #phone,
-#state,
-#city,
-#address_number,
-#street,
 #bio,
 .aplication-form-fields {
   padding: 0.7rem !important;
@@ -80,7 +86,6 @@ form h2 {
   font-size: 1rem;
 }
 
-
 .endereco {
   display: flex;
   gap: 2rem;
@@ -89,11 +94,11 @@ form h2 {
 }
 
 #cep,
-#rua,
+#street,
 #bairro,
-#cidade,
-#estado,
-#numero {
+#city,
+#state,
+#address_number {
   
   padding: 0.5rem;
   width: 14rem;

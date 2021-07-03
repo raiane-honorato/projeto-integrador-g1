@@ -53,15 +53,15 @@ function UserForm() {
       userName: "",
       cpfNumber: "",
       birth_date: "",
-      contatNumber: "",
+      phone: "",
       email: "",
       senha: "",
       confSenha: "",
     },
     validate: function (values) {
       const cpf = onlyNumbers(values.cpfNumber);
-      const tel = onlyNumbers(values.contatNumber);
-      console.log(cpf);
+      const tel = onlyNumbers(values.phone);
+    
 
       const errors = {};
 
@@ -78,7 +78,7 @@ function UserForm() {
       }
 
       if ((tel.length < 10) | (tel.length > 11)) {
-        errors.contatNumber = "Telefone invalido";
+        errors.phone = "Telefone invalido";
       }
 
       if (!values.email.includes("@") | (values.email.lengthh < 7)) {
@@ -196,18 +196,18 @@ function UserForm() {
           <div className="cadastrais">
             {/* <h2>Dados cadastrais</h2> */}
             <div className="inputs">
-              <label htmlFor="contatNumber">Telefone:</label>
+              <label htmlFor="phone">Telefone:</label>
               <InputMask
-                name="contatNumber"
-                id="contatNumber"
+                name="phone"
+                id="phone"
                 mask="(99) 9 9999-9999"
-                value={formik.values.contatNumber}
+                value={formik.values.phone}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
               />
-              {formik.touched.contatNumber && formik.errors.contatNumber && (
+              {formik.touched.phone && formik.errors.phone && (
                 <span className="formikError">
-                  {formik.errors.contatNumber}
+                  {formik.errors.phone}
                 </span>
               )}
             </div>

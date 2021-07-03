@@ -2,6 +2,7 @@ import { TextField, Button } from "@material-ui/core";
 import { useContext, useState } from "react";
 import { NavLink, useHistory } from "react-router-dom";
 import { AuthContext } from "../../context/auth";
+import toast, { Toaster } from 'react-hot-toast';
 
 function LoginComponent(props) {
   const { setToken } = useContext(AuthContext);
@@ -20,7 +21,6 @@ function LoginComponent(props) {
       .then((res) => {
         setUser(res);
       })
-      .then(res => console.log(user))
       .catch((erro) => alert("Não foi possível localizar este usuário."));
 
       return { token: "1234" };
@@ -33,9 +33,7 @@ function LoginComponent(props) {
       .then((res) => {
         setUser(res);
       })
-      .then(res => console.log(user))
       .catch((erro) => alert("Não foi possível localizar este usuário."));
-
 
       return { token: "5678" };
     } else {
@@ -50,24 +48,20 @@ function LoginComponent(props) {
     if (token) {
      
       setToken(token);
-
       const userId = "1";
-
-      console.log(user);
-
-      return history.push("/");
-
-
+      history.push("/");
+      return;
     }
 
     setUserEmail("");
     setPassword("");
-    alert('Senha ou usuário inválidos!')
+    toast.error('Senha ou usuário inválidos!',{duration: 2000, position: "top-right"})
   }
 
 
   return (
     <div className="firts-column">
+      <Toaster />
       <h2 className="title"> Login</h2>
       <form className="form" onSubmit={onSubmit}>
         <div className="form-group">

@@ -1,9 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Fragment } from "react";
 import "./userdata.css";
+import { AuthContext } from "../../context/auth";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBan } from "@fortawesome/free-solid-svg-icons";
+import CancelUserSubscription from "../Edit/ProfileEditionSection/CancelUserSubscription";
 
-function UserSubscriptionCart({subscription}) {
 
+function UserSubscriptionCart({subscription, subscriptions, setSubscriptions}) {
+
+    const { user } = useContext(AuthContext);
+    const [cancelSubscription,setCancelSubscription] = useState(false);
+    
     //getting subscription's project data
     const [project, setProject] = useState();
 
@@ -35,13 +43,34 @@ function UserSubscriptionCart({subscription}) {
           <div>{project && institution &&
             <Fragment key={project.id}>
               <h3>{project.title} em {
-
-              institution.institution_name
-
+              institution.institution_name  
               }</h3>                           
             </Fragment>
           }</div>
-           <p className={(subscription.subscription_status === 'Aceita') ? 'greenCard' : 'redCard'}>Situação da inscrição: {subscription.subscription_status}</p>
+          <div className="subscription-situation">
+            <p className={(subscription.subscription_status === 'Aceita') ? 'greenCard' : 'redCard'}>Situação da inscrição: {subscription.subscription_status}</p>
+            {
+                subscription.subscription_status === 'Aceita' &&
+                <button className="user-subscription-btn" onClick = {() => {setCancelSubscription(true)}}>
+                <FontAwesomeIcon icon = {faBan} />
+                <span>Cancelar inscrição</span>
+              </button>}
+          </div>
+          <div
+        className={`institution-overlay ${
+          (cancelSubscription)
+            ? "institution-set-vis"
+            : ""
+        }`}
+        onClick={() => {
+          setCancelSubscription(false);
+        }}
+      >
+        {" "}
+      </div>
+
+        {cancelSubscription && <CancelUserSubscription subscription={subscription} subscriptions={subscriptions}  setSubscriptions={setSubscriptions} setCancelSubscription = {setCancelSubscription} />}
+           
         </div>
     )
 

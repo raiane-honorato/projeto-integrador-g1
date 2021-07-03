@@ -10,11 +10,11 @@ function DropLoggedUser() {
         event.preventDefault();    
         setToken("");
         setUser("");
-        alert('Usuário deslogado!')
         return history.push("/");
       }
 
     return (
+
     <ul className="nav-btn-list">
         <li className="nav-btn">
             <NavLink to={`/user/${user.id}`}>

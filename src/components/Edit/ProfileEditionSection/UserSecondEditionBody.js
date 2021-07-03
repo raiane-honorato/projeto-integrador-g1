@@ -21,18 +21,18 @@ function UserSecondEditionBody({ formik }) {
       )}
     </div>
     <div className="inputs">
-      <label htmlFor="rua">Rua</label>
+      <label htmlFor="street">Rua</label>
       <input
         type="text"
-        name="rua"
-        id="rua"
-        value={formik.values.rua}
+        name="street"
+        id="street"
+        value={formik.values.street}
         onChange={formik.fillingForm}
         onBlur={formik.handleBlur}
         required
       />
-      {formik.touched.rua && formik.errors.rua && (
-        <span className="formikError">{formik.errors.rua}</span>
+      {formik.touched.street && formik.errors.street && (
+        <span className="formikError">{formik.errors.street}</span>
       )}
     </div>
     <div className="inputs">
@@ -51,48 +51,48 @@ function UserSecondEditionBody({ formik }) {
       )}
     </div>
     <div className="inputs">
-      <label htmlFor="numero">Número</label>
+      <label htmlFor="address_number">Número</label>
       <input
         type="text"
-        name="numero"
-        id="numero"
-        value={formik.values.numero}
+        name="address_number"
+        id="address_number"
+        value={formik.values.address_number}
         onChange={formik.handleChange}
         onBlur={formik.handleBlur}
         required
       />
-      {formik.touched.numero && formik.errors.numero && (
-        <span className="formikError">{formik.errors.numero}</span>
+      {formik.touched.address_number && formik.errors.address_number && (
+        <span className="formikError">{formik.errors.address_number}</span>
       )}
     </div>
     <div className="inputs">
-      <label htmlFor="cidade">Cidade</label>
+      <label htmlFor="city">Cidade</label>
       <input
         type="text"
-        name="cidade"
-        id="cidade"
-        value={formik.values.cidade}
+        name="city"
+        id="city"
+        value={formik.values.city}
         onChange={formik.fillingForm}
         onBlur={formik.handleBlur}
         required
       />
-      {formik.touched.cidade && formik.errors.cidade && (
-        <span className="formikError">{formik.errors.cidade}</span>
+      {formik.touched.city && formik.errors.city && (
+        <span className="formikError">{formik.errors.city}</span>
       )}
     </div>
     <div className="inputs">
-      <label htmlFor="estado">Estado</label>
+      <label htmlFor="state">Estado</label>
       <input
         type="text"
-        name="estado"
-        id="estado"
-        value={formik.values.estado}
+        name="state"
+        id="state"
+        value={formik.values.state}
         onChange={formik.fillingForm}
         onBlur={formik.handleBlur}
         required
       />
-      {formik.touched.estado && formik.errors.estado && (
-        <span className="formikError">{formik.errors.estado}</span>
+      {formik.touched.state && formik.errors.state && (
+        <span className="formikError">{formik.errors.state}</span>
       )}
     </div>
   </div>

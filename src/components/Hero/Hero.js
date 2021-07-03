@@ -22,6 +22,7 @@ function Hero() {
             Transforme o mundo por meio da solidariedade. Seja mais um elo dessa
             corrente.
           </p>
+          <div className='hero-buttons'>
           <NavLink to="/register_user">
             <button className="hero-btn" id="hero-btn-volunteer">
               Seja um voluntário
@@ -32,6 +33,8 @@ function Hero() {
             Seja uma instituição
           </button>
           </NavLink>
+
+          </div>
         </div>
       </header>
     </div>

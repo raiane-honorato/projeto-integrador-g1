@@ -1,5 +1,4 @@
 import "./InstitutionEdition.css"
-import InputMask from "react-input-mask";
 
 function InstitutionThirdEditionBody({formik}) {
 

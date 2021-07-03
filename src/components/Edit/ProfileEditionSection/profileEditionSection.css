@@ -56,3 +56,10 @@
 .user-edition-close-btn {
     cursor: pointer;
 }
+
+
+@media (max-device-width: 800px) {
+  .user-first-edition-window{
+   
+    min-width: 50%;
+}  }

@@ -10,6 +10,8 @@ import { AuthContext } from "../../context/auth";
 import DropLoggedUser from "./Nav-Dropdown/DropLoggedUser";
 import DropNotLogged from "./Nav-Dropdown/DropNotLogged";
 import DropLoggedInstitution from "./Nav-Dropdown/DropLoggedInstitution";
+import { Toaster } from 'react-hot-toast';
+
 
 function Navbar({ navbarTransparent, changeBackground }) {
   window.addEventListener("scroll", changeBackground);
@@ -18,16 +20,9 @@ function Navbar({ navbarTransparent, changeBackground }) {
   const { user, token, setToken, setUser} = useContext(AuthContext);
   const history = useHistory();
 
-  const signOut = (event) => {
-    event.preventDefault();    
-    setToken("");
-    setUser("");
-    alert('Usuário deslogado!')
-    return history.push("/");
-  }
-
-  return (
+   return (
     <>
+    <Toaster />
       <nav className="navbar" id={navbarTransparent ? "navbarTransparent" : ""}>
         <div className="nav-container">
           <NavLink to="/" className="nav-logo" exact>

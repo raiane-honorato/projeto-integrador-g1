@@ -26,7 +26,6 @@ function Spotlight() {
     .then(res => res.json())
     .then(res => {
       setProjects(res)
-      console.log(res)
     })
     .catch(erro => alert(`Erro ao obter lista de projetos: ${erro}`))
   },[]

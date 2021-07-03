@@ -10,6 +10,7 @@ function ManageProjectSubscription({subscription, subscriptions, project, setSta
     const [user, setUser] = useState();
     const [changeStatus, setChangeStatus] = useState(false);
 
+
     useEffect(() => {
         fetch(`http://localhost:8000/user/?id=${subscription.user_id}`)
         .then((res) => res.json())
@@ -40,7 +41,7 @@ function ManageProjectSubscription({subscription, subscriptions, project, setSta
 
     //change subscription funcion
 
-    const subsIndex = subscriptions.findIndex((element) => element.id == subscription.id )
+    const subsIndex = subscriptions.findIndex((element) => element.id === subscription.id )
     let subsArray = [...subscriptions]
 
     const changeSubscription = (status) => {
@@ -87,9 +88,9 @@ function ManageProjectSubscription({subscription, subscriptions, project, setSta
                 <div className = "manage-project-subscription-status">
                     <span 
                     className = {`manage-project-subscription-bullet-point 
-                    ${subscription.subscription_status == "Aceita" ?  "bullet-green" : 
-                    subscription.subscription_status == "Pendente" ?  "bullet-yellow" : 
-                    subscription.subscription_status == "Cancelada" ?  "bullet-grey" : 
+                    ${subscription.subscription_status === "Aceita" ?  "bullet-green" : 
+                    subscription.subscription_status === "Pendente" ?  "bullet-yellow" : 
+                    subscription.subscription_status === "Cancelada" ?  "bullet-grey" : 
                     "bullet-red"
                     }`}>
 
@@ -97,7 +98,7 @@ function ManageProjectSubscription({subscription, subscriptions, project, setSta
                     <p>{subscription.subscription_status}</p>
                 </div>
 
-               {project.status == 1 &&
+               {project.status === 1 &&
                 <div  ref = {windowRef} className = "manage-project-subscription-change-status">
                     <button 
                      

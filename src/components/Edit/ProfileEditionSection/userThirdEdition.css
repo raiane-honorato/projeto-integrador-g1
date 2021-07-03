@@ -1,3 +1,12 @@
+.causesAndHabilities {
+    min-height: 15rem;
+    
+}
+
+.inputs {
+    margin-top: 1rem;
+}
+
 #habilidades, #causas {
   
     padding: 0.7rem;
