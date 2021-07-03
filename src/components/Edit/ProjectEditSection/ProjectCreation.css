@@ -53,6 +53,13 @@
       max-height: calc(100vh - 20rem);
   }
 
+  .project-creation-local {
+    display: inline !important;
+  }
+  .project-creation-local label{
+    padding-left: .5rem;
+  }
+
   .manage-project-img-edit {
     display: flex;
     gap: 1rem;

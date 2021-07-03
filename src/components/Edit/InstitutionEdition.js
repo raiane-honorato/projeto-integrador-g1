@@ -1,52 +1,53 @@
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {useState, useEffect, useRef } from "react";
+import { useFormik } from 'formik';
 import "./InstitutionEdition.css";
 import InstitutionFirstEditionBody from "./InstitutionFirstEditionBody";
 import InstitutionSecondEditionBody from "./InstitutionSecondEditionBody";
 import InstitutionThirdEditionBody from "./InstitutionThirdEditionBody";
 
 //form function
-function useFormik({ initialValues, validate }) {
-    const [touched, setTouchedFields] = useState({});
-    const [errors, setErrors] = useState({});
-    const [values, setValues] = useState(initialValues);
+// function useFormik({ initialValues, validate }) {
+//     const [touched, setTouchedFields] = useState({});
+//     const [errors, setErrors] = useState({});
+//     const [values, setValues] = useState(initialValues);
   
-    useEffect(() => {
-      validateValues(values);
-    }, [values]);
+//     useEffect(() => {
+//       validateValues(values);
+//     }, [values]);
   
-    function handleChange(event) {
-      const fieldName = event.target.getAttribute("name");
-      const value = event.target.value;
+//     function handleChange(event) {
+//       const fieldName = event.target.getAttribute("name");
+//       const value = event.target.value;
   
-      setValues({
-        ...values,
-        [fieldName]: value,
-      });
-    }
+//       setValues({
+//         ...values,
+//         [fieldName]: value,
+//       });
+//     }
   
-    function handleBlur(event) {
-      const fieldName = event.target.getAttribute("name");
-      setTouchedFields({
-        ...touched,
-        [fieldName]: true,
-      });
-    }
+//     function handleBlur(event) {
+//       const fieldName = event.target.getAttribute("name");
+//       setTouchedFields({
+//         ...touched,
+//         [fieldName]: true,
+//       });
+//     }
   
-    function validateValues(values) {
-      setErrors(validate(values));
-    }
+//     function validateValues(values) {
+//       setErrors(validate(values));
+//     }
   
-    return {
-      values,
-      errors,
-      touched,
-      handleBlur,
-      setErrors,
-      handleChange,
-    };
-  }
+//     return {
+//       values,
+//       errors,
+//       touched,
+//       handleBlur,
+//       setErrors,
+//       handleChange,
+//     };
+//   }
 
 function InstitutionEdition(props) {
 
@@ -85,10 +86,6 @@ function InstitutionEdition(props) {
           if ((values.city.length < 3) | (values.city.length > 150)) {
             errors.city = "Endereço invalido";
           }
-
-        //   if (values.causes.length < 3) {
-        //     errors.causes = "Causa invalida";
-        //   }
     
           return errors;
         },
@@ -122,7 +119,7 @@ function InstitutionEdition(props) {
                 <FontAwesomeIcon className = "institution-edition-close-btn" icon = {faTimes} onClick = {() => props.setStatePass(false)}/>
                 </div>
 
-                {props.firstEditState && <InstitutionFirstEditionBody formik = {formik}/>}
+                {props.firstEditState && <InstitutionFirstEditionBody formik = {formik} institution = {props.institution}/>}
                 {props.secondEditState && <InstitutionSecondEditionBody formik = {formik}/>}
                 {props.thirdEditState && <InstitutionThirdEditionBody formik = {formik}/>}
                 

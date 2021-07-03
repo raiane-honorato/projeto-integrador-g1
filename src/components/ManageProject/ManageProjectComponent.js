@@ -123,7 +123,7 @@ function ManageProjectComponent({projectId}) {
         {" "}
       </div>
 
-        {editProject && <ProjectEdition setStatePass = {setEditProject} project = {project} setStateProject = {setProject} institutionId = {user.institution_id}/>}
+        {editProject && <ProjectEdition setStatePass = {setEditProject} project = {project} setStateProject = {setProject}/>}
         {closeProject && <CloseProject setStatePass = {setCloseProject} project = {project} setStateProject = {setProject} subscriptions = {subscriptons} setStateSubscriptions = {setSubscriptions}/>}
 
         </>
