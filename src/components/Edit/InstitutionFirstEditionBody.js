@@ -1,6 +1,42 @@
+import {useState, useEffect, useRef } from "react";
+import Multiselect from 'multiselect-react-dropdown';
 import "./InstitutionEdition.css";
 
-function InstitutionFirstEditionBody({ formik }) {
+function InstitutionFirstEditionBody({ formik, institution }) {
+
+        //setting causes list
+        const [causes, setCauses] = useState();
+        const [institutionCauses, setInstitutionCauses] = useState();
+        useEffect(() => {
+          fetch(`http://localhost:8000/cause`)
+          .then((res) => res.json())
+          .then((res) => {
+              setCauses(res);
+              return res;
+          })
+          .catch((erro) =>
+            alert("Não foi possível obter dados dos projetos.")
+          )
+  
+      },[])
+  
+      //institution's causes
+      useEffect(() => {
+        let filteredCauses = causes && institution && institution.cause_id.map((cause_id) => {
+          return causes.filter(cause => cause.id == cause_id)[0]
+        })
+        console.log(filteredCauses)
+        setInstitutionCauses(filteredCauses)
+      
+    },[causes])
+
+      //chosen cause
+      let onChangeCause = (selectedList, selectedItem) => {
+        const habilityList = selectedList.map((hability) => {return hability.id})
+        formik.setFieldValue('cause_id',habilityList)
+      }
+
+
   return (
     <div className="institution-first-edition-window-body">
       <div className="inputs">
@@ -39,6 +75,39 @@ function InstitutionFirstEditionBody({ formik }) {
           <span className="formikError">{formik.errors.summary}</span>
         )}
       </div>
+
+      <div className = "project-habilities-causes-creation">
+                    <label>Causas atreladas</label>
+                     {causes && institutionCauses && <Multiselect 
+                        options = {causes}
+                        displayValue = "name"
+                        selectedValues = {institutionCauses}
+                        selectionLimit = "3"
+                        placeholder = "Selecione até 3 habilidades"
+                        onSelect = {onChangeCause}
+                        onRemove = {onChangeCause}
+                        avoidHighlightFirstOption = "true"
+                        style =  {{
+                          chips: { background: 'var(--secondColor)' },
+                          multiselectContainer: {
+                            color: 'var(--secondColor)',
+                            background: 'white',
+                            padding: "0.7rem !important",
+                            borderRadius: "5px",
+                            border: "none",
+                            boxShadow: "1px 1px 4px #9c9c9c"
+                          },
+                          inputField: {
+                            font: 'var(--secondFont)',
+                            fontSize: ".8rem",
+                            width: "15rem"
+                          },
+                        }}
+                      />}
+                    </div>
+
+
+
     </div>
   );
 }
