@@ -80,7 +80,7 @@ function InstitutionFirstEditionBody({ formik, institution }) {
                     <label>Causas atreladas</label>
                      {causes && institutionCauses && <Multiselect 
                         options = {causes}
-                        displayValue = "name"
+                        displayValue = "label"
                         selectedValues = {institutionCauses}
                         selectionLimit = "3"
                         placeholder = "Selecione até 3 habilidades"
