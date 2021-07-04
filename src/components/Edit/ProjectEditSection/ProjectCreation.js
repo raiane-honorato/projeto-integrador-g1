@@ -273,7 +273,7 @@ function ProjectCreation(props) {
                     <label>Habilidades necessárias</label>
                      {habilities && <Multiselect 
                         options = {habilities}
-                        displayValue = "name"
+                        displayValue = "label"
                         selectionLimit = "3"
                         placeholder = "Selecione até 3 habilidades"
                         onSelect = {onChangeHability}
@@ -302,7 +302,7 @@ function ProjectCreation(props) {
                     <label>Causas atreladas</label>
                      {causes && institutionCauses && <Multiselect 
                         options = {causes}
-                        displayValue = "name"
+                        displayValue = "label"
                         selectedValues = {institutionCauses}
                         selectionLimit = "3"
                         placeholder = "Selecione até 3 habilidades"

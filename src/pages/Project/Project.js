@@ -92,7 +92,7 @@ function ProjectPage() {
             </div>
             <div className="project-information">
               <div className="project-provider">
-                <h3>{project.institution_name}</h3>
+                <h3>{institution && institution.institution_name}</h3>
                 <hr />
                 {institution && <span>Cidade: {institution.city}</span>}
                 <span>Remoto: {project.local_type}</span>
@@ -103,14 +103,14 @@ function ProjectPage() {
                   {habilities && <span>Habilidades:</span>}
                   {habilities &&
                     habilities.map((hability) => (
-                      <span key={hability.id}>{hability.name}</span>
+                      <span key={hability.id}>{hability.label}</span>
                     ))}
                 </div>
                 <div className="causes">
                   <span>Causas:</span>
                   {causes &&
                     causes.map((cause) => (
-                      <span key={cause.id}>{cause.name}</span>
+                      <span key={cause.id}>{cause.label}</span>
                     ))}
                 </div>
                 { subscriptions && user.type === 1 && subscriptions.length === 0 &&

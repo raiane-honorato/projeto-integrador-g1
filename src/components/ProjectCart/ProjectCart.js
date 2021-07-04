@@ -53,7 +53,7 @@ function ProjectCart(props) {
             {habilities && habilities.map((hability, index) => (
               <span className="spotlight-projectcart-hability" key={index}>
                 {
-                  hability.name
+                  hability.label
                 }
               </span>
             ))}
