@@ -104,7 +104,7 @@ function InstitutionData() {
               </div>
 
               <div className="institution-second-column">
-                <div className="institution-information">
+                <div className="institution-information-address">
                   {user.institution_id == institutionId && (
                     <EditButton
                       editClass="institution-second-edit"
