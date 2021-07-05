@@ -6,7 +6,7 @@ import './registeruser.css';
 
 function RegisterUser() {
   return (
-    <div className='user-register-container'>  
+    <div className='user-register-container user-grid'>  
       <div className='user-register-image-div'>
         <NavLink to="/" exact>
           <img
