@@ -5,14 +5,14 @@
   align-items: center
 }
 
-.user-form-title, .instituition-form-title {
+.user-form-title {
   text-align: center;
   font-size: 2.5rem;
   margin-bottom: 0;
   color: var(--mainBlack);
 }
 
-.formCadastro, .instForm {
+.formCadastro {
   margin: 2rem auto 8rem;
   width: 100%;
   max-width: 35rem;
@@ -209,4 +209,64 @@ hr {
   box-shadow: 1px 1px 4px #9c9c9c;
   font-family: "Poppins", sans-serif;
   font-size: 1rem;
+}
+
+@media only screen and (max-device-width : 600px) {
+  .container-useform {
+    display: flex;
+    flex-direction: column;  
+    background-color: var(--formBackground);
+  }
+
+  .user-form-title {
+    font-size: 1.5rem;
+    text-align: center;
+  }
+
+  .formCadastro {
+    font-size: 2rem;
+    text-align: center;
+    background-color: var(--formBackground);
+  }
+
+  form h2 {
+    font-size: 1rem;
+  }
+
+  .hr-style {
+    margin: 0 6rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+  }
+
+.step-guide {
+  font-size: 1rem;
+  text-align: center;
+}
+  
+  .btn-form {
+      flex-wrap: wrap;
+  }
+
+  .inputs {
+    display: flex;
+    flex-wrap: wrap;
+    
+  
+  }
+  .inputs label {
+    display: flex;
+    flex-wrap: wrap;
+    
+   
+  }
+
+  .btn-div {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    background-color: var(--formBackground);
+  }
 }
