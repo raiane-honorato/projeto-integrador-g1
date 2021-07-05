@@ -95,7 +95,6 @@
     font-family: var(--secondFont);
     font-size: 14px;
     color: var(--secondGrey);
-
 }
 
 .manage-projects-filter-dropdown {
@@ -167,5 +166,9 @@
     .manage-projects-new-project-btn {
         right: 1rem;
         margin: 0.5rem 0.5rem;
+    }
+
+    .manage-projects-filter-field p{
+        width: 8em;
     }
 }
