@@ -8,13 +8,11 @@
   top: 0;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   visibility: hidden;
   z-index: 104;
   overflow: visible;
 }
-
-
 .subscription-closing-window{
     position: fixed;
     z-index: 1040;
@@ -95,4 +93,24 @@
 
   .subscription-closing-close-btn {
       cursor: pointer;
+  }
+
+  @media only screen and (max-device-width : 600px) {
+  .subscription-closing-container {
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+  
+   
+
+  }
+
+  .subscription-closing-window {
+    display: flex;
+    flex-direction: column;
+    
+    
+  }
+
+  
   }
