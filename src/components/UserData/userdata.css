@@ -137,7 +137,7 @@
   text-decoration: none;
 }
 
-@media (max-device-width : 600px) {
+@media (max-device-width : 800px) {
   .userdata-container {
     display: flex;
     flex-direction: column;  
@@ -184,6 +184,11 @@
 
   .greenCard, .redCard, .subscription-situation button  {
     font-size: 0.6rem;  
+  
+  }
+
+  .redCard {
+    color: white;
   }
 
   .projects-data {
@@ -215,7 +220,6 @@
   .redCard {
     box-sizing: border-box;
     font-size: 0.875rem;
-    width: 10%;
     text-align: center;
   }
 
