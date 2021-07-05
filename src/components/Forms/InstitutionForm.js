@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import InputMask from "react-input-mask";
-import "./userform.css";
+import "./institutionForm.css";
 import Select, { components } from "react-select";
 import {
   SortableContainer,
@@ -240,7 +240,7 @@ function InstForm() {
   ];
 
   return (
-    <div>
+    <div className="container-instForm">
       <h1 className="instituition-form-title">Cadastre sua Instituição</h1>
       <form
         className="instForm"
@@ -249,13 +249,14 @@ function InstForm() {
         }}
       >
         <h2>{steps[currentStep].title}</h2>
-        <p className="step-guide">
+        <hr className="inst-hr-style" />
+        <p className="inst-step-guide">
           {currentStep + 1} de {steps.length}
         </p>
 
         {steps[currentStep].id === "dados-base1" && (
           <div className="dados-base1">
-            <div className="inputs">
+            <div className="inst-inputs">
               <label htmlFor="nomeOng">Nome da instituição</label>
               <input
                 type="text"
@@ -269,11 +270,11 @@ function InstForm() {
                 required
               />
               {formik.touched.institution_name && formik.errors.institution_name && (
-                <span className="formikError">{formik.errors.institution_name}</span>
+                <span className="inst-formikError">{formik.errors.institution_name}</span>
               )}
             </div>
 
-            <div className="inputs">
+            <div className="inst-inputs">
               <label htmlFor="summary">Resumo da instituição</label>
               <textarea
                 name="summary"
@@ -288,14 +289,14 @@ function InstForm() {
                 required
               />
               {formik.touched.summary && formik.errors.summary && (
-                <span className="formikError">{formik.errors.summary}</span>
+                <span className="inst-formikError">{formik.errors.summary}</span>
               )}
             </div>
           </div>
         )}
         {steps[currentStep].id === "endereco" && (
-          <div className="endereco">
-            <div className="inputs">
+          <div className="inst-endereco">
+            <div className="inst-inputs">
               <label htmlFor="cep">CEP</label>
               <input
                 type="number"
@@ -309,10 +310,10 @@ function InstForm() {
                 required
               />
               {formik.touched.cep && formik.errors.cep && (
-                <span className="formikError">{formik.errors.cep}</span>
+                <span className="inst-formikError">{formik.errors.cep}</span>
               )}
             </div>
-            <div className="inputs">
+            <div className="inst-inputs">
               <label htmlFor="street">Rua</label>
               <input
                 type="text"
@@ -324,10 +325,10 @@ function InstForm() {
                 required
               />
               {formik.touched.street && formik.errors.street && (
-                <span className="formikError">{formik.errors.street}</span>
+                <span className="inst-formikError">{formik.errors.street}</span>
               )}
             </div>
-            <div className="inputs">
+            <div className="inst-inputs">
               <label htmlFor="bairro">Bairro</label>
               <input
                 type="text"
@@ -339,10 +340,10 @@ function InstForm() {
                 required
               />
               {formik.touched.bairro && formik.errors.bairro && (
-                <span className="formikError">{formik.errors.bairro}</span>
+                <span className="inst-formikError">{formik.errors.bairro}</span>
               )}
             </div>
-            <div className="inputs">
+            <div className="inst-inputs">
               <label htmlFor="address_number">Número</label>
               <input
                 type="text"
@@ -354,10 +355,10 @@ function InstForm() {
                 required
               />
               {formik.touched.address_number && formik.errors.address_number && (
-                <span className="formikError">{formik.errors.address_number}</span>
+                <span className="inst-formikError">{formik.errors.address_number}</span>
               )}
             </div>
-            <div className="inputs">
+            <div className="inst-inputs">
               <label htmlFor="city">Cidade</label>
               <input
                 type="text"
@@ -369,10 +370,10 @@ function InstForm() {
                 required
               />
               {formik.touched.city && formik.errors.city && (
-                <span className="formikError">{formik.errors.city}</span>
+                <span className="inst-formikError">{formik.errors.city}</span>
               )}
             </div>
-            <div className="inputs">
+            <div className="inst-inputs">
               <label htmlFor="state">Estado</label>
               <input
                 type="text"
@@ -384,14 +385,14 @@ function InstForm() {
                 required
               />
               {formik.touched.state && formik.errors.state && (
-                <span className="formikError">{formik.errors.state}</span>
+                <span className="inst-formikError">{formik.errors.state}</span>
               )}
             </div>
           </div>
         )}
         {steps[currentStep].id === "dados-base2" && (
           <div className="dados-base2">
-            <div className="inputs">
+            <div className="inst-inputs">
               <label>Causas</label>
               <SortableSelect
                 className='causesInput'
@@ -415,7 +416,7 @@ function InstForm() {
               />
             </div>
 
-            <div className="inputs">
+            <div className="inst-inputs">
               <label htmlFor="numBeneficiados">Número de Beneficiádos</label>
               <input
                 type="number"
@@ -427,13 +428,13 @@ function InstForm() {
               />
               {formik.touched.numBeneficiados &&
                 formik.errors.numBeneficiados && (
-                  <span className="formikError">
+                  <span className="inst-formikError">
                     {formik.errors.numBeneficiados}
                   </span>
                 )}
             </div>
 
-            <div className="inputs">
+            <div className="inst-inputs">
               <label htmlFor="cnpjNumber">CNPJ</label>
               <InputMask
                 name="cnpjNumber"
@@ -444,14 +445,14 @@ function InstForm() {
                 onBlur={formik.handleBlur}
               />
               {formik.touched.cnpjNumber && formik.errors.cnpjNumber && (
-                <span className="formikError">{formik.errors.cnpjNumber}</span>
+                <span className="inst-formikError">{formik.errors.cnpjNumber}</span>
               )}
             </div>
           </div>
         )}
         {steps[currentStep].id === "contatos" && (
           <div className="contatos">
-            <div className="inputs">
+            <div className="inst-inputs">
               <label htmlFor="phone">Telefone</label>
               <InputMask
                 name="phone"
@@ -462,11 +463,11 @@ function InstForm() {
                 onBlur={formik.handleBlur}
               />
               {formik.touched.phone && formik.errors.phone && (
-                <span className="formikError">{formik.errors.phone}</span>
+                <span className="inst-formikError">{formik.errors.phone}</span>
               )}
             </div>
 
-            <div className="inputs">
+            <div className="inst-inputs">
               <label htmlFor="site">Site</label>
               <input
                 type="url"
@@ -479,11 +480,11 @@ function InstForm() {
                 onBlur={formik.handleBlur}
               />
               {formik.touched.site && formik.errors.site && (
-                <span className="formikError">{formik.errors.site}</span>
+                <span className="inst-formikError">{formik.errors.site}</span>
               )}
             </div>
 
-            <div className="inputs">
+            <div className="inst-inputs">
               <label htmlFor="facebook">Facebook (URL)</label>
               <input
                 type="url"
@@ -496,11 +497,11 @@ function InstForm() {
                 onBlur={formik.handleBlur}
               />
               {formik.touched.facebook && formik.errors.facebook && (
-                <span className="formikError">{formik.errors.facebook}</span>
+                <span className="inst-formikError">{formik.errors.facebook}</span>
               )}
             </div>
 
-            <div className="inputs">
+            <div className="inst-inputs">
               <label htmlFor="instagram">Instagram (URL)</label>
               <input
                 type="url"
@@ -513,14 +514,14 @@ function InstForm() {
                 onBlur={formik.handleBlur}
               />
               {formik.touched.instagram && formik.errors.instagram && (
-                <span className="formikError">{formik.errors.instagram}</span>
+                <span className="inst-formikError">{formik.errors.instagram}</span>
               )}
             </div>
           </div>
         )}
         {steps[currentStep].id === "sobre" && (
           <div className="sobre">
-            <div className="inputs">
+            <div className="inst-inputs">
               <label htmlFor="bio">Descrição da Ong</label>
               <textarea
                 name="bio"
@@ -535,14 +536,14 @@ function InstForm() {
                 required
               />
               {formik.touched.bio && formik.errors.bio && (
-                <span className="formikError">{formik.errors.bio}</span>
+                <span className="inst-formikError">{formik.errors.bio}</span>
               )}
             </div>
           </div>
         )}
         {steps[currentStep].id === "outros-contatos" && (
           <div className="outros-contatos">
-            <div className="inputs">
+            <div className="inst-inputs">
               <label htmlFor="email">E-Mail</label>
               <input
                 type="text"
@@ -556,11 +557,11 @@ function InstForm() {
                 required
               />
               {formik.touched.email && formik.errors.email && (
-                <span className="formikError">{formik.errors.email}</span>
+                <span className="inst-formikError">{formik.errors.email}</span>
               )}
             </div>
 
-            <div className="inputs">
+            <div className="inst-inputs">
               <label htmlFor="senha">Senha:</label>
               <input
                 type="password"
@@ -574,11 +575,11 @@ function InstForm() {
                 required
               />
               {formik.touched.senha && formik.errors.senha && (
-                <span className="formikError">{formik.errors.senha}</span>
+                <span className="inst-formikError">{formik.errors.senha}</span>
               )}
             </div>
 
-            <div className="inputs">
+            <div className="inst-inputs">
               <label htmlFor="confSenha">Confirmar Senha:</label>
               <input
                 type="password"
@@ -592,15 +593,16 @@ function InstForm() {
                 required
               />
               {formik.touched.confSenha && formik.errors.confSenha && (
-                <span className="formikError">{formik.errors.confSenha}</span>
+                <span className="inst-formikError">{formik.errors.confSenha}</span>
               )}
             </div>
           </div>
         )}
-        <div className="btn-div">
+        
+        <div className="inst-btn-div">
           {currentStep > 0 && (
             <button
-              className="btn-form btn-previous"
+              className="inst-btn-form inst-btn-previous"
               type="button"
               onClick={handlePreviousStep}
             >
@@ -610,7 +612,7 @@ function InstForm() {
 
           {currentStep < steps.length - 1 && (
             <button
-              className="btn-form btn-next"
+              className="inst-btn-form inst-btn-next"
               type="button"
               onClick={handleNextStep}
             >
@@ -619,7 +621,7 @@ function InstForm() {
           )}
 
           {currentStep === steps.length - 1 && (
-            <button className="btn-form btn-submit" type="submit">
+            <button className="inst-btn-form inst-btn-submit" type="submit">
               Cadastrar
             </button>
           )}

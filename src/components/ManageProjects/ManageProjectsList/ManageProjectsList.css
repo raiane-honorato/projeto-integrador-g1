@@ -145,3 +145,27 @@
 #manage-projects-apply-btn:hover {
     color: var(--secondColor)
 }
+
+@media only screen and (max-width: 600px) {
+    .manage-projects-list-container {
+        display: flex;
+        flex-direction: column;
+        width: min-content;
+    }
+
+    .manage-projects-header {
+        display: flex;
+        flex-direction: column;
+        width: min-content;
+        align-items: center;
+    }
+
+    .manage-projects-header h3 {
+        margin-top: 4rem;
+    }
+
+    .manage-projects-new-project-btn {
+        right: 1rem;
+        margin: 0.5rem 0.5rem;
+    }
+}

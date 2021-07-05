@@ -72,3 +72,13 @@
   .institution-edition-close-btn {
       cursor: pointer;
   }
+
+  @media only screen and (max-width: 600px) {
+    .institution-first-edition-window {
+      width: auto;
+    }
+
+    .institution-first-edition-window-body {
+      width: min-content;
+    }
+  }

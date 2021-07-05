@@ -138,4 +138,16 @@
   visibility: hidden;
 }
 
+@media only screen and (max-width: 600px) {
+  .institution-data-profile {
+    display: flex;
+    flex-direction: column;
+    width: auto;
+  }
 
+  .institution-grid-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}
