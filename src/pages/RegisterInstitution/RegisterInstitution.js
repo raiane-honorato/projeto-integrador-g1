@@ -5,7 +5,7 @@ import "./registerinstitution.css";
 
 function RegisterInstitution() {
   return (
-    <div className="instituition-register-container">
+    <div className="instituition-register-container instituition-grid">
       <div className="instituition-register-image-div">
         <NavLink to="/" exact>
           <img

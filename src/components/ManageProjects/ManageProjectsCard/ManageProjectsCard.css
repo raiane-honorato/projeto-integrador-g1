@@ -85,3 +85,18 @@
     align-items: center;
     text-decoration: none;
 }
+
+@media only screen and (max-width: 600px) {
+    .manage-projects-card-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 2rem 0;
+    }
+
+    .manage-projects-card-subscriptions-status-manage-btn {
+        display: flex;
+        flex-direction: row;
+        gap: 1rem;
+    }
+}

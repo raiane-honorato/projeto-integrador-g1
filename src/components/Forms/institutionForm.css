@@ -1,0 +1,168 @@
+.container-instForm {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center
+}
+  
+.instituition-form-title {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 0;
+  color: var(--mainBlack);
+}
+  
+.instForm {
+  margin: 2rem auto 8rem;
+  width: 100%;
+  max-width: 35rem;
+  max-height: 35rem;
+  flex-grow: 1;
+  color: var(--mainBlack);
+  background-color: var(--formBackground);
+  padding: 1rem 2rem;
+  border-radius: 1rem;
+  /* box-shadow: 1px 1px 5px black; */
+}
+  
+.instForm h2 {
+  color: var(--mainBlack);
+  font-weight: bold;
+  font-size: 1.5rem;
+  text-align: center;
+  margin-bottom: .5rem;
+}
+  
+.inst-hr-style {
+  margin: 0 8rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #bdb9b9;
+  /* margin-top: 2.5rem; */
+  /* margin-bottom: 2rem; */
+}
+
+.inst-step-guide {
+  text-align: center;
+}
+  
+.inst-inputs {
+  font-family: "Poppins", sans-serif;
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+  
+.causesInput {
+  padding: 0.7rem !important;
+  border-radius: 5px;
+  border: none;
+  box-shadow: 1px 1px 4px #9c9c9c;
+  font-family: "Poppins", sans-serif;
+  font-size: 1rem;
+}
+    
+.inst-endereco {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+  max-width: 35rem;
+  margin-top: 1rem;
+}
+  
+#cep,
+#street,
+#bairro,
+#city,
+#state,
+#address_number {    
+  padding: 0.7rem;
+  width: 14rem;
+  border-radius: 5px;
+  border: none;
+  box-shadow: 1px 1px 4px #9c9c9c;
+  font-family: "Poppins", sans-serif;
+  font-size: 1rem;
+}
+  
+#resumo,
+#descricao {
+  resize: none;
+}
+
+.inst-formikError{
+  color: rgb(255, 0, 0);
+}
+
+.inst-inputs label {
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+}
+
+#ongName,
+#resumo,
+#endereco,
+#causas,
+#numBeneficiados,
+#cnpj,
+#telOng,
+#email,
+#site,
+#instagram,
+#descricao,
+#facebook
+{
+  padding: 0.7rem !important;
+  border-radius: 5px;
+  border: none;
+  box-shadow: 1px 1px 4px #9c9c9c;
+  font-family: "Poppins", sans-serif;
+  font-size: 1rem;
+}
+  
+.inst-btn-div {
+  display: flex;
+  justify-content: space-between;
+}
+  
+.inst-btn-form {
+  height: 3rem;
+  width: 8rem;
+  margin: 1rem 0.5rem;
+  font-size: 1.2rem;
+  font-family: "Poppins", sans-serif;
+  border: none;
+  border-radius: .2rem;
+  cursor: pointer;
+}
+  
+.inst-btn-previous {  
+  background-color: var(--thirdColor);
+}
+
+.inst-btn-submit, .inst-btn-next {  
+  background-color: var(--secondColor);
+}
+
+.inst-btn-submit:hover, .inst-btn-previous:hover, .inst-btn-next:hover {
+  filter: brightness(1.2);
+}
+
+@media only screen and (max-width: 600px) {
+  .inst-hr-style {
+    margin: 0 4rem;
+  }
+
+  .inst-btn-div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--formBackground);
+    margin-left: -2rem;
+    margin-right: -2rem;
+  }
+}
