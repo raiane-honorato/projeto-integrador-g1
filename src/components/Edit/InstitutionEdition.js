@@ -1,53 +1,11 @@
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {useState, useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import { useFormik } from 'formik';
 import "./InstitutionEdition.css";
 import InstitutionFirstEditionBody from "./InstitutionFirstEditionBody";
 import InstitutionSecondEditionBody from "./InstitutionSecondEditionBody";
 import InstitutionThirdEditionBody from "./InstitutionThirdEditionBody";
-
-//form function
-// function useFormik({ initialValues, validate }) {
-//     const [touched, setTouchedFields] = useState({});
-//     const [errors, setErrors] = useState({});
-//     const [values, setValues] = useState(initialValues);
-  
-//     useEffect(() => {
-//       validateValues(values);
-//     }, [values]);
-  
-//     function handleChange(event) {
-//       const fieldName = event.target.getAttribute("name");
-//       const value = event.target.value;
-  
-//       setValues({
-//         ...values,
-//         [fieldName]: value,
-//       });
-//     }
-  
-//     function handleBlur(event) {
-//       const fieldName = event.target.getAttribute("name");
-//       setTouchedFields({
-//         ...touched,
-//         [fieldName]: true,
-//       });
-//     }
-  
-//     function validateValues(values) {
-//       setErrors(validate(values));
-//     }
-  
-//     return {
-//       values,
-//       errors,
-//       touched,
-//       handleBlur,
-//       setErrors,
-//       handleChange,
-//     };
-//   }
 
 function InstitutionEdition(props) {
 

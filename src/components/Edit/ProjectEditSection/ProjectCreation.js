@@ -3,51 +3,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {useState, useEffect, useRef } from "react";
 import { useFormik } from 'formik';
 import Multiselect from 'multiselect-react-dropdown';
-import toast, { Toaster } from 'react-hot-toast';
+import  { Toaster } from 'react-hot-toast';
 import "./ProjectCreation.css";
-
-
-//form function
-// function useFormik({ initialValues, validate }) {
-//     const [touched, setTouchedFields] = useState({});
-//     const [errors, setErrors] = useState({});
-//     const [values, setValues] = useState(initialValues);
-  
-//     useEffect(() => {
-//       validateValues(values);
-//     }, [values]);
-  
-//     function handleChange(event) {
-//       const fieldName = event.target.getAttribute("name");
-//       const value = event.target.value;
-  
-//       setValues({
-//         ...values,
-//         [fieldName]: value,
-//       });
-//     }
-  
-//     function handleBlur(event) {
-//       const fieldName = event.target.getAttribute("name");
-//       setTouchedFields({
-//         ...touched,
-//         [fieldName]: true,
-//       });
-//     }
-  
-//     function validateValues(values) {
-//       setErrors(validate(values));
-//     }
-  
-//     return {
-//       values,
-//       errors,
-//       touched,
-//       handleBlur,
-//       setErrors,
-//       handleChange,
-//     };
-//   }
 
 function ProjectCreation(props) {
 
@@ -111,7 +68,7 @@ function ProjectCreation(props) {
           alert("Não foi possível obter dados da instituição.")
         )
 
-    },[])
+    },[props.institutionId])
 
       //setting habilities list
       const [habilities, setHabilities] = useState();
@@ -155,12 +112,12 @@ function ProjectCreation(props) {
     //institution's causes
     useEffect(() => {
       let filteredCauses = causes && institution && institution.cause_id.map((cause_id) => {
-        return causes.filter(cause => cause.id == cause_id)[0]
+        return causes.filter(cause => cause.id === cause_id)[0]
       })
       console.log(filteredCauses)
       setInstitutionCauses(filteredCauses)
     
-  },[causes])
+  },[causes, institution])
 
 
     //chosen cause

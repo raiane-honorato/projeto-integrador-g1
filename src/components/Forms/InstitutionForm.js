@@ -36,7 +36,7 @@ function useFormik({ initialValues, validate }) {
             `Não foi possível obter o endereço do CEP informado! Erro:${error}`
           )
         );
-  }, [cep]);
+  }, [cep,values]);
 
   function searchingData(e) {
     setCep(e.target.value);

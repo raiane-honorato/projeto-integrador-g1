@@ -1,7 +1,6 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Fragment } from "react";
 import "./userdata.css";
-import { AuthContext } from "../../context/auth";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBan } from "@fortawesome/free-solid-svg-icons";
 import CancelUserSubscription from "../Edit/ProfileEditionSection/CancelUserSubscription";
@@ -9,7 +8,6 @@ import CancelUserSubscription from "../Edit/ProfileEditionSection/CancelUserSubs
 
 function UserSubscriptionCart({subscription, subscriptions, setSubscriptions}) {
 
-    const { user } = useContext(AuthContext);
     const [cancelSubscription,setCancelSubscription] = useState(false);
     
     //getting subscription's project data
