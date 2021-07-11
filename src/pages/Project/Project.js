@@ -1,6 +1,6 @@
 import { useEffect, useState, useContext } from "react";
 import { AuthContext } from "../../context/auth";
-import { useParams } from "react-router-dom";
+import { NavLink, useParams } from "react-router-dom";
 import Footer from "../../components/Footer/Footer";
 import Navbar from "../../components/Navbar/Navbar";
 import UserSubscription from "../../components/UserSubscription/UserSubscription";
@@ -113,8 +113,11 @@ function ProjectPage() {
                       <span key={cause.id}>{cause.label}</span>
                     ))}
                 </div>
-                { subscriptions && user.type === 1 && subscriptions.length === 0 &&
-                  <button className="project-btn" onClick = {() => setActiveSubscription(true)}>Quero a vaga</button>}
+                { subscriptions && user.type === 1 && subscriptions.length === 0 ?
+                <button className="project-btn" onClick = {() => setActiveSubscription(true)}>Quero a vaga</button>
+                :
+                <NavLink to="/login"><button className="project-btn">Faça seu Login</button></NavLink> 
+                }
                 {subscriptions && subscriptions.length > 0 && <p>Você já está inscrito nesta vaga</p>}
               </div>
             </div>
