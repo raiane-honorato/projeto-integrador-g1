@@ -13,6 +13,7 @@
     "@testing-library/user-event": "^12.8.3",
     "chokidar": "^3.5.2",
     "formik": "^2.2.9",
+    "framer-motion": "^4.1.17",
     "js-cookie": "^2.2.1",
     "multiselect-react-dropdown": "^2.0.1",
     "react": "^17.0.2",
