@@ -18,6 +18,16 @@ function Spotlight() {
       .catch(erro => alert(`Erro ao obter lista de habilidades: ${erro}`))
   },[])
 
+
+  const [causes, setCauses] = useState();
+
+  useEffect(() => {
+      fetch('http://localhost:8000/cause')
+      .then(res => res.json())
+      .then(res => setCauses(res))
+      .catch(erro => alert(`Erro ao obter lista de causas: ${erro}`))
+  },[])
+
   //getting project list from JSON server on 8000
   const [projects, setProjects] = useState();
   
@@ -34,6 +44,7 @@ function Spotlight() {
   
   return (
     <>
+      {/* Habilities */}
       <section className="spotlight-section spotlight-section-one">
         <div className="spotlight-section-one-content">
           <h2>Busque por habilidade</h2>
@@ -46,6 +57,26 @@ function Spotlight() {
                   alt={hability.value}
                 />
                 {hability.label}
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+
+      {/* causes */}
+      <section className="spotlight-section spotlight-section-cause">
+        <div className="spotlight-section-one-content">
+          <h2>Apoie sua Causa</h2>
+          <div className="causes-grid">
+            {causes && causes.map((cause) => (
+              <div key={cause.id} className="cause-img-div">
+                <img
+                  className="cause-img"
+                  src={cause.img_src}
+                  alt={cause.value}
+                />
+                {cause.label}
               </div>
             ))}
           </div>

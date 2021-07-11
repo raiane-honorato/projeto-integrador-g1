@@ -9,6 +9,10 @@
   background-color: var(--mainGrey);
 }
 
+.spotlight-section-cause {
+  background-color:#e0dfdf;
+}
+
 .spotlight-section-one-content {
   display: flex;
   flex-direction:column;
@@ -25,7 +29,7 @@
   text-shadow: 1px 1px var(--mainWhite);
 } 
  
-.habilities-grid { 
+.habilities-grid, .causes-grid { 
   display: grid; 
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap:1rem 0;
@@ -33,7 +37,7 @@
   font-family: 'Poppins', sans-serif;
 }
 
-.hability-img-div {
+.hability-img-div, .cause-img-div {
   display: flex;
   align-items:center;
   justify-content:flex-start;
@@ -41,7 +45,7 @@
   cursor: pointer;
 }
 
-.hability-img {
+.hability-img, .cause-img {
   width: 4rem;
   margin-right: 1rem;
   max-height: 3rem;

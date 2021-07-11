@@ -92,7 +92,7 @@ function ProjectPage() {
             </div>
             <div className="project-information">
               <div className="project-provider">
-                <h3>{institution && institution.institution_name}</h3>
+                {institution && <h3>Instituição: {institution.institution_name}</h3>}
                 <hr />
                 {institution && <span>Cidade: {institution.city}</span>}
                 <span>Remoto: {project.local_type}</span>

@@ -479,7 +479,7 @@
       "id": 2,
       "value": "Meio ambiente",
       "label": "Meio Ambiente",
-      "img_src": "images/environment_.svg"
+      "img_src": "images/environment_cause.svg"
     },
     {
       "id": 3,
@@ -497,7 +497,7 @@
       "id": 5,
       "value": "Educacao",
       "label": "Educação",
-      "img_src": "images/diversity_cause.svg"
+      "img_src": "images/education_cause.svg"
     },
     {
       "id": 6,
@@ -515,7 +515,7 @@
       "id": 8,
       "value": "Idosos",
       "label": "Idosos",
-      "img_src": "images/diversity_cause.svg"
+      "img_src": "images/eldery_cause.svg"
     },
     {
       "id": 9,
