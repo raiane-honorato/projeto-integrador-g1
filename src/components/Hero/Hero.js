@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import Navbar from "../Navbar/Navbar";
@@ -17,21 +18,37 @@ function Hero() {
       <Navbar navbarTransparent={navbarTransparent} changeBackground={changeBackground}/>
       <header className="hero">
         <div className="hero-container">
-          <h2 className="hero-title">Corrente do bem</h2>
-          <p className="hero-p">
+          <motion.h2 
+          className="hero-title"
+          initial={{opacity:0}, {x:-400}}
+          animate={{opacity:1}, {x:0}}
+          transition={{duration:1}}
+          >Corrente do bem</motion.h2>
+          <motion.p className="hero-p"
+          initial={{opacity:0}, {x:1000}}
+          animate={{opacity:1}, {x:0}}
+          transition={{duration:2}}>
             Transforme o mundo por meio da solidariedade. Seja mais um elo dessa
             corrente.
-          </p>
+          </motion.p >
           <div className='hero-buttons'>
           <NavLink to="/register_user">
-            <button className="hero-btn" id="hero-btn-volunteer">
+            <motion.button 
+             initial={{opacity:0}, {y:400}}
+             animate={{opacity:1}, {y:0}}
+             transition={{duration:2}}
+            className="hero-btn" id="hero-btn-volunteer">
               Seja um voluntário
-            </button>
+            </motion.button >
           </NavLink>
           <NavLink to="/register_institution">
-          <button className="hero-btn" id="hero-btn-institution">
+          <motion.button 
+             initial={{opacity:0}, {y:400}}
+             animate={{opacity:1}, {y:0}}
+             transition={{duration:1}}
+             className="hero-btn" id="hero-btn-institution">
             Seja uma instituição
-          </button>
+          </motion.button >
           </NavLink>
 
           </div>
