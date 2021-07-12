@@ -5,49 +5,6 @@ import { useFormik } from 'formik';
 import Multiselect from 'multiselect-react-dropdown';
 import "./ProjectEdition.css";
 
-
-//form function
-// function useFormik({ initialValues, validate }) {
-//     const [touched, setTouchedFields] = useState({});
-//     const [errors, setErrors] = useState({});
-//     const [values, setValues] = useState(initialValues);
-  
-//     useEffect(() => {
-//       validateValues(values);
-//     }, [values]);
-  
-//     function handleChange(event) {
-//       const fieldName = event.target.getAttribute("name");
-//       const value = event.target.value;
-  
-//       setValues({
-//         ...values,
-//         [fieldName]: value,
-//       });
-//     }
-  
-//     function handleBlur(event) {
-//       const fieldName = event.target.getAttribute("name");
-//       setTouchedFields({
-//         ...touched,
-//         [fieldName]: true,
-//       });
-//     }
-  
-//     function validateValues(values) {
-//       setErrors(validate(values));
-//     }
-  
-//     return {
-//       values,
-//       errors,
-//       touched,
-//       handleBlur,
-//       setErrors,
-//       handleChange,
-//     };
-//   }
-
 function ProjectEdition(props) {
 
     //dealing with outside click to close the component
@@ -105,11 +62,11 @@ function ProjectEdition(props) {
 
     useEffect(() => {
         let filteredHabilities = habilities && props.project.hability_id.map((hability_id) => {
-          return habilities.filter(hability => hability.id == hability_id)[0]
+          return habilities.filter(hability => hability.id === hability_id)[0]
         })
         setProjectHabilities(filteredHabilities)
       
-    },[habilities])
+    },[habilities, props.project.hability_id])
 
     //chosen habilities
     let onChangeHability = (selectedList, selectedItem) => {
@@ -136,11 +93,11 @@ function ProjectEdition(props) {
 
     useEffect(() => {
         let filteredCauses = causes && props.project.hability_id.map((hability_id) => {
-          return causes.filter(hability => hability.id == hability_id)[0]
+          return causes.filter(hability => hability.id === hability_id)[0]
         })
         setProjectCauses(filteredCauses)
       
-    },[causes])
+    },[causes, props.project.hability_id])
 
     //chosen cause
     let onChangeCause = (selectedList, selectedItem) => {
@@ -206,7 +163,7 @@ function ProjectEdition(props) {
                           id="local_type_local"
                           value = "local"
                           required
-                          checked = {props.project.local_type == "local" ? "checked":null}
+                          checked = {props.project.local_type === "local" ? "checked":null}
                         />
                         <label  htmlFor="local_type_local">Local</label>
                       </div>
@@ -218,7 +175,7 @@ function ProjectEdition(props) {
                           id="local_type_remote"
                           value = "remoto"
                           required
-                          checked = {props.project.local_type == "remoto" ? "checked":null}
+                          checked = {props.project.local_type === "remoto" ? "checked":null}
                         />
                         
                         <label htmlFor="local_type_remote">Remoto</label>
@@ -226,7 +183,7 @@ function ProjectEdition(props) {
                     </div>
 
                     <div className = "manage-project-img-edit">
-                      <img className = "manage-project-img project-edit-img" src = {props.project.img} />
+                      <img className = "manage-project-img project-edit-img" src = {props.project.img} alt="imagem do projeto" />
 
                       <div className="inputs">
                         <label htmlFor="img">Imagem</label>

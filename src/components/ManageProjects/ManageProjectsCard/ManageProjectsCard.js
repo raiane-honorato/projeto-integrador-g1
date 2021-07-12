@@ -1,5 +1,5 @@
 
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useState } from "react";
 
 import { faCog } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -21,7 +21,7 @@ function ManageProjectsCart({project}) {
           alert("Não foi possível obter dados dos projetos.")
         )
 
-    },[])
+    },[project.id])
 
 
 
@@ -30,7 +30,7 @@ function ManageProjectsCart({project}) {
         <div className = "manage-projects-card-container">
 
             <div className = "manage-projects-card-img-title">
-                <img src = {project.img} className = "manage-projects-card-img"></img>
+                <img src = {project.img} className = "manage-projects-card-img" alt="Imagem do projeto"></img>
                 <p>{project.title}</p>
             </div>
 
@@ -42,7 +42,7 @@ function ManageProjectsCart({project}) {
                 </div>
                 }
                 <div className = "manage-projects-card-subscriptions">
-                    <span className = {`manage-projects-card-bullet-point ${project.status == 1 ? "bullet-green" : "bullet-grey"}`}></span>
+                    <span className = {`manage-projects-card-bullet-point ${project.status === 1 ? "bullet-green" : "bullet-grey"}`}></span>
                     <p>{project.status === 1 ? "Aberto" : "Encerrado"}</p>
                 </div>
                 <NavLink className = "manage-projects-cart-button" to = {`/manage_project/${project.id}`}>

@@ -13,7 +13,7 @@ function ProjectCart(props) {
     .then(res => setInstitution(res))
     .catch(erro => alert(`Erro ao obter lista de habilidades: ${erro}`))
   }
-  ,[]);
+  ,[props.project.institution_id]);
 
   useEffect(() => {
     let requests = props.project.hability_id.map( (hability_id) => {
@@ -28,7 +28,7 @@ function ProjectCart(props) {
 
     
   }
-  ,[]);
+  ,[props.project.hability_id]);
 
 
   return (

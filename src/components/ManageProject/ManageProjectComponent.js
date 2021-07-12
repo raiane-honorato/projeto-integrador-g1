@@ -26,7 +26,7 @@ function ManageProjectComponent({projectId}) {
       .catch((erro) =>
         alert("Não foi possível obter dados desse projeto.")
       );
-  }, []);
+  }, [projectId]);
 
   useEffect(() => {
     fetch(`http://localhost:8000/subscription/?project_id=${projectId}`)
@@ -38,24 +38,24 @@ function ManageProjectComponent({projectId}) {
       alert("Não foi possível obter inscrições.")
     )
 
-},[])
+},[projectId])
 
 
   return (
     <div className = "manage-project-page">
-        {project && project.institution_id == user.institution_id &&
+        {project && project.institution_id === user.institution_id &&
         
         <>
         <div className = "manage-project-container">
           <div className = "manage-project-header">
             
             <div className = "manage-project-img-information">
-              <img className = "manage-project-img" src = {project.img} />
+              <img className = "manage-project-img" src = {project.img} alt="imagem do projeto"/>
               <div className = "manage-project-information">
                 <h3>{project.title}</h3>
                 <div className = "manage-project-subscriptions">
-                  <span className = {`manage-projects-card-bullet-point ${project.status == 1 ? "bullet-green" : "bullet-grey"}`}></span>
-                  <p>{project.status == 1 ? "Aberto" : "Encerrado"}</p>
+                  <span className = {`manage-projects-card-bullet-point ${project.status === 1 ? "bullet-green" : "bullet-grey"}`}></span>
+                  <p>{project.status === 1 ? "Aberto" : "Encerrado"}</p>
                 </div>
                 <p>{project.description}</p>
               </div>

@@ -1,4 +1,4 @@
-import {useState, useEffect, useRef } from "react";
+import {useState, useEffect } from "react";
 import Multiselect from 'multiselect-react-dropdown';
 import "./InstitutionEdition.css";
 
@@ -23,12 +23,12 @@ function InstitutionFirstEditionBody({ formik, institution }) {
       //institution's causes
       useEffect(() => {
         let filteredCauses = causes && institution && institution.cause_id.map((cause_id) => {
-          return causes.filter(cause => cause.id == cause_id)[0]
+          return causes.filter(cause => cause.id === cause_id)[0]
         })
         console.log(filteredCauses)
         setInstitutionCauses(filteredCauses)
       
-    },[causes])
+    },[causes, institution])
 
       //chosen cause
       let onChangeCause = (selectedList, selectedItem) => {

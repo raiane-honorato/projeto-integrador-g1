@@ -1,4 +1,4 @@
-import { NavLink, useHistory } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import "./Navbar.css";
 import miniLogo from "../../img/mini-logo-white.png";
 import SearchBar from "../SearchBar/SearchBar";
@@ -17,8 +17,7 @@ function Navbar({ navbarTransparent, changeBackground }) {
   window.addEventListener("scroll", changeBackground);
 
   const [activeLogin, setActiveLogin] = useState(false);
-  const { user, token, setToken, setUser} = useContext(AuthContext);
-  const history = useHistory();
+  const { user, token} = useContext(AuthContext);
 
    return (
     <>

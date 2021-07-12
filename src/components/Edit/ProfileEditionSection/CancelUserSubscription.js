@@ -1,7 +1,7 @@
 import toast, { Toaster } from 'react-hot-toast';
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {  useEffect, useRef, useState } from "react";
+import {  useRef } from "react";
 import './cancelUserSubscription.css';
 
 function CancelUserSubscription({setSubscriptions, subscriptions, subscription, setCancelSubscription}) {

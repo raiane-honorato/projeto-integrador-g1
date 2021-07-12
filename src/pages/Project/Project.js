@@ -30,7 +30,7 @@ function ProjectPage() {
         setInstitutionId(res.institution_id);
       })
       .catch((erro) => alert(`Erro ao obter lista de projetos: ${erro}`));
-  }, []);
+  }, [projectId]);
 
   useEffect(() => {
     fetch(`http://localhost:8000/subscription/?user_id=${user.id}&&project_id=${projectId}`)
@@ -39,7 +39,7 @@ function ProjectPage() {
         setSubscriptions(res);
       })
       .catch((erro) => alert(`Erro ao obter lista de projetos: ${erro}`));
-  }, []);
+  }, [projectId, user.id]);
   
 
   useEffect(() => {

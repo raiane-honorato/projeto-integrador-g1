@@ -1,4 +1,4 @@
-import { useEffect, useState, useContext } from "react";
+import { useContext } from "react";
 import { AuthContext } from "../../context/auth";
 
 
@@ -19,7 +19,7 @@ function ManageProjects() {
 
 
       {/* setting page for volunteer user */}
-      { user.type == 1 &&
+      { user.type === 1 &&
         <div class="error-main">
         <h1>Você não tem acesso a esta página.</h1>
         <p>Faça login como uma instituição para continuar.</p>
@@ -27,7 +27,7 @@ function ManageProjects() {
       </div>}
 
 
-        {user.type == 2 && <ManageProjectsList />}
+        {user.type === 2 && <ManageProjectsList />}
 
 
       <Footer />

@@ -1,4 +1,4 @@
-import { useEffect, useState, useContext } from "react";
+import { useContext } from "react";
 import { AuthContext } from "../../context/auth";
 import { useParams } from "react-router";
 
@@ -6,9 +6,7 @@ import Footer from '../../components/Footer/Footer';
 import Navbar from '../../components/Navbar/Navbar';
 
 import erroImg from "../../img/404.svg";
-import ManageProjectsList from "../../components/ManageProjects/ManageProjectsList/ManageProjectsList";
 import ManageProjectComponent from "../../components/ManageProject/ManageProjectComponent";
-//import ManageProjectComponent from "../../components/ManageProject/ManageProjectComponent";
 
 function ManageProject() {
     const { user } = useContext(AuthContext);

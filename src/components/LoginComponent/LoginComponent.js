@@ -9,7 +9,7 @@ function LoginComponent(props) {
   const history = useHistory();
   const [userEmail, setUserEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { user, setUser } = useContext(AuthContext);
+  const { setUser } = useContext(AuthContext);
 
   function login(userEmail, password) {
     if (userEmail === "joao@joao.com") {
@@ -48,7 +48,6 @@ function LoginComponent(props) {
     if (token) {
      
       setToken(token);
-      const userId = "1";
       history.push("/");
       return;
     }

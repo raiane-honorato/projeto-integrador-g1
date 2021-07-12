@@ -21,7 +21,7 @@ function ManageProjectSubscription({subscription, subscriptions, project, setSta
           alert("Não foi possível obter dados dos projetos.")
         )
 
-    },[])
+    },[subscription.user_id])
 
     //dealing with outside click to close the component
     let windowRef = useRef();
@@ -73,7 +73,7 @@ function ManageProjectSubscription({subscription, subscriptions, project, setSta
         <div className = "manage-project-subscription-container">
             {user &&            
             <div className = "manage-project-subscription-img-title">
-                <img src = {user.img} className = "manage-project-subscription-img"></img>
+                <img src = {user.img} className = "manage-project-subscription-img" alt="Foto do usuário"></img>
                 <div className = "manage-project-substription-name-email-phone">
                     <NavLink to = {`/user/${user.id}`}>{user.name}</NavLink>
                     <p>{user.email}</p>
@@ -102,8 +102,8 @@ function ManageProjectSubscription({subscription, subscriptions, project, setSta
                 <div  ref = {windowRef} className = "manage-project-subscription-change-status">
                     <button 
                      
-                    className = {`manage-project-subscription-change-status-btn ${subscription.subscription_status == "Cancelada" ? " canceled-change-status":""}`}
-                    onClick = {subscription.subscription_status != "Cancelada" ? () =>  setChangeStatus(!changeStatus)  :""}>
+                    className = {`manage-project-subscription-change-status-btn ${subscription.subscription_status === "Cancelada" ? " canceled-change-status":""}`}
+                    onClick = {subscription.subscription_status !== "Cancelada" ? () =>  setChangeStatus(!changeStatus)  :""}>
                         <span>Alterar status</span>
                     </button>
 

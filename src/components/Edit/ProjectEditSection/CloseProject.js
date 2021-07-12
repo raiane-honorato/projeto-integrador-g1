@@ -12,7 +12,7 @@ function CloseProject(props) {
 
     let cancelProject = () => {
               //saving information
-        let changeStatus =  fetch(`http://localhost:8000/projects/${props.project.id}`, 
+      fetch(`http://localhost:8000/projects/${props.project.id}`, 
         {
             method: "PATCH",
             headers: {"Content-type": "application/json"},

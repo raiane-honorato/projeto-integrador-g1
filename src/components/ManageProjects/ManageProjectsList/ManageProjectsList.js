@@ -48,7 +48,7 @@ function ManageProjectsList() {
           .catch((erro) =>
             alert("Não foi possível obter dados dos projetos.")
           )
-      }, []);
+      }, [user.institution_id]);
 
       useEffect(() => {
         
@@ -81,7 +81,7 @@ function ManageProjectsList() {
 
         q && cleanFilter()
         
-      }, [q])
+      }, [q, user.institution_id])
 
       let handleFilterChange = (event) => {
         setFilterState({...filterState, [event.target.name] : event.target.checked })
@@ -95,7 +95,7 @@ function ManageProjectsList() {
       let updateProjects = () => {
         setFilterProject(filterState)
         setQ("")
-        if (filterState.opened == filterState.closed) {
+        if (filterState.opened === filterState.closed) {
           fetch(`http://localhost:8000/projects/?institution_id=${user.institution_id}`)
           .then((res) => res.json())
           .then((res) => {
