@@ -622,11 +622,11 @@
       "address_number": "53",
       "causes": [
         2,
-        4
+        4,
+        6
       ],
       "habilities": [
-        2,
-        3
+        2
       ]
     },
     {
