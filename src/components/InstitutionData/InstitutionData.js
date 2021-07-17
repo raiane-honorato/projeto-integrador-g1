@@ -11,7 +11,7 @@ import InstitutionEdition from "../Edit/InstitutionEdition";
 
 function InstitutionData() {
   const parameter = useParams();
-  const institutionId = parameter.id;
+  const institutionId = parseInt(parameter.id);
   const [institution, setInstitution] = useState("");
   const [causes, setCauses] = useState([]);
   const [projects, setProjects] = useState("");
