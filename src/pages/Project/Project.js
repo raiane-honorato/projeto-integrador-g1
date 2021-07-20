@@ -5,6 +5,7 @@ import Footer from "../../components/Footer/Footer";
 import Navbar from "../../components/Navbar/Navbar";
 import UserSubscription from "../../components/UserSubscription/UserSubscription";
 import "./project.css";
+import Loader from '../../components/Loader/Loader';
 
 function ProjectPage() {
   const parameter = useParams();
@@ -80,7 +81,7 @@ function ProjectPage() {
   return (
     <div id="page-container">
       <Navbar />
-      {project && (
+      {project ? (
         <div key={project.id} className="project-container">
           <div className="project-title">
             <h2>{project.title}</h2>
@@ -123,6 +124,9 @@ function ProjectPage() {
             </div>
           </div>
         </div>
+      ) : (
+        <Loader 
+        />
       )}
       <Footer />
 
