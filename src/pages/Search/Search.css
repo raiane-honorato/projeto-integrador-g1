@@ -24,8 +24,17 @@
 .search-filter-container{
     display: flex;
     flex-wrap: wrap;
+    align-items: center;
 }
-.search-filter-button {
+.projects-search-field {
+    margin-left: .5rem;
+}
+
+.manage-projects-icon {
+    cursor: pointer;
+}
+
+.search-filter-button, .hability-filter-button {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -45,7 +54,7 @@
     
 }
 
-.search-filter-button:hover {
+.search-filter-button:hover, .hability-filter-button:hover {
     filter: brightness(1.2);
  
   }

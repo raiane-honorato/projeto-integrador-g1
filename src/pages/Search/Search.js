@@ -9,44 +9,42 @@ import Footer from "../../components/Footer/Footer";
 
 //import projects from "../../data/projects.json";
 import ProjectCart from "../../components/ProjectCart/ProjectCart";
-import { useContext } from "react";
-import { AuthContext } from "../../context/auth";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
+import { faChevronDown, faSearch } from "@fortawesome/free-solid-svg-icons";
 
 function Search() {
+  const [searchCause, setSearchCause] = useState("");
+  const [searchHability, setSearchHability] = useState("")
+  const [searchCity, setSearchCity] = useState("");
+
   const [filterStatus, setFilterStatus] = useState(false);
-  const [filterState, setFilterState] = useState({
+  const [filterRemote, setfilterRemote] = useState({
     remote: false,
     notRemote: false,
   });
+
   const [filterProject, setFilterProject] = useState({
     opened: false,
     closed: false,
   });
-  const [s, setS] = useState("");
-  const { user } = useContext(AuthContext);
   let windowRef = useRef();
 
   let handleFilterChange = (event) => {
-    setFilterState({
-      ...filterState,
+    setfilterRemote({
+      ...filterRemote,
       [event.target.name]: event.target.checked,
     });
   };
 
   let cleanFilter = () => {
-    setFilterState({ remote: false, notRemote: false });
+    setfilterRemote({ remote: false, notRemote: false });
     setFilterProject({ opened: false, closed: false });
   };
 
-  let updateProjects = () => {
-    setFilterProject(filterState);
-    setS("");
-    if (filterState.remote === filterState.notRemote) {
-      fetch(
-        `http://localhost:8000/projects/`
-      )
+  let updateProjectsByRemote = () => {
+    setFilterProject(filterRemote);
+    if (filterRemote.remote === filterRemote.notRemote) {
+      fetch(`http://localhost:8000/projects/`)
         .then((res) => res.json())
         .then((res) => {
           setProjects(res);
@@ -55,9 +53,9 @@ function Search() {
     } else {
       fetch(
         `http://localhost:8000/projects/?${
-          filterState.remote
+          filterRemote.remote
             ? "local_type=remoto"
-            : filterState.notRemote
+            : filterRemote.notRemote
             ? "local_type=local"
             : ""
         }`
@@ -115,9 +113,6 @@ function Search() {
       );
   }, [projects, q]);
 
-  // filter states
-  const [locationTypeState, setLocationTypeState] = useState(false);
-
   //pagination
   const [pageNumber, setPageNumber] = useState(0);
   const [pageCount, setPageCount] = useState(0);
@@ -165,19 +160,25 @@ function Search() {
         </span>
 
         <div className="search-filter-container">
-          <div className="search-filter-button-div address">
-            <button className="search-filter-button address">Cidade</button>
+        <div className="manage-projects-search-field">
+            <FontAwesomeIcon className="manage-projects-icon" icon={faSearch} />
+            <input
+              className="manage-projects-search-input"
+              type="text"
+              placeholder="buscar por cidade"
+              value={searchCity}
+              onChange={(event) => {
+                setSearchCity(event.target.value);
+              }}
+            />
           </div>
 
-          <div
-            className="remote-search-filter-field-container"
-            ref={windowRef}
-          >
+          <div className="remote-search-filter-field-container" ref={windowRef}>
             <div
               className="search-filter-button location-type"
               onClick={() => {
                 setFilterStatus(!filterStatus);
-                setFilterState(filterProject);
+                setfilterRemote(filterProject);
               }}
             >
               <p>Remoto</p>
@@ -194,7 +195,7 @@ function Search() {
                     className="manage-projects-filter-checkbox"
                     type="checkbox"
                     name="remote"
-                    checked={filterState.remote}
+                    checked={filterRemote.remote}
                     onChange={handleFilterChange}
                   ></input>
                   <span className="manage-projects-filter-text">Sim</span>
@@ -204,7 +205,7 @@ function Search() {
                     className="manage-projects-filter-checkbox"
                     type="checkbox"
                     name="notRemote"
-                    checked={filterState.notRemote}
+                    checked={filterRemote.notRemote}
                     onChange={handleFilterChange}
                   ></input>
                   <span className="manage-projects-filter-text">Não</span>
@@ -219,7 +220,7 @@ function Search() {
                   <button
                     className="manage-projects-filter-btn"
                     id="manage-projects-apply-btn"
-                    onClick={updateProjects}
+                    onClick={updateProjectsByRemote}
                   >
                     Aplicar
                   </button>
@@ -228,14 +229,30 @@ function Search() {
             )}
           </div>
 
-          <div className="search-filter-button-div hability">
-            <button className="search-filter-button hability">
-              Habilidade
-            </button>
+          <div className="manage-projects-search-field">
+            <FontAwesomeIcon className="manage-projects-icon" icon={faSearch} />
+            <input
+              className="manage-projects-search-input"
+              type="text"
+              placeholder="buscar por habilidade"
+              value={searchHability}
+              onChange={(event) => {
+                setSearchHability(event.target.value);
+              }}
+            />
           </div>
 
-          <div className="search-filter-button-div cause">
-            <button className="search-filter-button cause">Causa</button>
+          <div className="manage-projects-search-field  projects-search-field">
+            <FontAwesomeIcon className="manage-projects-icon" icon={faSearch} />
+            <input
+              className="manage-projects-search-input"
+              type="text"
+              placeholder="buscar por causa"
+              value={searchCause}
+              onChange={(event) => {
+                setSearchCause(event.target.value);
+              }}
+            />
           </div>
         </div>
 
