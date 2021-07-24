@@ -16,6 +16,7 @@ function Search() {
   const [searchCause, setSearchCause] = useState("");
   const [searchHability, setSearchHability] = useState("")
   const [searchCity, setSearchCity] = useState("");
+  const [s, setS] = useState('');
 
   const [filterStatus, setFilterStatus] = useState(false);
   const [filterRemote, setfilterRemote] = useState({
@@ -72,15 +73,39 @@ function Search() {
 
   //getting project list from JSON server on 8000
   const [projects, setProjects] = useState(null);
+  console.log(projects)
 
   useEffect(() => {
-    fetch(" http://localhost:8000/projects")
+    fetch(`http://localhost:8000/projects/`)
       .then((res) => res.json())
       .then((res) => {
         setProjects(res);
       })
       .catch((erro) => alert(`Erro ao obter lista de projetos: ${erro}`));
   }, []);
+
+  // getting search city from institution list from JSON server on 8000
+  const [institutionsId, setInstitutionsId] = useState(null);
+  function searchingForCity () {
+    fetch(`http://localhost:8000/institution/?city=${searchCity}`)
+    .then((res) => res.json())
+    .then((res) => {
+      setInstitutionsId(res.map(institution => institution.id))
+    })
+    .catch((erro) => alert(`Erro ao obter lista de projetos: ${erro}`));
+  }
+
+  useEffect(() => {
+    let requests =
+    institutionsId && institutionsId.map((instId) => {
+        return fetch(`http://localhost:8000/projects/${instId}`).then((res) => res.json())
+      });
+
+      requests && Promise.all(requests)
+      .then((p) => setProjects(p))
+      .catch((err) => alert("Não foi possível obter as causas"));
+  }, [institutionsId]);
+
 
   // q search parameter
   const { search } = useLocation();
@@ -90,8 +115,11 @@ function Search() {
   //filter project list by q parameter
   const [filteredProjects, setFilteredProjects] = useState(null);
 
+ 
+
   useEffect(() => {
-    projects &&
+    if (projects) {
+      console.log('oi')
       setFilteredProjects(
         projects
           .filter(
@@ -111,6 +139,9 @@ function Search() {
             return b.popularity - a.popularity;
           })
       );
+    } else if (projects && q==="") {
+     return;
+    }      
   }, [projects, q]);
 
   //pagination
@@ -161,7 +192,7 @@ function Search() {
 
         <div className="search-filter-container">
         <div className="manage-projects-search-field">
-            <FontAwesomeIcon className="manage-projects-icon" icon={faSearch} />
+            <FontAwesomeIcon className="manage-projects-icon" onClick={searchingForCity} icon={faSearch} />
             <input
               className="manage-projects-search-input"
               type="text"
