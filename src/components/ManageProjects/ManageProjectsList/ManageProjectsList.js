@@ -63,7 +63,7 @@ function ManageProjectsList() {
         q && fetch(`http://localhost:8000/projects/?institution_id=${user.institution_id}&q=${q.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "")}`)
         .then((res) => res.json())
         .then((res) => {
-          console.log(q)
+    
           setProjects(res);
         })
         .catch((erro) =>
