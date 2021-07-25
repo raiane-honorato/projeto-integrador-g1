@@ -4,6 +4,7 @@
     min-height: 100vh;
     display: flex;
     justify-content: center;
+    overflow: hidden;
 }
 
 .manage-project-container{
@@ -12,14 +13,12 @@
     box-shadow: rgb(0 0 0 / 15%) 0px 10px 37px;
     border-radius: 1rem;
     margin: 4rem 0rem;
-    width: 80vw;
-    
+    width: 80vw;    
 }
 
 .manage-project-header {
-
     border-bottom: 1px solid var(--secondGrey);
-    width: calc(100% - 4rem);
+    width: 100%;
     padding: 1rem 2rem;
     font-family: var(--secondFont);
 }
@@ -50,13 +49,16 @@
     gap: .6rem;
     align-items: center;
 }
+
 .manage-project-subscriptions p{
     margin: 0;
     font-size: 13px;
 }
+
 .manage-project-setting-buttons{
     display: inline;
 }
+
 .manage-project-button {
     margin: 1rem 0.5rem;
     font-size: 1.1rem;
@@ -136,4 +138,125 @@
     text-align: center;
     font-size: 1.2rem;
     color: var(--secondGrey);
+}
+
+
+@media only screen and (max-width: 800px) {
+    .manage-project-img-information {
+        width: 100%;
+        flex-direction: column;
+        padding-bottom: 0rem;
+    }
+
+    .manage-project-information p {
+        text-align: justify;
+        font-size: 90%;
+    }
+
+    .manage-project-button {
+        font-size: 0.8rem;
+        padding: 0.3rem 0.5rem;
+        margin: 0.5rem;
+    }
+
+    .manage-project-setting-buttons{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+
+    .manage-project-subscriptions-title {
+        font-size: 0.8rem;
+    }
+
+    .manage-project-search-filter {
+        display: flex;
+        gap: 1rem;
+        padding-left: 0rem;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .manage-project-search-input {
+        font-size: 11px;
+        gap: .5rem;
+        padding: 0.2rem 0.4rem;
+    }
+
+    .manage-project-filter-field {
+        gap: 2rem;
+    }
+
+    .manage-project-filter-field p {
+        font-size: 11px;
+    }
+
+    .svg-inline--fa.fa-w-16 {
+        width: 0.8em;
+    }
+
+    .manage-project-subscription-container {
+        flex-direction: column;
+    }
+
+    .manage-project-substription-name-email-phone a {
+        font-size: 1rem;
+    }
+
+    .manage-project-substription-name-email-phone p {
+        font-size: 0.7rem !important;
+    }
+
+    .manage-project-subscription-date-status-manage-btn {
+        gap: 0rem !important;
+        flex-direction: column;
+        justify-content: center;
+        margin-top: 1rem;
+        font-size: 11px;
+    }
+
+    .manage-project-subscription-status {
+        justify-content: center;
+    }
+
+    .manage-project-subscription-change-status-btn {
+        margin: 0rem !important;
+        font-size: 0.8rem !important;
+    }
+
+    .manage-project-subscription-change-status-dropdown {
+        min-width: 130px !important;
+    }
+
+    .project-closing-window {
+        top: 15rem;
+        min-width: 12rem;
+        width: 70%;
+    }
+    
+    .project-closing-window-body {
+        margin: 0rem;
+        text-align: justify;
+        padding: 0rem;
+        font-size: 0.8rem;
+    }
+
+    .project-first-closing-window-footer {
+        gap: 0rem;
+        justify-content: center;
+    }
+
+    .project-closing-btn {
+        font-size: 0.8rem;
+        min-width: 3rem;
+        margin: 0.3rem 0.5rem;
+        padding: .3rem;
+    }
+
+    .project-edition-window{
+        top: 7.5rem;
+        min-width: 12rem;
+        width: 90%;
+    }
 }

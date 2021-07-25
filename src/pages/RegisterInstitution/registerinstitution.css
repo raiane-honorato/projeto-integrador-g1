@@ -7,6 +7,7 @@
   grid-template-columns: 1fr 1fr;
   min-height: 100vh;
   background-color: var(--formBackground);
+  overflow: hidden;
 }
 
 .instituition-register-image-div {
