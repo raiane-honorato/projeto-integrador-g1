@@ -259,7 +259,7 @@ function Search() {
           </div>
 
           <div className="manage-projects-search-field">
-            <FontAwesomeIcon className="manage-projects-icon" onClick={searchingByHability} icon={faSearch} />
+            <FontAwesomeIcon className="manage-projects-icon" icon={faSearch} />
             <input
               className="manage-projects-search-input"
               type="text"
