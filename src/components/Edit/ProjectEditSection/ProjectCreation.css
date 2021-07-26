@@ -1,6 +1,7 @@
 .project-set-vis {
   visibility: visible !important;
 }
+
 .project-creation-container {
   position: fixed;
   height: 100%;
@@ -14,90 +15,105 @@
   overflow: visible;
 }
 
-
 .project-creation-window{
-    position: fixed;
-    z-index: 1040;
-    top:10rem;
-    min-width: 55rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    padding: .5rem 2rem;
-    border-radius: 1rem;
-    background-color: rgba(247, 247, 247);
-    max-height: calc(100vh - 10rem);
-    margin-bottom: 2rem;
+  position: fixed;
+  z-index: 1040;
+  top:10rem;
+  min-width: 55rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: .5rem 2rem;
+  border-radius: 1rem;
+  background-color: rgba(247, 247, 247);
+  max-height: calc(100vh - 10rem);
+  margin-bottom: 2rem;
   overflow: hidden;
-  }
+}
   
-  .project-creation-window-header{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border-bottom: 1px solid var(--secondGrey);
-    
+.project-creation-window-header{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--secondGrey);  
+}
+
+.project-creation-window-header h3{
+  display: inline;
+  font-family: var(--secondFont);
+  margin: 0;
+}
+
+.project-creation-window-body {
+  margin: 2rem 0rem;
+  padding-right: 2rem;
+  overflow: hidden;
+  overflow-y: scroll;
+  max-height: calc(100vh - 20rem);
+}
+
+.project-creation-local {
+  display: inline !important;
+}
+
+.project-creation-local label{
+  padding-left: .5rem;
+}
+
+.manage-project-img-edit {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.project-edit-img {
+  height: 6rem !important;
+  width: 6rem !important;
+}
+
+.project-habilities-causes-creation {
+  font-family: var(--secondFont) !important;
+  margin-bottom: 1rem;
+}
+
+.project-habilities-causes-creation li:hover{
+  background-color: var(--secondColor) !important
+}
   
-  }
-  .project-creation-window-header h3{
-    display: inline;
-    font-family: var(--secondFont);
-    margin: 0;
+.project-creation-save{ 
+  background-color: var(--secondColor);
+  height: 2rem;
+  width: 5rem;
+  margin: 1rem 0.5rem;
+  font-size: 1.1rem;
+  font-family: 'Poppins', sans-serif;
+  padding: 2px;
+  border: none;
+  border-radius: .2rem;
+  cursor: pointer;
+  color: var(--mainBlack);
+}
+
+.project-creation-save:hover{
+  filter: brightness(1.2);
+}
+
+.project-creation-close-btn {
+  cursor: pointer;
+}
+
+@media only screen and (max-width: 800px) {
+  .project-creation-window {
+    top: 7.5rem;
+    min-width: 12rem;
+    width: 90%;
   }
 
   .project-creation-window-body {
-      margin: 2rem 0rem;
-      padding-right: 2rem;
-      overflow: hidden;
-      overflow-y: scroll;
-      max-height: calc(100vh - 20rem);
+    margin: 1rem 0rem;
   }
 
   .project-creation-local {
-    display: inline !important;
+    display: flex !important;
   }
-  .project-creation-local label{
-    padding-left: .5rem;
-  }
-
-  .manage-project-img-edit {
-    display: flex;
-    gap: 1rem;
-    margin-bottom: 1rem;
-  }
-
-  .project-edit-img {
-    height: 6rem !important;
-    width: 6rem !important;
-  }
-
-  .project-habilities-causes-creation {
-    font-family: var(--secondFont) !important;
-    margin-bottom: 1rem;
-  }
-
-  .project-habilities-causes-creation li:hover{
-    background-color: var(--secondColor) !important
-  }
-  
-  .project-creation-save{ 
-    background-color: var(--secondColor);
-    height: 2rem;
-    width: 5rem;
-    margin: 1rem 0.5rem;
-    font-size: 1.1rem;
-    font-family: 'Poppins', sans-serif;
-    padding: 2px;
-    border: none;
-    border-radius: .2rem;
-    cursor: pointer;
-    color: var(--mainBlack);
-  }
-
-  .project-creation-save:hover{
-    filter: brightness(1.2);
-  }
-
-  .project-creation-close-btn {
-      cursor: pointer;
-  }
+}

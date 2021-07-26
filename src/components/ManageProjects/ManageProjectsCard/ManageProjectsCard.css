@@ -2,12 +2,15 @@
     padding: 2rem 5rem;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    overflow: hidden;
+    justify-content: center;
 }
 
 .manage-projects-card-img-title{
+    width: 45%;
     display: flex;
-    align-items: flex-start;
+    flex-wrap: wrap;
+    align-items: center;
     gap: 1rem;
 }
 
@@ -26,9 +29,12 @@
 }
 
 .manage-projects-card-subscriptions-status-manage-btn {
+    max-width: 100%;
+    width: auto;
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
-    gap: 4rem;
+    gap: 2rem;
 }
 
 .manage-projects-card-subscriptions-status-manage-btn p {
@@ -39,13 +45,12 @@
     display: flex;
     gap: .6rem;
     align-items: center;
-
+    width: 10rem;
 }
 
 .manage-projects-card-subscriptions p {
     margin: 0;
     color: rgb(37, 37, 37);
-    
 }
 
 .manage-projects-card-subscriptions-p1{
@@ -86,17 +91,37 @@
     text-decoration: none;
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 800px) {
     .manage-projects-card-container {
         display: flex;
         flex-direction: column;
-        justify-content: center;
-        padding: 2rem 0;
+        padding: 2rem;
+    }
+
+    .manage-projects-card-img-title {
+        width: 70%;
+        font-size: 0.9rem;
+        flex-direction: column;
     }
 
     .manage-projects-card-subscriptions-status-manage-btn {
         display: flex;
         flex-direction: row;
-        gap: 1rem;
+        gap: 0rem;
+        font-size: 0.9rem;
+        width: 100%;
+        justify-content: center;
+    }
+
+    .manage-projects-card-subscriptions {
+        width: 8rem;
+        margin-top: 0.5rem;
+        gap: 0.3rem;
+    }
+
+    .manage-projects-cart-button {
+        font-size: 0.8rem;
+        margin-left: 1rem;
+        padding: 0.3rem;
     }
 }

@@ -67,7 +67,7 @@
   display: flex;
   gap: 1rem;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: space-between;
   width: 100%;
   max-width: 35rem;
   margin-top: 1rem;
@@ -151,18 +151,78 @@
   filter: brightness(1.2);
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 800px) {
+  .instForm {
+    max-height: 50rem;
+    margin: 1rem auto 8rem;
+  }
+
+  .inst-endereco {
+    margin-bottom: 1rem;
+    grid-gap: 0;
+    display: flex;
+    flex-direction: column;
+    font-family: "Poppins", sans-serif;
+  }
+
+  .instituition-form-title {
+    font-size: 1.5rem;
+  }
+
+  .inst-endereco
+  #cep,
+  #street,
+  #bairro,
+  #city,
+  #state,
+  #address_number {      
+    border-radius: 5px;
+    width: 100%;
+    border: none;
+    box-shadow: 1px 1px 4px #9c9c9c;
+    font-family: "Poppins", sans-serif;
+    font-size: 0.8rem;
+    padding: 0.7rem !important;
+  }
+
+  #ongName, #cpfNumber, #userName, #email, #birth_date, #contatNumber, #senha, #confSenha, #institution_name, #resumo, #causas, #site,
+  #numBeneficiados, #cnpjNumber, #telOng, #urlSite, #facebook, #instagram, #descricao, #phone, #bio, .aplication-form-fields {
+    font-size: 0.8rem;
+  }
+
+  textarea#resumo {
+    max-width: -webkit-fill-available;
+  }
+
+  .instForm h2 {
+    font-size: 1rem;
+  }
+
   .inst-hr-style {
     margin: 0 4rem;
   }
 
+  .inst-step-guide {
+    font-size: 1rem;
+  }
+
+  .inst-inputs label {
+    font-size: 0.9rem;
+  }
+
   .inst-btn-div {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: center;
     align-items: center;
     background-color: var(--formBackground);
-    margin-left: -2rem;
-    margin-right: -2rem;
+    margin-left: -1rem;
+    margin-right: -1rem;
+  }
+
+  .inst-btn-form {
+    height: 2rem;
+    width: 6rem;
+    font-size: 1rem;
   }
 }

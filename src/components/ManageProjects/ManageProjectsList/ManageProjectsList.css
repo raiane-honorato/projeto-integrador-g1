@@ -4,6 +4,9 @@
     min-height: 100vh;
     display: flex;
     justify-content: center;
+    max-width: 75rem;
+    margin: 0 auto;
+    overflow: hidden;
 }
 
 .manage-projects-list-container{
@@ -12,8 +15,7 @@
     box-shadow: rgb(0 0 0 / 15%) 0px 10px 37px;
     border-radius: 1rem;
     margin: 4rem 0rem;
-    width: 80vw;
-    
+    width: 80vw;    
 }
 
 .manage-projects-header {
@@ -22,6 +24,7 @@
     width: calc(100% - 4rem);
     padding: 1rem 2rem;
     position: relative;
+    box-sizing: content-box;
 }
 
 .manage-projects-header h3{
@@ -32,8 +35,8 @@
 
 .manage-projects-new-project-btn {
     position: absolute;
-    top: 1rem;
-    right: 2rem;
+    top: 3rem;
+    right: 4.5rem;
     background-color: var(--thirdColor);
     height: 2rem;
     margin: 1rem 0.5rem;
@@ -145,30 +148,47 @@
     color: var(--secondColor)
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 800px) {
     .manage-projects-list-container {
         display: flex;
         flex-direction: column;
-        width: min-content;
-    }
+        width: 90%;
+    } 
 
-    .manage-projects-header {
-        display: flex;
-        flex-direction: column;
-        width: min-content;
+    .manage-projects-search-filter {
+        flex-direction: row;
+        gap: 1rem;
         align-items: center;
-    }
-
-    .manage-projects-header h3 {
-        margin-top: 4rem;
+        margin-top: 1rem;
     }
 
     .manage-projects-new-project-btn {
-        right: 1rem;
-        margin: 0.5rem 0.5rem;
+        position: absolute;
+        top: 3rem;
+        font-size: 0.8rem;
+        padding: 0.5rem;
     }
 
-    .manage-projects-filter-field p{
-        width: 8em;
+    .manage-projects-search-input {
+        width: 7rem;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .manage-projects-header {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        position: unset;
+    }
+
+    .manage-projects-new-project-btn {
+        position: unset !important;
+        font-size: 0.8rem;
+        padding: 0.5rem;
+    }
+
+    .manage-projects-search-filter {
+        flex-direction: column !important;
     }
 }
