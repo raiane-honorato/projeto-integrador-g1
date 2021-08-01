@@ -42,6 +42,7 @@
 
 .manage-project-subscription-date-status-manage-btn {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     gap: 4rem;
 }
