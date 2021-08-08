@@ -2,61 +2,64 @@ import { TextField, Button } from "@material-ui/core";
 import { useContext, useState } from "react";
 import { NavLink, useHistory } from "react-router-dom";
 import { AuthContext } from "../../context/auth";
-import toast, { Toaster } from 'react-hot-toast';
+import toast, { Toaster } from "react-hot-toast";
 
 function LoginComponent(props) {
-  const { setToken } = useContext(AuthContext);
+  const { token, setToken } = useContext(AuthContext);
   const history = useHistory();
   const [userEmail, setUserEmail] = useState("");
   const [password, setPassword] = useState("");
   const { setUser } = useContext(AuthContext);
 
-  function login(userEmail, password) {
-    if (userEmail === "joao@joao.com") {
-
-      const userId = "1";
-
-      fetch(`http://localhost:8000/user/${userId}`)
-      .then((res) => res.json())
-      .then((res) => {
-        setUser(res);
-      })
-      .catch((erro) => alert("Não foi possível localizar este usuário."));
-
-      return { token: "1234" };
-    } else if (userEmail === "medicos@medicos.com") {
-
-      const userId = "4";
-
-      fetch(`http://localhost:8000/user/${userId}`)
-      .then((res) => res.json())
-      .then((res) => {
-        setUser(res);
-      })
-      .catch((erro) => alert("Não foi possível localizar este usuário."));
-
-      return { token: "5678" };
-    } else {
-      return { error: "Usuário ou senha inválido!" };
+  async function login(userEmail, password) {
+    try {
+      const response = await fetch("http://localhost:8080/login", {
+        method: "POST",
+        headers: { "Content-type": "application/json" },
+        body: JSON.stringify({
+          email: userEmail,
+          password: password,
+        }),
+      });
+      const result = await response.json();
+      setToken(result.token);
+    } catch (error) {
+      console.log(error);
+      return "Usuário ou senha inválido!";
     }
   }
 
-  function onSubmit(event) {
+  function renderingUser() {
+    const userId = "1";
+
+    fetch(`http://localhost:8000/user/${userId}`)
+      .then((res) => res.json())
+      .then((res) => {
+        setUser(res);
+      })
+      .catch((erro) => alert("Não foi possível localizar este usuário."));
+  }
+
+  async function onSubmit(event) {
     event.preventDefault();
-    const { token } = login(userEmail, password);
-
-    if (token) {
-     
-      setToken(token);
-      history.push("/");
-      return;
+    try {
+      await login(userEmail, password);
+      if (token !== null || token !== "undefined" ||token !== ""){
+        renderingUser();
+        history.push("/");
+      } else {
+        toast.error("Senha ou usuário inválidos!", {
+          duration: 2000,
+          position: "top-right",
+        });
+      }     
+    } catch (error) {
+      toast.error("Senha ou usuário inválidos!", {
+        duration: 2000,
+        position: "top-right",
+      });
     }
-
-    setUserEmail("");
-    setPassword("");
-    toast.error('Senha ou usuário inválidos!',{duration: 2000, position: "top-right"})
   }
-
 
   return (
     <div className="firts-column">

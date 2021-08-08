@@ -10,6 +10,7 @@ function DropLoggedUser() {
         event.preventDefault();    
         setToken("");
         setUser("");
+        localStorage.clear();
         return history.push("/");
       }
 

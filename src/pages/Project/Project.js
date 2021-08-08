@@ -6,6 +6,7 @@ import Navbar from "../../components/Navbar/Navbar";
 import UserSubscription from "../../components/UserSubscription/UserSubscription";
 import "./project.css";
 import Loader from '../../components/Loader/Loader';
+import api from '../../services/api';
 
 function ProjectPage() {
   const parameter = useParams();
@@ -15,7 +16,6 @@ function ProjectPage() {
   const [project, setProject] = useState();
   const [causes, setCauses] = useState([]);
   const [habilities, setHabilities] = useState([]);
-  const [institutionId, setInstitutionId] = useState();
   const [institution, setInstitution] = useState();
   const [subscriptions, setSubscriptions] = useState();
   const [activeSubscription, setActiveSubscription ] = useState(false);
@@ -24,16 +24,17 @@ function ProjectPage() {
 
   //get data from localhost port 8000
   useEffect(() => {
-    fetch(`http://localhost:8000/projects/${projectId}`)
-      .then((res) => res.json())
-      .then((res) => {
-        setProject(res);
-        setInstitutionId(res.institution_id);
-      })
-      .catch((erro) => alert(`Erro ao obter lista de projetos: ${erro}`));
+    api.get(`/project/${projectId}`)
+    .then((res) => {
+      setProject(res.data);
+      setCauses(res.data.causes);
+      setHabilities(res.data.habilities);
+      setInstitution(res.data.institution);
+    })
+    .catch((erro) => alert(`Erro ao obter lista de projetos: ${erro}`));
   }, [projectId]);
 
-  useEffect(() => {
+  useEffect(() => { 
     fetch(`http://localhost:8000/subscription/?user_id=${user.id}&&project_id=${projectId}`)
       .then((res) => res.json())
       .then((res) => {
@@ -41,42 +42,6 @@ function ProjectPage() {
       })
       .catch((erro) => alert(`Erro ao obter lista de projetos: ${erro}`));
   }, [projectId, user.id]);
-  
-
-  useEffect(() => {
-    institutionId && fetch(`http://localhost:8000/institution/${institutionId}`)
-      .then((res) => res.json())
-      .then((res) => {
-        setInstitution(res);
-      })
-      .catch((erro) => alert(`Erro ao obter instituição`));
-  }, [institutionId]);
-
-  useEffect(() => {
-    let requests =
-      project &&
-      project.cause_id.map( (cause_id) => {
-        return fetch(`http://localhost:8000/cause/${cause_id}`).then((res) => res.json())
-      });
-
-      requests && Promise.all(requests)
-      .then((p) => setCauses(p))
-      .catch((err) => alert("Não foi possível obter as causas"));
-  }, [project]);
-
-
-  useEffect(() => {
-    let requests2 =
-      project &&
-      project.hability_id.map(async (hability_id) => {
-        const res = await fetch(`http://localhost:8000/hability/${hability_id}`);
-        return await res.json();
-      });
-
-      requests2 && Promise.all(requests2)
-      .then((p) => setHabilities(p))
-      .catch((err) => alert("Não foi possível obter as habilidades"));
-  }, [project]);
 
   return (
     <div id="page-container">
@@ -93,9 +58,9 @@ function ProjectPage() {
             </div>
             <div className="project-information">
               <div className="project-provider">
-                {institution && <h3>Instituição: {institution.institution_name}</h3>}
+                {institution && <h3>Instituição: {institution.name}</h3>}
                 <hr />
-                {institution && <span>Cidade: {institution.city}</span>}
+                {institution && <span>Cidade: {institution.address.city}</span>}
                 <span>Remoto: {project.local_type}</span>
               </div>
               <div className="project-details">

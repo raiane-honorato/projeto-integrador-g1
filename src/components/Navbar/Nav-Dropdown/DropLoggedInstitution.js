@@ -10,6 +10,7 @@ function DropLoggedInstitution() {
         event.preventDefault();    
         setToken("");
         setUser("");
+        localStorage.clear();
         return history.push("/");
       }
 
