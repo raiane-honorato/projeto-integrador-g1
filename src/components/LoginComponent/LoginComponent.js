@@ -44,14 +44,12 @@ function LoginComponent(props) {
     event.preventDefault();
     try {
       await login(userEmail, password);
-      if (token !== null || token !== "undefined" ||token !== ""){
+      if (token !== null && token !== undefined && token !== ""){
+        console.log("aqui n")
         renderingUser();
         history.push("/");
       } else {
-        toast.error("Senha ou usuário inválidos!", {
-          duration: 2000,
-          position: "top-right",
-        });
+        console.logo("nao")
       }     
     } catch (error) {
       toast.error("Senha ou usuário inválidos!", {

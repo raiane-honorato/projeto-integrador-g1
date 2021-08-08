@@ -18,7 +18,7 @@ function DropLoggedUser() {
 
     <ul className="nav-btn-list">
         <li className="nav-btn">
-            <NavLink to={`/user/${user.id}`}>
+            <NavLink to={`/user/${user?.id}`}>
             <b>Perfil</b>
             </NavLink>  
         </li>
