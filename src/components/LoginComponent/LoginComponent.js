@@ -18,8 +18,7 @@ function LoginComponent(props) {
       password
     })
     const { token } = response.data;
-    const tokenInStorage = localStorage.setItem("token", token)
-    setToken(tokenInStorage);
+    setToken(token);
   }
 
   async function renderingUser() {
@@ -32,9 +31,10 @@ function LoginComponent(props) {
     event.preventDefault();
     try { 
         await login(userEmail, password);
-        token ? console.log('oi') : console.log('nada')   
-        // console.log(token) 
-        history.push("/");    
+        console.log("token: " + token)
+        await renderingUser();
+          history.push("/");
+            
     } catch (error) {
       toast.error("Senha ou usuário inválidos!", {
         duration: 2000,
@@ -42,6 +42,7 @@ function LoginComponent(props) {
       });
     }
   }
+
 
   return (
     <div className="firts-column">

@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext } from "react";
 import useStorage from "../utils/useStorage.js";
 
 const AuthContext = createContext({
@@ -10,8 +10,8 @@ const AuthContext = createContext({
 
 const AuthProvider = ({ children }) => {
   
-  const [token, setToken] = useState();
-  const [user, setUser] = useState();
+  const [token, setToken] = useStorage('token');
+  const [user, setUser] = useStorage("user");
 
   return (
     <AuthContext.Provider
