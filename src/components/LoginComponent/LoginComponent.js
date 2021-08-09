@@ -3,6 +3,7 @@ import { useContext, useState } from "react";
 import { NavLink, useHistory } from "react-router-dom";
 import { AuthContext } from "../../context/auth";
 import toast, { Toaster } from "react-hot-toast";
+import api from "../../services/api";
 
 function LoginComponent(props) {
   const { token, setToken } = useContext(AuthContext);
@@ -12,45 +13,28 @@ function LoginComponent(props) {
   const { setUser } = useContext(AuthContext);
 
   async function login(userEmail, password) {
-    try {
-      const response = await fetch("http://localhost:8080/login", {
-        method: "POST",
-        headers: { "Content-type": "application/json" },
-        body: JSON.stringify({
-          email: userEmail,
-          password: password,
-        }),
-      });
-      const result = await response.json();
-      setToken(result.token);
-    } catch (error) {
-      console.log(error);
-      return "Usuário ou senha inválido!";
-    }
+    const response = await api.post(`/login`, {
+      email: userEmail,
+      password
+    })
+    const { token } = response.data;
+    const tokenInStorage = localStorage.setItem("token", token)
+    setToken(tokenInStorage);
   }
 
-  function renderingUser() {
-    const userId = "1";
-
-    fetch(`http://localhost:8000/user/${userId}`)
-      .then((res) => res.json())
-      .then((res) => {
-        setUser(res);
-      })
-      .catch((erro) => alert("Não foi possível localizar este usuário."));
+  async function renderingUser() {
+     const response = await api.get(`/user/email?email=${userEmail}`);
+     const result = response.data;
+      setUser(result)  
   }
 
   async function onSubmit(event) {
     event.preventDefault();
-    try {
-      await login(userEmail, password);
-      if (token !== null && token !== undefined && token !== ""){
-        console.log("aqui n")
-        renderingUser();
-        history.push("/");
-      } else {
-        console.logo("nao")
-      }     
+    try { 
+        await login(userEmail, password);
+        token ? console.log('oi') : console.log('nada')   
+        // console.log(token) 
+        history.push("/");    
     } catch (error) {
       toast.error("Senha ou usuário inválidos!", {
         duration: 2000,

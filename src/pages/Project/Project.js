@@ -35,13 +35,13 @@ function ProjectPage() {
   }, [projectId]);
 
   useEffect(() => { 
-    fetch(`http://localhost:8000/subscription/?user_id=${user.id}&&project_id=${projectId}`)
+       user && fetch(`http://localhost:8000/subscription/?user_id=${user.id}&&project_id=${projectId}`)
       .then((res) => res.json())
       .then((res) => {
         setSubscriptions(res);
       })
       .catch((erro) => alert(`Erro ao obter lista de projetos: ${erro}`));
-  }, [projectId, user.id]);
+  }, [projectId, user]);
 
   return (
     <div id="page-container">
