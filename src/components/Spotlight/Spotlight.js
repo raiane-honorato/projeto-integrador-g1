@@ -47,7 +47,7 @@ function Spotlight() {
       {/* Habilities */}
       <section className="spotlight-section spotlight-section-one">
         <div className="spotlight-section-one-content">
-          <h2>Busque por habilidade</h2>
+          <h2>Vagas por habilidade</h2>
           <div className="habilities-grid">
             {habilities && habilities.map((hability) => (
               <div key={hability.id} className="hability-img-div">
@@ -67,7 +67,7 @@ function Spotlight() {
       {/* causes */}
       <section className="spotlight-section spotlight-section-cause">
         <div className="spotlight-section-one-content">
-          <h2>Apoie sua Causa</h2>
+          <h2>Apoie uma Causa</h2>
           <div className="causes-grid">
             {causes && causes.map((cause) => (
               <div key={cause.id} className="cause-img-div">

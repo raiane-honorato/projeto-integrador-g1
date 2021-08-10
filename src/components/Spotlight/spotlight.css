@@ -1,6 +1,8 @@
 .spotlight-section {
   display: flex;
   justify-content: center;
+
+  
 }
   
                   /* Secção de habilidades mais requisitadas */
@@ -34,7 +36,7 @@
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap:1rem 0;
   margin-bottom: 4rem;
-  font-family: 'Poppins', sans-serif;
+  
 }
 
 .hability-img-div, .cause-img-div {
@@ -43,6 +45,7 @@
   justify-content:flex-start;
   margin: .5rem;
   cursor: pointer;
+  font-family: var(--secondFont);
 }
 
 .hability-img, .cause-img {
@@ -88,7 +91,7 @@
     justify-content: center;
   }
 
-  .habilities-grid {
+  .habilities-grid, .causes-grid {
     display: flex;
     flex-direction: column;
     justify-content: center;

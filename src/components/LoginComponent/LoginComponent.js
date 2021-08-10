@@ -30,8 +30,7 @@ function LoginComponent(props) {
   async function onSubmit(event) {
     event.preventDefault();
     try { 
-        await login(userEmail, password);
-        console.log("token: " + token)
+        await login(userEmail, password);      
         await renderingUser();
           history.push("/");
             

@@ -137,6 +137,10 @@
   text-decoration: none;
 }
 
+.user-subscription-btn span {
+  margin-left: .3rem;
+}
+
 @media (max-device-width : 800px) {
   .userdata-container {
     display: flex;
@@ -209,6 +213,7 @@
     justify-content: center;
     flex-direction: column ;
   }
+
 
   .greenCard {
     box-sizing: border-box;
