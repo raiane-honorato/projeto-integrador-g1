@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import InputMask from "react-input-mask";
 import "./institutionForm.css";
 import Select, { components } from "react-select";
@@ -14,7 +14,7 @@ function useFormik({ initialValues, validate }) {
   const [values, setValues] = useState(initialValues);
   const [cep, setCep] = useState("");
 
-  useEffect(() => {
+  useCallback(() => {
     function validateValues(values) {
       setErrors(validate(values));
     }

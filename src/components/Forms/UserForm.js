@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useCallback } from "react";
 import InputMask from "react-input-mask";
 import "./userform.css";
 
@@ -7,7 +7,7 @@ function useFormik({ initialValues, validate }) {
   const [errors, setErrors] = useState({});
   const [values, setValues] = useState(initialValues);
 
-  useEffect(() => {
+  useCallback(() => {
     function validateValues(values) {
       setErrors(validate(values));
     }
