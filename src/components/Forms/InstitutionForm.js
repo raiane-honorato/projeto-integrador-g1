@@ -15,8 +15,11 @@ function useFormik({ initialValues, validate }) {
   const [cep, setCep] = useState("");
 
   useEffect(() => {
+    function validateValues(values) {
+      setErrors(validate(values));
+    }
     validateValues(values);
-  }, [values]);
+  }, [values, validate]);
 
   useEffect(() => {
     if (cep.length > 7)
@@ -63,10 +66,6 @@ function useFormik({ initialValues, validate }) {
       ...touched,
       [fieldName]: true,
     });
-  }
-
-  function validateValues(values) {
-    setErrors(validate(values));
   }
 
   return {

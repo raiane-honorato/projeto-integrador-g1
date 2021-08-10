@@ -3,30 +3,27 @@ import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {  useRef } from "react";
 import './cancelUserSubscription.css';
+import api from './../../../services/api';
 
 function CancelUserSubscription({setSubscriptions, subscriptions, subscription, setCancelSubscription}) {
 
-    //dealing with outside click to close the component
+     //dealing with outside click to close the component
   let windowRef = useRef();
-
-  const subsIndex = subscriptions.findIndex((element) => element.id === subscription.id )
-  let subsArray = [...subscriptions]
 
   const cancelSubscription = () => {
    
-      fetch(`http://localhost:8000/subscription/${subscription.id}`, 
-    {
+    api({
       method: "PATCH",
-      headers: {"Content-type": "application/json"},
-      body: JSON.stringify({"subscription_status": "Cancelada"})
+      url: `/subscription/${subscription.id}`, 
+      headers: { "Content-type": "application/json" },    
+      data: {status: "Cancelada"}
     })
-    .then((res) => res.json())
     .then((res) => {
-      subsArray[subsIndex] = res;
-      setSubscriptions(subsArray);
+      console.log("data" + res.data)     
+      setSubscriptions(res.data);
       setCancelSubscription(false);
     })
-    .then((res) => toast.success("Inscrição cancelada com sucesso."))
+    .then(() => toast.success("Inscrição cancelada com sucesso."))
     .catch((erro) =>
       alert("Não foi possível atualizar.")
     );

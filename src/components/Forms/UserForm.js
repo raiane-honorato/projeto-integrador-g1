@@ -8,8 +8,12 @@ function useFormik({ initialValues, validate }) {
   const [values, setValues] = useState(initialValues);
 
   useEffect(() => {
+    function validateValues(values) {
+      setErrors(validate(values));
+    }
+  
     validateValues(values);
-  }, [values]);
+  }, [values, validate]);
 
   function handleChange(event) {
     const fieldName = event.target.getAttribute("name");
@@ -27,10 +31,6 @@ function useFormik({ initialValues, validate }) {
       ...touched,
       [fieldName]: true,
     });
-  }
-
-  function validateValues(values) {
-    setErrors(validate(values));
   }
 
   return {

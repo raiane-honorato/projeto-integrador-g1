@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, {  useState } from "react";
 import { Fragment } from "react";
 import "./userdata.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";

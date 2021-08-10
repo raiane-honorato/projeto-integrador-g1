@@ -16,7 +16,6 @@ function UserData() {
   const [pageUser, setPageUser] = useState("");
   const [causes, setCauses] = useState();
   const [habilities, setHabilities] = useState();
-  console.log(subscriptions)
 
   //states of content edition
   const [firstEditState, setFirstEditState] = useState(false);
@@ -33,7 +32,6 @@ function UserData() {
           setPageUser(res.data);
           setCauses(res.data.causes);
           setHabilities(res.data.habilities);
-          console.log(res.data)
         })
         .catch((erro) => alert("Não foi possível localizar este usuário."));
     }

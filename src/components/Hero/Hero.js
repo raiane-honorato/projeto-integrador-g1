@@ -20,13 +20,13 @@ function Hero() {
         <div className="hero-container">
           <motion.h2 
           className="hero-title"
-          initial={{opacity:0}, {x:-400}}
-          animate={{opacity:1}, {x:0}}
+          initial={{opacity:0, x:-400}}
+          animate={{opacity:1, x:0}}
           transition={{duration:1}}
           >Corrente do bem</motion.h2>
           <motion.p className="hero-p"
-          initial={{opacity:0}, {x:1000}}
-          animate={{opacity:1}, {x:0}}
+          initial={{opacity:0, x:1000}}
+          animate={{opacity:1, x:0}}
           transition={{duration:2}}>
             Transforme o mundo por meio da solidariedade. Seja mais um elo dessa
             corrente.
@@ -34,8 +34,8 @@ function Hero() {
           <div className='hero-buttons'>
           <NavLink to="/register_user">
             <motion.button 
-             initial={{opacity:0}, {y:400}}
-             animate={{opacity:1}, {y:0}}
+             initial={{opacity:0, y:400}}
+             animate={{opacity:1, y:0}}
              transition={{duration:2}}
             className="hero-btn" id="hero-btn-volunteer">
               Seja um voluntário
@@ -43,8 +43,8 @@ function Hero() {
           </NavLink>
           <NavLink to="/register_institution">
           <motion.button 
-             initial={{opacity:0}, {y:400}}
-             animate={{opacity:1}, {y:0}}
+             initial={{opacity:0, y:400}}
+             animate={{opacity:1, y:0}}
              transition={{duration:1}}
              className="hero-btn" id="hero-btn-institution">
             Seja uma instituição
