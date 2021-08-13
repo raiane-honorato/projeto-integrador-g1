@@ -16,11 +16,12 @@ function useFormik({ initialValues, validate }) {
   const [cep, setCep] = useState("");
 
   useEffect(() => {
-    function validateValues(values) {
-      setErrors(validate(values));
-    }
-    validateValues(values);
-  }, [validate, values]);
+       validateValues(values);
+  }, [values]);
+
+  function validateValues(values) {
+    setErrors(validate(values));
+  }
 
   useEffect(() => {
     if (cep.length > 7)

@@ -1,7 +1,18 @@
+import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
+import ProjectCardSkeleton from "../ProjectCardSkeleton/ProjectCardSkeleton";
 import "./ProjectCart.css";
 
 function ProjectCart({ project }) {
+  const [imageLoaded, setImageLoaded] = useState(false);
+
+  const image = project.img;
+
+  useEffect(() => {
+    const imageLoader = new Image();
+    imageLoader.src = image;
+    imageLoader.onload = () => setImageLoaded(true);
+  }, [image]);
 
     return (
     <>
@@ -10,14 +21,15 @@ function ProjectCart({ project }) {
         key={`card-${project["id"]}`}
         className="spotlight-card-container"
       >
-        <div className="card">
-          <div className="card-image-div">
+        {imageLoaded ? (
+        <div className="card">          
+          <div className="card-image-div">        
             <img
               className="card-image"
               alt={project["title"]}
-              src={project["img"]}
-            />
-          </div>
+              src={image}
+            />         
+          </div>           
           <div className="card-content">
             <h3 className="job-title">{project["title"]}</h3>
 
@@ -31,6 +43,9 @@ function ProjectCart({ project }) {
             ))}
           </div>
         </div>
+          ) : (
+            <ProjectCardSkeleton />
+          )}
       </NavLink>
     </>
   );

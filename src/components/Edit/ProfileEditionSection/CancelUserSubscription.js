@@ -5,9 +5,8 @@ import {  useRef } from "react";
 import './cancelUserSubscription.css';
 import api from './../../../services/api';
 
-function CancelUserSubscription({setSubscriptions, subscriptions, subscription, setCancelSubscription}) {
-
-     //dealing with outside click to close the component
+function CancelUserSubscription({ subscription, setSubscription, setCancelSubscription}) {
+       //dealing with outside click to close the component
   let windowRef = useRef();
 
   const cancelSubscription = () => {
@@ -15,17 +14,20 @@ function CancelUserSubscription({setSubscriptions, subscriptions, subscription, 
     api({
       method: "PATCH",
       url: `/subscription/${subscription.id}`, 
-      headers: { "Content-type": "application/json" },    
-      data: {status: "Cancelada"}
+      headers: { "Content-type": "application/json"
+                  
+    },    
+      data: {   
+        ...subscription,    
+        status: "Cancelada"}
     })
-    .then((res) => {
-      console.log("data" + res.data)     
-      setSubscriptions(res.data);
+    .then((res) => {        
+      setSubscription(res.data)
       setCancelSubscription(false);
     })
     .then(() => toast.success("Inscrição cancelada com sucesso."))
     .catch((erro) =>
-      alert("Não foi possível atualizar.")
+      alert("Não foi possível atualizar a inscrição.")
     );
   }
 

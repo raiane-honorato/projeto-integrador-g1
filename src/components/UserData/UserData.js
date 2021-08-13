@@ -17,6 +17,7 @@ function UserData() {
   const [causes, setCauses] = useState();
   const [habilities, setHabilities] = useState();
 
+
   //states of content edition
   const [firstEditState, setFirstEditState] = useState(false);
   const [secondEditState, setSecondEditState] = useState(false);
@@ -132,13 +133,13 @@ function UserData() {
                 </div>
               </div>
               <div className="projects-data">
-                {user.id === pageUser.id && <h2>Projetos</h2>}
+                {subscriptions && <h2>Projetos</h2>}
                 {subscriptions &&
                   user.id === pageUser.id &&
                   subscriptions.map((subscription) => (
                     <UserSubscriptionCart
                       key={subscription.id}
-                      subscription={subscription}
+                      subscriptionId={subscription.id}
                       subscriptions={subscriptions}
                       setSubscriptions={setSubscriptions}
                     />

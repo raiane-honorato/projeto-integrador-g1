@@ -1,0 +1,17 @@
+.projectCardSkeleton {
+  background-color: gray;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  max-height: 12rem;  
+  max-width: 40rem; 
+  animation: keyFrameLoading 500ms infinite alternate;
+}
+
+@keyframes keyFrameLoading {
+  0% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+}
