@@ -1,56 +1,40 @@
 import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
+import ProjectCardSkeleton from "../ProjectCardSkeleton/ProjectCardSkeleton";
 import "./ProjectCart.css";
 
-function ProjectCart(props) {
+function ProjectCart({ project }) {
+  const [imageLoaded, setImageLoaded] = useState(false);
 
-  const [institution, setInstitution] = useState();
-  const [habilities, setHabilities] = useState([]);
-
-  useEffect(() => {
-    fetch(`http://localhost:8000/institution/${props.project.institution_id}`)
-    .then(res => res.json())
-    .then(res => setInstitution(res))
-    .catch(erro => alert(`Erro ao obter lista de habilidades: ${erro}`))
-  }
-  ,[props.project.institution_id]);
+  const image = project.img;
 
   useEffect(() => {
-    let requests = props.project.hability_id.map( (hability_id) => {
-      
-      return fetch(`http://localhost:8000/hability/${hability_id}`)
-      .then(res => res.json())
-    })
+    const imageLoader = new Image();
+    imageLoader.src = image;
+    imageLoader.onload = () => setImageLoaded(true);
+  }, [image]);
 
-    Promise.all(requests)
-    .then(res => setHabilities(res))
-    .catch(erro => alert(`Erro ao obter lista de habilidades: ${erro}`))
-
-    
-  }
-  ,[props.project.hability_id]);
-
-
-  return (
+    return (
     <>
       <NavLink
-        to={`/project/${props.project["id"]}`}
-        key={`card-${props.project["id"]}`}
+        to={`/project/${project["id"]}`}
+        key={`card-${project["id"]}`}
         className="spotlight-card-container"
       >
-        <div className="card">
-          <div className="card-image-div">
+        {imageLoaded ? (
+        <div className="card">          
+          <div className="card-image-div">        
             <img
               className="card-image"
-              alt={props.project["title"]}
-              src={props.project["img"]}
-            />
-          </div>
+              alt={project["title"]}
+              src={image}
+            />         
+          </div>           
           <div className="card-content">
-            <h3 className="job-title">{props.project["title"]}</h3>
+            <h3 className="job-title">{project["title"]}</h3>
 
-            <p className="job-schedule">{institution && institution.institution_name}</p>
-            {habilities && habilities.map((hability, index) => (
+            <p className="job-schedule">{project.institution && project.institution.name}</p>
+            {project.habilities && project.habilities.map((hability, index) => (
               <span className="spotlight-projectcart-hability" key={index}>
                 {
                   hability.label
@@ -59,6 +43,9 @@ function ProjectCart(props) {
             ))}
           </div>
         </div>
+          ) : (
+            <ProjectCardSkeleton />
+          )}
       </NavLink>
     </>
   );

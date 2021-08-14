@@ -72,8 +72,7 @@ function Search() {
 
   //getting project list from JSON server on 8000
   const [projects, setProjects] = useState(null);
-  console.log(projects)
-
+ 
   useEffect(() => {
     fetch(`http://localhost:8000/projects/`)
       .then((res) => res.json())
@@ -117,7 +116,6 @@ function Search() {
  
   useEffect(() => {
     if (projects) {
-      console.log('oi')
       setFilteredProjects(
         projects
           .filter(

@@ -1,6 +1,6 @@
 import { Route, BrowserRouter, Switch } from "react-router-dom";
 
-import Home from "./pages/Home";
+import Home from "./pages/Home/Home";
 import Search from "./pages/Search/Search";
 import RegisterUser from "./pages/RegisterUser/RegisterUser";
 import RegisterInstitution from "./pages/RegisterInstitution/RegisterInstitution";

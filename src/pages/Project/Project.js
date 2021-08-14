@@ -5,8 +5,9 @@ import Footer from "../../components/Footer/Footer";
 import Navbar from "../../components/Navbar/Navbar";
 import UserSubscription from "../../components/UserSubscription/UserSubscription";
 import "./project.css";
-import Loader from '../../components/Loader/Loader';
-import api from '../../services/api';
+import Loader from "../../components/Loader/Loader";
+import api from "../../services/api";
+import ImageSkeleton from "../../components/ImageSkeleton/ImageSkeleton";
 
 function ProjectPage() {
   const parameter = useParams();
@@ -18,30 +19,37 @@ function ProjectPage() {
   const [habilities, setHabilities] = useState([]);
   const [institution, setInstitution] = useState();
   const [subscriptions, setSubscriptions] = useState();
-  const [activeSubscription, setActiveSubscription ] = useState(false);
-
-  console.log(activeSubscription)
+  const [activeSubscription, setActiveSubscription] = useState(false);
+  const [imageLoaded, setImageLoaded] = useState(false);
 
   //get data from localhost port 8000
   useEffect(() => {
-    api.get(`/project/${projectId}`)
-    .then((res) => {
-      setProject(res.data);
-      setCauses(res.data.causes);
-      setHabilities(res.data.habilities);
-      setInstitution(res.data.institution);
-    })
-    .catch((erro) => alert(`Erro ao obter lista de projetos: ${erro}`));
-  }, [projectId]);
-
-  useEffect(() => { 
-       user && fetch(`http://localhost:8000/subscription/?user_id=${user.id}&&project_id=${projectId}`)
-      .then((res) => res.json())
+    api
+      .get(`/project/${projectId}`)
       .then((res) => {
-        setSubscriptions(res);
+        setProject(res.data);
+        setCauses(res.data.causes);
+        setHabilities(res.data.habilities);
+        setInstitution(res.data.institution);
       })
       .catch((erro) => alert(`Erro ao obter lista de projetos: ${erro}`));
-  }, [projectId, user]);
+  }, [projectId]);
+
+  useEffect(() => {
+    user && api.get(`/subscription/?user_id=${user.id}&project_id=${projectId}`)
+      .then((res) => {
+        setSubscriptions(res.data);
+      })
+      .catch((erro) => alert(`Erro ao obter lista de projetos: ${erro}`));
+}, [projectId, user]);
+
+  const image = project?.img;
+
+  useEffect(() => {
+    const imageLoader = new Image();
+    imageLoader.src = image;
+    imageLoader.onload = () => setImageLoaded(true);
+  }, [image]);
 
   return (
     <div id="page-container">
@@ -53,9 +61,13 @@ function ProjectPage() {
           </div>
 
           <div className="grid-project">
-            <div className="project-image-div">
-              <img src={project.img} alt="project" />
-            </div>
+            {imageLoaded ? (
+              <div className="project-image-div">
+                <img src={image} alt="project" />
+              </div>
+            ) : (
+              <ImageSkeleton />
+            )}
             <div className="project-information">
               <div className="project-provider">
                 {institution && <h3>Instituição: {institution.name}</h3>}
@@ -79,27 +91,37 @@ function ProjectPage() {
                       <span key={cause.id}>{cause.label}</span>
                     ))}
                 </div>
-                { subscriptions && user.type === 1 && subscriptions.length === 0 ?
-                <button className="project-btn" onClick = {() => setActiveSubscription(true)}>Quero a vaga</button>
-                :
-                <NavLink to="/login"><button className="project-btn">Faça seu Login</button></NavLink> 
-                }
-                {subscriptions && subscriptions.length > 0 && <p>Você já está inscrito nesta vaga</p>}
+                {subscriptions &&
+                user.type === 1 &&
+                subscriptions.length === 0 ? (
+                  <button
+                    className="project-btn"
+                    onClick={() => setActiveSubscription(true)}
+                  >
+                    Quero a vaga
+                  </button>
+                ) : subscriptions?.length > 0 ? (
+                  <p>Você já está inscrito nesta vaga</p>
+                ) : (
+                  <NavLink to="/login">
+                    <button className="project-btn">Faça seu Login</button>
+                  </NavLink>
+                )}
               </div>
             </div>
           </div>
         </div>
       ) : (
-        <Loader 
-        />
+        <div className="project-container">
+          <Loader />
+        </div>
       )}
       <Footer />
 
       <div
-        className={`project-overlay ${activeSubscription
-            ? "project-set-vis"
-            : ""
-          }`}
+        className={`project-overlay ${
+          activeSubscription ? "project-set-vis" : ""
+        }`}
         onClick={() => {
           setActiveSubscription(false);
         }}
@@ -107,13 +129,13 @@ function ProjectPage() {
         {" "}
       </div>
 
-
-      {activeSubscription && <UserSubscription project = {project} setStatePass = {setActiveSubscription}/>}
-
-
+      {activeSubscription && (
+        <UserSubscription
+          project={project}
+          setStatePass={setActiveSubscription}
+        />
+      )}
     </div>
-
-
   );
 }
 

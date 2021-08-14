@@ -6,6 +6,7 @@ import UserSubscriptionCart from "./UserSubscriptionCart";
 import EditButton from "../Edit/EditButton";
 import ProfileEditionSection from "../Edit/ProfileEditionSection/ProfileEditionSection";
 import { Toaster } from "react-hot-toast";
+import api from "../../services/api";
 
 function UserData() {
   const parameter = useParams();
@@ -15,6 +16,7 @@ function UserData() {
   const [pageUser, setPageUser] = useState("");
   const [causes, setCauses] = useState();
   const [habilities, setHabilities] = useState();
+
 
   //states of content edition
   const [firstEditState, setFirstEditState] = useState(false);
@@ -26,53 +28,23 @@ function UserData() {
       setPageUser(user);
       return;
     } else {
-      fetch(`http://localhost:8000/user/${userId}`)
-        .then((res) => res.json())
+      api.get(`/user/${userId}`)
         .then((res) => {
-          setPageUser(res);
+          setPageUser(res.data);
+          setCauses(res.data.causes);
+          setHabilities(res.data.habilities);
         })
         .catch((erro) => alert("Não foi possível localizar este usuário."));
     }
   }, [user, userId]);
 
   useEffect(() => {
-    fetch(`http://localhost:8000/subscription?user_id=${userId}`)
-      .then((res) => res.json())
+    api.get(`/subscription?user_id=${userId}`)
       .then((res) => {
-        setSubscriptions(res);
+        setSubscriptions(res.data);
       })
       .catch((erro) => alert("Não foi possível obter os projetos do usuário."));
   }, [userId]);
-
-  useEffect(() => {
-    let requests =
-      pageUser.causes &&
-      pageUser.causes.map(async (cause_id) => {
-        const res = await fetch(`http://localhost:8000/cause/${cause_id}`);
-        return await res.json();
-      });
-
-    requests &&
-      Promise.all(requests)
-        .then((p) => setCauses(p))
-        .catch((err) => alert("Não foi possível obter as causas"));
-  }, [pageUser]);
-
-  useEffect(() => {
-    let requests2 =
-      pageUser.habilities &&
-      pageUser.habilities.map(async (hability_id) => {
-        const res = await fetch(
-          `http://localhost:8000/hability/${hability_id}`
-        );
-        return await res.json();
-      });
-
-    requests2 &&
-      Promise.all(requests2)
-        .then((p) => setHabilities(p))
-        .catch((err) => alert("Não foi possível obter as habilidades"));
-  }, [pageUser]);
 
   return (
     <>
@@ -143,31 +115,31 @@ function UserData() {
                   </div>
                   <div className="second-section-personal-data">
                     <p>
-                      <span>Rua:</span> {pageUser.street}
+                      <span>Rua:</span> {pageUser.address?.street}
                     </p>
                     <p>
-                      <span>Número:</span> {pageUser.address_number}
+                      <span>Número:</span> {pageUser.address?.address_number}
                     </p>
                     <p>
-                      <span>Bairro:</span> {pageUser.bairro}
+                      <span>Bairro:</span> {pageUser.address?.neighborhood}
                     </p>
                     <p>
-                      <span>Cidade:</span> {pageUser.city}
+                      <span>Cidade:</span> {pageUser.address?.city}
                     </p>
                     <p>
-                      <span>Estado:</span> {pageUser.state}
+                      <span>Estado:</span> {pageUser.address?.state}
                     </p>
                   </div>
                 </div>
               </div>
               <div className="projects-data">
-                {user.id === pageUser.id && <h2>Projetos</h2>}
+                {subscriptions && <h2>Projetos</h2>}
                 {subscriptions &&
                   user.id === pageUser.id &&
                   subscriptions.map((subscription) => (
                     <UserSubscriptionCart
                       key={subscription.id}
-                      subscription={subscription}
+                      subscriptionId={subscription.id}
                       subscriptions={subscriptions}
                       setSubscriptions={setSubscriptions}
                     />

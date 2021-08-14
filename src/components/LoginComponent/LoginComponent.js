@@ -6,7 +6,7 @@ import toast, { Toaster } from "react-hot-toast";
 import api from "../../services/api";
 
 function LoginComponent(props) {
-  const { token, setToken } = useContext(AuthContext);
+  const { setToken } = useContext(AuthContext);
   const history = useHistory();
   const [userEmail, setUserEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -30,8 +30,7 @@ function LoginComponent(props) {
   async function onSubmit(event) {
     event.preventDefault();
     try { 
-        await login(userEmail, password);
-        console.log("token: " + token)
+        await login(userEmail, password);      
         await renderingUser();
           history.push("/");
             

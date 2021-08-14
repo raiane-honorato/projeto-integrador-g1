@@ -25,7 +25,6 @@ function InstitutionFirstEditionBody({ formik, institution }) {
         let filteredCauses = causes && institution && institution.cause_id.map((cause_id) => {
           return causes.filter(cause => cause.id === cause_id)[0]
         })
-        console.log(filteredCauses)
         setInstitutionCauses(filteredCauses)
       
     },[causes, institution])

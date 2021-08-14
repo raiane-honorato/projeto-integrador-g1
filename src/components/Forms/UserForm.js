@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useCallback } from "react";
 import InputMask from "react-input-mask";
 import "./userform.css";
 
@@ -7,9 +7,13 @@ function useFormik({ initialValues, validate }) {
   const [errors, setErrors] = useState({});
   const [values, setValues] = useState(initialValues);
 
-  useEffect(() => {
+  useCallback(() => {
+    function validateValues(values) {
+      setErrors(validate(values));
+    }
+  
     validateValues(values);
-  }, [values]);
+  }, [values, validate]);
 
   function handleChange(event) {
     const fieldName = event.target.getAttribute("name");
@@ -27,10 +31,6 @@ function useFormik({ initialValues, validate }) {
       ...touched,
       [fieldName]: true,
     });
-  }
-
-  function validateValues(values) {
-    setErrors(validate(values));
   }
 
   return {

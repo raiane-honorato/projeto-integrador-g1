@@ -36,7 +36,7 @@ function ManageProjectsList() {
         return () => {
             filterStatus && document.removeEventListener("mousedown", handler)
         }
-    },[filterStatus])
+    },[filterStatus, filterProject])
 
     useEffect(() => {
       

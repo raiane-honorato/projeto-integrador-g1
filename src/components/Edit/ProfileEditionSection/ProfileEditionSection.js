@@ -3,8 +3,9 @@ import { useState, useEffect, useRef } from "react";
 import "./profileEditionSection.css";
 import UserFirstEditionBody from "./UserFirstEditionBody";
 import UserSecondEditionBody from "./UserSecondEditionBody";
-import UserThirdEditionBody from './UserThirdEditionBody';
-import toast from 'react-hot-toast';
+import UserThirdEditionBody from "./UserThirdEditionBody";
+import toast from "react-hot-toast";
+import api from "../../../services/api";
 
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 
@@ -12,34 +13,43 @@ function useFormik({ initialValues, validate }) {
   const [touched, setTouchedFields] = useState({});
   const [errors, setErrors] = useState({});
   const [values, setValues] = useState(initialValues);
-  const [cep, setCep] = useState('');
+  const [cep, setCep] = useState("");
 
   useEffect(() => {
-    validateValues(values);
+       validateValues(values);
   }, [values]);
+
+  function validateValues(values) {
+    setErrors(validate(values));
+  }
 
   useEffect(() => {
     if (cep.length > 7)
-    fetch(`https://viacep.com.br/ws/${cep}/json/`)
-      .then((response) => response.json())
-      .then((response) => setValues({
-        ...values,
-        street: response.logradouro,
-        bairro: response.bairro,
-        city: response.localidade,
-        state: response.uf
-      }))
-      .catch((error) => console.log(`Não foi possível obter o endereço do CEP informado! Erro:${error}`));
-
+      fetch(`https://viacep.com.br/ws/${cep}/json/`)
+        .then((response) => response.json())
+        .then((response) =>
+          setValues({
+            ...values,
+            street: response.logradouro,
+            bairro: response.bairro,
+            city: response.localidade,
+            state: response.uf,
+          })
+        )
+        .catch((error) =>
+          console.log(
+            `Não foi possível obter o endereço do CEP informado! Erro:${error}`
+          )
+        );
   }, [values, cep]);
 
   function searchingData(e) {
     setCep(e.target.value);
-  }  
+  }
 
   function fillingForm({ target }) {
-    const {id, value} = target;
-    setValues({...values, [id]: value})
+    const { id, value } = target;
+    setValues({ ...values, [id]: value });
   }
 
   function handleChange(event) {
@@ -60,10 +70,6 @@ function useFormik({ initialValues, validate }) {
     });
   }
 
-  function validateValues(values) {
-    setErrors(validate(values));
-  }
-
   return {
     values,
     errors,
@@ -73,7 +79,7 @@ function useFormik({ initialValues, validate }) {
     handleChange,
     cep,
     searchingData,
-    fillingForm
+    fillingForm,
   };
 }
 
@@ -100,19 +106,19 @@ function ProfileEditionSection(props) {
       const errors = {};
 
       if ((values.name.length < 3) | (values.name.length > 100)) {
-        errors.name = "Nome Invalido";
+        errors.name = "Nome inválido";
       }
 
-      if (values.CPF.length < 11) {
-        errors.CPF = "CPF invalido";
+      if (values.cpf.length < 11) {
+        errors.cpf = "CPF inválido";
       }
 
       if (values.birth_date.length === undefined) {
-        errors.birth_date = "Data invalida";
+        errors.birth_date = "Data inválida";
       }
 
       if ((values.phone.length < 10) | (values.phone.length > 11)) {
-        errors.phone = "Telefone invalido";
+        errors.phone = "Telefone inválido";
       }
 
       if (!values.email.includes("@") | (values.email.lengthh < 7)) {
@@ -125,16 +131,16 @@ function ProfileEditionSection(props) {
 
   //saving information
   const handleSave = () => {
-    fetch(`http://localhost:8000/user/${props.pageUser.id}`, {
+    api({
       method: "PATCH",
+      url: `/user/${props.pageUser.id}`,
       headers: { "Content-type": "application/json" },
-      body: JSON.stringify(formik.values),
+      data: formik.values,
     })
-      .then((res) => res.json())
       .then((res) => {
-        props.setPageUser(res);
+        props.setPageUser(res.data);
         props.setStatePass(false);
-        toast.success("Usuário atualizado.", {position: "top-right"})
+        toast.success("Usuário atualizado.", { position: "top-right" });
       })
       .catch((erro) => alert("Não foi possível atualizar."));
   };
