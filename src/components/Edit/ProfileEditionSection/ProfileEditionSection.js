@@ -33,7 +33,7 @@ function useFormik({ initialValues, validate }) {
             ...values,
             address: {
               street: response.logradouro,
-              bairro: response.bairro,
+              neighborhood: response.bairro,
               city: response.localidade,
               state: response.uf
             }
@@ -43,7 +43,10 @@ function useFormik({ initialValues, validate }) {
           console.log(
             `Não foi possível obter o endereço do CEP informado! Erro:${error}`
           )     
-        );        
+        );    
+        return () => {
+      
+        }    
   }, [values, cep]);
 
   function searchingData(e) {
@@ -132,7 +135,7 @@ function ProfileEditionSection(props) {
     },
   });
 
-  console.log(formik.values)
+  
   //saving information
   const handleSave = () => {
     api({

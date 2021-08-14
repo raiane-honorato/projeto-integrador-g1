@@ -5,9 +5,8 @@ import {
   SortableElement,
   sortableHandle,
 } from "react-sortable-hoc";
-import { useState } from "react";
-import { hability } from '../../../data/projects.json';
-import { cause } from '../../../data/projects.json';
+import { useEffect, useState } from "react";
+import api from '../../../services/api';
 
 function arrayMove(array, from, to) {
   array = array.slice();
@@ -33,11 +32,26 @@ const SortableSelect = SortableContainer(Select);
 function UserThirdEditionBody({ formik }) {
   const [selectedCauses, setSelectedCauses] = useState([]);
   const [selectedHabilities, setSelectedHabilities] = useState([]);
+  const [habilities, setHabilities] = useState([]);
+  const [causes, setCauses] = useState([]);
+
+
+  useEffect(() => {
+    api('/hability')
+    .then(res => setHabilities(res.data))
+    .catch((erro) => alert('Não foi possível carregar as habilidades!'))
+  },[])
+
+  useEffect(() => {
+    api('/cause')
+    .then(res => setCauses(res.data))
+    .catch((erro) => alert('Não foi possível carregar as causas!'))
+  },[])
   
  if(selectedHabilities){
   formik.values.habilities = [];
    for (let i in selectedHabilities) {      
-      formik.values.habilities.push(selectedHabilities[i].id)
+      formik.values.habilities.push(selectedHabilities[i])
    }
  }
 
@@ -45,7 +59,7 @@ function UserThirdEditionBody({ formik }) {
  if(selectedCauses){
   formik.values.causes = [];
    for (let i in selectedCauses) {      
-      formik.values.causes.push(selectedCauses[i].id)
+      formik.values.causes.push(selectedCauses[i])
    }
  }
 
@@ -79,7 +93,7 @@ function UserThirdEditionBody({ formik }) {
           getHelperDimensions={({ node }) => node.getBoundingClientRect()}
           // react-select props:
           isMulti
-          options={cause}
+          options={causes}
           value={selectedCauses}
           onChange={onChangeCause}
           components={{
@@ -103,7 +117,7 @@ function UserThirdEditionBody({ formik }) {
           getHelperDimensions={({ node }) => node.getBoundingClientRect()}
           // react-select props:
           isMulti
-          options={hability}
+          options={habilities}
           value={selectedHabilities}
           onChange={onChangeHability}
           components={{

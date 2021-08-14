@@ -36,7 +36,10 @@ function UserData() {
         })
         .catch((erro) => alert("Não foi possível localizar este usuário."));
     }
-  }, [user, userId]);
+    return () => {
+
+    }
+  }, [user, userId, causes, habilities]);
 
   useEffect(() => {
     api.get(`/subscription?user_id=${userId}`)
@@ -44,6 +47,9 @@ function UserData() {
         setSubscriptions(res.data);
       })
       .catch((erro) => alert("Não foi possível obter os projetos do usuário."));
+      return () => {
+      
+      }
   }, [userId]);
 
   return (
@@ -57,16 +63,14 @@ function UserData() {
               <h1>{pageUser.name}</h1>
               <div className="causes-section">
                 {causes && <span>Causas:</span>}
-                {causes &&
-                  causes.map((cause) => (
+                {causes?.map((cause) => (
                     <span key={cause.id}>{cause.label}</span>
                   ))}
               </div>
 
               <div className="habilities-section">
                 {habilities && <span>Habilidades:</span>}
-                {habilities &&
-                  habilities.map((hability) => (
+                {habilities?.map((hability) => (
                     <span key={hability.id}>{hability.label}</span>
                   ))}
               </div>
