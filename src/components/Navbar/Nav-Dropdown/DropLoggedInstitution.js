@@ -10,13 +10,14 @@ function DropLoggedInstitution() {
         event.preventDefault();    
         setToken("");
         setUser("");
+        localStorage.clear();
         return history.push("/");
       }
 
     return (
     <ul className="nav-btn-list">
         <li className="nav-btn">
-            <NavLink to={`/institution/${user.institution_id}`}>
+            <NavLink to={`/institution/${user?.institution_id}`}>
             <b>Página da instituição</b>
             </NavLink>  
         </li>

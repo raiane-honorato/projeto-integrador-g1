@@ -2,59 +2,45 @@ import { TextField, Button } from "@material-ui/core";
 import { useContext, useState } from "react";
 import { NavLink, useHistory } from "react-router-dom";
 import { AuthContext } from "../../context/auth";
-import toast, { Toaster } from 'react-hot-toast';
+import toast, { Toaster } from "react-hot-toast";
+import api from "../../services/api";
 
 function LoginComponent(props) {
-  const { setToken } = useContext(AuthContext);
+  const { token, setToken } = useContext(AuthContext);
   const history = useHistory();
   const [userEmail, setUserEmail] = useState("");
   const [password, setPassword] = useState("");
   const { setUser } = useContext(AuthContext);
 
-  function login(userEmail, password) {
-    if (userEmail === "joao@joao.com") {
-
-      const userId = "1";
-
-      fetch(`http://localhost:8000/user/${userId}`)
-      .then((res) => res.json())
-      .then((res) => {
-        setUser(res);
-      })
-      .catch((erro) => alert("Não foi possível localizar este usuário."));
-
-      return { token: "1234" };
-    } else if (userEmail === "medicos@medicos.com") {
-
-      const userId = "4";
-
-      fetch(`http://localhost:8000/user/${userId}`)
-      .then((res) => res.json())
-      .then((res) => {
-        setUser(res);
-      })
-      .catch((erro) => alert("Não foi possível localizar este usuário."));
-
-      return { token: "5678" };
-    } else {
-      return { error: "Usuário ou senha inválido!" };
-    }
+  async function login(userEmail, password) {
+    const response = await api.post(`/login`, {
+      email: userEmail,
+      password
+    })
+    const { token } = response.data;
+    setToken(token);
   }
 
-  function onSubmit(event) {
+  async function renderingUser() {
+     const response = await api.get(`/user/email?email=${userEmail}`);
+     const result = response.data;
+      setUser(result)  
+  }
+
+  async function onSubmit(event) {
     event.preventDefault();
-    const { token } = login(userEmail, password);
-
-    if (token) {
-     
-      setToken(token);
-      history.push("/");
-      return;
+    try { 
+        await login(userEmail, password);
+        console.log("token: " + token)
+        await renderingUser();
+          history.push("/");
+            
+    } catch (error) {
+      toast.error("Senha ou usuário inválidos!", {
+        duration: 2000,
+        position: "top-right",
+      });
     }
-
-    setUserEmail("");
-    setPassword("");
-    toast.error('Senha ou usuário inválidos!',{duration: 2000, position: "top-right"})
   }
 
 
