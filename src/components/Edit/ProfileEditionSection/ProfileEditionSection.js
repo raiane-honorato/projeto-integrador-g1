@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import "./profileEditionSection.css";
 import UserFirstEditionBody from "./UserFirstEditionBody";
 import UserSecondEditionBody from "./UserSecondEditionBody";
@@ -15,13 +15,14 @@ function useFormik({ initialValues, validate }) {
   const [values, setValues] = useState(initialValues);
   const [cep, setCep] = useState("");
 
-  useEffect(() => {
+  useCallback(() => {
+    function validateValues(values) {
+      setErrors(validate(values));
+    }
        validateValues(values);
-  }, [values]);
+  }, [validate, values]);
 
-  function validateValues(values) {
-    setErrors(validate(values));
-  }
+ 
 
   useEffect(() => {
     if (cep.length > 7)
@@ -30,17 +31,19 @@ function useFormik({ initialValues, validate }) {
         .then((response) =>
           setValues({
             ...values,
-            street: response.logradouro,
-            bairro: response.bairro,
-            city: response.localidade,
-            state: response.uf,
+            address: {
+              street: response.logradouro,
+              bairro: response.bairro,
+              city: response.localidade,
+              state: response.uf
+            }
           })
         )
         .catch((error) =>
           console.log(
             `Não foi possível obter o endereço do CEP informado! Erro:${error}`
-          )
-        );
+          )     
+        );        
   }, [values, cep]);
 
   function searchingData(e) {
@@ -129,21 +132,24 @@ function ProfileEditionSection(props) {
     },
   });
 
+  console.log(formik.values)
   //saving information
   const handleSave = () => {
     api({
       method: "PATCH",
       url: `/user/${props.pageUser.id}`,
       headers: { "Content-type": "application/json" },
-      data: formik.values,
+      data: formik.values  
     })
       .then((res) => {
         props.setPageUser(res.data);
         props.setStatePass(false);
         toast.success("Usuário atualizado.", { position: "top-right" });
       })
-      .catch((erro) => alert("Não foi possível atualizar."));
+      .catch((erro) => toast.error("Não foi possível atualizar os dados do usuário."));
   };
+
+  // console.log(formik.values)
 
   return (
     <div className="user-edition-container user-set-vis">

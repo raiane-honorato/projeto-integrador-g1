@@ -12,6 +12,12 @@ function ProjectCart({ project }) {
     const imageLoader = new Image();
     imageLoader.src = image;
     imageLoader.onload = () => setImageLoaded(true);
+
+    return () => {
+      // Here goes the code you wish to run on unmount
+    }
+
+    
   }, [image]);
 
     return (
