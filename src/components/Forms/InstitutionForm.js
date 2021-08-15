@@ -7,6 +7,7 @@ import {
   SortableElement,
   sortableHandle,
 } from "react-sortable-hoc";
+import api from "../../services/api";
 
 function useFormik({ initialValues, validate }) {
   const [touched, setTouchedFields] = useState({});
@@ -28,10 +29,12 @@ function useFormik({ initialValues, validate }) {
         .then((response) =>
           setValues({
             ...values,
-            street: response.logradouro,
-            bairro: response.bairro,
-            city: response.localidade,
-            state: response.uf,
+            address: {
+              street: response.logradouro,
+              neighborhood: response.bairro,
+              city: response.localidade,
+              state: response.uf
+            }
           })
         )
         .catch((error) =>
@@ -102,66 +105,57 @@ const SortableMultiValueLabel = sortableHandle((props) => (
 
 const SortableSelect = SortableContainer(Select);
 
-const causeOptions = [
-  {value:'saude', label: 'Saúde'},
-  {value:'meio ambiente', label: 'Meio Ambiente'},
-  {value:'mulheres', label: 'Mulheres'},
-  {value:'arte e cultura', label: 'Arte e Cultura'},
-  {value:'educação', label: 'Educação'},
-  {value:'direitos humanos', label: 'Direitos Humanos'},
-  {value:'crianças', label: 'Crianças'},
-  {value:'idosos', label: 'Idosos'},
-  {value:'proteção animal', label: 'Proteção Animal'},
-  {value:'refugiados', label: 'Refugiados'},
-]
-
-
 function InstForm() {
   const [currentStep, setCurrentStep] = useState(0);
   const [selected, setSelected] = useState([]);
+  const [causes, setCauses] = useState([]);
+
+
+  useEffect(() => {
+    api('/cause')
+    .then(res => setCauses(res.data))
+    .catch((erro) => alert('Não foi possível carregar as causas!'))
+  },[])
 
   const onChange = (selectedOptions) => setSelected(selectedOptions);
 
   const onSortEnd = ({ oldIndex, newIndex }) => {
     const newValue = arrayMove(selected, oldIndex, newIndex);
     setSelected(newValue);
-    console.log(
-      "Values sorted:",
-      newValue.map((i) => i.value)
-    );
   };
 
   const onlyNumbers = (str) => str.replace(/[^0-9]/g, "");
 
   const formik = useFormik({
     initialValues: {
-      institution_name: "",
+      name: "",
       summary: "",
-      cnpjNumber: "",
-      street: "",
-      bairro: "",
-      address_number: "",
-      city: "",
-      state: "",
-      causas: "",
-      numBeneficiados: "",
+      cnpj: "",
+      address: {
+          street: "",
+          neighborhood: "",
+          address_number: "",
+          city: "",
+          state: ""
+      },
+      causes: "",
       phone: "",
       site: "",
       facebook: "",
       instagram: "",
       bio: "",
       email: "",
-      senha: "",
-      confSenha: "",
+      password: "",
+      passwordConfirmation: "",
     },
     validate: function (values) {
-      const cnpj = onlyNumbers(values.cnpjNumber);
-      const tel = onlyNumbers(values.phone);
+      const cnpj = onlyNumbers(values.cnpj);
+      const phone = onlyNumbers(values.phone);
 
       const errors = {};
 
-      if ((values.institution_name.length < 3) | (values.institution_name.length > 100)) {
-        errors.institution_name = "Nome Invalido";
+      if ((values.name.length < 3) | (values.name.length > 100)) {
+        errors.name = "Nome Invalido";
       }
 
       if ((values.summary.length < 5) | (values.summary.length > 100)) {
@@ -169,14 +163,10 @@ function InstForm() {
       }
 
       if (cnpj.length < 14) {
-        errors.cnpjNumber = "CNPJ invalido";
+        errors.cnpj = "CNPJ invalido";
       }
 
-      if (values.causas.length < 3) {
-        errors.causas = "Causa invalida";
-      }
-
-      if ((tel.length < 10) | (tel.length > 11)) {
+      if ((phone.length < 10) | (phone.length > 11)) {
         errors.phone = "Telefone invalido";
       }
 
@@ -188,15 +178,15 @@ function InstForm() {
         errors.email = "Email invalido";
       }
 
-      if ((values.senha.length < 8) | (values.senha.length > 15)) {
+      if ((values.password.length < 8) | (values.password.length > 15)) {
         errors.senha = "Senha invalida";
       }
 
       if (
-        (values.confSenha !== values.senha) |
-        (values.confSenha === undefined)
+        (values.passwordConfirmation !== values.password) |
+        (values.passwordConfirmation === undefined)
       ) {
-        errors.confSenha = "Senha invalida";
+        errors.passwordConfirmation = "Senha inválida";
       }
 
       return errors;
@@ -256,20 +246,20 @@ function InstForm() {
         {steps[currentStep].id === "dados-base1" && (
           <div className="dados-base1">
             <div className="inst-inputs">
-              <label htmlFor="nomeOng">Nome da instituição</label>
+              <label htmlFor="name">Nome da instituição</label>
               <input
                 type="text"
-                name="institution_name"
-                id="institution_name"
-                value={formik.values.institution_name}
+                name="name"
+                id="name"
+                value={formik.values.name}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 minLength="3"
                 maxLength="100"
                 required
               />
-              {formik.touched.institution_name && formik.errors.institution_name && (
-                <span className="inst-formikError">{formik.errors.institution_name}</span>
+              {formik.touched.name && formik.errors.name && (
+                <span className="inst-formikError">{formik.errors.name}</span>
               )}
             </div>
 
@@ -277,7 +267,7 @@ function InstForm() {
               <label htmlFor="summary">Resumo da instituição</label>
               <textarea
                 name="summary"
-                id="resumo"
+                id="summary"
                 rows="3"
                 cols="50"
                 minLength="10"
@@ -318,7 +308,7 @@ function InstForm() {
                 type="text"
                 name="street"
                 id="street"
-                value={formik.values.street}
+                value={formik.values.address.street}
                 onChange={formik.fillingForm}
                 onBlur={formik.handleBlur}
                 required
@@ -328,18 +318,18 @@ function InstForm() {
               )}
             </div>
             <div className="inst-inputs">
-              <label htmlFor="bairro">Bairro</label>
+              <label htmlFor="neighborhood">Bairro</label>
               <input
                 type="text"
-                name="bairro"
-                id="bairro"
-                value={formik.values.bairro}
+                name="neighborhood"
+                id="neighborhood"
+                value={formik.values.address.neighborhood}
                 onChange={formik.fillingForm}
                 onBlur={formik.handleBlur}
                 required
               />
-              {formik.touched.bairro && formik.errors.bairro && (
-                <span className="inst-formikError">{formik.errors.bairro}</span>
+              {formik.touched.neighborhood && formik.errors.neighborhood && (
+                <span className="inst-formikError">{formik.errors.neighborhood}</span>
               )}
             </div>
             <div className="inst-inputs">
@@ -348,7 +338,7 @@ function InstForm() {
                 type="text"
                 name="address_number"
                 id="address_number"
-                value={formik.values.address_number}
+                value={formik.values.address.address_number}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 required
@@ -363,7 +353,7 @@ function InstForm() {
                 type="text"
                 name="city"
                 id="city"
-                value={formik.values.city}
+                value={formik.values.address.city}
                 onChange={formik.fillingForm}
                 onBlur={formik.handleBlur}
                 required
@@ -378,7 +368,7 @@ function InstForm() {
                 type="text"
                 name="state"
                 id="state"
-                value={formik.values.state}
+                value={formik.values.address.state}
                 onChange={formik.fillingForm}
                 onBlur={formik.handleBlur}
                 required
@@ -404,7 +394,7 @@ function InstForm() {
                 getHelperDimensions={({ node }) => node.getBoundingClientRect()}
                 // react-select props:
                 isMulti
-                options={causeOptions}
+                options={causes}
                 value={selected}
                 onChange={onChange}
                 components={{
@@ -415,36 +405,19 @@ function InstForm() {
               />
             </div>
 
+           
             <div className="inst-inputs">
-              <label htmlFor="numBeneficiados">Número de Beneficiádos</label>
-              <input
-                type="number"
-                name="numBeneficiados"
-                id="numBeneficiados"
-                value={formik.values.numBeneficiados}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-              />
-              {formik.touched.numBeneficiados &&
-                formik.errors.numBeneficiados && (
-                  <span className="inst-formikError">
-                    {formik.errors.numBeneficiados}
-                  </span>
-                )}
-            </div>
-
-            <div className="inst-inputs">
-              <label htmlFor="cnpjNumber">CNPJ</label>
+              <label htmlFor="cnpj">CNPJ</label>
               <InputMask
-                name="cnpjNumber"
-                id="cnpjNumber"
+                name="cnpj"
+                id="cnpj"
                 mask="99.999.999/9999-99"
-                value={formik.values.cnpjNumber}
+                value={formik.values.cnpj}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
               />
-              {formik.touched.cnpjNumber && formik.errors.cnpjNumber && (
-                <span className="inst-formikError">{formik.errors.cnpjNumber}</span>
+              {formik.touched.cnpj && formik.errors.cnpj && (
+                <span className="inst-formikError">{formik.errors.cnpj}</span>
               )}
             </div>
           </div>
@@ -564,35 +537,35 @@ function InstForm() {
               <label htmlFor="senha">Senha:</label>
               <input
                 type="password"
-                id="senha"
-                name="senha"
+                id="password"
+                name="password"
                 minLength="4"
                 maxLength="15"
-                value={formik.values.senha}
+                value={formik.values.password}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 required
               />
-              {formik.touched.senha && formik.errors.senha && (
-                <span className="inst-formikError">{formik.errors.senha}</span>
+              {formik.touched.password && formik.errors.password && (
+                <span className="inst-formikError">{formik.errors.password}</span>
               )}
             </div>
 
             <div className="inst-inputs">
-              <label htmlFor="confSenha">Confirmar Senha:</label>
+              <label htmlFor="passwordConfirmation">Confirmar Senha:</label>
               <input
                 type="password"
-                id="confSenha"
-                name="confSenha"
+                id="passwordConfirmation"
+                name="passwordConfirmation"
                 minLength="4"
                 maxLength="15"
-                value={formik.values.confSenha}
+                value={formik.values.passwordConfirmation}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 required
               />
-              {formik.touched.confSenha && formik.errors.confSenha && (
-                <span className="inst-formikError">{formik.errors.confSenha}</span>
+              {formik.touched.passwordConfirmation && formik.errors.passwordConfirmation && (
+                <span className="inst-formikError">{formik.errors.passwordConfirmation}</span>
               )}
             </div>
           </div>

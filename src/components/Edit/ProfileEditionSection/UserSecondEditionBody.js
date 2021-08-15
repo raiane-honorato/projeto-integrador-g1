@@ -26,7 +26,7 @@ function UserSecondEditionBody({ formik }) {
         type="text"
         name="street"
         id="street"
-        value={formik.values.street}
+        value={formik.values.address.street}
         onChange={formik.fillingForm}
         onBlur={formik.handleBlur}
         required
@@ -39,15 +39,15 @@ function UserSecondEditionBody({ formik }) {
       <label htmlFor="bairro">Bairro</label>
       <input
         type="text"
-        name="bairro"
-        id="bairro"
-        value={formik.values.bairro}
+        name="neighborhood"
+        id="neighborhood"
+        value={formik.values.address.neighborhood}
         onChange={formik.fillingForm}
         onBlur={formik.handleBlur}
         required
       />
-      {formik.touched.bairro && formik.errors.bairro && (
-        <span className="formikError">{formik.errors.bairro}</span>
+      {formik.touched.neighborhood && formik.errors.neighborhood && (
+        <span className="formikError">{formik.errors.neighborhood}</span>
       )}
     </div>
     <div className="inputs">
@@ -56,7 +56,7 @@ function UserSecondEditionBody({ formik }) {
         type="text"
         name="address_number"
         id="address_number"
-        value={formik.values.address_number}
+        value={formik.values.address.address_number}
         onChange={formik.handleChange}
         onBlur={formik.handleBlur}
         required
@@ -71,7 +71,7 @@ function UserSecondEditionBody({ formik }) {
         type="text"
         name="city"
         id="city"
-        value={formik.values.city}
+        value={formik.values.address.city}
         onChange={formik.fillingForm}
         onBlur={formik.handleBlur}
         required
@@ -86,7 +86,7 @@ function UserSecondEditionBody({ formik }) {
         type="text"
         name="state"
         id="state"
-        value={formik.values.state}
+        value={formik.values.address.state}
         onChange={formik.fillingForm}
         onBlur={formik.handleBlur}
         required
