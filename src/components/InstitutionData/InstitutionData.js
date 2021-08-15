@@ -8,6 +8,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import ProjectCart from "../ProjectCart/ProjectCart";
 import EditButton from "../Edit/EditButton";
 import InstitutionEdition from "../Edit/InstitutionEdition";
+import api from "../../services/api";
 
 function InstitutionData() {
   const parameter = useParams();
@@ -23,40 +24,45 @@ function InstitutionData() {
   const [thirdEditState, setThirdEditState] = useState(false);
 
   useEffect(() => {
-    fetch(`http://localhost:8000/institution/${institutionId}`)
-      .then((res) => res.json())
+    api.get(`/institution/${institutionId}`)
       .then((res) => {
-        setInstitution(res);
+        setInstitution(res.data);
+        setCauses(res.data.causes);
+        console.log("institution");
+        console.log(res.data);
+        console.log("causes");
+        console.log(res.data.causes);
       })
       .catch((erro) =>
         alert("Não foi possível obter dados dessa instituição.")
       );
   }, [institutionId]);
 
+
   useEffect(() => {
-    fetch(`http://localhost:8000/projects/?institution_id=${institutionId}`)
-      .then((res) => res.json())
+    api.get(`/project?institution_id=${institutionId}`)
       .then((res) => {
-        setProjects(res);
-      })
+      setProjects(res.data);
+      console.log(res.data)})
       .catch((erro) =>
         alert("Não foi possível obter dados dessa instituição.")
       );
   }, [institutionId]);
 
-  useEffect(() => {
-    let requests =
-      institution &&
-      institution.cause_id.map((cause_id) => {
-        return fetch(`http://localhost:8000/cause/${cause_id}`).then((res) =>
-          res.json()
-        );
-      });
 
-    Promise.all(requests)
-      .then((p) => setCauses(p))
-      .catch((err) => alert("Não foi possível obter as causas"));
-  }, [institution]);
+  // useEffect(() => {
+  //   let requests =
+  //     institution &&
+  //     institution.cause_id.map((cause_id) => {
+  //       return fetch(`http://localhost:8000/cause/${cause_id}`).then((res) =>
+  //         res.json()
+  //       );
+  //     });
+
+  //   Promise.all(requests)
+  //     .then((p) => setCauses(p))
+  //     .catch((err) => alert("Não foi possível obter as causas"));
+  // }, [institution]);
 
   return (
     <>
@@ -64,7 +70,7 @@ function InstitutionData() {
         {institution && (
           <>
             <div className="institution-first-section-profile">
-              {user.institution_id === institutionId && (
+              {user.institution.id === institutionId && (
                 <EditButton
                   editClass="institution-first-edit"
                   setStatePass={setFirstEditState}
@@ -72,7 +78,7 @@ function InstitutionData() {
               )}
               <img className="institution-profile-pic" src={institution.img} alt="Imagem da instituição" />
               <div>
-                <span className="institution-city">{`${institution.city}, ${institution.state}`}</span>
+                <span className="institution-city">{`${institution.address.city}, ${institution.address.state}`}</span>
                 <h2 className="institution-name">
                   {institution.institution_name}
                 </h2>
@@ -85,7 +91,7 @@ function InstitutionData() {
                         className="institution-cause"
                         key={`cause-${cause.id}`}
                       >
-                        {cause.name}
+                        {cause.label}
                       </span>
                     </>
                   ))}
@@ -105,7 +111,7 @@ function InstitutionData() {
 
               <div className="institution-second-column">
                 <div className="institution-information-address">
-                  {user.institution_id === institutionId && (
+                  {user.institution.id === institutionId && (
                     <EditButton
                       editClass="institution-second-edit"
                       setStatePass={setSecondEditState}
@@ -113,11 +119,11 @@ function InstitutionData() {
                   )}
                   <div className="institution-address">
                     <h3>Endereço</h3>
-                    <span>{institution.street}, </span>
-                    <span>{institution.address_number}, </span>
-                    <span>{institution.complement}</span>
-                    <span>{institution.city}</span>
-                    <span>, {institution.state}.</span>
+                    <span>{institution.address.street}, </span>
+                    <span>{institution.address.address_number}, </span>
+                    <span>{institution.address.complement}</span>
+                    <span>{institution.address.city}</span>
+                    <span>, {institution.address.state}.</span>
                   </div>
                   <div className="institution-social-contacts">
                     <h3>Contatos</h3>
@@ -162,7 +168,7 @@ function InstitutionData() {
                   </div>
                 </div>
                 <div className="institution-information">
-                  {user.institution_id === institutionId && (
+                  {user.institution.id === institutionId && (
                     <EditButton
                       editClass="institution-second-edit"
                       setStatePass={setThirdEditState}

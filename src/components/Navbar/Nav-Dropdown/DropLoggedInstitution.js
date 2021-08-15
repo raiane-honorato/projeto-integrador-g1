@@ -1,6 +1,6 @@
 import { NavLink, useHistory } from "react-router-dom";
 import { AuthContext } from "../../../context/auth";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 
 function DropLoggedInstitution() {
     const { user, setToken, setUser} = useContext(AuthContext);
@@ -14,13 +14,17 @@ function DropLoggedInstitution() {
         return history.push("/");
       }
 
+      useEffect(() => {
+          console.log("usuario")
+          console.log(user)
+      }, [])
     return (
     <ul className="nav-btn-list">
-        <li className="nav-btn">
-            <NavLink to={`/institution/${user?.id}`}>
+        {user.institution.id && <li className="nav-btn">
+            <NavLink to={`/institution/${user?.institution.id}`}>
             <b>Página da instituição</b>
             </NavLink>  
-        </li>
+        </li>}
         <li className="nav-btn">
             <NavLink to={`/manage_projects`}>
             Gerenciar projetos
