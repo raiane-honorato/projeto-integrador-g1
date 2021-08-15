@@ -50,34 +50,34 @@ function UserForm() {
 
   const formik = useFormik({
     initialValues: {
-      userName: "",
-      cpfNumber: "",
+      name: "",
+      cpf: "",
       birth_date: "",
       phone: "",
       email: "",
-      senha: "",
-      confSenha: "",
+      password: "",
+      passwordConfirmation: "",
     },
     validate: function (values) {
-      const cpf = onlyNumbers(values.cpfNumber);
-      const tel = onlyNumbers(values.phone);
+      const cpf = onlyNumbers(values.cpf);
+      const phone = onlyNumbers(values.phone);
     
 
       const errors = {};
 
-      if ((values.userName.length < 3) | (values.userName.length > 100)) {
-        errors.userName = "Nome Invalido";
+      if ((values.name.length < 3) | (values.name.length > 100)) {
+        errors.name = "Nome Invalido";
       }
 
       if (cpf.length < 11) {
-        errors.cpfNumber = "CPF invalido";
+        errors.cpf = "CPF invalido";
       }
 
       if (values.birth_date.length === undefined) {
         errors.birth_date = "Data invalida";
       }
 
-      if ((tel.length < 10) | (tel.length > 11)) {
+      if ((phone.length < 10) | (phone.length > 11)) {
         errors.phone = "Telefone invalido";
       }
 
@@ -85,15 +85,15 @@ function UserForm() {
         errors.email = "Email inválido";
       }
 
-      if ((values.senha.length < 8) | (values.senha.length > 15)) {
-        errors.senha = "Senha invalida";
+      if ((values.password.length < 8) | (values.password.length > 15)) {
+        errors.password = "Senha invalida";
       }
 
       if (
-        (values.confSenha !== values.senha) |
-        (values.confSenha === undefined)
+        (values.passwordConfirmation !== values.password) |
+        (values.passwordConfirmation === undefined)
       ) {
-        errors.confSenha = "Senha invalida";
+        errors.passwordConfirmation = "Senha invalida";
       }
 
       return errors;
@@ -140,35 +140,35 @@ function UserForm() {
         {steps[currentStep].id === "personal-data" && (
           <div className="dados-pessoais">
             <div className="inputs">
-              <label htmlFor="userName">Nome Completo:</label>
+              <label htmlFor="name">Nome Completo:</label>
               <input
                 type="text"
-                id="userName"
-                name="userName"
+                id="name"
+                name="name"
                 minLength="3"
                 maxLength="100"
-                value={formik.values.userName}
+                value={formik.values.name}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 required
               />
-              {formik.touched.userName && formik.errors.userName && (
-                <span className="formikError">{formik.errors.userName}</span>
+              {formik.touched.name && formik.errors.name && (
+                <span className="formikError">{formik.errors.name}</span>
               )}
             </div>
 
             <div className="inputs">
               <label htmlFor="cpfNumber">CPF:</label>
               <InputMask
-                name="cpfNumber"
-                id="cpfNumber"
+                name="cpf"
+                id="cpf"
                 mask="999.999.999-99"
-                value={formik.values.cpfNumber}
+                value={formik.values.cpf}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
               />
-              {formik.touched.cpfNumber && formik.errors.cpfNumber && (
-                <span className="formikError">{formik.errors.cpfNumber}</span>
+              {formik.touched.cpf && formik.errors.cpf && (
+                <span className="formikError">{formik.errors.cpf}</span>
               )}
             </div>
 
@@ -231,29 +231,29 @@ function UserForm() {
             </div>
 
             <div className="inputs">
-              <label htmlFor="senha">Senha:</label>
+              <label htmlFor="passwordConfirmation">Senha:</label>
               <input
                 type="password"
-                id="senha"
-                name="senha"
+                id="password"
+                name="password"
                 minLength="8"
                 maxLength="15"
-                value={formik.values.senha}
+                value={formik.values.password}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 required
               />
-              {formik.touched.senha && formik.errors.senha && (
-                <span className="formikError">{formik.errors.senha}</span>
+              {formik.touched.password && formik.errors.password && (
+                <span className="formikError">{formik.errors.password}</span>
               )}
             </div>
 
             <div className="inputs">
-              <label htmlFor="confSenha">Confirmar Senha:</label>
+              <label htmlFor="passwordConfirmation">Confirmar Senha:</label>
               <input
                 type="password"
-                id="confSenha"
-                name="confSenha"
+                id="passwordConfirmation"
+                name="passwordConfirmation"
                 minLength="8"
                 maxLength="15"
                 value={formik.values.confSenha}

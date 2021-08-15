@@ -22,11 +22,11 @@ function useFormik({ initialValues, validate }) {
        validateValues(values);
   }, [validate, values]);
 
- 
-
   useEffect(() => {
+    const abortController = new AbortController();
+    const signal = abortController.signal;
     if (cep.length > 7)
-      fetch(`https://viacep.com.br/ws/${cep}/json/`)
+      fetch(`https://viacep.com.br/ws/${cep}/json/`, { signal: signal })
         .then((response) => response.json())
         .then((response) =>
           setValues({
@@ -45,7 +45,7 @@ function useFormik({ initialValues, validate }) {
           )     
         );    
         return () => {
-      
+          abortController.abort();
         }    
   }, [values, cep]);
 
@@ -145,7 +145,7 @@ function ProfileEditionSection(props) {
       data: formik.values  
     })
       .then((res) => {
-        props.setPageUser(res.data);
+       console.log(res.data);
         props.setStatePass(false);
         toast.success("Usuário atualizado.", { position: "top-right" });
       })

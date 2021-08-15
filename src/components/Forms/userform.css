@@ -58,24 +58,19 @@ form h2 {
   font-size: 1rem;
 }
 
-#cpfNumber,
-#userName,
+#cpf,
+#name,
 #email,
 #birth_date,
-#contatNumber,
-#senha,
-#confSenha,
-#institution_name,
-#resumo,
-#causas,
-#numBeneficiados,
-#cnpjNumber,
-#telOng,
-#urlSite,
+#phone,
+#password,
+#passwordConfirmation,
+#summary,
+#causes,
+#cnpj,
+#site,
 #facebook,
 #instagram,
-#descricao,
-#phone,
 #bio,
 .aplication-form-fields {
   padding: 0.7rem !important;
@@ -113,8 +108,8 @@ hr{
   color: #bdb9b9;
 }
 
-#resumo,
-#descricao {
+#summary,
+#bio {
   resize: none;
 }
 
@@ -131,13 +126,13 @@ hr{
   font-size: 1rem;
 }
 
-#cpfNumber:focus,
-#completeName:focus,
+#cpf:focus,
+#name:focus,
 #email:focus,
 #birth_date:focus,
-#contatNumber:focus,
-#senha:focus,
-#confSenha:focus {
+#phone:focus,
+#password:focus,
+#passwordConfirmation:focus {
   border: 1px solid var(--secondColor);
 }
 
@@ -188,7 +183,7 @@ hr {
 
  
 
-/* Formulário da Instituição  */
+/* Formulário da Instituição 
 
 #ongName,
 #resumo,
@@ -209,7 +204,7 @@ hr {
   box-shadow: 1px 1px 4px #9c9c9c;
   font-family: "Poppins", sans-serif;
   font-size: 1rem;
-}
+} */
 
 @media only screen and (max-device-width : 600px) {
   .container-useform {
