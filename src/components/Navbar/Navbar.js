@@ -19,7 +19,7 @@ function Navbar({ navbarTransparent, changeBackground }) {
   const [activeLogin, setActiveLogin] = useState(false);
   const { user, token} = useContext(AuthContext);
 
-  useEffect(console.log(user),[])
+  useEffect(() => console.log(user),[])
 
    return (
     <>

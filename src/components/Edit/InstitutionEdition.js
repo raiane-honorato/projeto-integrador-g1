@@ -6,6 +6,7 @@ import "./InstitutionEdition.css";
 import InstitutionFirstEditionBody from "./InstitutionFirstEditionBody";
 import InstitutionSecondEditionBody from "./InstitutionSecondEditionBody";
 import InstitutionThirdEditionBody from "./InstitutionThirdEditionBody";
+import api from "../../services/api";
 
 function InstitutionEdition(props) {
 
@@ -33,7 +34,7 @@ function InstitutionEdition(props) {
 
           const errors = {};
     
-          if ((values.institution_name.length < 3) | (values.institution_name.length > 100)) {
+          if ((values.name.length < 3) | (values.name.length > 100)) {
             errors.institution_name = "Nome Invalido";
           }
     
@@ -41,7 +42,7 @@ function InstitutionEdition(props) {
             errors.summary = "Texto invalido";
           }
     
-          if ((values.city.length < 3) | (values.city.length > 150)) {
+          if ((values.address.city.length < 3) | (values.address.city.length > 150)) {
             errors.city = "Endereço invalido";
           }
     
@@ -51,18 +52,30 @@ function InstitutionEdition(props) {
 
       //saving information
       const handleSave = () => {
-        fetch(`http://localhost:8000/institution/${props.institution.id}`, 
-        {
-            method: "PATCH",
-            headers: {"Content-type": "application/json"},
-            body: JSON.stringify(formik.values)
+        console.log("formik")
+        console.log(formik.values)
+        api({      
+          method: "PATCH",
+          url: `/address/${props.institution.address.id}`,
+          headers: { "Content-type": "application/json" },
+          data: formik.values.address  
         })
-      .then((res) => res.json())
-      .then((res) => {
-        props.setStateInstitution(res);
+        .then((res) => {
+          console.log(res)
+          return(api({      
+          method: "PATCH",
+          url: `/institution/${props.institution.id}`,
+          headers: { "Content-type": "application/json" },
+          data: formik.values  })
+        )}
+        )
+            .then((res) => {
+              console.log("salvo")
+              console.log(res)
+        props.setStateInstitution(res.data);
         props.setStatePass(false);
-      })
-      .catch((erro) =>
+      })  
+          .catch((erro) =>
         alert("Não foi possível atualizar.")
       );
 

@@ -28,41 +28,27 @@ function InstitutionData() {
       .then((res) => {
         setInstitution(res.data);
         setCauses(res.data.causes);
-        console.log("institution");
-        console.log(res.data);
-        console.log("causes");
-        console.log(res.data.causes);
       })
       .catch((erro) =>
         alert("Não foi possível obter dados dessa instituição.")
       );
   }, [institutionId]);
 
+  useEffect(() => {
+    setCauses(institution.causes);
+  },[institution])
+
 
   useEffect(() => {
     api.get(`/project?institution_id=${institutionId}`)
       .then((res) => {
       setProjects(res.data);
-      console.log(res.data)})
+      })
       .catch((erro) =>
         alert("Não foi possível obter dados dessa instituição.")
       );
   }, [institutionId]);
 
-
-  // useEffect(() => {
-  //   let requests =
-  //     institution &&
-  //     institution.cause_id.map((cause_id) => {
-  //       return fetch(`http://localhost:8000/cause/${cause_id}`).then((res) =>
-  //         res.json()
-  //       );
-  //     });
-
-  //   Promise.all(requests)
-  //     .then((p) => setCauses(p))
-  //     .catch((err) => alert("Não foi possível obter as causas"));
-  // }, [institution]);
 
   return (
     <>
@@ -80,7 +66,7 @@ function InstitutionData() {
               <div>
                 <span className="institution-city">{`${institution.address.city}, ${institution.address.state}`}</span>
                 <h2 className="institution-name">
-                  {institution.institution_name}
+                  {institution.name}
                 </h2>
                 <p className="institution-summary">{institution.summary}</p>
                 {causes &&

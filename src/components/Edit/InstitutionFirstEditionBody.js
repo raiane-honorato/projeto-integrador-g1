@@ -1,58 +1,49 @@
 import {useState, useEffect } from "react";
 import Multiselect from 'multiselect-react-dropdown';
 import "./InstitutionEdition.css";
+import api from "../../services/api";
 
 function InstitutionFirstEditionBody({ formik, institution }) {
 
         //setting causes list
         const [causes, setCauses] = useState();
-        const [institutionCauses, setInstitutionCauses] = useState();
+        const [institutionCauses, setInstitutionCauses] = useState(institution.causes);
+
         useEffect(() => {
-          fetch(`http://localhost:8000/cause`)
-          .then((res) => res.json())
+          api.get("/cause")
           .then((res) => {
-              setCauses(res);
-              return res;
+              setCauses(res.data);
           })
           .catch((erro) =>
             alert("Não foi possível obter dados dos projetos.")
           )
   
       },[])
-  
-      //institution's causes
-      useEffect(() => {
-        let filteredCauses = causes && institution && institution.cause_id.map((cause_id) => {
-          return causes.filter(cause => cause.id === cause_id)[0]
-        })
-        setInstitutionCauses(filteredCauses)
-      
-    },[causes, institution])
 
+ 
       //chosen cause
       let onChangeCause = (selectedList, selectedItem) => {
-        const habilityList = selectedList.map((hability) => {return hability.id})
-        formik.setFieldValue('cause_id',habilityList)
+        formik.setFieldValue('causes',selectedList)
       }
 
 
   return (
     <div className="institution-first-edition-window-body">
       <div className="inputs">
-        <label htmlFor="institution_name">Nome da instituição</label>
+        <label htmlFor="name">Nome da instituição</label>
         <input
           type="text"
-          name="institution_name"
+          name="name"
           id="ongName"
-          value={formik.values.institution_name}
+          value={formik.values.name}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           minLength="3"
           maxLength="100"
           required
         />
-        {formik.touched.institution_name && formik.errors.institution_name && (
-          <span className="formikError">{formik.errors.institution_name}</span>
+        {formik.touched.name && formik.errors.name && (
+          <span className="formikError">{formik.errors.name}</span>
         )}
       </div>
 
@@ -82,7 +73,7 @@ function InstitutionFirstEditionBody({ formik, institution }) {
                         displayValue = "label"
                         selectedValues = {institutionCauses}
                         selectionLimit = "3"
-                        placeholder = "Selecione até 3 habilidades"
+                        placeholder = "Selecione até 3 causas"
                         onSelect = {onChangeCause}
                         onRemove = {onChangeCause}
                         avoidHighlightFirstOption = "true"

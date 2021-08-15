@@ -1,7 +1,12 @@
 import "./InstitutionEdition.css"
 import InputMask from "react-input-mask";
+import { useEffect } from "react";
 
 function InstitutionSecondEditionBody({ formik }) {
+
+    useEffect(() => {
+        console.log(formik)
+    }, [])
 
     return (
         <div className="institution-first-edition-window-body">
@@ -9,9 +14,9 @@ function InstitutionSecondEditionBody({ formik }) {
                 <label htmlFor="street">Rua</label>
                 <input
                     type="text"
-                    name="street"
+                    name="address.street"
                     id="street"
-                    value={formik.values.street}
+                    value={formik.values.address.street}
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                     minLength="3"
@@ -27,9 +32,9 @@ function InstitutionSecondEditionBody({ formik }) {
                 <label htmlFor="address_number">Número</label>
                 <input
                     type="number"
-                    name="address_number"
+                    name="address.address_number"
                     id="address_number"
-                    value={formik.values.address_number}
+                    value={formik.values.address.address_number}
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                     required
@@ -43,9 +48,9 @@ function InstitutionSecondEditionBody({ formik }) {
                 <label htmlFor="city">Cidade</label>
                 <input
                     type="text"
-                    name="city"
+                    name="address.city"
                     id="city"
-                    value={formik.values.city}
+                    value={formik.values.address.city}
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                     minLength="3"
@@ -61,9 +66,9 @@ function InstitutionSecondEditionBody({ formik }) {
                 <label htmlFor="city">Estado</label>
                 <input
                     type="text"
-                    name="state"
+                    name="address.state"
                     id="state"
-                    value={formik.values.state}
+                    value={formik.values.address.state}
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                     minLength="3"
