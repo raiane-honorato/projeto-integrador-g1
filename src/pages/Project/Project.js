@@ -8,6 +8,7 @@ import "./project.css";
 import Loader from "../../components/Loader/Loader";
 import api from "../../services/api";
 import ImageSkeleton from "../../components/ImageSkeleton/ImageSkeleton";
+import{ Toaster } from 'react-hot-toast';
 
 function ProjectPage() {
   const parameter = useParams();
@@ -21,7 +22,6 @@ function ProjectPage() {
   const [subscription, setSubscription] = useState();
   const [activeSubscription, setActiveSubscription] = useState(false);
   const [imageLoaded, setImageLoaded] = useState(false);
-  console.log(subscription);
 
   //get data from localhost port 8000
   useEffect(() => {
@@ -56,6 +56,7 @@ function ProjectPage() {
 
   return (
     <div id="page-container">
+      <Toaster />
       <Navbar />
       {project ? (
         <div key={project.id} className="project-container">
@@ -104,7 +105,7 @@ function ProjectPage() {
                     Quero a vaga
                   </button>
                 )}
-                {subscription &&
+                {subscription && subscription.length === 1 &&
                 (
                   <p>Você está inscrito nesta vaga.</p>
                 )}
