@@ -26,7 +26,7 @@ function UserSubscription({
         user,
         project,
         date: Date.now(),
-        status: "Aceita",
+        status: "Pendente",
       },
     })
       .then((res) => {
