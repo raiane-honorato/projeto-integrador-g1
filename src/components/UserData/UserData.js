@@ -7,6 +7,7 @@ import EditButton from "../Edit/EditButton";
 import ProfileEditionSection from "../Edit/ProfileEditionSection/ProfileEditionSection";
 import { Toaster } from "react-hot-toast";
 import api from "../../services/api";
+import formatDate from '../../utils/formatDate';
 
 function UserData() {
   const parameter = useParams();
@@ -16,7 +17,7 @@ function UserData() {
   const [pageUser, setPageUser] = useState("");
   const [causes, setCauses] = useState();
   const [habilities, setHabilities] = useState();
-
+  
   //states of content edition
   const [firstEditState, setFirstEditState] = useState(false);
   const [secondEditState, setSecondEditState] = useState(false);
@@ -46,6 +47,8 @@ function UserData() {
       })
       .catch((erro) => alert("Não foi possível obter os projetos do usuário."));
   }, [userId]);
+
+
 
   return (
     <>
