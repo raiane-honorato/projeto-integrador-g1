@@ -18,9 +18,10 @@ function ProjectPage() {
   const [causes, setCauses] = useState([]);
   const [habilities, setHabilities] = useState([]);
   const [institution, setInstitution] = useState();
-  const [subscriptions, setSubscriptions] = useState();
+  const [subscription, setSubscription] = useState();
   const [activeSubscription, setActiveSubscription] = useState(false);
   const [imageLoaded, setImageLoaded] = useState(false);
+  console.log(subscription);
 
   //get data from localhost port 8000
   useEffect(() => {
@@ -36,12 +37,14 @@ function ProjectPage() {
   }, [projectId]);
 
   useEffect(() => {
-    user && api.get(`/subscription/?user_id=${user.id}&project_id=${projectId}`)
-      .then((res) => {
-        setSubscriptions(res.data);
-      })
-      .catch((erro) => alert(`Erro ao obter lista de projetos: ${erro}`));
-}, [projectId, user]);
+    user &&
+      api
+        .get(`/subscription/?user_id=${user.id}&project_id=${projectId}`)
+        .then((res) => {
+          setSubscription(res.data);
+        })
+        .catch((erro) => alert(`Erro ao obter lista de projetos: ${erro}`));
+  }, [projectId, user]);
 
   const image = project?.img;
 
@@ -91,18 +94,21 @@ function ProjectPage() {
                       <span key={cause.id}>{cause.label}</span>
                     ))}
                 </div>
-                {subscriptions &&
+                {subscription &&
                 user.type === 1 &&
-                subscriptions.length === 0 ? (
+                subscription.length === 0 && (
                   <button
                     className="project-btn"
                     onClick={() => setActiveSubscription(true)}
                   >
                     Quero a vaga
                   </button>
-                ) : subscriptions?.length > 0 ? (
-                  <p>Você já está inscrito nesta vaga</p>
-                ) : (
+                )}
+                {subscription &&
+                (
+                  <p>Você está inscrito nesta vaga.</p>
+                )}
+                {!user && (
                   <NavLink to="/login">
                     <button className="project-btn">Faça seu Login</button>
                   </NavLink>
@@ -132,6 +138,8 @@ function ProjectPage() {
       {activeSubscription && (
         <UserSubscription
           project={project}
+          subscription={subscription}
+          setSubscription={setSubscription}
           setStatePass={setActiveSubscription}
         />
       )}

@@ -6,11 +6,35 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import "./UserSubscription.css";
 import { NavLink } from "react-router-dom";
+import api from "../../services/api";
 
 
-function UserSubscription({project, setStatePass}) {
+function UserSubscription({ project, setStatePass, subscription, setSubscription}) {
 
     const { user } = useContext(AuthContext);
+   
+
+    function userSubscription() {
+         api({
+            method: "POST",
+            url: `/subscription`,
+            headers: { "Content-type": "application/json" },
+            data:  {
+                user,
+                project,
+                date: Date.now(),
+                status: "Aceita"
+            }
+          })
+          .then(res => setSubscription(res.data))
+          .then(res => console.log(res))
+          .catch((erro) => console.log(erro))
+
+        setStatePass(false)
+    }
+
+    console.log(subscription)
+
 
     //dealing with outside click to close the component
     let windowRef = useRef();
@@ -56,7 +80,7 @@ function UserSubscription({project, setStatePass}) {
                   </div>
                 
                 <div className = "project-first-closing-window-footer">
-                    <button className = "user-subscription-btn"  onClick = {() => setStatePass(false)}>Inscrever-se</button>
+                    <button className = "user-subscription-btn"  onClick = {userSubscription}>Inscrever-se</button>
                 </div>
             </div>
         </div>
