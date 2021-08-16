@@ -7,10 +7,6 @@ import EditButton from "../Edit/EditButton";
 import ProfileEditionSection from "../Edit/ProfileEditionSection/ProfileEditionSection";
 import { Toaster } from "react-hot-toast";
 import api from "../../services/api";
-import axios from 'axios';
-
-const CancelToken = axios.CancelToken;
-
 
 function UserData() {
   const parameter = useParams();
@@ -21,21 +17,18 @@ function UserData() {
   const [causes, setCauses] = useState();
   const [habilities, setHabilities] = useState();
 
-  const cancelSource = useRef(null);
-
-
   //states of content edition
   const [firstEditState, setFirstEditState] = useState(false);
   const [secondEditState, setSecondEditState] = useState(false);
   const [thirdEditState, setThirdEditState] = useState(false);
 
   useEffect(() => {
-   
     if (user.id === userId) {
       setPageUser(user);
       return;
     } else {
-      api.get(`/user/${userId}`)
+      api
+        .get(`/user/${userId}`)
         .then((res) => {
           setPageUser(res.data);
           setCauses(res.data.causes);
@@ -43,22 +36,15 @@ function UserData() {
         })
         .catch((erro) => alert("Não foi possível localizar este usuário."));
     }
-    return () => {
-     
-    }
   }, [user, userId, causes, habilities]);
 
-
-  useEffect(() => { 
-    cancelSource.current = CancelToken.source();
-       api.get(`/subscription?user_id=${userId}`, {cancelToken: cancelSource.current.token})
+  useEffect(() => {
+    api
+      .get(`/subscription?user_id=${userId}`)
       .then((res) => {
         setSubscriptions(res.data);
       })
       .catch((erro) => alert("Não foi possível obter os projetos do usuário."));
-      return () => {
-        cancelSource.current.cancel();
-      }
   }, [userId]);
 
   return (
@@ -73,15 +59,15 @@ function UserData() {
               <div className="causes-section">
                 {causes && <span>Causas:</span>}
                 {causes?.map((cause) => (
-                    <span key={cause.id}>{cause.label}</span>
-                  ))}
+                  <span key={cause.id}>{cause.label}</span>
+                ))}
               </div>
 
               <div className="habilities-section">
                 {habilities && <span>Habilidades:</span>}
                 {habilities?.map((hability) => (
-                    <span key={hability.id}>{hability.label}</span>
-                  ))}
+                  <span key={hability.id}>{hability.label}</span>
+                ))}
               </div>
 
               {user.id === pageUser.id && (

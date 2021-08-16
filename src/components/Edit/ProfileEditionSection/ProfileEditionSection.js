@@ -1,6 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState, useEffect, useRef, useCallback } from "react";
 import "./profileEditionSection.css";
+// import { useFormik } from 'formik';
 import UserFirstEditionBody from "./UserFirstEditionBody";
 import UserSecondEditionBody from "./UserSecondEditionBody";
 import UserThirdEditionBody from "./UserThirdEditionBody";
@@ -8,12 +9,14 @@ import toast from "react-hot-toast";
 import api from "../../../services/api";
 
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
+import ShortLoader from "../../Loader/ShortLoader";
 
 function useFormik({ initialValues, validate }) {
   const [touched, setTouchedFields] = useState({});
   const [errors, setErrors] = useState({});
   const [values, setValues] = useState(initialValues);
   const [cep, setCep] = useState("");
+  console.log(values)
 
   useCallback(() => {
     function validateValues(values) {
@@ -22,32 +25,30 @@ function useFormik({ initialValues, validate }) {
        validateValues(values);
   }, [validate, values]);
 
-  useEffect(() => {
-    const abortController = new AbortController();
-    const signal = abortController.signal;
-    if (cep.length > 7)
-      fetch(`https://viacep.com.br/ws/${cep}/json/`, { signal: signal })
-        .then((response) => response.json())
-        .then((response) =>
-          setValues({
-            ...values,
-            address: {
-              street: response.logradouro,
-              neighborhood: response.bairro,
-              city: response.localidade,
-              state: response.uf
-            }
-          })
-        )
-        .catch((error) =>
-          console.log(
-            `Não foi possível obter o endereço do CEP informado! Erro:${error}`
-          )     
-        );    
-        return () => {
-          abortController.abort();
-        }    
-  }, [values, cep]);
+  // useEffect(() => {    
+  //   if (cep.length > 7)
+  //     fetch(`https://viacep.com.br/ws/${cep}/json/`)
+  //       .then((response) => response.json())
+  //       .then((response) =>
+  //         setValues({
+  //           ...values,
+  //           address: {
+  //             street: response.logradouro,
+  //             neighborhood: response.bairro,
+  //             city: response.localidade,
+  //             state: response.uf
+  //           }
+  //         })
+  //       )
+  //       .catch((error) =>
+  //         console.log(
+  //           `Não foi possível obter o endereço do CEP informado! Erro:${error}`
+  //         )     
+  //       );    
+  //       return () => {
+      
+  //       }    
+  // }, [values, cep]);
 
   function searchingData(e) {
     setCep(e.target.value);
@@ -90,6 +91,9 @@ function useFormik({ initialValues, validate }) {
 }
 
 function ProfileEditionSection(props) {
+
+  const [loading, setLoading] = useState(false);
+
   //dealing with outside click to close the component
   let windowRef = useRef();
 
@@ -135,9 +139,10 @@ function ProfileEditionSection(props) {
     },
   });
 
-  
+
   //saving information
   const handleSave = () => {
+    setLoading(true);
     api({
       method: "PATCH",
       url: `/user/${props.pageUser.id}`,
@@ -145,14 +150,14 @@ function ProfileEditionSection(props) {
       data: formik.values  
     })
       .then((res) => {
-       console.log(res.data);
+        props.setPageUser(res.data);
         props.setStatePass(false);
+        setLoading(false)
         toast.success("Usuário atualizado.", { position: "top-right" });
       })
       .catch((erro) => toast.error("Não foi possível atualizar os dados do usuário."));
   };
 
-  // console.log(formik.values)
 
   return (
     <div className="user-edition-container user-set-vis">
@@ -165,7 +170,7 @@ function ProfileEditionSection(props) {
             onClick={() => props.setStatePass(false)}
           />
         </div>
-
+        
         {props.firstEditState && <UserFirstEditionBody formik={formik} />}
         {props.secondEditState && <UserSecondEditionBody formik={formik} />}
         {props.thirdEditState && <UserThirdEditionBody formik={formik} />}
@@ -174,6 +179,7 @@ function ProfileEditionSection(props) {
           <button className="user-edition-save" onClick={handleSave}>
             Salvar
           </button>
+          {loading && <ShortLoader />}
         </div>
       </div>
     </div>
