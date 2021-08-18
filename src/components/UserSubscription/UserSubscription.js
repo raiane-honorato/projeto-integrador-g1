@@ -12,7 +12,6 @@ import toast, { Toaster } from "react-hot-toast";
 function UserSubscription({
   project,
   setStatePass,
-  subscription,
   setSubscription,
 }) {
   const { user } = useContext(AuthContext);

@@ -11,7 +11,7 @@ const Loader = () => {
       preserveAspectRatio: 'xMidYMid slice'
     }
 };
-  return <Lottie width={400} height={400} options={defaultOptions} />
+  return <Lottie width={300} height={300} options={defaultOptions} />
 };
 
 export default Loader;

@@ -15,25 +15,24 @@ function LoginComponent(props) {
   async function login(userEmail, password) {
     const response = await api.post(`/login`, {
       email: userEmail,
-      password
-    })
+      password,
+    });
     const { token } = response.data;
     setToken(token);
   }
 
   async function renderingUser() {
-     const response = await api.get(`/user/email?email=${userEmail}`);
-     const result = response.data;
-      setUser(result)  
+    const response = await api.get(`/user/email?email=${userEmail}`);
+    const result = response.data;
+    setUser(result);
   }
 
   async function onSubmit(event) {
     event.preventDefault();
-    try { 
-        await login(userEmail, password);      
-        await renderingUser();
-          history.push("/");
-            
+    try {
+      await login(userEmail, password);
+      await renderingUser();
+      history.push("/");
     } catch (error) {
       toast.error("Senha ou usuário inválidos!", {
         duration: 2000,
@@ -41,7 +40,6 @@ function LoginComponent(props) {
       });
     }
   }
-
 
   return (
     <div className="firts-column">

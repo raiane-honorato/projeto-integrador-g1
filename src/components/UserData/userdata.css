@@ -62,7 +62,7 @@
 }
 
 .yellowCard {
-  background-color:#e2ff0c;
+  background-color: var(--fourthColor);
 }
 
 

@@ -17,7 +17,6 @@ function UserData() {
   const [pageUser, setPageUser] = useState("");
   const [causes, setCauses] = useState();
   const [habilities, setHabilities] = useState();
-  
   //states of content edition
   const [firstEditState, setFirstEditState] = useState(false);
   const [secondEditState, setSecondEditState] = useState(false);
@@ -37,7 +36,8 @@ function UserData() {
         })
         .catch((erro) => alert("Não foi possível localizar este usuário."));
     }
-  }, [user, userId, causes, habilities]);
+  }, [user, userId]);
+
 
   useEffect(() => {
     api
@@ -48,6 +48,7 @@ function UserData() {
       .catch((erro) => alert("Não foi possível obter os projetos do usuário."));
   }, [userId]);
 
+  const birthDate = formatDate((pageUser?.birth_date));
 
 
   return (
@@ -106,7 +107,7 @@ function UserData() {
                 <div className="section-personal-data">
                   <div className="first-section-personal-data">
                     <p>
-                      <span>Data de Nascimento:</span> {pageUser.birth_date}
+                      <span>Data de Nascimento:</span> {birthDate}
                     </p>
                     <p>
                       <span>Telefone:</span> {pageUser.phone}
@@ -167,6 +168,8 @@ function UserData() {
             }
             setPageUser={setPageUser}
             pageUser={pageUser}
+            setCauses={setCauses}
+            setHabilities={setHabilities}
           />
         )}
       </div>
