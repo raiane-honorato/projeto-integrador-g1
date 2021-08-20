@@ -14,9 +14,10 @@
   font-family: var(--secondFont);
 }
 
+
 .profile-basic-information img {
-  max-width: 200px;
-  border-radius: 50%;
+  width: 12rem;
+  border-radius:50%;
 }
 
 .profileEdition {

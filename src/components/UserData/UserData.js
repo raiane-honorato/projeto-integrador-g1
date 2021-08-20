@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { AuthContext } from "../../context/auth";
 import "./userdata.css";
@@ -7,7 +7,8 @@ import EditButton from "../Edit/EditButton";
 import ProfileEditionSection from "../Edit/ProfileEditionSection/ProfileEditionSection";
 import { Toaster } from "react-hot-toast";
 import api from "../../services/api";
-import formatDate from '../../utils/formatDate';
+import formatDate from "../../utils/formatDate";
+import { storage } from "../../services/base";
 
 function UserData() {
   const parameter = useParams();
@@ -21,6 +22,18 @@ function UserData() {
   const [firstEditState, setFirstEditState] = useState(false);
   const [secondEditState, setSecondEditState] = useState(false);
   const [thirdEditState, setThirdEditState] = useState(false);
+  const [userImg, setUserImg] = useState();
+
+  useEffect(() => {
+    storage
+      .ref("/")
+      .child(`user${pageUser.id}`)
+      .getDownloadURL()
+      .then((url) => {
+        setUserImg(url);
+        localStorage.setItem("imgUrl", url);
+      });
+  }, [pageUser.id]);
 
   useEffect(() => {
     if (user.id === userId) {
@@ -38,7 +51,6 @@ function UserData() {
     }
   }, [user, userId]);
 
-
   useEffect(() => {
     api
       .get(`/subscription?user_id=${userId}`)
@@ -48,8 +60,28 @@ function UserData() {
       .catch((erro) => alert("Não foi possível obter os projetos do usuário."));
   }, [userId]);
 
-  const birthDate = formatDate((pageUser?.birth_date));
+  const birthDate = formatDate(pageUser?.birth_date);
 
+  const onChangePicture = (e) => {
+    const uploadTask = storage.ref(`/user${pageUser.id}`).put(userImg);
+    uploadTask.on(
+      "state_changed",
+      (snapshot) => {},
+      (error) => {
+        alert(error);
+      },
+      () => {
+        storage
+          .ref("/")
+          .child(`user${pageUser.id}`)
+          .getDownloadURL()
+          .then((url) => {
+            localStorage.setItem("imgUrl", url);
+            setUserImg(url);
+          });
+      }
+    );
+  };
 
   return (
     <>
@@ -58,17 +90,21 @@ function UserData() {
           <>
             <Toaster />
             <div className="profile-basic-information">
-              <img src={pageUser.img} alt="Foto do usuário" />
+              <img
+                src={pageUser.img ? pageUser.img : userImg}
+                alt="Foto do usuário"
+              />
+              <input type="file" onChange={onChangePicture} />
               <h1>{pageUser.name}</h1>
               <div className="causes-section">
-                {causes && <span>Causas:</span>}
+                {causes?.length !== 0 && <span>Causas:</span>}
                 {causes?.map((cause) => (
                   <span key={cause.id}>{cause.label}</span>
                 ))}
               </div>
 
               <div className="habilities-section">
-                {habilities && <span>Habilidades:</span>}
+                {habilities?.length !==0 && <span>Habilidades:</span>}
                 {habilities?.map((hability) => (
                   <span key={hability.id}>{hability.label}</span>
                 ))}
@@ -116,23 +152,26 @@ function UserData() {
                       <span>Email:</span> {pageUser.email}
                     </p>
                   </div>
-                  <div className="second-section-personal-data">
-                    <p>
-                      <span>Rua:</span> {pageUser.address?.street}
-                    </p>
-                    <p>
-                      <span>Número:</span> {pageUser.address?.address_number}
-                    </p>
-                    <p>
-                      <span>Bairro:</span> {pageUser.address?.neighborhood}
-                    </p>
-                    <p>
-                      <span>Cidade:</span> {pageUser.address?.city}
-                    </p>
-                    <p>
-                      <span>Estado:</span> {pageUser.address?.state}
-                    </p>
-                  </div>
+
+                  {pageUser.address && (
+                    <div className="second-section-personal-data">
+                      <p>
+                        <span>Rua:</span> {pageUser.address?.street}
+                      </p>
+                      <p>
+                        <span>Número:</span> {pageUser.address?.address_number}
+                      </p>
+                      <p>
+                        <span>Bairro:</span> {pageUser.address?.neighborhood}
+                      </p>
+                      <p>
+                        <span>Cidade:</span> {pageUser.address?.city}
+                      </p>
+                      <p>
+                        <span>Estado:</span> {pageUser.address?.state}
+                      </p>
+                    </div>
+                  )}
                 </div>
               </div>
               <div className="projects-data">

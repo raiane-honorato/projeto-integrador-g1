@@ -17,6 +17,7 @@ function Navbar({ navbarTransparent, changeBackground }) {
 
   const [activeLogin, setActiveLogin] = useState(false);
   const { user, token } = useContext(AuthContext);
+  const imgUrlFromFirebase = localStorage.getItem("imgUrl")
 
   return (
     <>
@@ -57,7 +58,7 @@ function Navbar({ navbarTransparent, changeBackground }) {
                 user && (
                   <img
                     className="profile-picture"
-                    src={user.img}
+                    src={user.img ? user.img : imgUrlFromFirebase}
                     alt="profile-img"
                   />
                 )

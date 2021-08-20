@@ -11,37 +11,31 @@ function Spotlight() {
   const [habilities, setHabilities] = useState();
   const [causes, setCauses] = useState();
   const [projects, setProjects] = useState();
-  const [loading, setLoading] = useState(false);
+
 
   useEffect(() => {
-    setLoading(true);
     api
       .get(`/project`)
       .then((res) => {
         setProjects(res.data);
-        setLoading(false);
       })
       .catch((erro) => alert(`Erro ao obter lista de projetos: ${erro}`));
   }, []);
 
   useEffect(() => {
-    setLoading(true);
     api
       .get(`/cause`)
       .then((res) => {
         setCauses(res.data);
-        setLoading(false);
       })
       .catch((erro) => alert(`Erro ao obter lista de causas: ${erro}`));
   }, []);
 
   useEffect(() => {
-    setLoading(true);
     api
       .get(`/hability`)
       .then((res) => {
         setHabilities(res.data);
-        setLoading(false);
       })
       .catch((erro) => alert(`Erro ao obter lista de habilidadesc: ${erro}`));
   }, []);

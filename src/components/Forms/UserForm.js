@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { useState, useCallback } from "react";
 import InputMask from "react-input-mask";
 import api from "../../services/api";

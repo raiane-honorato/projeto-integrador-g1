@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useState, useEffect, useRef } from "react";
 import "./profileEditionSection.css"
 import UserFirstEditionBody from "./UserFirstEditionBody";
 import UserSecondEditionBody from "./UserSecondEditionBody";
@@ -50,7 +50,7 @@ function ProfileEditionSection(props) {
         errors.phone = "Telefone inválido";
       }
 
-      if (!values.email.includes("@") | (values.email.lengthh < 7)) {
+      if (!values.email.includes("@") | (values.email.length < 7)) {
         errors.email = "Email inválido";
       }
 
@@ -61,32 +61,85 @@ function ProfileEditionSection(props) {
   //saving information
   const handleSave = () => {
     setLoading(true);
-    api({
-      method: "PATCH",
-      url: `/address/${props.pageUser.address.id}`,
-      headers: { "Content-type": "application/json" },
-      data: formik.values.address,
+    if (formik.values.address.id) {
+      console.log('oi')
+      api({
+        method: "PATCH",
+        url: `/address/${props.pageUser.address.id}`,
+        headers: { "Content-type": "application/json" },
+        data: formik.values.address,
+      })
+        .then((res) => { 
+           return api({
+            method: "PATCH",
+            url: `/user/${props.pageUser.id}`,
+            headers: { "Content-type": "application/json" },
+            data: formik.values,
+          });
+        })
+        .then((res) => {       
+          props.setCauses(res.data.causes);
+          props.setHabilities(res.data.habilities);
+          props.setPageUser(res.data)
+          props.setStatePass(false);
+          setLoading(false);
+          toast.success("Usuário atualizado.", { position: "top-right" });
+        })
+        .catch((erro) =>
+          toast.error("Não foi possível atualizar os dados do usuário.")
+        );
+    } else if (formik.values.address) {
+      api({
+        method: "POST",
+        url: `/address`,
+        headers: { "Content-type": "application/json" },
+        data: formik.values.address,
+      })
+        .then((res) => { 
+          return api({
+            method: "PATCH",
+            url: `/user/${props.pageUser.id}`,
+            headers: { "Content-type": "application/json" },
+            data: formik.values,
+          })
+        .then((res) => {       
+          props.setCauses(res.data.causes);
+          props.setHabilities(res.data.habilities);
+          props.setPageUser(res.data)
+          props.setStatePass(false);
+          setLoading(false);
+          toast.success("Usuário atualizado.", { position: "top-right" });
+        })
+        .catch((erro) =>
+          toast.error("Não foi possível atualizar os dados do usuário.")
+        );
+    })} else {
+      api({
+        method: "PATCH",
+        url: `/address/${props.pageUser.address.id}`,
+        headers: { "Content-type": "application/json" },
+        data: formik.values.address,
+      })
+        .then((res) => { 
+          return api({
+            method: "PATCH",
+            url: `/user/${props.pageUser.id}`,
+            headers: { "Content-type": "application/json" },
+            data: formik.values,
+          })
+        .then((res) => {       
+          props.setCauses(res.data.causes);
+          props.setHabilities(res.data.habilities);
+          props.setPageUser(res.data)
+          props.setStatePass(false);
+          setLoading(false);
+          toast.success("Usuário atualizado.", { position: "top-right" });
+        })
+        .catch((erro) =>
+          toast.error("Não foi possível atualizar os dados do usuário.")
+        );
     })
-      .then((res) => { 
-         return api({
-          method: "PATCH",
-          url: `/user/${props.pageUser.id}`,
-          headers: { "Content-type": "application/json" },
-          data: formik.values,
-        });
-      })
-      .then((res) => {       
-        props.setCauses(res.data.causes);
-        props.setHabilities(res.data.habilities);
-        props.setPageUser(res.data)
-        props.setStatePass(false);
-        setLoading(false);
-        toast.success("Usuário atualizado.", { position: "top-right" });
-      })
-      .catch((erro) =>
-        toast.error("Não foi possível atualizar os dados do usuário.")
-      );
-  };
+    }}
 
   return (
     <div className="user-edition-container user-set-vis">
