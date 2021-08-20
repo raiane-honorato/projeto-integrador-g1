@@ -5,6 +5,7 @@ import { useFormik } from 'formik';
 import Multiselect from 'multiselect-react-dropdown';
 import  { Toaster } from 'react-hot-toast';
 import "./ProjectCreation.css";
+import api from "../../../services/api";
 
 function ProjectCreation(props) {
 
@@ -31,11 +32,12 @@ function ProjectCreation(props) {
         "title": "",
         "img": "",
         "local_type": "",
-        "institution_id": props.institutionId,
         "description": "",
-        "hability_id": [],
-        "cause_id": [],
-        "popularity": null}
+        "popularity": null,
+        "institution":props.institution,
+        "habilities": [],
+        "causes": props.institution.causes,
+        }
         ,
         validate: function (values) {
 
@@ -54,33 +56,18 @@ function ProjectCreation(props) {
         },
       });
 
-            //getting institution information
-      const [institution, setInstitution] = useState();
-      useEffect(() => {
-        fetch(`http://localhost:8000/institution/${props.institutionId}`)
-        .then((res) => res.json())
-        .then((res) => {
-          console.log(res)
-            setInstitution(res);
-            return res;
-        })
-        .catch((erro) =>
-          alert("Não foi possível obter dados da instituição.")
-        )
-
-    },[props.institutionId])
 
       //setting habilities list
+      
       const [habilities, setHabilities] = useState();
       useEffect(() => {
-        fetch(`http://localhost:8000/hability`)
-        .then((res) => res.json())
+        api.get(`/hability`)
         .then((res) => {
-            setHabilities(res);
+            setHabilities(res.data);
             return res;
         })
         .catch((erro) =>
-          alert("Não foi possível obter dados dos projetos.")
+          alert("Não foi possível obter dados de habilidades.")
         )
 
     },[])
@@ -88,8 +75,7 @@ function ProjectCreation(props) {
 
     //chosen habilities
     let onChangeHability = (selectedList, selectedItem) => {
-      const habilityList = selectedList.map((hability) => {return hability.id})
-      formik.setFieldValue('hability_id',habilityList)
+      formik.setFieldValue('habilities',selectedList)
     }
 
 
@@ -97,10 +83,9 @@ function ProjectCreation(props) {
       const [causes, setCauses] = useState();
       const [institutionCauses, setInstitutionCauses] = useState();
       useEffect(() => {
-        fetch(`http://localhost:8000/cause`)
-        .then((res) => res.json())
+        api.get(`/cause`)
         .then((res) => {
-            setCauses(res);
+            setCauses(res.data);
             return res;
         })
         .catch((erro) =>
@@ -111,31 +96,25 @@ function ProjectCreation(props) {
 
     //institution's causes
     useEffect(() => {
-      let filteredCauses = causes && institution && institution.cause_id.map((cause_id) => {
-        return causes.filter(cause => cause.id === cause_id)[0]
-      })
-      console.log(filteredCauses)
-      setInstitutionCauses(filteredCauses)
+      setInstitutionCauses(props.institution.causes)
     
-  },[causes, institution])
+  },[causes, props.institution])
 
 
     //chosen cause
     let onChangeCause = (selectedList, selectedItem) => {
-      const habilityList = selectedList.map((hability) => {return hability.id})
-      formik.setFieldValue('cause_id',habilityList)
+      formik.setFieldValue('causes',selectedList)
     }
 
       //saving information
       const handleSave = () => {
-        fetch(`http://localhost:8000/projects/`, 
-        {
-            method: "POST",
-            headers: {"Content-type": "application/json"},
-            body: JSON.stringify(formik.values)
-        })
-      .then((res) => res.json())
-      .then((res) => props.setStateProjects([...props.projects, res]) )
+        api({      
+          method: "POST",
+          url: `/project/`,
+          headers: { "Content-type": "application/json" },
+          data: formik.values 
+      })
+      .then((res) => props.setStateProjects([...props.projects, res.data]) )
       .then((res) => {
         props.setStateNewProject(true);
         props.setStatePass(false);

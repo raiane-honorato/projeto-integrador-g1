@@ -4,6 +4,7 @@ import {useState, useEffect, useRef } from "react";
 import { useFormik } from 'formik';
 import Multiselect from 'multiselect-react-dropdown';
 import "./ProjectEdition.css";
+import api from "../../../services/api";
 
 function ProjectEdition(props) {
 
@@ -35,7 +36,7 @@ function ProjectEdition(props) {
             errors.title = "Nome Invalido";
           }
     
-          if ((values.description.length < 5) | (values.description.length > 100)) {
+          if ((values.description.length < 5) | (values.description.length > 500)) {
             errors.description = "Texto invalido";
           }
     
@@ -48,10 +49,9 @@ function ProjectEdition(props) {
       const [habilities, setHabilities] = useState();
       const [projectHabilities, setProjectHabilities] = useState();
       useEffect(() => {
-        fetch(`http://localhost:8000/hability`)
-        .then((res) => res.json())
+        api.get(`/hability`)
         .then((res) => {
-            setHabilities(res);
+            setHabilities(res.data);
             return res;
         })
         .catch((erro) =>
@@ -61,17 +61,13 @@ function ProjectEdition(props) {
     },[])
 
     useEffect(() => {
-        let filteredHabilities = habilities && props.project.hability_id.map((hability_id) => {
-          return habilities.filter(hability => hability.id === hability_id)[0]
-        })
-        setProjectHabilities(filteredHabilities)
+        setProjectHabilities(props.project.habilities)
       
-    },[habilities, props.project.hability_id])
+    },[habilities, props.project.habilities])
 
     //chosen habilities
     let onChangeHability = (selectedList, selectedItem) => {
-      const habilityList = selectedList.map((hability) => {return hability.id})
-      formik.setFieldValue('hability_id',habilityList)
+      formik.setFieldValue('habilities',selectedList)
     }
 
 
@@ -79,11 +75,9 @@ function ProjectEdition(props) {
       const [causes, setCauses] = useState();
       const [projectCauses, setProjectCauses] = useState();
       useEffect(() => {
-        fetch(`http://localhost:8000/cause`)
-        .then((res) => res.json())
+        api.get(`/cause`)
         .then((res) => {
-            setCauses(res);
-            return res;
+            setCauses(res.data);
         })
         .catch((erro) =>
           alert("Não foi possível obter dados dos projetos.")
@@ -92,30 +86,26 @@ function ProjectEdition(props) {
     },[])
 
     useEffect(() => {
-        let filteredCauses = causes && props.project.hability_id.map((hability_id) => {
-          return causes.filter(hability => hability.id === hability_id)[0]
-        })
-        setProjectCauses(filteredCauses)
+        setProjectCauses(props.project.causes)
       
-    },[causes, props.project.hability_id])
+    },[causes, props.project.causes])
 
     //chosen cause
     let onChangeCause = (selectedList, selectedItem) => {
-      const habilityList = selectedList.map((hability) => {return hability.id})
-      formik.setFieldValue('cause_id',habilityList)
+      formik.setFieldValue('causes',selectedList)
     }
 
       //saving information
       const handleSave = () => {
-        fetch(`http://localhost:8000/projects/${props.project.id}`, 
-        {
-            method: "PATCH",
-            headers: {"Content-type": "application/json"},
-            body: JSON.stringify(formik.values)
+
+        api({      
+          method: "PATCH",
+          url: `/project/${props.project.id}`,
+          headers: { "Content-type": "application/json" },
+          data: formik.values 
         })
-      .then((res) => res.json())
       .then((res) => {
-        props.setStateProject(res);
+        props.setStateProject(res.data);
         props.setStatePass(false);
       })
       .catch((erro) =>
@@ -269,18 +259,17 @@ function ProjectEdition(props) {
                       <label htmlFor="description">Descrição do projeto</label>
                       <textarea
                         type="text"
-                        name="title"
+                        name="description"
                         id="description"
                         className = "aplication-form-fields"
-                        value={formik.values.description}
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}
                         rows="6"
                         cols="50"
                         minLength="3"
-                        maxLength="180"
+                        maxLength="500"
                         required
-                      />
+                      >{formik.values.description}</textarea>
                       {formik.touched.description && formik.errors.description && (
                         <span className="formikError">{formik.errors.description}</span>
                       )}

@@ -1,27 +1,21 @@
 import { useEffect, useRef, useState } from "react";
 import { NavLink } from "react-router-dom";
 import toast, { Toaster } from 'react-hot-toast';
+import moment from "moment";
 
 import "./ManageProjectSubscription.css"
+import api from "../../services/api";
 
 
 function ManageProjectSubscription({subscription, subscriptions, project, setStateSubscriptions}) {
 
     const [user, setUser] = useState();
     const [changeStatus, setChangeStatus] = useState(false);
-
+    
 
     useEffect(() => {
-        fetch(`http://localhost:8000/user/?id=${subscription.user_id}`)
-        .then((res) => res.json())
-        .then((res) => {
-            setUser(res[0]);
-        })
-        .catch((erro) =>
-          alert("Não foi possível obter dados dos projetos.")
-        )
-
-    },[subscription.user_id])
+        subscription && setUser(subscription.user);
+    },[subscription])
 
     //dealing with outside click to close the component
     let windowRef = useRef();
@@ -39,28 +33,28 @@ function ManageProjectSubscription({subscription, subscriptions, project, setSta
     },[changeStatus])
 
 
-    //change subscription funcion
+    //change subscription function
 
-    const subsIndex = subscriptions.findIndex((element) => element.id === subscription.id )
-    let subsArray = [...subscriptions]
+    // const subsIndex = subscriptions && subscriptions.findIndex((element) => element.id === subscription.id )
+    // let subsArray = [...subscriptions]
 
     const changeSubscription = (status) => {
-        fetch(`http://localhost:8000/subscription/${subscription.id}`, 
-        {
+        api({      
             method: "PATCH",
-            headers: {"Content-type": "application/json"},
-            body: JSON.stringify(
-                {
-                    "subscription_status":status
-                }
-            )
-        })
-      .then((res) => res.json())
+            url: `/subscription/${subscription.id}`,
+            headers: { "Content-type": "application/json" },
+            data: {...subscription, "status":status} 
+          })
       .then((res) => {
-        subsArray[subsIndex] = res;
-        setStateSubscriptions(subsArray);
-        setChangeStatus(false);
-      })
+        return(api.get(`/subscription?project_id=${project.id}`))})
+        .then(res => {
+            setStateSubscriptions(res.data);
+            setChangeStatus(false);
+        })
+        // subsArray[subsIndex] = res.data;
+        // setStateSubscriptions(subsArray);
+        // setChangeStatus(false);
+      
       .then((res) => toast.success("Inscrição atualizada com sucesso."))
       .catch((erro) =>
         alert("Não foi possível atualizar.")
@@ -70,6 +64,7 @@ function ManageProjectSubscription({subscription, subscriptions, project, setSta
     return(
         <>
         <div className = "manage-project-toast"><Toaster /></div>
+        {subscription &&
         <div className = "manage-project-subscription-container">
             {user &&            
             <div className = "manage-project-subscription-img-title">
@@ -83,27 +78,27 @@ function ManageProjectSubscription({subscription, subscriptions, project, setSta
 
             <div className = "manage-project-subscription-date-status-manage-btn">
                 
-                <p className = "manage-project-subscription-date"><b>{subscription.subs_date}</b></p> 
+                <p className = "manage-project-subscription-date"><b>{`${subscription && moment(Date(subscription.date)).format("DD/MM/YYYY")}`}</b></p> 
 
                 <div className = "manage-project-subscription-status">
                     <span 
                     className = {`manage-project-subscription-bullet-point 
-                    ${subscription.subscription_status === "Aceita" ?  "bullet-green" : 
-                    subscription.subscription_status === "Pendente" ?  "bullet-yellow" : 
-                    subscription.subscription_status === "Cancelada" ?  "bullet-grey" : 
+                    ${subscription.status === "Aceita" ?  "bullet-green" : 
+                    subscription.status === "Pendente" ?  "bullet-yellow" : 
+                    subscription.status === "Cancelada" ?  "bullet-grey" : 
                     "bullet-red"
                     }`}>
 
                     </span>
-                    <p>{subscription.subscription_status}</p>
+                    <p>{subscription.status}</p>
                 </div>
 
                {project.status === 1 &&
                 <div  ref = {windowRef} className = "manage-project-subscription-change-status">
                     <button 
                      
-                    className = {`manage-project-subscription-change-status-btn ${subscription.subscription_status === "Cancelada" ? " canceled-change-status":""}`}
-                    onClick = {subscription.subscription_status !== "Cancelada" ? () =>  setChangeStatus(!changeStatus)  :""}>
+                    className = {`manage-project-subscription-change-status-btn ${subscription.status === "Cancelada" ? " canceled-change-status":""}`}
+                    onClick = {subscription.status !== "Cancelada" ? () =>  setChangeStatus(!changeStatus)  :""}>
                         <span>Alterar status</span>
                     </button>
 
@@ -123,7 +118,7 @@ function ManageProjectSubscription({subscription, subscriptions, project, setSta
                 }
 
             </div>
-        </div>
+        </div>}
         </>
     )
 }

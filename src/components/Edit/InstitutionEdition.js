@@ -61,7 +61,6 @@ function InstitutionEdition(props) {
           data: formik.values.address  
         })
         .then((res) => {
-          console.log(res)
           return(api({      
           method: "PATCH",
           url: `/institution/${props.institution.id}`,
@@ -70,8 +69,6 @@ function InstitutionEdition(props) {
         )}
         )
             .then((res) => {
-              console.log("salvo")
-              console.log(res)
         props.setStateInstitution(res.data);
         props.setStatePass(false);
       })  

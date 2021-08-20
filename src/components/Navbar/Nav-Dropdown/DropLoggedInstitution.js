@@ -20,7 +20,7 @@ function DropLoggedInstitution() {
       }, [])
     return (
     <ul className="nav-btn-list">
-        {user.institution.id && <li className="nav-btn">
+        {user && user.institution && <li className="nav-btn">
             <NavLink to={`/institution/${user?.institution.id}`}>
             <b>Página da instituição</b>
             </NavLink>  
