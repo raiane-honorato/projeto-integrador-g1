@@ -36,7 +36,7 @@ function Hero() {
             <motion.button 
              initial={{opacity:0, y:400}}
              animate={{opacity:1, y:0}}
-             transition={{duration:2}}
+             transition={{duration:1.5}}
             className="hero-btn" id="hero-btn-volunteer">
               Seja um voluntário
             </motion.button >

@@ -22,18 +22,18 @@ function useFormik({ initialValues, validate }) {
        validateValues(values);
   }, [validate, values]);
 
- 
-
   useEffect(() => {
+    const abortController = new AbortController();
+    const signal = abortController.signal;
     if (cep.length > 7)
-      fetch(`https://viacep.com.br/ws/${cep}/json/`)
+      fetch(`https://viacep.com.br/ws/${cep}/json/`, { signal: signal })
         .then((response) => response.json())
         .then((response) =>
           setValues({
             ...values,
             address: {
               street: response.logradouro,
-              bairro: response.bairro,
+              neighborhood: response.bairro,
               city: response.localidade,
               state: response.uf
             }
@@ -43,7 +43,10 @@ function useFormik({ initialValues, validate }) {
           console.log(
             `Não foi possível obter o endereço do CEP informado! Erro:${error}`
           )     
-        );        
+        );    
+        return () => {
+          abortController.abort();
+        }    
   }, [values, cep]);
 
   function searchingData(e) {
@@ -132,7 +135,7 @@ function ProfileEditionSection(props) {
     },
   });
 
-  console.log(formik.values)
+  
   //saving information
   const handleSave = () => {
     api({
@@ -142,7 +145,7 @@ function ProfileEditionSection(props) {
       data: formik.values  
     })
       .then((res) => {
-        props.setPageUser(res.data);
+       console.log(res.data);
         props.setStatePass(false);
         toast.success("Usuário atualizado.", { position: "top-right" });
       })

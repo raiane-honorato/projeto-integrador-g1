@@ -75,7 +75,7 @@
   
 #cep,
 #street,
-#bairro,
+#neighborhood,
 #city,
 #state,
 #address_number {    
@@ -88,8 +88,8 @@
   font-size: 1rem;
 }
   
-#resumo,
-#descricao {
+#summary,
+#bio {
   resize: none;
 }
 
@@ -102,17 +102,18 @@
   font-size: 1rem;
 }
 
-#ongName,
-#resumo,
+#name,
+#password,
+#passwordConfirmation,
+#summary,
 #endereco,
-#causas,
-#numBeneficiados,
+#causes,
 #cnpj,
-#telOng,
+#phone,
 #email,
 #site,
 #instagram,
-#descricao,
+#bio,
 #facebook
 {
   padding: 0.7rem !important;
