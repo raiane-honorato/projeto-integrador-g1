@@ -48,6 +48,7 @@ function ProjectEdition(props) {
       //setting habilities list
       const [habilities, setHabilities] = useState();
       const [projectHabilities, setProjectHabilities] = useState();
+      const [localType, setLocalType] = useState(props.project.local_type);
       useEffect(() => {
         api.get(`/hability`)
         .then((res) => {
@@ -152,8 +153,9 @@ function ProjectEdition(props) {
                           name="local_type"
                           id="local_type_local"
                           value = "local"
-                          required
-                          checked = {props.project.local_type === "local" ? "checked":null}
+                          requiredchecked = {localType === "local"}
+                          onChange = {event => setLocalType("local")}
+                          //checked = {props.project.local_type === "local" ? "checked":null}
                         />
                         <label  htmlFor="local_type_local">Local</label>
                       </div>
@@ -165,7 +167,8 @@ function ProjectEdition(props) {
                           id="local_type_remote"
                           value = "remoto"
                           required
-                          checked = {props.project.local_type === "remoto" ? "checked":null}
+                          checked = {localType === "remoto"}
+                          onChange = {event => setLocalType("remoto")}
                         />
                         
                         <label htmlFor="local_type_remote">Remoto</label>

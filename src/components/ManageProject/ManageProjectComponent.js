@@ -57,7 +57,6 @@ function ManageProjectComponent({ projectId }) {
     api.get(`/subscription/?project_id=${projectId}`)
       .then((res) => {
         setSubscriptions(res.data);
-        console.log(res.data)
       })
       .catch((erro) =>
         alert("Não foi possível obter inscrições.")
@@ -71,14 +70,6 @@ function ManageProjectComponent({ projectId }) {
       .then((res) => {
         setSubscriptions(res.data);
       })
-      .catch((erro) =>
-        alert("Não foi possível obter inscrições.")
-      )
-
-    !q && api.get(`/subscription/?project_id=${projectId}`)
-    .then((res) => {
-      setSubscriptions(res.data);
-    })
       .catch((erro) =>
         alert("Não foi possível obter inscrições.")
       )
@@ -203,7 +194,7 @@ function ManageProjectComponent({ projectId }) {
                       <label className="manage-projects-filter-option">
                         <input
                           className="manage-projects-filter-checkbox"
-                          type="checkbox"
+                          type="radio"
                           name="approved"
                           checked={filterRegistration.approved}
                           onChange={handleFilterChange}
@@ -216,7 +207,7 @@ function ManageProjectComponent({ projectId }) {
                       <label className="manage-projects-filter-option">
                         <input
                           className="manage-projects-filter-checkbox"
-                          type="checkbox"
+                          type="radio"
                           name="declined"
                           checked={filterRegistration.declined}
                           onChange={handleFilterChange}
@@ -229,7 +220,7 @@ function ManageProjectComponent({ projectId }) {
                       <label className="manage-projects-filter-option">
                         <input
                           className="manage-projects-filter-checkbox"
-                          type="checkbox"
+                          type="radio"
                           name="pending"
                           checked={filterRegistration.pending}
                           onChange={handleFilterChange}
@@ -242,7 +233,7 @@ function ManageProjectComponent({ projectId }) {
                       <label className="manage-projects-filter-option">
                         <input
                           className="manage-projects-filter-checkbox"
-                          type="checkbox"
+                          type="radio"
                           name="canceled"
                           checked={filterRegistration.canceled}
                           onChange={handleFilterChange}
