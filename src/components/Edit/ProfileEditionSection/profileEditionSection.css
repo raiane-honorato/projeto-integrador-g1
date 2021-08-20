@@ -57,6 +57,12 @@
     cursor: pointer;
 }
 
+.user-first-edition-window-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 
 @media (max-device-width: 800px) {
   .user-first-edition-window{

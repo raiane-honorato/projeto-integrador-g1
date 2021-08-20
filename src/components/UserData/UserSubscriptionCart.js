@@ -35,11 +35,11 @@ function UserSubscriptionCart({
       </div>
       <div className="subscription-situation">
         <p
-          className={subscription?.status === "Aceita" ? "greenCard" : "redCard"}
+          className={subscription?.status === "Aceita" ? "greenCard" : (subscription?.status === "Pendente" ? "yellowCard" : "redCard")}
         >
           Situação da inscrição: {subscription?.status}
         </p>
-        {subscription?.status === "Aceita" && (
+        {subscription?.status === "Pendente" && (
           <button
             className="user-subscription-btn"
             onClick={() => {

@@ -5,35 +5,43 @@ import api from "../../services/api";
 //components
 import ProjectCart from "../ProjectCart/ProjectCart";
 import { useEffect, useState } from "react";
+import Loader from "../Loader/Loader";
 
 function Spotlight() {
   const [habilities, setHabilities] = useState();
   const [causes, setCauses] = useState();
   const [projects, setProjects] = useState();
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    setLoading(true);
     api
       .get(`/project`)
       .then((res) => {
         setProjects(res.data);
+        setLoading(false);
       })
       .catch((erro) => alert(`Erro ao obter lista de projetos: ${erro}`));
   }, []);
 
   useEffect(() => {
+    setLoading(true);
     api
       .get(`/cause`)
       .then((res) => {
         setCauses(res.data);
+        setLoading(false);
       })
       .catch((erro) => alert(`Erro ao obter lista de causas: ${erro}`));
   }, []);
 
   useEffect(() => {
+    setLoading(true);
     api
       .get(`/hability`)
       .then((res) => {
         setHabilities(res.data);
+        setLoading(false);
       })
       .catch((erro) => alert(`Erro ao obter lista de habilidadesc: ${erro}`));
   }, []);
@@ -45,7 +53,7 @@ function Spotlight() {
         <div className="spotlight-section-one-content">
           <h2>Destaque suas habilidades</h2>
           <div className="habilities-grid">
-            {habilities &&
+            {habilities ? (
               habilities.map((hability) => (
                 <div key={hability.id} className="hability-img-div">
                   <img
@@ -55,7 +63,9 @@ function Spotlight() {
                   />
                   {hability.label}
                 </div>
-              ))}
+              ))) : (
+                <Loader />
+              )}
           </div>
         </div>
       </section>
@@ -65,7 +75,7 @@ function Spotlight() {
         <div className="spotlight-section-one-content">
           <h2>Apoie uma Causa</h2>
           <div className="causes-grid">
-            {causes &&
+            {causes ? (
               causes.map((cause) => (
                 <div key={cause.id} className="cause-img-div">
                   <img
@@ -75,7 +85,9 @@ function Spotlight() {
                   />
                   {cause.label}
                 </div>
-              ))}
+              ))) : (
+                <Loader />
+              )}
           </div>
         </div>
       </section>
@@ -85,7 +97,7 @@ function Spotlight() {
       <section className="spotlight-section spotlight-section-two">
         <h2>Projetos em destaque</h2>
         <div className="job-cards">
-          {projects &&
+          {projects ? (
             projects
               .sort((a, b) => {
                 return b.popularity - a.popularity;
@@ -96,7 +108,9 @@ function Spotlight() {
                   project={project}
                   key={`spotlight-${project.id}`}
                 />
-              ))}
+              ))) : (
+                <Loader />
+              )}
         </div>
       </section>
     </>

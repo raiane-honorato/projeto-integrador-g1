@@ -10,18 +10,17 @@ import { AuthContext } from "../../context/auth";
 import DropLoggedUser from "./Nav-Dropdown/DropLoggedUser";
 import DropNotLogged from "./Nav-Dropdown/DropNotLogged";
 import DropLoggedInstitution from "./Nav-Dropdown/DropLoggedInstitution";
-import { Toaster } from 'react-hot-toast';
-
+import { Toaster } from "react-hot-toast";
 
 function Navbar({ navbarTransparent, changeBackground }) {
   window.addEventListener("scroll", changeBackground);
 
   const [activeLogin, setActiveLogin] = useState(false);
-  const { user, token} = useContext(AuthContext);
+  const { user, token } = useContext(AuthContext);
 
-   return (
+  return (
     <>
-    <Toaster />
+      <Toaster />
       <nav className="navbar" id={navbarTransparent ? "navbarTransparent" : ""}>
         <div className="nav-container">
           <NavLink to="/" className="nav-logo" exact>
@@ -55,28 +54,32 @@ function Navbar({ navbarTransparent, changeBackground }) {
                   alt="Menu"
                 />
               ) : (
-               user && <img
-                  className="profile-picture"
-                  src={user.img}
-                  alt="profile-img"
-                />
+                user && (
+                  <img
+                    className="profile-picture"
+                    src={user.img}
+                    alt="profile-img"
+                  />
+                )
               )}
             </div>
             <div className={activeLogin ? "" : "nav-set-vis"}>
               <div className="nav-login-dropdown">
-                {!token ? 
-                <DropNotLogged /> : 
-                (user?.type === 1 ? <DropLoggedUser /> : <DropLoggedInstitution/>)
-                }
-
+                {!token ? (
+                  <DropNotLogged />
+                ) : user?.type === 1 ? (
+                  <DropLoggedUser />
+                ) : (
+                  <DropLoggedInstitution />
+                )}
               </div>
             </div>
           </div>
         </div>
       </nav>
-      <div 
-      className={activeLogin ? "nav-overlay" : "nav-overlay nav-set-vis"}
-      onClick={() => setActiveLogin(!activeLogin)}
+      <div
+        className={activeLogin ? "nav-overlay" : "nav-overlay nav-set-vis"}
+        onClick={() => setActiveLogin(!activeLogin)}
       ></div>
     </>
   );

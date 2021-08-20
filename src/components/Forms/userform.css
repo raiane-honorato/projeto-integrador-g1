@@ -181,31 +181,6 @@ hr {
   text-align: center;
 }
 
- 
-
-/* Formulário da Instituição 
-
-#ongName,
-#resumo,
-#endereco,
-#causas,
-#numBeneficiados,
-#cnpj,
-#telOng,
-#email,
-#site,
-#instagram,
-#descricao,
-#facebook
-{
-  padding: 0.7rem;
-  border-radius: 5px;
-  border: none;
-  box-shadow: 1px 1px 4px #9c9c9c;
-  font-family: "Poppins", sans-serif;
-  font-size: 1rem;
-} */
-
 @media only screen and (max-device-width : 600px) {
   .container-useform {
     display: flex;
