@@ -5,7 +5,7 @@ function UserFirstEditionBody({ formik }) {
   return (
     <div className="dados-pessoais">
       <div className="inputs">
-        <label htmlFor="dataNasc">Data de Nascimento:</label>
+        <label htmlFor="birth_date">Data de Nascimento:</label>
         <input
           type="date"
           id="birth_date"
@@ -21,7 +21,7 @@ function UserFirstEditionBody({ formik }) {
       </div>
 
       <div className="inputs">
-        <label htmlFor="contatNumber">Telefone:</label>
+        <label htmlFor="phone">Telefone:</label>
         <InputMask
           name="phone"
           id="phone"

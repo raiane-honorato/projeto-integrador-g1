@@ -61,6 +61,11 @@
   background-color:var(--thirdColorLight );
 }
 
+.yellowCard {
+  background-color: var(--fourthColor);
+}
+
+
 .subscription-situation {
   display: flex;
   justify-content: space-between;
@@ -227,6 +232,7 @@
     font-size: 0.875rem;
     text-align: center;
   }
+
 
   .project-data-details {
     text-align: center;

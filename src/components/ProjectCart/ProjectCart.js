@@ -1,24 +1,7 @@
-import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
-import ProjectCardSkeleton from "../ProjectCardSkeleton/ProjectCardSkeleton";
 import "./ProjectCart.css";
 
 function ProjectCart({ project }) {
-  const [imageLoaded, setImageLoaded] = useState(false);
-
-  const image = project.img;
-
-  useEffect(() => {
-    const imageLoader = new Image();
-    imageLoader.src = image;
-    imageLoader.onload = () => setImageLoaded(true);
-
-    return () => {
-      // Here goes the code you wish to run on unmount
-    }
-
-    
-  }, [image]);
 
     return (
     <>
@@ -27,13 +10,12 @@ function ProjectCart({ project }) {
         key={`card-${project["id"]}`}
         className="spotlight-card-container"
       >
-        {imageLoaded ? (
         <div className="card">          
           <div className="card-image-div">        
             <img
               className="card-image"
               alt={project["title"]}
-              src={image}
+              src={project.img}
             />         
           </div>           
           <div className="card-content">
@@ -49,9 +31,6 @@ function ProjectCart({ project }) {
             ))}
           </div>
         </div>
-          ) : (
-            <ProjectCardSkeleton />
-          )}
       </NavLink>
     </>
   );
