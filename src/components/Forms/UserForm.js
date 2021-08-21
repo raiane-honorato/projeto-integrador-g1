@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { useState, useCallback } from "react";
 import InputMask from "react-input-mask";
 import api from "../../services/api";
@@ -6,6 +5,7 @@ import "./userform.css";
 import toast, { Toaster } from "react-hot-toast";
 import { useHistory } from "react-router-dom";
 import Loader from "../Loader/Loader";
+import NoPhotoUser from "../../img/no-photo-user.png"
 
 function useFormik({ initialValues, validate }) {
   const [touched, setTouchedFields] = useState({});
@@ -92,7 +92,7 @@ function UserForm() {
     initialValues: {
       type: "1",
       name: "",
-      img: "",
+      img: "https://firebasestorage.googleapis.com/v0/b/correte-do-bem.appspot.com/o/no-photo-user.png?alt=media&token=c4f3e73c-cbf1-44b9-adb2-5c7d10cbb61e",
       cpf: "",
       birth_date: null,
       phone: "",

@@ -5,7 +5,7 @@ import SearchBar from "../SearchBar/SearchBar";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 import { faUserAlt } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "../../context/auth";
 import DropLoggedUser from "./Nav-Dropdown/DropLoggedUser";
 import DropNotLogged from "./Nav-Dropdown/DropNotLogged";
