@@ -20,11 +20,14 @@ function ManageProjectComponent({ projectId }) {
   const [closeProject, setCloseProject] = useState(false);
 
 
-  const [q, setQ] = useState('');
-  const [filterStatus, setFilterStatus] = useState(false);
-  const [filterRegistration, setfilterRegistration] = useState({ 'approved': false, 'declined': false, 'pending': false, 'canceled': false })
-  const [filterProject, setFilterProject] = useState({ 'opened': false, 'closed': false })
+  const [filterParams, setFilterParams] = useState({'q':'','status':''})
+  const [filterDropDown, setFilterDropDown] = useState(false);
+  //const [q, setQ] = useState('');
+  //const [filterByStatus, setFilterByStatus] = useState('');
+  //const [filterRegistration, setfilterRegistration] = useState({ 'approved': false, 'declined': false, 'pending': false, 'canceled': false })
+  //const [filterProject, setFilterProject] = useState({ 'opened': false, 'closed': false })
   const [loading, setLoading] = useState(false);
+  const [loading2, setLoading2] = useState(false);
 
   //dealing with outside click to close the component
   let windowRef = useRef();
@@ -32,16 +35,15 @@ function ManageProjectComponent({ projectId }) {
   useEffect(() => {
     let handler = (event) => {
       if (!windowRef.current.contains(event.target)) {
-        setFilterStatus(false)
-        setfilterRegistration(filterProject)
+        setFilterDropDown(false)
       }
     }
-    filterStatus && document.addEventListener("mousedown", handler);
+    filterDropDown && document.addEventListener("mousedown", handler);
 
     return () => {
-      filterStatus && document.removeEventListener("mousedown", handler)
+      filterDropDown && document.removeEventListener("mousedown", handler)
     }
-  }, [filterStatus])
+  }, [filterDropDown])
 
 
 
@@ -71,58 +73,35 @@ function ManageProjectComponent({ projectId }) {
   }, [projectId])
 
 
-  useEffect(() => {
-    q && api.get(`/subscription/?project_id=${projectId}&q=${q.toLocaleLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "")}`)
-      .then((res) => {
-        setSubscriptions(res.data);
-      })
-      .catch((erro) =>
-        alert("Não foi possível obter inscrições.")
-      )
-
-    q && cleanFilter()
-
-  }, [q, projectId])
 
   let handleFilterChange = (event) => {
-    setfilterRegistration({ ...filterRegistration, [event.target.name]: event.target.checked })
+    setFilterParams({...filterParams, 'status':event.target.name})
+    //const initialValue = { 'approved': false, 'declined': false, 'pending': false, 'canceled': false }
+    //setfilterRegistration({ ...initialValue, [event.target.name]: event.target.checked })
   }
 
   let cleanFilter = () => {
-    setfilterRegistration({ 'approved': false, 'declined': false, 'pending': false, 'canceled': false })
-    setFilterProject({ 'opened': false, 'closed': false })
+    setFilterParams({'q':'', 'status':''})
+    //setfilterRegistration({ 'approved': false, 'declined': false, 'pending': false, 'canceled': false })
+    //setFilterProject({ 'opened': false, 'closed': false })
   }
 
-  let updateProjects = () => {
-    setFilterProject(filterRegistration)
-    setQ("")
-    if (filterRegistration.approved === filterRegistration.declined === filterRegistration.pending === filterRegistration.canceled) {
-      api.get(`/subscription/?project_id=${projectId}`)
+  useEffect( () => {
+      setLoading2(true);
+      setSubscriptions("");
+      api.get(`/subscription/?project_id=${projectId}${filterParams.status?"&status="+filterParams.status:""}&q=${filterParams.q}`)
         .then((res) => {
           setSubscriptions(res.data);
+          setLoading2(false);
         })
         .catch((erro) =>
           alert("Não foi possível obter inscrições.")
         )
-    }
-    else {
-      api.get(`/subscription/?project_id=${projectId}${filterRegistration.approved ? '&status=Aceita'
-        : filterRegistration.declined ? '&status=Recusada'
-          : filterRegistration.pending ? '&status=Pendente'
-            : filterRegistration.canceled ? '&status=Cancelada'
-              : ''
-        }`)
-        .then((res) => res.json())
-        .then((res) => {
-          setSubscriptions(res);
-        })
-        .catch((erro) =>
-          alert("Não foi possível obter inscrições.")
-        )
-    }
 
-    setFilterStatus(false)
-  }
+      setFilterDropDown(false)
+    }, [filterParams])
+
+  
 
 
   return (
@@ -181,30 +160,30 @@ function ManageProjectComponent({ projectId }) {
                     className="manage-project-search-input"
                     type="text"
                     placeholder="buscar voluntário"
-                    value={q}
-                    onChange={(event) => { setQ(event.target.value) }}
+                    value={filterParams.q}
+                    onChange={(event) => { setFilterParams({...filterParams, 'q':event.target.value}) }}
                   />
                 </div>
 
                 <div className="manage-projects-filter-field-container" ref={windowRef} >
                   <div className="manage-project-filter-field"
                     onClick={() => {
-                      setFilterStatus(!filterStatus);
-                      setfilterRegistration(filterProject)
+                      setFilterDropDown(!filterDropDown);
+                      
                     }}>
                     <p>Todas as inscrições</p>
                     <FontAwesomeIcon className="manage-project-icon" icon={faChevronDown} />
                   </div>
 
-                  {filterStatus &&
+                  {filterDropDown &&
 
                     <div className="manage-projects-filter-dropdown">
                       <label className="manage-projects-filter-option">
                         <input
                           className="manage-projects-filter-checkbox"
                           type="radio"
-                          name="approved"
-                          checked={filterRegistration.approved}
+                          name="Aceita"
+                          checked={filterParams.status == "Aceita"}
                           onChange={handleFilterChange}
                         >
 
@@ -216,8 +195,8 @@ function ManageProjectComponent({ projectId }) {
                         <input
                           className="manage-projects-filter-checkbox"
                           type="radio"
-                          name="declined"
-                          checked={filterRegistration.declined}
+                          name="Recusada"
+                          checked={filterParams.status == "Recusada"}
                           onChange={handleFilterChange}
                         >
 
@@ -229,8 +208,8 @@ function ManageProjectComponent({ projectId }) {
                         <input
                           className="manage-projects-filter-checkbox"
                           type="radio"
-                          name="pending"
-                          checked={filterRegistration.pending}
+                          name="Pendente"
+                          checked={filterParams.status == "Pendente"}
                           onChange={handleFilterChange}
                         >
 
@@ -242,28 +221,27 @@ function ManageProjectComponent({ projectId }) {
                         <input
                           className="manage-projects-filter-checkbox"
                           type="radio"
-                          name="canceled"
-                          checked={filterRegistration.canceled}
+                          name="Cancelada"
+                          checked={filterParams.status == "Cancelada"}
                           onChange={handleFilterChange}
                         >
 
                         </input>
                         <span className="manage-projects-filter-text">Cancelada</span>
                       </label>
-
-                      <div className="manage-projects-filter-btn-container">
-                        <button className="manage-projects-filter-btn" onClick={cleanFilter}>Limpar</button>
-                        <button className="manage-projects-filter-btn" id="manage-projects-apply-btn" onClick={updateProjects}>Aplicar</button>
-                      </div>
                     </div>
                   }
                 </div>
+                {(filterParams.q || filterParams.status) &&
+                  
+                    <button className="manage-project-clean-filters-btn" onClick={cleanFilter}>Limpar filtros</button>
+                }
               </div>
-              {loading  && <Loader />}
-              {subscriptons &&
-                (subscriptons.length >= 1) ?
+              {loading2  && <Loader />}
+              {!loading2 && subscriptons &&
+                ((subscriptons.length >= 1) ?
                 subscriptons.map(subscription => <ManageProjectSubscription subscription={subscription} subscriptions={subscriptons} setStateSubscriptions={setSubscriptions} project={project} />) :
-                <p className="manage-project-no-subscriptions">Ainda não há inscrições</p>
+                <p className="manage-project-no-subscriptions">Ainda não há inscrições</p>)
               }
             </div>
 

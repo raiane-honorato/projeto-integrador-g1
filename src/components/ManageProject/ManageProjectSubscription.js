@@ -82,7 +82,7 @@ function ManageProjectSubscription({subscription, subscriptions, project, setSta
 
             <div className = "manage-project-subscription-date-status-manage-btn">
                 
-                <p className = "manage-project-subscription-date"><b>{`${subscription && moment(Date(subscription.date)).format("DD/MM/YYYY")}`}</b></p> 
+                <p className = "manage-project-subscription-date"><b>{`${subscription && moment(new Date(subscription.date)).format("DD/MM/YYYY")}`}</b></p> 
 
                 <div className = "manage-project-subscription-status">
                     <span 
