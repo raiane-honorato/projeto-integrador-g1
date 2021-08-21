@@ -5,9 +5,11 @@ import ProjectEdition from "../Edit/ProjectEditSection/ProjectEdition";
 import CloseProject from "../Edit/ProjectEditSection/CloseProject";
 import "./ManageProjectComponent.css";
 
+
 import { faEye, faPen, faBan, faSearch, faChevronDown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import ManageProjectSubscription from "./ManageProjectSubscription";
+import api from "../../services/api";
 
 function ManageProjectComponent({ projectId }) {
   const { user } = useContext(AuthContext);
@@ -39,11 +41,12 @@ function ManageProjectComponent({ projectId }) {
     }
   }, [filterStatus])
 
+
+
   useEffect(() => {
-    fetch(`http://localhost:8000/projects/${projectId}`)
-      .then((res) => res.json())
+    api.get(`/project/${projectId}`)
       .then((res) => {
-        setProject(res);
+        setProject(res.data);
       })
       .catch((erro) =>
         alert("Não foi possível obter dados desse projeto.")
@@ -51,10 +54,9 @@ function ManageProjectComponent({ projectId }) {
   }, [projectId]);
 
   useEffect(() => {
-    fetch(`http://localhost:8000/subscription/?project_id=${projectId}`)
-      .then((res) => res.json())
+    api.get(`/subscription/?project_id=${projectId}`)
       .then((res) => {
-        setSubscriptions(res);
+        setSubscriptions(res.data);
       })
       .catch((erro) =>
         alert("Não foi possível obter inscrições.")
@@ -64,19 +66,9 @@ function ManageProjectComponent({ projectId }) {
 
 
   useEffect(() => {
-    q && fetch(`http://localhost:8000/subscription/?project_id=${projectId}&q=${q.toLocaleLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "")}`)
-      .then((res) => res.json())
+    q && api.get(`/subscription/?project_id=${projectId}&q=${q.toLocaleLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "")}`)
       .then((res) => {
-        setSubscriptions(res);
-      })
-      .catch((erro) =>
-        alert("Não foi possível obter inscrições.")
-      )
-
-    !q && fetch(`http://localhost:8000/subscription/?project_id=${projectId}`)
-      .then((res) => res.json())
-      .then((res) => {
-        setSubscriptions(res);
+        setSubscriptions(res.data);
       })
       .catch((erro) =>
         alert("Não foi possível obter inscrições.")
@@ -99,20 +91,19 @@ function ManageProjectComponent({ projectId }) {
     setFilterProject(filterRegistration)
     setQ("")
     if (filterRegistration.approved === filterRegistration.declined === filterRegistration.pending === filterRegistration.canceled) {
-      fetch(`http://localhost:8000/subscription/?project_id=${projectId}`)
-        .then((res) => res.json())
+      api.get(`/subscription/?project_id=${projectId}`)
         .then((res) => {
-          setSubscriptions(res);
+          setSubscriptions(res.data);
         })
         .catch((erro) =>
           alert("Não foi possível obter inscrições.")
         )
     }
     else {
-      fetch(`http://localhost:8000/subscription/?project_id=${projectId}${filterRegistration.approved ? '&subscription_status=Aceita'
-        : filterRegistration.declined ? '&subscription_status=Recusada'
-          : filterRegistration.pending ? '&subscription_status=Pendente'
-            : filterRegistration.canceled ? '&subscription_status=Cancelada'
+      api.get(`/subscription/?project_id=${projectId}${filterRegistration.approved ? '&status=Aceita'
+        : filterRegistration.declined ? '&status=Recusada'
+          : filterRegistration.pending ? '&status=Pendente'
+            : filterRegistration.canceled ? '&status=Cancelada'
               : ''
         }`)
         .then((res) => res.json())
@@ -203,7 +194,7 @@ function ManageProjectComponent({ projectId }) {
                       <label className="manage-projects-filter-option">
                         <input
                           className="manage-projects-filter-checkbox"
-                          type="checkbox"
+                          type="radio"
                           name="approved"
                           checked={filterRegistration.approved}
                           onChange={handleFilterChange}
@@ -216,7 +207,7 @@ function ManageProjectComponent({ projectId }) {
                       <label className="manage-projects-filter-option">
                         <input
                           className="manage-projects-filter-checkbox"
-                          type="checkbox"
+                          type="radio"
                           name="declined"
                           checked={filterRegistration.declined}
                           onChange={handleFilterChange}
@@ -229,7 +220,7 @@ function ManageProjectComponent({ projectId }) {
                       <label className="manage-projects-filter-option">
                         <input
                           className="manage-projects-filter-checkbox"
-                          type="checkbox"
+                          type="radio"
                           name="pending"
                           checked={filterRegistration.pending}
                           onChange={handleFilterChange}
@@ -242,7 +233,7 @@ function ManageProjectComponent({ projectId }) {
                       <label className="manage-projects-filter-option">
                         <input
                           className="manage-projects-filter-checkbox"
-                          type="checkbox"
+                          type="radio"
                           name="canceled"
                           checked={filterRegistration.canceled}
                           onChange={handleFilterChange}

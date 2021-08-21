@@ -16,12 +16,11 @@ function InstitutionThirdEditionBody({formik}) {
                             rows="6"
                             cols="50"
                             minLength="10"
-                            maxLength="180"
-                            value={formik.values.bio}
+                            maxLength="500" 
                             onChange={formik.handleChange}
                             onBlur={formik.handleBlur}            
                             required
-                        />
+                        >{`${formik.values.bio.toString()}`}</textarea>
                         {formik.touched.bio && formik.errors.bio && (
                             <span className="formikError">{formik.errors.bio}</span>
                         )}

@@ -6,42 +6,48 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import toast, { Toaster } from 'react-hot-toast';
 
 import "./CloseProject.css";
+import api from "../../../services/api";
+import axios from "axios";
 
 function CloseProject(props) {
     console.log(props)
 
-    let cancelProject = () => {
+    async function cancelProject () {
               //saving information
-      fetch(`http://localhost:8000/projects/${props.project.id}`, 
-        {
+        api({      
             method: "PATCH",
-            headers: {"Content-type": "application/json"},
-            body: JSON.stringify({"status": 2})
+            url: `/project/${props.project.id}`,
+            headers: { "Content-type": "application/json" },
+            data: {...props.project, "status":2} 
         })
-      .then((res) => res.json())
-      .then((res) => props.setStateProject(res))
+      .then((res) => props.setStateProject(res.data))
 
-      let cancelSubscriptions = props.subscriptions //.filter((subscription) => subscription.subscription_status == "Pendente")
+
+          let cancelSubscriptions = (props.subscriptions.filter((subscription) => subscription.status == "Pendente")
       .map( (subscription) => {
-          if(subscription.subscription_status === "Pendente") {
-        return fetch(`http://localhost:8000/subscription/${subscription.id}`, 
-          {
-              method: "PATCH",
-              headers: {"Content-type": "application/json"},
-              body: JSON.stringify({"subscription_status": "Recusada"})
-          })
-        .then((res) => res.json()) } else {
-            return subscription
-        }
+        
+           return( api({      
+                method: "PATCH",
+                url: `/subscription/${subscription.id}`,
+                headers: { "Content-type": "application/json" },
+                data: {...subscription, "status":"Recusada"} 
+            }))
 
-      })
-      console.log(cancelSubscriptions)
-      Promise.all(cancelSubscriptions)
-        .then((p) => {
-            toast.success("Vaga cancelada com sucesso.")
-            props.setStateSubscriptions(p)
-            props.setStatePass(false)
-        })
+      }))
+
+      await axios.all(cancelSubscriptions)
+      .then(
+          res => {
+              api.get(`/subscription?project_id=${props.project.id}`)
+              .then(res => {
+                  toast.success("Vaga cancelada com sucesso.")
+                  props.setStateSubscriptions(res.data)
+                  props.setStatePass(false)
+              })
+              
+          }
+          )
+
     }    
 
     //dealing with outside click to close the component

@@ -10,6 +10,7 @@ import "./ManageProjectsList.css"
 import ManageProjectsCart from "../ManageProjectsCard/ManageProjectsCard";
 import ProjectCreation from "../../Edit/ProjectEditSection/ProjectCreation";
 import toast, { Toaster } from 'react-hot-toast';
+import api from "../../../services/api";
 
 function ManageProjectsList() {
     const { user } = useContext(AuthContext);
@@ -39,16 +40,15 @@ function ManageProjectsList() {
     },[filterStatus, filterProject])
 
     useEffect(() => {
-      
-        fetch(`http://localhost:8000/projects/?institution_id=${user.institution_id}`)
-          .then((res) => res.json())
-          .then((res) => {
-            setProjects(res);
-          })
-          .catch((erro) =>
-            alert("Não foi possível obter dados dos projetos.")
-          )
-      }, [user.institution_id]);
+      console.log(user)
+      api.get(`/project?institution_id=${user.institution.id}`)
+      .then((res) => {
+      setProjects(res.data);
+      })
+      .catch((erro) =>
+        alert("Não foi possível obter dados dessa instituição.")
+      );
+      }, [user]);
 
       useEffect(() => {
         
@@ -60,24 +60,21 @@ function ManageProjectsList() {
       },[newProject])
 
       useEffect(() => {
-        q && fetch(`http://localhost:8000/projects/?institution_id=${user.institution_id}&q=${q.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "")}`)
-        .then((res) => res.json())
+        q && api.get(`/project?institution_id=${user.institution.id}&q=${q}`)
         .then((res) => {
-    
-          setProjects(res);
+        setProjects(res.data);
         })
         .catch((erro) =>
-          alert("Não foi possível obter dados dos projetos.")
-        )
+          alert("Não foi possível obter dados dessa instituição.")
+        );
 
-        !q && fetch(`http://localhost:8000/projects/?institution_id=${user.institution_id}`)
-        .then((res) => res.json())
+        !q && api.get(`/project?institution_id=${user.institution.id}`)
         .then((res) => {
-          setProjects(res);
+        setProjects(res.data);
         })
         .catch((erro) =>
-          alert("Não foi possível obter dados dos projetos.")
-        )
+          alert("Não foi possível obter dados dessa instituição.")
+        );
 
         q && cleanFilter()
         
@@ -96,19 +93,17 @@ function ManageProjectsList() {
         setFilterProject(filterState)
         setQ("")
         if (filterState.opened === filterState.closed) {
-          fetch(`http://localhost:8000/projects/?institution_id=${user.institution_id}`)
-          .then((res) => res.json())
+          api.get(`/project?institution_id=${user.institution.id}`)
           .then((res) => {
-            setProjects(res);
+            setProjects(res.data);
           })
           .catch((erro) =>
             alert("Não foi possível obter dados dos projetos.")
           )
         } else {
-          fetch(`http://localhost:8000/projects/?institution_id=${user.institution_id}${filterState.opened ? '&status=1': filterState.closed ? '&status=2':''}`)
-          .then((res) => res.json())
+          api.get(`/project?institution_id=${user.institution.id}${filterState.opened ? '&status=1': filterState.closed ? '&status=2':''}`)
           .then((res) => {
-            setProjects(res);
+            setProjects(res.data);
           })
           .catch((erro) =>
             alert("Não foi possível obter dados dos projetos.")
@@ -210,7 +205,7 @@ function ManageProjectsList() {
         }}
       ></div>
 
-      {createProject && <ProjectCreation setStatePass = {setCreateProject} institutionId = {user.institution_id} projects = {projects} setStateProjects = {setProjects} setStateNewProject = {setNewProject}/>}
+      {createProject && <ProjectCreation setStatePass = {setCreateProject} institution = {user.institution} projects = {projects} setStateProjects = {setProjects} setStateNewProject = {setNewProject}/>}
         
     </>
   )
