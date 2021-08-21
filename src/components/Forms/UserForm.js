@@ -5,7 +5,6 @@ import "./userform.css";
 import toast, { Toaster } from "react-hot-toast";
 import { useHistory } from "react-router-dom";
 import Loader from "../Loader/Loader";
-import NoPhotoUser from "../../img/no-photo-user.png"
 
 function useFormik({ initialValues, validate }) {
   const [touched, setTouchedFields] = useState({});
