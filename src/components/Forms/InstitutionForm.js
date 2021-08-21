@@ -8,12 +8,47 @@ import {
   sortableHandle,
 } from "react-sortable-hoc";
 import api from "../../services/api";
+import toast, { Toaster } from "react-hot-toast";
+import { useHistory } from "react-router-dom";
+import Loader from "../Loader/Loader";
 
 function useFormik({ initialValues, validate }) {
   const [touched, setTouchedFields] = useState({});
   const [errors, setErrors] = useState({});
   const [values, setValues] = useState(initialValues);
   const [cep, setCep] = useState("");
+  const [loading, setLoading] = useState(false);
+  const history = useHistory();
+
+  function savingInstitution(event) {
+    event.preventDefault();
+    setLoading(true);
+    api({
+      method: "POST",
+      url: "/institution",
+      headers: { "Content-type": "application/json" },
+      data: values,
+    })
+      .then((res) => {
+        setLoading(false);
+        toast.success("Usuário cadastrado!", {
+          duration: 2000,
+          position: "top-right",
+        });
+        history.push("/institution");
+      })
+      .catch((erro) => {
+        toast.error("Não foi possível realizar cadastro!", {
+          duration: 2000,
+          position: "top-right",
+        });
+        console.log(erro);
+        console.log(event);
+        console.log(api); 
+      });
+  }
+
+  // .catch(err => { console.log(err); res.status(400).json('unable to register'); })
 
   useCallback(() => {
     function validateValues(values) {
@@ -81,6 +116,8 @@ function useFormik({ initialValues, validate }) {
     cep,
     searchingData,
     fillingForm,
+    savingInstitution,
+    loading,
   };
 }
 
@@ -128,25 +165,27 @@ function InstForm() {
 
   const formik = useFormik({
     initialValues: {
+      type: "2",
       name: "",
+      img: "https://firebasestorage.googleapis.com/v0/b/correte-do-bem.appspot.com/o/no-photo-user.png?alt=media&token=c4f3e73c-cbf1-44b9-adb2-5c7d10cbb61e",
+      email: "",
       summary: "",
       cnpj: "",
-      address: {
-          street: "",
-          neighborhood: "",
-          address_number: "",
-          city: "",
-          state: ""
-      },
-      causes: "",
       phone: "",
-      site: "",
+      site: "",     
       facebook: "",
       instagram: "",
       bio: "",
-      email: "",
       password: "",
       passwordConfirmation: "",
+      address: {
+        street: "",
+        neighborhood: "",
+        address_number: "",
+        city: "",
+        state: ""
+    },
+    causes: "",
     },
     validate: function (values) {
       const cnpj = onlyNumbers(values.cnpj);
@@ -230,12 +269,16 @@ function InstForm() {
 
   return (
     <div className="container-instForm">
+      <Toaster />
+      {formik.loading ? (
+        <Loader />
+      ) : (
+        <>
+
       <h1 className="instituition-form-title">Cadastre sua Instituição</h1>
       <form
-        className="instForm"
-        onSubmit={(event) => {
-          event.preventDefault();
-        }}
+        className="instForm"  
+        onSubmit={formik.savingInstitution}
       >
         <h2>{steps[currentStep].title}</h2>
         <hr className="inst-hr-style" />
@@ -599,6 +642,8 @@ function InstForm() {
           )}
         </div>
       </form>
+      </>
+      )}
     </div>
   );
 }
