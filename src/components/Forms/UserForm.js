@@ -30,7 +30,7 @@ function useFormik({ initialValues, validate }) {
           duration: 2000,
           position: "top-right",
         });
-        history.push("/");
+        history.push("/login");
       })
       .catch((erro) => {
         toast.error("Não foi possível realizar cadastro!", {
@@ -90,9 +90,11 @@ function UserForm() {
 
   const formik = useFormik({
     initialValues: {
+      type: "1",
       name: "",
+      img: "",
       cpf: "",
-      birth_date: "",
+      birth_date: null,
       phone: "",
       email: "",
       password: "",
