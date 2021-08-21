@@ -171,7 +171,7 @@ function ManageProjectComponent({ projectId }) {
                       setFilterDropDown(!filterDropDown);
                       
                     }}>
-                    <p>Todas as inscrições</p>
+                    <p>{filterParams.status ? filterParams.status : "Todas as inscrições"}</p>
                     <FontAwesomeIcon className="manage-project-icon" icon={faChevronDown} />
                   </div>
 

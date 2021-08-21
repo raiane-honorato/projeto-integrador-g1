@@ -4,7 +4,6 @@
     min-height: 100vh;
     display: flex;
     justify-content: center;
-    max-width: 75rem;
     margin: 0 auto;
     overflow: hidden;
 }
