@@ -9,6 +9,7 @@ import ProjectCart from "../ProjectCart/ProjectCart";
 import EditButton from "../Edit/EditButton";
 import InstitutionEdition from "../Edit/InstitutionEdition";
 import api from "../../services/api";
+import Loader from "../Loader/Loader";
 
 function InstitutionData() {
   const parameter = useParams();
@@ -22,12 +23,15 @@ function InstitutionData() {
   const [firstEditState, setFirstEditState] = useState(false);
   const [secondEditState, setSecondEditState] = useState(false);
   const [thirdEditState, setThirdEditState] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    setLoading(true);
     api.get(`/institution/${institutionId}`)
       .then((res) => {
         setInstitution(res.data);
         setCauses(res.data.causes);
+        setLoading(false);
       })
       .catch((erro) =>
         alert("Não foi possível obter dados dessa instituição.")
@@ -53,6 +57,7 @@ function InstitutionData() {
   return (
     <>
       <div className="institution-data-profile">
+      {loading && <Loader />}
         {institution && (
           <>
             <div className="institution-first-section-profile">

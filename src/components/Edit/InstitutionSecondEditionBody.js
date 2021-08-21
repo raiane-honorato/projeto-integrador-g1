@@ -4,10 +4,6 @@ import { useEffect } from "react";
 
 function InstitutionSecondEditionBody({ formik }) {
 
-    useEffect(() => {
-        console.log(formik)
-    }, [])
-
     return (
         <div className="institution-first-edition-window-body">
             <div className="inputs">

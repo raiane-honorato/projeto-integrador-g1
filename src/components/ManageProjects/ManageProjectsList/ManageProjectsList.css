@@ -4,7 +4,6 @@
     min-height: 100vh;
     display: flex;
     justify-content: center;
-    max-width: 75rem;
     margin: 0 auto;
     overflow: hidden;
 }
@@ -138,6 +137,8 @@
     background-color:initial;
     color: var(--secondGrey);
 }
+
+
 
 #manage-projects-apply-btn {
     text-decoration: underline;
