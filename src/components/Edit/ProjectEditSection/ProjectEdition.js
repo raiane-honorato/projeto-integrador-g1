@@ -5,9 +5,11 @@ import { useFormik } from 'formik';
 import Multiselect from 'multiselect-react-dropdown';
 import "./ProjectEdition.css";
 import api from "../../../services/api";
+import toast from "react-hot-toast";
+import ShortLoader from "../../Loader/ShortLoader";
 
 function ProjectEdition(props) {
-
+  const [loading, setLoading] = useState(false);
     //dealing with outside click to close the component
     let windowRef = useRef();
 
@@ -98,7 +100,7 @@ function ProjectEdition(props) {
 
       //saving information
       const handleSave = () => {
-
+        setLoading(true);
         api({      
           method: "PATCH",
           url: `/project/${props.project.id}`,
@@ -108,6 +110,8 @@ function ProjectEdition(props) {
       .then((res) => {
         props.setStateProject(res.data);
         props.setStatePass(false);
+        setLoading(false);
+        toast.success("Projeto atualizado.")
       })
       .catch((erro) =>
         alert("Não foi possível atualizar.")
@@ -284,6 +288,7 @@ function ProjectEdition(props) {
                 
                 <div className = "project-first-edition-window-footer">
                     <button className = "project-edition-save" onClick = {handleSave}>Salvar</button>
+                    {loading && <ShortLoader size={50}/>}
                 </div>
             </div>
         </div>

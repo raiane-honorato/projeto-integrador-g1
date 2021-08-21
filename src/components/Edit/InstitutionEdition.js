@@ -1,14 +1,17 @@
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useFormik } from 'formik';
 import "./InstitutionEdition.css";
 import InstitutionFirstEditionBody from "./InstitutionFirstEditionBody";
 import InstitutionSecondEditionBody from "./InstitutionSecondEditionBody";
 import InstitutionThirdEditionBody from "./InstitutionThirdEditionBody";
 import api from "../../services/api";
+import toast from "react-hot-toast";
+import ShortLoader from "../Loader/ShortLoader";
 
 function InstitutionEdition(props) {
+  const [loading, setLoading] = useState(false);
 
     //dealing with outside click to close the component
     let windowRef = useRef();
@@ -52,6 +55,7 @@ function InstitutionEdition(props) {
 
       //saving information
       const handleSave = () => {
+        setLoading(true);
         console.log("formik")
         console.log(formik.values)
         api({      
@@ -70,7 +74,9 @@ function InstitutionEdition(props) {
         )
             .then((res) => {
         props.setStateInstitution(res.data);
+        setLoading(false);
         props.setStatePass(false);
+        toast.success("Instituição atualizada.", { position: "top-right" });
       })  
           .catch((erro) =>
         alert("Não foi possível atualizar.")
@@ -93,6 +99,7 @@ function InstitutionEdition(props) {
                 
                 <div className = "institution-first-edition-window-footer">
                     <button className = "institution-edition-save" onClick = {handleSave}>Salvar</button>
+                    {loading && <ShortLoader />}
                 </div>
             </div>
         </div>

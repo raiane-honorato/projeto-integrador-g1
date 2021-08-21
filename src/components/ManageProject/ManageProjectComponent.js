@@ -10,6 +10,7 @@ import { faEye, faPen, faBan, faSearch, faChevronDown } from "@fortawesome/free-
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import ManageProjectSubscription from "./ManageProjectSubscription";
 import api from "../../services/api";
+import Loader from "../Loader/Loader";
 
 function ManageProjectComponent({ projectId }) {
   const { user } = useContext(AuthContext);
@@ -23,6 +24,7 @@ function ManageProjectComponent({ projectId }) {
   const [filterStatus, setFilterStatus] = useState(false);
   const [filterRegistration, setfilterRegistration] = useState({ 'approved': false, 'declined': false, 'pending': false, 'canceled': false })
   const [filterProject, setFilterProject] = useState({ 'opened': false, 'closed': false })
+  const [loading, setLoading] = useState(false);
 
   //dealing with outside click to close the component
   let windowRef = useRef();
@@ -44,9 +46,11 @@ function ManageProjectComponent({ projectId }) {
 
 
   useEffect(() => {
+    setLoading(true)
     api.get(`/project/${projectId}`)
       .then((res) => {
         setProject(res.data);
+        setLoading(false)
       })
       .catch((erro) =>
         alert("Não foi possível obter dados desse projeto.")
@@ -54,9 +58,11 @@ function ManageProjectComponent({ projectId }) {
   }, [projectId]);
 
   useEffect(() => {
+    setLoading(true)
     api.get(`/subscription/?project_id=${projectId}`)
       .then((res) => {
         setSubscriptions(res.data);
+        setLoading(false)
       })
       .catch((erro) =>
         alert("Não foi possível obter inscrições.")
@@ -121,10 +127,12 @@ function ManageProjectComponent({ projectId }) {
 
   return (
     <div className="manage-project-page">
+      {loading && <Loader />}
       {project && project.institution_id === user.institution_id &&
 
         <>
           <div className="manage-project-container">
+
             <div className="manage-project-header">
 
               <div className="manage-project-img-information">
@@ -251,7 +259,7 @@ function ManageProjectComponent({ projectId }) {
                   }
                 </div>
               </div>
-
+              {loading  && <Loader />}
               {subscriptons &&
                 (subscriptons.length >= 1) ?
                 subscriptons.map(subscription => <ManageProjectSubscription subscription={subscription} subscriptions={subscriptons} setStateSubscriptions={setSubscriptions} project={project} />) :

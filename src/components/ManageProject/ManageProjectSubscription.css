@@ -83,6 +83,11 @@
     position: relative;
 }
 
+.manage-project-subscription-change-status-btn-loading {
+    display: flex;
+    align-items: center;
+}
+
 .manage-project-subscription-change-status-btn{
     background-color: var(--secondColor);
     height: 2rem;
@@ -94,10 +99,15 @@
     border-radius: .2rem;
     cursor: pointer;
     color: var(--mainWhite);
-    display: flex;
+    display: inline-flex;
     gap: .5rem;
     align-items: center;
     text-decoration: none;
+
+}
+.manage-project-subscription-change-status-loading{
+    display: inline-block;
+    align-items: center;
 }
 
 .canceled-change-status{

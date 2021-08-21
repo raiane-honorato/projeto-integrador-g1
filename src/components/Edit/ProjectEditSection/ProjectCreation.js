@@ -6,8 +6,11 @@ import Multiselect from 'multiselect-react-dropdown';
 import  { Toaster } from 'react-hot-toast';
 import "./ProjectCreation.css";
 import api from "../../../services/api";
+import toast from "react-hot-toast";
+import ShortLoader from "../../Loader/ShortLoader";
 
 function ProjectCreation(props) {
+  const [loading, setLoading] = useState(false);
 
     //dealing with outside click to close the component
     let windowRef = useRef();
@@ -108,6 +111,7 @@ function ProjectCreation(props) {
 
       //saving information
       const handleSave = () => {
+        setLoading(true);
         api({      
           method: "POST",
           url: `/project/`,
@@ -118,6 +122,7 @@ function ProjectCreation(props) {
       .then((res) => {
         props.setStateNewProject(true);
         props.setStatePass(false);
+        setLoading(false);
       })
       .catch((erro) =>{
         alert("Não foi possível salvar.")
@@ -291,6 +296,7 @@ function ProjectCreation(props) {
                 
                 <div className = "project-first-creation-window-footer">
                     <button className = "project-creation-save" onClick = {handleSave}>Salvar</button>
+                    {loading && <ShortLoader />}
                 </div>
             </div>
         </div>

@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -8,19 +8,24 @@ import toast, { Toaster } from 'react-hot-toast';
 import "./CloseProject.css";
 import api from "../../../services/api";
 import axios from "axios";
+import ShortLoader from "../../Loader/ShortLoader";
 
 function CloseProject(props) {
-    console.log(props)
+    const [loading, setLoading] = useState(false);
 
     async function cancelProject () {
               //saving information
+        setLoading(true);
         api({      
             method: "PATCH",
             url: `/project/${props.project.id}`,
             headers: { "Content-type": "application/json" },
             data: {...props.project, "status":2} 
         })
-      .then((res) => props.setStateProject(res.data))
+      .then((res) => {
+          props.setStateProject(res.data)
+          
+        })
 
 
           let cancelSubscriptions = (props.subscriptions.filter((subscription) => subscription.status == "Pendente")
@@ -40,8 +45,9 @@ function CloseProject(props) {
           res => {
               api.get(`/subscription?project_id=${props.project.id}`)
               .then(res => {
-                  toast.success("Vaga cancelada com sucesso.")
+                  toast.success("Projeto cancelado com sucesso.")
                   props.setStateSubscriptions(res.data)
+                  setLoading(false)
                   props.setStatePass(false)
               })
               
@@ -87,6 +93,7 @@ function CloseProject(props) {
                 <div className = "project-first-closing-window-footer">
                     <button className = "project-closing-btn cancel-project" onClick = {cancelProject}>Encerrar</button>
                     <button className = "project-closing-btn no-cancel-project"  onClick = {() => props.setStatePass(false)}>Cancelar</button>
+                    {loading && <ShortLoader />}
                 </div>
             </div>
         </div>

@@ -5,12 +5,14 @@ import moment from "moment";
 
 import "./ManageProjectSubscription.css"
 import api from "../../services/api";
+import ShortLoader from "../Loader/ShortLoader";
 
 
 function ManageProjectSubscription({subscription, subscriptions, project, setStateSubscriptions}) {
 
     const [user, setUser] = useState();
     const [changeStatus, setChangeStatus] = useState(false);
+    const [loading, setLoading] = useState(false);
     
 
     useEffect(() => {
@@ -39,6 +41,7 @@ function ManageProjectSubscription({subscription, subscriptions, project, setSta
     // let subsArray = [...subscriptions]
 
     const changeSubscription = (status) => {
+        setLoading(true);
         api({      
             method: "PATCH",
             url: `/subscription/${subscription.id}`,
@@ -50,6 +53,7 @@ function ManageProjectSubscription({subscription, subscriptions, project, setSta
         .then(res => {
             setStateSubscriptions(res.data);
             setChangeStatus(false);
+            setLoading(false);
         })
         // subsArray[subsIndex] = res.data;
         // setStateSubscriptions(subsArray);
@@ -95,12 +99,16 @@ function ManageProjectSubscription({subscription, subscriptions, project, setSta
 
                {project.status === 1 &&
                 <div  ref = {windowRef} className = "manage-project-subscription-change-status">
-                    <button 
-                     
+                    <div className = "manage-project-subscription-change-status-btn-loading">
+                    <button  
                     className = {`manage-project-subscription-change-status-btn ${subscription.status === "Cancelada" ? " canceled-change-status":""}`}
                     onClick = {subscription.status !== "Cancelada" ? () =>  setChangeStatus(!changeStatus)  :""}>
                         <span>Alterar status</span>
                     </button>
+                    <div className = "manage-project-subscription-change-status-loading">
+                        {loading && <ShortLoader size={40}/>}
+                    </div>
+                    </div>
 
                     {changeStatus &&
                     <div  className = "manage-project-subscription-change-status-dropdown">

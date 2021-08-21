@@ -2,7 +2,7 @@ import Lottie from 'react-lottie';
 
 import animationData from '../../img/loading.json';
 
-const ShortLoader = () => {
+const ShortLoader = ({size}) => {
   const defaultOptions = {
     loop: true,
     autoplay: true, 
@@ -11,7 +11,10 @@ const ShortLoader = () => {
       preserveAspectRatio: 'xMidYMid slice'
     }
 };
-  return <Lottie width={100} height={100} options={defaultOptions} />
+    if(!size) {size = 100}
+    return <Lottie width={size} height={size} options={defaultOptions}/>
+  
+   
 };
 
 export default ShortLoader;

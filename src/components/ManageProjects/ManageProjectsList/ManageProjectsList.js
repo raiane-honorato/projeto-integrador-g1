@@ -11,6 +11,7 @@ import ManageProjectsCart from "../ManageProjectsCard/ManageProjectsCard";
 import ProjectCreation from "../../Edit/ProjectEditSection/ProjectCreation";
 import toast, { Toaster } from 'react-hot-toast';
 import api from "../../../services/api";
+import Loader from "../../Loader/Loader";
 
 function ManageProjectsList() {
     const { user } = useContext(AuthContext);
@@ -21,6 +22,7 @@ function ManageProjectsList() {
     const [filterStatus, setFilterStatus] = useState(false);
     const [filterState, setFilterState] = useState({'opened':false,'closed':false})
     const [filterProject, setFilterProject] = useState({'opened':false,'closed':false})
+    const [loading, setLoading] = useState(false);
 
     //dealing with outside click to close the component
     let windowRef = useRef();
@@ -40,10 +42,11 @@ function ManageProjectsList() {
     },[filterStatus, filterProject])
 
     useEffect(() => {
-      console.log(user)
+      setLoading(true);
       api.get(`/project?institution_id=${user.institution.id}`)
       .then((res) => {
       setProjects(res.data);
+      setLoading(false);
       })
       .catch((erro) =>
         alert("Não foi possível obter dados dessa instituição.")
@@ -90,12 +93,15 @@ function ManageProjectsList() {
       }
 
       let updateProjects = () => {
+        setLoading(true);
+        setProjects()
         setFilterProject(filterState)
         setQ("")
         if (filterState.opened === filterState.closed) {
           api.get(`/project?institution_id=${user.institution.id}`)
           .then((res) => {
             setProjects(res.data);
+            setLoading(false)
           })
           .catch((erro) =>
             alert("Não foi possível obter dados dos projetos.")
@@ -104,6 +110,7 @@ function ManageProjectsList() {
           api.get(`/project?institution_id=${user.institution.id}${filterState.opened ? '&status=1': filterState.closed ? '&status=2':''}`)
           .then((res) => {
             setProjects(res.data);
+            setLoading(false)
           })
           .catch((erro) =>
             alert("Não foi possível obter dados dos projetos.")
@@ -122,7 +129,6 @@ function ManageProjectsList() {
     <div className = "manage-project-toast"><Toaster /></div>
     <div className = "manage-projects-container">
         <div className = "manage-projects-list-container">
-           
             <div className = "manage-projects-header">
               <h3>Gerenciar projetos</h3>
               <button className = "manage-projects-new-project-btn" onClick = {() => {setCreateProject(true)}}>Criar novo projeto</button>
@@ -185,7 +191,7 @@ function ManageProjectsList() {
 
             </div>
 
-
+            {loading && <Loader />}
             {projects && projects.map(project => 
               <ManageProjectsCart project = {project} key = {`manage-project-cart-${project.id}`}/>)
             }
