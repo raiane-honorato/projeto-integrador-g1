@@ -10,6 +10,7 @@ import { useFormik } from "formik";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import ShortLoader from "../../Loader/ShortLoader";
 
+
 function ProfileEditionSection(props) {
   const [loading, setLoading] = useState(false);
 

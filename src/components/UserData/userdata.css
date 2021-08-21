@@ -243,3 +243,10 @@
     
   }
 }
+
+@media (min-device-width : 1024px)  {
+
+.user-edition-container {
+  width: 65%;
+}
+}

@@ -7,7 +7,7 @@ function InstitutionFirstEditionBody({ formik, institution }) {
 
         //setting causes list
         const [causes, setCauses] = useState();
-        const [institutionCauses, setInstitutionCauses] = useState(institution.causes);
+        const [institutionCauses] = useState(institution.causes);
 
         useEffect(() => {
           api.get("/cause")

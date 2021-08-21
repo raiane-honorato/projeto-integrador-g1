@@ -1,133 +1,114 @@
 import "./userThirdEdition.css";
-import Select, { components } from "react-select";
-import {
-  SortableContainer,
-  SortableElement,
-  sortableHandle,
-} from "react-sortable-hoc";
-import { useEffect, useState } from "react";
-import api from '../../../services/api';
-
-function arrayMove(array, from, to) {
-  array = array.slice();
-  array.splice(to < 0 ? array.length + to : to, 0, array.splice(from, 1)[0]);
-  return array;
-}
-
-const SortableMultiValue = SortableElement((props) => {
-  const onMouseDown = (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-  };
-  const innerProps = { ...props.innerProps, onMouseDown };
-  return <components.MultiValue {...props} innerProps={innerProps} />;
-});
-
-const SortableMultiValueLabel = sortableHandle((props) => (
-  <components.MultiValueLabel {...props} />
-));
-
-const SortableSelect = SortableContainer(Select);
+import { useContext, useEffect, useState } from "react";
+import api from "../../../services/api";
+import Multiselect from "multiselect-react-dropdown";
+import { AuthContext } from "../../../context/auth";
 
 function UserThirdEditionBody({ formik }) {
-  const [selectedCauses, setSelectedCauses] = useState([]);
-  const [selectedHabilities, setSelectedHabilities] = useState([]);
+  const { user } = useContext(AuthContext);
   const [habilities, setHabilities] = useState([]);
   const [causes, setCauses] = useState([]);
-
-
-  useEffect(() => {
-    api('/hability')
-    .then(res => setHabilities(res.data))
-    .catch((erro) => alert('Não foi possível carregar as habilidades!'))
-  },[])
+  const [userCauses, setUserCauses] = useState(user.causes);
+  const [userHabilities, setUserHabilities ] = useState(user.habilities);
+ 
 
   useEffect(() => {
-    api('/cause')
-    .then(res => setCauses(res.data))
-    .catch((erro) => alert('Não foi possível carregar as causas!'))
-  },[])
+    api("/hability")
+      .then((res) => setHabilities(res.data))
+      .catch((erro) => alert("Não foi possível carregar as habilidades!"));
+  }, []);
+
+  useEffect(() => {
+    api("/cause")
+      .then((res) => setCauses(res.data))
+      .catch((erro) => alert("Não foi possível carregar as causas!"));
+  }, []);
+
+  useEffect(() => {
+    setUserCauses(user.causes)
   
- if(selectedHabilities){
-  formik.values.habilities = [];
-   for (let i in selectedHabilities) {      
-      formik.values.habilities.push(selectedHabilities[i])
-   }
- }
+},[causes, user.causes])
 
+useEffect(() => {
+  setUserHabilities(user.habilities)
 
- if(selectedCauses){
-  formik.values.causes = [];
-   for (let i in selectedCauses) {      
-      formik.values.causes.push(selectedCauses[i])
-   }
- }
+},[habilities, user.habilities])
 
-  const onChangeCause = (selectedOptions) => setSelectedCauses(selectedOptions);
-  const onChangeHability = (selectedOptions) => setSelectedHabilities(selectedOptions);
-
-  const onSortEndCause = ({ oldIndex, newIndex }) => {
-    const newValue = arrayMove(selectedCauses, oldIndex, newIndex);
-    setSelectedCauses(newValue);
-
+  //chosen cause
+  let onChangeCause = (selectedList, selectedItem) => {
+    formik.setFieldValue("causes", selectedList);
   };
 
-  const onSortEndHability = ({ oldIndex, newIndex }) => {
-    const newValue = arrayMove(selectedHabilities, oldIndex, newIndex);
-    setSelectedHabilities(newValue);
-    
+  //chosen hability
+  let onChangHability = (selectedList, selectedItem) => {
+    formik.setFieldValue("habilities", selectedList);
   };
 
   return (
     <div className="causesAndHabilities">
       <div className="inputs">
         <label>Causas</label>
-        <SortableSelect
-         name='habilities'
-          useDragHandle
-          // react-sortable-hoc props:
-          axis="xy"
-          onSortEnd={onSortEndCause}
-          distance={4}
-          // small fix for https://github.com/clauderic/react-sortable-hoc/pull/352:
-          getHelperDimensions={({ node }) => node.getBoundingClientRect()}
-          // react-select props:
-          isMulti
-          options={causes}
-          value={selectedCauses}
-          onChange={onChangeCause}
-          components={{
-            MultiValue: SortableMultiValue,
-            MultiValueLabel: SortableMultiValueLabel,
-          }}
-          closeMenuOnSelect={false}
-        />
+        {causes && userCauses &&(
+          <Multiselect
+            options={causes}
+            displayValue="label"
+            selectedValues={userCauses}
+            selectionLimit="3"
+            placeholder="Selecione até 3 causas"
+            onSelect={onChangeCause}
+            onRemove={onChangeCause}
+            avoidHighlightFirstOption="true"
+            style={{
+              chips: { background: "var(--secondColor)" },
+              multiselectContainer: {
+                color: "var(--secondColor)",
+                background: "white",
+                padding: "0.7rem !important",
+                borderRadius: "5px",
+                border: "none",
+                boxShadow: "1px 1px 4px #9c9c9c",
+              },
+              inputField: {
+                font: "var(--secondFont)",
+                fontSize: ".8rem",
+                width: "15rem",
+              },
+            }}
+          />
+        )}
       </div>
 
       <div className="inputs">
         <label>Habilidades</label>
-        <SortableSelect
-        name='habilities'
-          useDragHandle
-          // react-sortable-hoc props:
-          axis="xy"
-          onSortEnd={onSortEndHability}
-          distance={4}
-          // small fix for https://github.com/clauderic/react-sortable-hoc/pull/352:
-          getHelperDimensions={({ node }) => node.getBoundingClientRect()}
-          // react-select props:
-          isMulti
-          options={habilities}
-          value={selectedHabilities}
-          onChange={onChangeHability}
-          components={{
-            MultiValue: SortableMultiValue,
-            MultiValueLabel: SortableMultiValueLabel,
-          }}
-          closeMenuOnSelect={false}
-        />
+        {habilities && userHabilities && (
+          <Multiselect
+            options={habilities}
+            displayValue="label"
+            selectedValues={user.habilities}
+            selectionLimit="3"
+            placeholder="Selecione até 3 causas"
+            onSelect={onChangHability}
+            onRemove={onChangHability}
+            avoidHighlightFirstOption="true"
+            style={{
+              chips: { background: "var(--secondColor)" },
+              multiselectContainer: {
+                color: "var(--secondColor)",
+                background: "white",
+                padding: "0.7rem !important",
+                borderRadius: "5px",
+                border: "none",
+                boxShadow: "1px 1px 4px #9c9c9c",
+              },
+              inputField: {
+                font: "var(--secondFont)",
+                fontSize: ".8rem",
+                width: "15rem",
+              },
+            }}
+          />
+        )}
       </div>
-        
     </div>
   );
 }

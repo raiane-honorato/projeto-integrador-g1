@@ -7,7 +7,7 @@ import "./ManageProjectSubscription.css"
 import api from "../../services/api";
 
 
-function ManageProjectSubscription({subscription, subscriptions, project, setStateSubscriptions}) {
+function ManageProjectSubscription({subscription, project, setStateSubscriptions}) {
 
     const [user, setUser] = useState();
     const [changeStatus, setChangeStatus] = useState(false);
@@ -32,12 +32,6 @@ function ManageProjectSubscription({subscription, subscriptions, project, setSta
         }
     },[changeStatus])
 
-
-    //change subscription function
-
-    // const subsIndex = subscriptions && subscriptions.findIndex((element) => element.id === subscription.id )
-    // let subsArray = [...subscriptions]
-
     const changeSubscription = (status) => {
         api({      
             method: "PATCH",
@@ -51,9 +45,6 @@ function ManageProjectSubscription({subscription, subscriptions, project, setSta
             setStateSubscriptions(res.data);
             setChangeStatus(false);
         })
-        // subsArray[subsIndex] = res.data;
-        // setStateSubscriptions(subsArray);
-        // setChangeStatus(false);
       
       .then((res) => toast.success("Inscrição atualizada com sucesso."))
       .catch((erro) =>
