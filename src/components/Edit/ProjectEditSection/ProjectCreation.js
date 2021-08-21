@@ -126,7 +126,7 @@ function ProjectCreation(props) {
       })
       .catch((erro) =>{
         alert("Não foi possível salvar.")
-        console.log(erro)}
+        }
       );
 
       }

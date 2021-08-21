@@ -56,8 +56,6 @@ function InstitutionEdition(props) {
       //saving information
       const handleSave = () => {
         setLoading(true);
-        console.log("formik")
-        console.log(formik.values)
         api({      
           method: "PATCH",
           url: `/address/${props.institution.address.id}`,
