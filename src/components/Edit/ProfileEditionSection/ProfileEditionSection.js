@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useState, useEffect, useRef } from "react";
 import "./profileEditionSection.css";
 import UserFirstEditionBody from "./UserFirstEditionBody";
 import UserSecondEditionBody from "./UserSecondEditionBody";

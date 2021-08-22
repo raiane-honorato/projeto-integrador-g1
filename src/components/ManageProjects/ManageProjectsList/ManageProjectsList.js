@@ -73,7 +73,7 @@ function ManageProjectsList() {
           alert("Não foi possível obter lista de projetos.")
         );
         
-      }, [filterParams])
+      }, [filterParams, user.institution.id])
 
       let handleFilterChange = (event) => {
         setFilterParams({...filterParams, 'status' : event.target.name })
@@ -108,7 +108,7 @@ function ManageProjectsList() {
                   <div className="manage-projects-filter-field" onClick = {()=> {
                     setFilterStatus(!filterStatus);
                     }}>
-                    <p>{filterParams.status=="1"?  "Abertos" : filterParams.status=="2"? "Fechados" : "Todas as vagas"}</p>
+                    <p>{filterParams.status==="1"?  "Abertos" : filterParams.status==="2"? "Fechados" : "Todas as vagas"}</p>
                     <FontAwesomeIcon className = "manage-projects-icon" icon = {faChevronDown} />
                   </div>
 
@@ -120,7 +120,7 @@ function ManageProjectsList() {
                           className = "manage-projects-filter-checkbox" 
                           type="radio" 
                           name="1"
-                          checked = {filterParams.status == 1}
+                          checked = {filterParams.status === "1"}
                           onChange = {handleFilterChange}
                           >
                           
@@ -133,7 +133,7 @@ function ManageProjectsList() {
                           className = "manage-projects-filter-checkbox" 
                           type="radio" 
                           name="2"
-                          checked = {filterParams.status == 2}
+                          checked = {filterParams.status === "2"}
                           onChange = {handleFilterChange}
                           >
                           

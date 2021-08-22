@@ -6,7 +6,6 @@ import Multiselect from 'multiselect-react-dropdown';
 import  { Toaster } from 'react-hot-toast';
 import "./ProjectCreation.css";
 import api from "../../../services/api";
-import toast from "react-hot-toast";
 import ShortLoader from "../../Loader/ShortLoader";
 
 function ProjectCreation(props) {
