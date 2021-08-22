@@ -8,7 +8,7 @@ import api from "../../services/api";
 import ShortLoader from "../Loader/ShortLoader";
 
 
-function ManageProjectSubscription({subscription, subscriptions, project, setStateSubscriptions}) {
+function ManageProjectSubscription({subscription, project, setStateSubscriptions}) {
 
     const [user, setUser] = useState();
     const [changeStatus, setChangeStatus] = useState(false);
@@ -34,12 +34,6 @@ function ManageProjectSubscription({subscription, subscriptions, project, setSta
         }
     },[changeStatus])
 
-
-    //change subscription function
-
-    // const subsIndex = subscriptions && subscriptions.findIndex((element) => element.id === subscription.id )
-    // let subsArray = [...subscriptions]
-
     const changeSubscription = (status) => {
         setLoading(true);
         api({      
@@ -55,9 +49,6 @@ function ManageProjectSubscription({subscription, subscriptions, project, setSta
             setChangeStatus(false);
             setLoading(false);
         })
-        // subsArray[subsIndex] = res.data;
-        // setStateSubscriptions(subsArray);
-        // setChangeStatus(false);
       
       .then((res) => toast.success("Inscrição atualizada com sucesso."))
       .catch((erro) =>

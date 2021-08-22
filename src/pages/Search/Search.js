@@ -1,16 +1,16 @@
 import React, { useRef } from "react";
 import { useLocation } from "react-router-dom";
 import "./Search.css";
-import { useEffect, useState } from "react";
+import { useEffect, useState } from "react";  
 import ReactPaginate from "react-paginate";
 
 import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Footer/Footer";
 
-//import projects from "../../data/projects.json";
 import ProjectCart from "../../components/ProjectCart/ProjectCart";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown, faSearch } from "@fortawesome/free-solid-svg-icons";
+import api from "../../services/api";
 
 function Search() {
   const [searchCause, setSearchCause] = useState("");
@@ -44,29 +44,18 @@ function Search() {
   let updateProjectsByRemote = () => {
     setFilterProject(filterRemote);
     if (filterRemote.remote === filterRemote.notRemote) {
-      fetch(`http://localhost:8000/projects/`)
-        .then((res) => res.json())
+      api.get('/project')
         .then((res) => {
-          setProjects(res);
+          setProjects(res.data);
         })
         .catch((erro) => alert("Não foi possível obter dados dos projetos."));
     } else {
-      fetch(
-        `http://localhost:8000/projects/?${
-          filterRemote.remote
-            ? "local_type=remoto"
-            : filterRemote.notRemote
-            ? "local_type=local"
-            : ""
-        }`
-      )
-        .then((res) => res.json())
+      api.get(`/project?local_type=${ filterRemote.remote ? "remoto" : "local" }`)
         .then((res) => {
-          setProjects(res);
+          setProjects(res.data);
         })
-        .catch((erro) => alert("Não foi possível obter dados dos projetos."));
+        .catch((erro) => alert("Não foi possível obter dados da pesquisa de vagas remotas."));
     }
-
     setFilterStatus(false);
   };
 
