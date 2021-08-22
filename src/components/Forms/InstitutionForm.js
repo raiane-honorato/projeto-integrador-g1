@@ -7,6 +7,7 @@ import toast, { Toaster } from "react-hot-toast";
 import { useHistory } from "react-router-dom";
 import Loader from "../Loader/Loader";
 import { useFormik } from 'formik';
+import { formatRelative } from "date-fns";
 
 function InstForm() {
 
@@ -128,37 +129,37 @@ function InstForm() {
 
       const errors = {};
 
-      if ((values.name.length < 3) | (values.name.length > 100)) {
+      if ((values.name.length < 3) | (values.name.length > 100) | !values.name) {
         errors.name = "Nome Invalido";
       }
 
-      if ((values.summary.length < 5) | (values.summary.length > 100)) {
+      if ((values.summary.length < 5) | (values.summary.length > 100) | !values.summary) {
         errors.summary = "Texto invalido";
       }
 
-      if (cnpj.length < 14) {
+      if (cnpj.length < 14 |  !values.cnpj) {
         errors.cnpj = "CNPJ invalido";
       }
 
-      if ((phone.length < 10) | (phone.length > 11)) {
+      if ((phone.length < 10) | (phone.length > 11) | !values.phone) {
         errors.phone = "Telefone invalido";
       }
 
-      if ((values.bio.length < 5) | (values.bio.length > 520)) {
+      if ((values.bio.length < 5) | (values.bio.length > 520) | !values.bio) {
         errors.bio = "Texto invalido";
       }
 
-      if (!values.email.includes("@") | (values.email.lengthh < 7)) {
+      if (!values.email.includes("@") | (values.email.lengthh < 7) | !values.email) {
         errors.email = "Email invalido";
       }
 
-      if ((values.password.length < 8) | (values.password.length > 15)) {
+      if ((values.password.length < 8) | (values.password.length > 15) |  !values.senha) {
         errors.senha = "Senha invalida";
       }
 
       if (
         (values.passwordConfirmation !== values.password) |
-        (values.passwordConfirmation === undefined)
+        (values.passwordConfirmation === undefined) |  !values.passwordConfirmation
       ) {
         errors.passwordConfirmation = "Senha inválida";
       }
@@ -173,7 +174,49 @@ function InstForm() {
   }, [formik.values]);
 
   function handleNextStep() {
-    setCurrentStep((prevStep) => prevStep + 1);
+
+    const errors = {};
+
+    switch (currentStep) {
+      case 0:
+        if (formik.values.name.length == 0 || formik.values.summary.length == 0) {
+          formik.errors.name = "Nome Invalido";
+          return errors
+        } else {
+          return setCurrentStep((prevStep) => prevStep + 1);
+        }
+
+      case 1:
+        if (formik.values.address.zip_code == 0 || formik.values.address.street == 0 || formik.values.address.neighborhood == 0 ||
+          formik.values.address.address_number == 0 || formik.values.address.city == 0 || formik.values.address.state == 0) {
+          return
+        } else {
+          return setCurrentStep((prevStep) => prevStep + 1);
+        }
+
+      case 2:
+        if (formik.values.cnpj.length == 0) {
+          return
+        } else {
+          return setCurrentStep((prevStep) => prevStep + 1);
+        }
+      case 3:
+        if (formik.values.phone.length == 0) {
+          return
+        } else {
+          return setCurrentStep((prevStep) => prevStep + 1);
+        }
+      case 4:
+        if (formik.values.bio.length == 0) {
+          return
+        } else {
+          return setCurrentStep((prevStep) => prevStep + 1);
+        }
+      default:
+        return
+    }
+
+
   }
 
   function handlePreviousStep() {
@@ -230,7 +273,7 @@ function InstForm() {
             {steps[currentStep].id === "dados-base1" && (
               <div className="dados-base1">
                 <div className="inst-inputs">
-                  <label htmlFor="name">Nome da instituição</label>
+                  <label htmlFor="name">Nome da instituição:*</label>
                   <input
                     type="text"
                     name="name"
@@ -248,7 +291,7 @@ function InstForm() {
                 </div>
 
                 <div className="inst-inputs">
-                  <label htmlFor="summary">Resumo da instituição</label>
+                  <label htmlFor="summary">Resumo da instituição:*</label>
                   <textarea
                     name="summary"
                     id="summary"
@@ -270,7 +313,7 @@ function InstForm() {
             {steps[currentStep].id === "endereco" && (
               <div className="inst-endereco">
                 <div className="inst-inputs">
-                  <label htmlFor="zip_code">CEP</label>
+                  <label htmlFor="zip_code">CEP:*</label>
                   <input
                     type="number"
                     name="address.zip_code"
@@ -287,7 +330,7 @@ function InstForm() {
                   )}
                 </div>
                 <div className="inst-inputs">
-                  <label htmlFor="street">Rua</label>
+                  <label htmlFor="street">Rua:*</label>
                   <input
                     type="text"
                     name="address.street"
@@ -302,7 +345,7 @@ function InstForm() {
                   )}
                 </div>
                 <div className="inst-inputs">
-                  <label htmlFor="neighborhood">Bairro</label>
+                  <label htmlFor="neighborhood">Bairro:*</label>
                   <input
                     type="text"
                     name="address.neighborhood"
@@ -317,7 +360,7 @@ function InstForm() {
                   )}
                 </div>
                 <div className="inst-inputs">
-                  <label htmlFor="address_number">Número</label>
+                  <label htmlFor="address_number">Número:*</label>
                   <input
                     type="text"
                     name="address.address_number"
@@ -332,7 +375,7 @@ function InstForm() {
                   )}
                 </div>
                 <div className="inst-inputs">
-                  <label htmlFor="city">Cidade</label>
+                  <label htmlFor="city">Cidade:*</label>
                   <input
                     type="text"
                     name="address.city"
@@ -347,7 +390,7 @@ function InstForm() {
                   )}
                 </div>
                 <div className="inst-inputs">
-                  <label htmlFor="state">Estado</label>
+                  <label htmlFor="state">Estado:*</label>
                   <input
                     type="text"
                     name="address.state"
@@ -366,7 +409,7 @@ function InstForm() {
             {steps[currentStep].id === "dados-base2" && (
               <div className="dados-base2">
                 <div className="inst-inputs">
-                  <label>Causas</label>
+                  <label>Causas:</label>
                   {causes && (
                     <Multiselect
                       options={causes}
@@ -398,7 +441,7 @@ function InstForm() {
 
 
                 <div className="inst-inputs">
-                  <label htmlFor="cnpj">CNPJ</label>
+                  <label htmlFor="cnpj">CNPJ:*</label>
                   <InputMask
                     name="cnpj"
                     id="cnpj"
@@ -416,7 +459,7 @@ function InstForm() {
             {steps[currentStep].id === "contatos" && (
               <div className="contatos">
                 <div className="inst-inputs">
-                  <label htmlFor="phone">Telefone</label>
+                  <label htmlFor="phone">Telefone:*</label>
                   <InputMask
                     name="phone"
                     id="phone"
@@ -431,7 +474,7 @@ function InstForm() {
                 </div>
 
                 <div className="inst-inputs">
-                  <label htmlFor="site">Site</label>
+                  <label htmlFor="site">Site:</label>
                   <input
                     type="url"
                     id="site"
@@ -448,7 +491,7 @@ function InstForm() {
                 </div>
 
                 <div className="inst-inputs">
-                  <label htmlFor="facebook">Facebook (URL)</label>
+                  <label htmlFor="facebook">Facebook (URL):</label>
                   <input
                     type="url"
                     id="facebook"
@@ -465,7 +508,7 @@ function InstForm() {
                 </div>
 
                 <div className="inst-inputs">
-                  <label htmlFor="instagram">Instagram (URL)</label>
+                  <label htmlFor="instagram">Instagram (URL):</label>
                   <input
                     type="url"
                     id="instagram"
@@ -485,7 +528,7 @@ function InstForm() {
             {steps[currentStep].id === "sobre" && (
               <div className="sobre">
                 <div className="inst-inputs">
-                  <label htmlFor="bio">Descrição da Ong</label>
+                  <label htmlFor="bio">Descrição da Ong:*</label>
                   <textarea
                     name="bio"
                     id="bio"
@@ -507,7 +550,7 @@ function InstForm() {
             {steps[currentStep].id === "outros-contatos" && (
               <div className="outros-contatos">
                 <div className="inst-inputs">
-                  <label htmlFor="email">E-Mail</label>
+                  <label htmlFor="email">E-Mail:*</label>
                   <input
                     type="text"
                     id="email"
@@ -525,7 +568,7 @@ function InstForm() {
                 </div>
 
                 <div className="inst-inputs">
-                  <label htmlFor="senha">Senha:</label>
+                  <label htmlFor="senha">Senha:*</label>
                   <input
                     type="password"
                     id="password"
@@ -543,7 +586,7 @@ function InstForm() {
                 </div>
 
                 <div className="inst-inputs">
-                  <label htmlFor="passwordConfirmation">Confirmar Senha:</label>
+                  <label htmlFor="passwordConfirmation">Confirmar Senha:*</label>
                   <input
                     type="password"
                     id="passwordConfirmation"

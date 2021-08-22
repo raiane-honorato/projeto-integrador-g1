@@ -141,7 +141,17 @@ function UserForm() {
   });
 
   function handleNextStep() {
-    setCurrentStep((prevStep) => prevStep + 1);
+
+    switch(currentStep){
+      case 0:
+        if(formik.values.name.length == 0 || formik.values.cpf.length == 0 || formik.values.birth_date == 0){
+          break
+        }else{
+          return setCurrentStep((prevStep) => prevStep + 1);
+        }
+      default:
+        break
+    }
   }
 
   function handlePreviousStep() {
@@ -183,7 +193,7 @@ function UserForm() {
             {steps[currentStep].id === "personal-data" && (
               <div className="dados-pessoais">
                 <div className="inputs">
-                  <label htmlFor="name">Nome Completo:</label>
+                  <label htmlFor="name">Nome Completo:*</label>
                   <input
                     type="text"
                     id="name"
@@ -201,7 +211,7 @@ function UserForm() {
                 </div>
 
                 <div className="inputs">
-                  <label htmlFor="cpf">CPF:</label>
+                  <label htmlFor="cpf">CPF:*</label>
                   <InputMask
                     name="cpf"
                     id="cpf"
@@ -216,7 +226,7 @@ function UserForm() {
                 </div>
 
                 <div className="inputs">
-                  <label htmlFor="birth_date">Data de Nascimento:</label>
+                  <label htmlFor="birth_date">Data de Nascimento:*</label>
                   <input
                     type="date"
                     id="birth_date"
@@ -241,7 +251,7 @@ function UserForm() {
               <div className="cadastrais">
                 {/* <h2>Dados cadastrais</h2> */}
                 <div className="inputs">
-                  <label htmlFor="phone">Telefone:</label>
+                  <label htmlFor="phone">Telefone:*</label>
                   <InputMask
                     name="phone"
                     id="phone"
@@ -256,7 +266,7 @@ function UserForm() {
                 </div>
 
                 <div className="inputs">
-                  <label htmlFor="email">E-Mail:</label>
+                  <label htmlFor="email">E-Mail:*</label>
                   <input
                     type="email"
                     id="email"
@@ -274,7 +284,7 @@ function UserForm() {
                 </div>
 
                 <div className="inputs">
-                  <label htmlFor="passwordConfirmation">Senha:</label>
+                  <label htmlFor="passwordConfirmation">Senha:*</label>
                   <input
                     type="password"
                     id="password"
@@ -294,7 +304,7 @@ function UserForm() {
                 </div>
 
                 <div className="inputs">
-                  <label htmlFor="passwordConfirmation">Confirmar Senha:</label>
+                  <label htmlFor="passwordConfirmation">Confirmar Senha:*</label>
                   <input
                     type="password"
                     id="passwordConfirmation"
@@ -357,4 +367,4 @@ function UserForm() {
   );
 }
 
-export default UserForm;
+export default UserForm
