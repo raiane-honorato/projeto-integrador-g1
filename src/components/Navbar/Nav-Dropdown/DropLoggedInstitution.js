@@ -1,6 +1,6 @@
 import { NavLink, useHistory } from "react-router-dom";
 import { AuthContext } from "../../../context/auth";
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 
 function DropLoggedInstitution() {
     const { user, setToken, setUser} = useContext(AuthContext);

@@ -64,7 +64,7 @@ function Spotlight() {
                   {hability.label}
                 </div>
               ))) : (
-                <Loader />
+                loading && <Loader />
               )}
           </div>
         </div>
@@ -86,7 +86,7 @@ function Spotlight() {
                   {cause.label}
                 </div>
               ))) : (
-                <Loader />
+                loading && <Loader />
               )}
           </div>
         </div>
@@ -109,7 +109,7 @@ function Spotlight() {
                   key={`spotlight-${project.id}`}
                 />
               ))) : (
-                <Loader />
+                loading && <Loader />
               )}
         </div>
       </section>

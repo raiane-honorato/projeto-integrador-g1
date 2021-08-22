@@ -28,7 +28,7 @@ function CloseProject(props) {
         })
 
 
-          let cancelSubscriptions = (props.subscriptions.filter((subscription) => subscription.status == "Pendente")
+          let cancelSubscriptions = (props.subscriptions.filter((subscription) => subscription.status === "Pendente")
       .map( (subscription) => {
         
            return( api({      

@@ -99,7 +99,7 @@ function ManageProjectComponent({ projectId }) {
         )
 
       setFilterDropDown(false)
-    }, [filterParams])
+    }, [filterParams, projectId])
 
   
 
@@ -183,7 +183,7 @@ function ManageProjectComponent({ projectId }) {
                           className="manage-projects-filter-checkbox"
                           type="radio"
                           name="Aceita"
-                          checked={filterParams.status == "Aceita"}
+                          checked={filterParams.status === "Aceita"}
                           onChange={handleFilterChange}
                         >
 
@@ -196,7 +196,7 @@ function ManageProjectComponent({ projectId }) {
                           className="manage-projects-filter-checkbox"
                           type="radio"
                           name="Recusada"
-                          checked={filterParams.status == "Recusada"}
+                          checked={filterParams.status === "Recusada"}
                           onChange={handleFilterChange}
                         >
 
@@ -209,7 +209,7 @@ function ManageProjectComponent({ projectId }) {
                           className="manage-projects-filter-checkbox"
                           type="radio"
                           name="Pendente"
-                          checked={filterParams.status == "Pendente"}
+                          checked={filterParams.status === "Pendente"}
                           onChange={handleFilterChange}
                         >
 
@@ -222,7 +222,7 @@ function ManageProjectComponent({ projectId }) {
                           className="manage-projects-filter-checkbox"
                           type="radio"
                           name="Cancelada"
-                          checked={filterParams.status == "Cancelada"}
+                          checked={filterParams.status === "Cancelada"}
                           onChange={handleFilterChange}
                         >
 
