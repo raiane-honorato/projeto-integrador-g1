@@ -44,13 +44,15 @@ function Search() {
   let updateProjectsByRemote = () => {
     setFilterProject(filterRemote);
     if (filterRemote.remote === filterRemote.notRemote) {
-      api.get('/project')
+      api
+        .get("/project")
         .then((res) => {
           setProjects(res.data);
         })
         .catch((erro) => alert("Não foi possível obter dados dos projetos."));
     } else {
-      api.get(`/project/local_type=${ filterRemote.remote ? "remoto" : "local" }`)
+      api
+        .get(`/project?local_type=${filterRemote.remote ? "remoto" : "local"}`)
         .then((res) => {
           setProjects(res.data);
         })
