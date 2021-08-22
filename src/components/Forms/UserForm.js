@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { useState, useCallback } from "react";
 import InputMask from "react-input-mask";
 import api from "../../services/api";
@@ -30,7 +29,7 @@ function useFormik({ initialValues, validate }) {
           duration: 2000,
           position: "top-right",
         });
-        history.push("/");
+        history.push("/login");
       })
       .catch((erro) => {
         toast.error("Não foi possível realizar cadastro!", {
@@ -90,9 +89,11 @@ function UserForm() {
 
   const formik = useFormik({
     initialValues: {
+      type: "1",
       name: "",
+      img: "https://firebasestorage.googleapis.com/v0/b/correte-do-bem.appspot.com/o/no-photo-user.png?alt=media&token=c4f3e73c-cbf1-44b9-adb2-5c7d10cbb61e",
       cpf: "",
-      birth_date: "",
+      birth_date: null,
       phone: "",
       email: "",
       password: "",

@@ -5,7 +5,7 @@
   border-radius: 40px;
   display: flex;
   align-items: center;
-  max-width: 310px;
+  max-width: 330px;
   padding: .8rem .5rem;
   box-shadow: 1px 1px 3px var(--mainWhite);
   box-sizing: content-box;
@@ -15,7 +15,7 @@
   font-family: 'Poppins', sans-serif;
   border: none;
   border-radius: 20px;
-  width: 15rem;
+  min-width: 17rem;
   padding: .8rem .5rem;
 }
 

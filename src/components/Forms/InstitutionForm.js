@@ -82,6 +82,7 @@ function InstForm() {
           position: "top-right",
         });
       });
+
   }
 
   const [currentStep, setCurrentStep] = useState(0);

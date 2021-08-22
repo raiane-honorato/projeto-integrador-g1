@@ -7,138 +7,89 @@ import ReactPaginate from "react-paginate";
 import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Footer/Footer";
 
-//import projects from "../../data/projects.json";
 import ProjectCart from "../../components/ProjectCart/ProjectCart";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown, faSearch } from "@fortawesome/free-solid-svg-icons";
+import api from "../../services/api";
+import Loader from "../../components/Loader/Loader";
+import SearchFilterOption from "../../components/SearchFilters/SearchFilterOption";
 
 function Search() {
-  const [searchCause, setSearchCause] = useState("");
-  const [searchHability, setSearchHability] = useState("")
-  const [searchCity, setSearchCity] = useState("");
-
-  const [filterStatus, setFilterStatus] = useState(false);
-  const [filterRemote, setfilterRemote] = useState({
-    remote: false,
-    notRemote: false,
-  });
-
-  const [filterProject, setFilterProject] = useState({
-    opened: false,
-    closed: false,
-  });
-  let windowRef = useRef();
-
-  let handleFilterChange = (event) => {
-    setfilterRemote({
-      ...filterRemote,
-      [event.target.name]: event.target.checked,
-    });
-  };
-
-  let cleanFilter = () => {
-    setfilterRemote({ remote: false, notRemote: false });
-    setFilterProject({ opened: false, closed: false });
-  };
-
-  let updateProjectsByRemote = () => {
-    setFilterProject(filterRemote);
-    if (filterRemote.remote === filterRemote.notRemote) {
-      fetch(`http://localhost:8000/projects/`)
-        .then((res) => res.json())
-        .then((res) => {
-          setProjects(res);
-        })
-        .catch((erro) => alert("Não foi possível obter dados dos projetos."));
-    } else {
-      fetch(
-        `http://localhost:8000/projects/?${
-          filterRemote.remote
-            ? "local_type=remoto"
-            : filterRemote.notRemote
-            ? "local_type=local"
-            : ""
-        }`
-      )
-        .then((res) => res.json())
-        .then((res) => {
-          setProjects(res);
-        })
-        .catch((erro) => alert("Não foi possível obter dados dos projetos."));
-    }
-
-    setFilterStatus(false);
-  };
-
-  //getting project list from JSON server on 8000
-  const [projects, setProjects] = useState(null);
- 
-  useEffect(() => {
-    fetch(`http://localhost:8000/projects/`)
-      .then((res) => res.json())
-      .then((res) => {
-        setProjects(res);
-      })
-      .catch((erro) => alert(`Erro ao obter lista de projetos: ${erro}`));
-  }, []);
-
-  // getting search city from institution list from JSON server on 8000
-  const [institutionsId, setInstitutionsId] = useState(null);
-  function searchingForCity () {
-    fetch(`http://localhost:8000/institution/?city=${searchCity}`)
-    .then((res) => res.json())
-    .then((res) => {
-      setInstitutionsId(res.map(institution => institution.id))
-    })
-    .catch((erro) => alert(`Erro ao obter lista de projetos: ${erro}`));
-  }
-
-  useEffect(() => {
-    let requests =
-    institutionsId && institutionsId.map((instId) => {
-        return fetch(`http://localhost:8000/projects/${instId}`).then((res) => res.json())
-      });
-
-      requests && Promise.all(requests)
-      .then((p) => setProjects(p))
-      .catch((err) => alert("Não foi possível obter as causas"));
-  }, [institutionsId]);
-
 
   // q search parameter
   const { search } = useLocation();
   const searchParams = new URLSearchParams(search);
   const q = searchParams.get("q");
 
-  //filter project list by q parameter
-  const [filteredProjects, setFilteredProjects] = useState(null);
+  const [projects, setProjects] = useState(null);
+  const [causes, setCauses] = useState();
+  const [habilities, setHabilities] = useState();
+  const [filterStatus, setFilterStatus] = useState(
+    {
+      'local_type': false,
+      'cause': false,
+      'hability': false
+    }
+  );
+  const [filterParams, setFilterParams] = useState({
+    'q': q,
+    'cause': '',
+    'hability': '',
+    'local_type': ''
+  })
+  const [loading, setLoading] = useState(false);
 
- 
+  //dealing with outside click to close the component
+  let windowRef1 = useRef();
+  let windowRef2 = useRef();
+  let windowRef3 = useRef();
+
   useEffect(() => {
-    if (projects) {
-      setFilteredProjects(
-        projects
-          .filter(
-            (project) =>
-              project["title"]
-                .toLowerCase()
-                .normalize("NFD")
-                .replace(/[\u0300-\u036f]/g, "")
-                .indexOf(
-                  q
-                    .toLowerCase()
-                    .normalize("NFD")
-                    .replace(/[\u0300-\u036f]/g, "")
-                ) > -1
-          )
-          .sort((a, b) => {
-            return b.popularity - a.popularity;
-          })
-      );
-    } else if (projects && q==="") {
-     return;
-    }      
-  }, [projects, q]);
+    let handler = (event) => {
+      if (!windowRef1.current.contains(event.target) &&
+        !windowRef2.current.contains(event.target) &&
+        !windowRef3.current.contains(event.target)) {
+        setFilterStatus({
+          'local_type': false,
+          'cause': false,
+          'hability': false
+        })
+      }
+    }
+    filterStatus && document.addEventListener("mousedown", handler);
+
+    return () => {
+      filterStatus && document.removeEventListener("mousedown", handler)
+    }
+  }, [filterStatus])
+
+
+  useEffect(() => {
+    setLoading(true)
+    api.get(`/project`)
+      .then((res) => {
+        setProjects(res.data);
+        setLoading(false)
+      })
+      .catch((erro) => alert(`Erro ao obter lista de projetos: ${erro}`));
+  }, []);
+
+  useEffect(() => {
+    api.get(`/cause`)
+      .then((res) => {
+        setCauses(res.data);
+      })
+      .catch((erro) => alert(`Erro ao obter lista de causas: ${erro}`));
+  }, []);
+
+  useEffect(() => {
+    api.get(`/hability`)
+      .then((res) => {
+        setHabilities(res.data);
+      })
+      .catch((erro) => alert(`Erro ao obter lista de habilidades: ${erro}`));
+  }, []);
+
 
   //pagination
   const [pageNumber, setPageNumber] = useState(0);
@@ -151,14 +102,50 @@ function Search() {
   );
 
   useEffect(() => {
-    filteredProjects &&
-      setPageCount(Math.ceil(filteredProjects.length / projectsPerPage));
-  }, [filteredProjects]);
+    setLoading(true);
+    setProjects("");
+    let params = `/project`
+    let condition = "?"
+    if(filterParams.q){
+      params += condition + "q=" + filterParams.q
+      condition = "&"
+    }
+    if(filterParams.local_type){
+      params += condition + "local_type=" + filterParams.local_type
+      condition = "&"
+    }
+    if(filterParams.cause){
+      params += condition + "cause_id=" + filterParams.cause.id
+      condition = "&"
+    }
+    if(filterParams.hability){
+      params += condition + "hability_id=" + filterParams.hability.id
+      condition = "&"
+    }
+    
+    api.get(params)
+    .then(res => {
+      setProjects(res.data)
+      setLoading(false)
+      setFilterStatus({
+        'local_type': false,
+        'cause': false,
+        'hability': false
+      })
+    })
+    
+    
+    }, [filterParams])
 
   useEffect(() => {
-    filteredProjects &&
+    projects &&
+      setPageCount(Math.ceil(projects.length / projectsPerPage));
+  }, [projects]);
+
+  useEffect(() => {
+    projects &&
       setDisplayProjects(
-        filteredProjects
+        projects
           .slice(projectsViewd, projectsViewd + projectsPerPage)
           .map((project) => {
             return (
@@ -166,7 +153,7 @@ function Search() {
             );
           })
       );
-  }, [filteredProjects, projectsViewd]);
+  }, [projects, projectsViewd]);
 
   const changePage = ({ selected }) => {
     setPageNumber(selected);
@@ -180,114 +167,148 @@ function Search() {
       <div className="search-container">
         <h2 className="search-title">Explore oportunidades de voluntariado</h2>
         <span className="summary-results">
-          {filteredProjects &&
-            `${filteredProjects.length} ${
-              filteredProjects.length === 1 ? "resultado" : "resultados"
+          {projects &&
+            `${projects.length} ${projects.length === 1 ? "resultado" : "resultados"
             }`}
         </span>
 
+        {/* q search */}
         <div className="search-filter-container">
-        <div className="manage-projects-search-field">
-            <FontAwesomeIcon className="manage-projects-icon" onClick={searchingForCity} icon={faSearch} />
+          <div className="search-field-filter-q">
+            <FontAwesomeIcon className="manage-projects-icon" icon={faSearch} />
             <input
-              className="manage-projects-search-input"
+              className="search-filter-q"
               type="text"
-              placeholder="buscar por cidade"
-              value={searchCity}
-              onChange={(event) => {
-                setSearchCity(event.target.value);
-              }}
+              placeholder="Palavra chave, instituição ou cidade"
+              value={filterParams.q}
+              onChange={(event) => setFilterParams({...filterParams, 'q':event.target.value})}
+            // value={searchCity}
+            // onChange={(event) => {
+            //   setSearchCity(event.target.value);
+            // }}
             />
           </div>
 
-          <div className="remote-search-filter-field-container" ref={windowRef}>
+          {/* local_type filter */}
+          <div className="remote-search-filter-field-container" ref={windowRef1}>
             <div
               className="search-filter-button location-type"
               onClick={() => {
-                setFilterStatus(!filterStatus);
-                setfilterRemote(filterProject);
+                setFilterStatus({
+                  'local_type': !filterStatus.local_type,
+                  'cause': false,
+                  'hability': false
+                })
+                
               }}
             >
-              <p>Remoto</p>
+              <p>{filterParams.local_type == "remoto" ? "Remoto" : filterParams.local_type == "local" ? "Presencial" : "Localização"}</p>
               <FontAwesomeIcon
                 className="manage-projects-icon"
                 icon={faChevronDown}
               />
             </div>
 
-            {filterStatus && (
+            {filterStatus.local_type && (
               <div className="manage-projects-filter-dropdown">
                 <label className="manage-projects-filter-option">
                   <input
                     className="manage-projects-filter-checkbox"
-                    type="checkbox"
-                    name="remote"
-                    checked={filterRemote.remote}
-                    onChange={handleFilterChange}
+                    type="radio"
+                    name="remoto"
+                    checked={filterParams.local_type == "remoto"}
+                    onChange={(event) => setFilterParams({ ...filterParams, 'local_type': event.target.name })}
                   ></input>
-                  <span className="manage-projects-filter-text">Sim</span>
+                  <span className="manage-projects-filter-text">Remoto</span>
                 </label>
                 <label className="manage-projects-filter-option">
                   <input
                     className="manage-projects-filter-checkbox"
-                    type="checkbox"
-                    name="notRemote"
-                    checked={filterRemote.notRemote}
-                    onChange={handleFilterChange}
+                    type="radio"
+                    name="local"
+                    checked={filterParams.local_type == "local"}
+                    onChange={(event) => setFilterParams({ ...filterParams, 'local_type': event.target.name })}
                   ></input>
-                  <span className="manage-projects-filter-text">Não</span>
+                  <span className="manage-projects-filter-text">Presencial</span>
                 </label>
-                <div className="manage-projects-filter-btn-container">
-                  <button
-                    className="manage-projects-filter-btn"
-                    onClick={cleanFilter}
-                  >
-                    Limpar
-                  </button>
-                  <button
-                    className="manage-projects-filter-btn"
-                    id="manage-projects-apply-btn"
-                    onClick={updateProjectsByRemote}
-                  >
-                    Aplicar
-                  </button>
-                </div>
               </div>
             )}
           </div>
 
-          <div className="manage-projects-search-field">
-            <FontAwesomeIcon className="manage-projects-icon" icon={faSearch} />
-            <input
-              className="manage-projects-search-input"
-              type="text"
-              placeholder="buscar por habilidade"
-              value={searchHability}
-              onChange={(event) => {
-                setSearchHability(event.target.value);
+
+          {/* cause filter */}
+          <div className="remote-search-filter-field-container" ref={windowRef2}>
+            <div
+              className="search-filter-button location-type"
+              onClick={() => {
+                setFilterStatus({
+                  'local_type': false,
+                  'cause': !filterStatus.cause,
+                  'hability': false
+                })
               }}
-            />
+            >
+              <p>{filterParams.cause?filterParams.cause.label : "Causas"}</p>
+              <FontAwesomeIcon
+                className="manage-projects-icon"
+                icon={faChevronDown}
+              />
+            </div>
+
+            {filterStatus.cause && (
+              <div className="manage-projects-filter-dropdown">
+                {causes &&
+                  causes.map(cause => <SearchFilterOption entity={cause} type="cause" filterParams={filterParams} setFilterParams={setFilterParams} setFilterStatus={setFilterStatus} />)
+                }
+              </div>
+            )}
           </div>
 
-          <div className="manage-projects-search-field  projects-search-field">
-            <FontAwesomeIcon className="manage-projects-icon" icon={faSearch} />
-            <input
-              className="manage-projects-search-input"
-              type="text"
-              placeholder="buscar por causa"
-              value={searchCause}
-              onChange={(event) => {
-                setSearchCause(event.target.value);
+          {/* hability filter */}
+          <div className="remote-search-filter-field-container" ref={windowRef3}>
+            <div
+              className="search-filter-button location-type"
+              onClick={() => {
+                setFilterStatus({
+                  'local_type': false,
+                  'cause': false,
+                  'hability': !filterStatus.hability
+                })
               }}
-            />
+            >
+              <p>{filterParams.hability?filterParams.hability.label : "Habilidades"}</p>
+              <FontAwesomeIcon
+                className="manage-projects-icon"
+                icon={faChevronDown}
+              />
+            </div>
+
+            {filterStatus.hability && (
+              <div className="manage-projects-filter-dropdown">
+                {habilities &&
+                  habilities.map(hability => <SearchFilterOption entity={hability} type="hability" filterParams={filterParams} setFilterParams={setFilterParams} setFilterStatus={setFilterStatus} />)
+                }
+              </div>
+            )}
           </div>
+
+          {(filterParams.q || filterParams.cause || filterParams.hability || filterParams.local_type) &&
+            <button className="manage-project-clean-filters-btn"
+              onClick={(event) => setFilterParams({
+                'q': '',
+                'cause': '',
+                'hability': '',
+                'local_type': ''
+              })}>Limpar</button>}
+
         </div>
 
         <div className="search-card-container">
-          {filteredProjects && displayProjects}
+          {loading && <Loader />}
+          {projects && displayProjects}
         </div>
         <div className="search-pagination-container">
-          {filteredProjects && (
+          {projects && (
             <ReactPaginate
               previousLabel={"Anterior"}
               nextLabel={"Próximo"}

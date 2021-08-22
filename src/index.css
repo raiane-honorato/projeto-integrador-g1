@@ -1,7 +1,7 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: "Playfair Display", serif;
+  font-family: "Poppins", serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -41,7 +41,7 @@ body {
   --mainSpacing: 0.1rem;
   --mainTransition: all 0.3s linear;
 
-  --firstFont: 'Playfair Display', serif;
+  --firstFont: 'Poppins', sans-serif;
   --secondFont: 'Poppins', sans-serif;
 }
 

@@ -71,6 +71,8 @@
 .project-habilities-causes-edition li:hover{
   background-color: var(--secondColor) !important
 }
+
+
   
 .project-edition-save{ 
   background-color: var(--secondColor);

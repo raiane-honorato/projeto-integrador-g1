@@ -1,12 +1,7 @@
 import "./InstitutionEdition.css"
 import InputMask from "react-input-mask";
-import { useEffect } from "react";
 
 function InstitutionSecondEditionBody({ formik }) {
-
-    useEffect(() => {
-        console.log(formik)
-    }, [])
 
     return (
         <div className="institution-first-edition-window-body">

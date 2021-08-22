@@ -11,16 +11,16 @@ import ManageProjectsCart from "../ManageProjectsCard/ManageProjectsCard";
 import ProjectCreation from "../../Edit/ProjectEditSection/ProjectCreation";
 import toast, { Toaster } from 'react-hot-toast';
 import api from "../../../services/api";
+import Loader from "../../Loader/Loader";
 
 function ManageProjectsList() {
     const { user } = useContext(AuthContext);
     const [projects, setProjects] = useState("");
     const [createProject, setCreateProject] = useState(false);
     const [newProject, setNewProject] = useState(false);
-    const [q, setQ] = useState('');
     const [filterStatus, setFilterStatus] = useState(false);
-    const [filterState, setFilterState] = useState({'opened':false,'closed':false})
-    const [filterProject, setFilterProject] = useState({'opened':false,'closed':false})
+    const [filterParams, setFilterParams] = useState({'q':'','status':''})
+    const [loading, setLoading] = useState(false);
 
     //dealing with outside click to close the component
     let windowRef = useRef();
@@ -29,7 +29,6 @@ function ManageProjectsList() {
         let handler = (event) => {
                 if(!windowRef.current.contains(event.target)){
                   setFilterStatus(false)
-                  setFilterState(filterProject)
                 }
                 }
         filterStatus && document.addEventListener("mousedown", handler);
@@ -37,13 +36,14 @@ function ManageProjectsList() {
         return () => {
             filterStatus && document.removeEventListener("mousedown", handler)
         }
-    },[filterStatus, filterProject])
+    },[filterStatus])
 
     useEffect(() => {
-      console.log(user)
+      setLoading(true);
       api.get(`/project?institution_id=${user.institution.id}`)
       .then((res) => {
       setProjects(res.data);
+      setLoading(false);
       })
       .catch((erro) =>
         alert("Não foi possível obter dados dessa instituição.")
@@ -59,70 +59,37 @@ function ManageProjectsList() {
 
       },[newProject])
 
+      //update project list based on filters
       useEffect(() => {
-        q && api.get(`/project?institution_id=${user.institution.id}&q=${q}`)
+        setLoading(true);
+        setProjects("");
+        api.get(`/project?institution_id=${user.institution.id}&q=${filterParams.q}${filterParams.status?"&status="+filterParams.status:""}`)
         .then((res) => {
         setProjects(res.data);
+        setLoading(false);
+        setFilterStatus(false);
         })
         .catch((erro) =>
-          alert("Não foi possível obter dados dessa instituição.")
+          alert("Não foi possível obter lista de projetos.")
         );
-
-        !q && api.get(`/project?institution_id=${user.institution.id}`)
-        .then((res) => {
-        setProjects(res.data);
-        })
-        .catch((erro) =>
-          alert("Não foi possível obter dados dessa instituição.")
-        );
-
-        q && cleanFilter()
         
-      }, [q, user.institution_id])
+      }, [filterParams, user.institution.id])
 
       let handleFilterChange = (event) => {
-        setFilterState({...filterState, [event.target.name] : event.target.checked })
+        setFilterParams({...filterParams, 'status' : event.target.name })
       }
 
       let cleanFilter = () => {
-        setFilterState({'opened':false,'closed':false})
-        setFilterProject({'opened':false,'closed':false})
+        setFilterParams({'q':'','status':''})
       }
 
-      let updateProjects = () => {
-        setFilterProject(filterState)
-        setQ("")
-        if (filterState.opened === filterState.closed) {
-          api.get(`/project?institution_id=${user.institution.id}`)
-          .then((res) => {
-            setProjects(res.data);
-          })
-          .catch((erro) =>
-            alert("Não foi possível obter dados dos projetos.")
-          )
-        } else {
-          api.get(`/project?institution_id=${user.institution.id}${filterState.opened ? '&status=1': filterState.closed ? '&status=2':''}`)
-          .then((res) => {
-            setProjects(res.data);
-          })
-          .catch((erro) =>
-            alert("Não foi possível obter dados dos projetos.")
-          )
-        }
 
-        setFilterStatus(false)
-      }
-
-      // useEffect(() => {
-      //   if (filterProject.opened == false & filterProject.closed == false){updateProjects()}
-      // },[filterProject])
 
   return (
     <>
     <div className = "manage-project-toast"><Toaster /></div>
     <div className = "manage-projects-container">
         <div className = "manage-projects-list-container">
-           
             <div className = "manage-projects-header">
               <h3>Gerenciar projetos</h3>
               <button className = "manage-projects-new-project-btn" onClick = {() => {setCreateProject(true)}}>Criar novo projeto</button>
@@ -133,16 +100,15 @@ function ManageProjectsList() {
                   className = "manage-projects-search-input" 
                   type = "text" 
                   placeholder = "buscar projeto"
-                  value = {q}
-                  onChange = {(event) => {setQ(event.target.value)}}
+                  value = {filterParams.q}
+                  onChange = {(event) => {setFilterParams({...filterParams, 'q':event.target.value})}}
                    />
                 </div>  
                 <div className="manage-projects-filter-field-container" ref = {windowRef} >
                   <div className="manage-projects-filter-field" onClick = {()=> {
                     setFilterStatus(!filterStatus);
-                    setFilterState(filterProject)
                     }}>
-                    <p>Todas as vagas</p>
+                    <p>{filterParams.status==="1"?  "Abertos" : filterParams.status==="2"? "Fechados" : "Todas as vagas"}</p>
                     <FontAwesomeIcon className = "manage-projects-icon" icon = {faChevronDown} />
                   </div>
 
@@ -152,40 +118,40 @@ function ManageProjectsList() {
                     <label className = "manage-projects-filter-option">
                         <input 
                           className = "manage-projects-filter-checkbox" 
-                          type="checkbox" 
-                          name="opened"
-                          checked = {filterState.opened}
+                          type="radio" 
+                          name="1"
+                          checked = {filterParams.status === "1"}
                           onChange = {handleFilterChange}
                           >
                           
                         </input>
-                        <span className = "manage-projects-filter-text">Abertas</span>
+                        <span className = "manage-projects-filter-text">Abertos</span>
                     </label>
+
                     <label className = "manage-projects-filter-option">
                     <input 
                           className = "manage-projects-filter-checkbox" 
-                          type="checkbox" 
-                          name="closed"
-                          checked = {filterState.closed}
+                          type="radio" 
+                          name="2"
+                          checked = {filterParams.status === "2"}
                           onChange = {handleFilterChange}
                           >
                           
                         </input>                          
-                        <span className = "manage-projects-filter-text">Encerradas</span>
+                        <span className = "manage-projects-filter-text">Encerrados</span>
                     </label>
-                    <div className = "manage-projects-filter-btn-container">
-                      <button className = "manage-projects-filter-btn" onClick = {cleanFilter}>Limpar</button>
-                      <button className = "manage-projects-filter-btn" id="manage-projects-apply-btn" onClick = {updateProjects}>Aplicar</button>
-                    </div>
+                   
                   </div>
                   }
 
                 </div>
+                { (filterParams.q || filterParams.status) &&
+                  <button className = "manage-project-clean-filters-btn" onClick = {cleanFilter}>Limpar</button>}
               </div> 
 
             </div>
 
-
+            {loading && <Loader />}
             {projects && projects.map(project => 
               <ManageProjectsCart project = {project} key = {`manage-project-cart-${project.id}`}/>)
             }

@@ -68,7 +68,7 @@
   margin-top: 1rem;
 }
   
-#cep,
+#zip_code,
 #street,
 #neighborhood,
 #city,
@@ -166,7 +166,7 @@
   }
 
   .inst-endereco
-  #cep,
+  #zip_code,
   #street,
   #bairro,
   #city,

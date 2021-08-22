@@ -5,12 +5,14 @@ import moment from "moment";
 
 import "./ManageProjectSubscription.css"
 import api from "../../services/api";
+import ShortLoader from "../Loader/ShortLoader";
 
 
-function ManageProjectSubscription({subscription, subscriptions, project, setStateSubscriptions}) {
+function ManageProjectSubscription({subscription, project, setStateSubscriptions}) {
 
     const [user, setUser] = useState();
     const [changeStatus, setChangeStatus] = useState(false);
+    const [loading, setLoading] = useState(false);
     
 
     useEffect(() => {
@@ -32,13 +34,8 @@ function ManageProjectSubscription({subscription, subscriptions, project, setSta
         }
     },[changeStatus])
 
-
-    //change subscription function
-
-    // const subsIndex = subscriptions && subscriptions.findIndex((element) => element.id === subscription.id )
-    // let subsArray = [...subscriptions]
-
     const changeSubscription = (status) => {
+        setLoading(true);
         api({      
             method: "PATCH",
             url: `/subscription/${subscription.id}`,
@@ -50,10 +47,8 @@ function ManageProjectSubscription({subscription, subscriptions, project, setSta
         .then(res => {
             setStateSubscriptions(res.data);
             setChangeStatus(false);
+            setLoading(false);
         })
-        // subsArray[subsIndex] = res.data;
-        // setStateSubscriptions(subsArray);
-        // setChangeStatus(false);
       
       .then((res) => toast.success("Inscrição atualizada com sucesso."))
       .catch((erro) =>
@@ -78,7 +73,7 @@ function ManageProjectSubscription({subscription, subscriptions, project, setSta
 
             <div className = "manage-project-subscription-date-status-manage-btn">
                 
-                <p className = "manage-project-subscription-date"><b>{`${subscription && moment(Date(subscription.date)).format("DD/MM/YYYY")}`}</b></p> 
+                <p className = "manage-project-subscription-date"><b>{`${subscription && moment(new Date(subscription.date)).format("DD/MM/YYYY")}`}</b></p> 
 
                 <div className = "manage-project-subscription-status">
                     <span 
@@ -95,12 +90,16 @@ function ManageProjectSubscription({subscription, subscriptions, project, setSta
 
                {project.status === 1 &&
                 <div  ref = {windowRef} className = "manage-project-subscription-change-status">
-                    <button 
-                     
+                    <div className = "manage-project-subscription-change-status-btn-loading">
+                    <button  
                     className = {`manage-project-subscription-change-status-btn ${subscription.status === "Cancelada" ? " canceled-change-status":""}`}
                     onClick = {subscription.status !== "Cancelada" ? () =>  setChangeStatus(!changeStatus)  :""}>
                         <span>Alterar status</span>
                     </button>
+                    <div className = "manage-project-subscription-change-status-loading">
+                        {loading && <ShortLoader size={40}/>}
+                    </div>
+                    </div>
 
                     {changeStatus &&
                     <div  className = "manage-project-subscription-change-status-dropdown">
