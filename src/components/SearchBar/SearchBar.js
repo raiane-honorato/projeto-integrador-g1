@@ -1,9 +1,11 @@
 import './searchBar.css';
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import { useState } from "react";
 
 function SearchBar() {
-  const [q, setQ] = useState('');
+  const { search } = useLocation();
+  const searchParams = new URLSearchParams(search);
+  const [q, setQ] = useState("");
 
   const history = useHistory();
   return (
@@ -12,7 +14,7 @@ function SearchBar() {
       <input 
       type="text" 
       id="search-input" 
-      placeholder='Palavra chave ou habilidade'
+      placeholder='Palavra chave, instituição ou cidade'
       onChange = {(event) => {setQ(event.target.value)}}
       onKeyPress = {(event) => {
         if (event.key === 'Enter'){
