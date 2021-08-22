@@ -38,7 +38,7 @@ function useFormik({ initialValues, validate }) {
           })
         )
         .catch((error) =>
-          console.log(
+          alert(
             `Não foi possível obter o endereço do CEP informado! Erro:${error}`
           )
         );

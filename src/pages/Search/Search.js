@@ -51,12 +51,14 @@ function Search() {
         })
         .catch((erro) => alert("Não foi possível obter dados dos projetos."));
     } else {
+
       api
         .get(`/project?local_type=${filterRemote.remote ? "remoto" : "local"}`)
+
         .then((res) => {
           setProjects(res.data);
         })
-        .catch((erro) => alert("Não foi possível obter dados dos projetos."));
+        .catch((erro) => alert("Não foi possível obter dados da pesquisa de vagas remotas."));
     }
     setFilterStatus(false);
   };

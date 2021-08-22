@@ -132,6 +132,16 @@
     font-family: var(--secondFont);
 }
 
+.manage-project-clean-filters-btn {
+    border: none;
+    cursor:pointer;
+    padding: 0;
+    background-color:initial;
+    color: var(--secondColor);
+    font-family: var(--secondFont);
+    font-weight: bold;
+}
+
 .manage-project-no-subscriptions {
     margin-top: 2rem;
     font-family: var(--secondFont);
@@ -139,6 +149,8 @@
     font-size: 1.2rem;
     color: var(--secondGrey);
 }
+
+
 
 
 @media only screen and (max-width: 800px) {
@@ -190,6 +202,16 @@
 
     .manage-project-filter-field p {
         font-size: 11px;
+    }
+
+    .manage-project-clean-filters-btn {
+        margin-top: 1rem;
+        border: none;
+        cursor:pointer;
+        width: 30%;
+        padding: 0;
+        background-color:initial;
+        color: var(--secondGrey);
     }
 
     .svg-inline--fa.fa-w-16 {

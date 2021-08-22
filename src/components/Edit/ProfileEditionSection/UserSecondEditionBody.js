@@ -10,7 +10,7 @@ function UserSecondEditionBody({ formik }) {
         type="number"
         name="address.zip_code"
         id="zip_code"
-        value={formik.values.address.zip_code}
+        value={formik.values.address?.zip_code}
         onChange={formik.handleChange}
         onBlur={formik.handleBlur}
         minLength="8"
@@ -27,7 +27,7 @@ function UserSecondEditionBody({ formik }) {
         type="text"
         name="address.street"
         id="street"
-        value={formik.values.address.street}
+        value={formik.values.address?.street}
         onChange={formik.handleChange}
         onBlur={formik.handleBlur}
         required
@@ -42,7 +42,7 @@ function UserSecondEditionBody({ formik }) {
         type="text"
         name="address.neighborhood"
         id="neighborhood"
-        value={formik.values.address.neighborhood}
+        value={formik.values.address?.neighborhood}
         onChange={formik.handleChange}
         onBlur={formik.handleBlur}
         required
@@ -57,7 +57,7 @@ function UserSecondEditionBody({ formik }) {
         type="text"
         name="address.address_number"
         id="address_number"
-        value={formik.values.address.address_number}
+        value={formik.values.address?.address_number}
         onChange={formik.handleChange}
         onBlur={formik.handleBlur}
         required
@@ -72,7 +72,7 @@ function UserSecondEditionBody({ formik }) {
         type="text"
         name="address.city"
         id="city"
-        value={formik.values.address.city}
+        value={formik.values.address?.city}
         onChange={formik.handleChange}
         onBlur={formik.handleBlur}
         required
@@ -87,7 +87,7 @@ function UserSecondEditionBody({ formik }) {
         type="text"
         name="address.state"
         id="state"
-        value={formik.values.address.state}
+        value={formik.values.address?.state}
         onChange={formik.handleChange}
         onBlur={formik.handleBlur}
         required

@@ -14,10 +14,6 @@ function DropLoggedInstitution() {
         return history.push("/");
       }
 
-      useEffect(() => {
-          console.log("usuario")
-          console.log(user)
-      }, [])
     return (
     <ul className="nav-btn-list">
         {user && user.institution && <li className="nav-btn">
