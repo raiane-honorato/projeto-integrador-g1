@@ -73,9 +73,11 @@
 #neighborhood,
 #city,
 #state,
-#address_number {    
+#address_number,
+#ongName,
+#resumo {    
   padding: 0.7rem;
-  width: 14rem;
+  min-width: 14rem;
   border-radius: 5px;
   border: none;
   box-shadow: 1px 1px 4px #9c9c9c;
@@ -109,7 +111,8 @@
 #site,
 #instagram,
 #bio,
-#facebook
+#facebook,
+#cep
 {
   padding: 0.7rem !important;
   border-radius: 5px;
