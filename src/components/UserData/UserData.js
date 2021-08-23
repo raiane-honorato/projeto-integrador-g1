@@ -21,6 +21,7 @@ function UserData() {
   const [firstEditState, setFirstEditState] = useState(false);
   const [secondEditState, setSecondEditState] = useState(false);
   const [thirdEditState, setThirdEditState] = useState(false);
+  const [fourthEditState, setFourthEditState] = useState(false);
 
   useEffect(() => {
     if (user.id === userId) {
@@ -57,6 +58,10 @@ function UserData() {
             <Toaster />
             <div className="profile-basic-information">
               <img src={pageUser.img} alt="Foto do usuário" />
+              <EditButton
+                      editClass="user-first-edit"
+                      setStatePass={setFourthEditState}
+                    />
               <h1>{pageUser.name}</h1>
               <div className="causes-section">
                 {causes?.length !== 0 && <span>Causas:</span>}
@@ -162,11 +167,12 @@ function UserData() {
           </>
         )}
 
-        {(firstEditState || secondEditState || thirdEditState) && (
+        {(firstEditState || secondEditState || thirdEditState || fourthEditState) && (
           <ProfileEditionSection
             firstEditState={firstEditState}
             secondEditState={secondEditState}
             thirdEditState={thirdEditState}
+            fourthEditState={fourthEditState}
             setStatePass={
               firstEditState
                 ? setFirstEditState
@@ -174,7 +180,9 @@ function UserData() {
                 ? setSecondEditState
                 : thirdEditState
                 ? setThirdEditState
-                : ""
+                : fourthEditState?
+                setFourthEditState:
+                ""
             }
             setPageUser={setPageUser}
             pageUser={pageUser}
@@ -186,7 +194,7 @@ function UserData() {
 
       <div
         className={`user-overlay ${
-          firstEditState || secondEditState || thirdEditState
+          firstEditState || secondEditState || thirdEditState || fourthEditState
             ? "user-set-vis"
             : ""
         }`}
@@ -194,6 +202,7 @@ function UserData() {
           setFirstEditState(false);
           setSecondEditState(false);
           setThirdEditState(false);
+          setFourthEditState(false);
         }}
       >
         {" "}

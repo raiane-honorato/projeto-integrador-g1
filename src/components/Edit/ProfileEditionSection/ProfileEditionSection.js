@@ -9,6 +9,7 @@ import api from "../../../services/api";
 import { useFormik } from "formik";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import ShortLoader from "../../Loader/ShortLoader";
+import UserFourthEditionBody from "./UserFourthEditionBody";
 
 
 function ProfileEditionSection(props) {
@@ -177,6 +178,7 @@ function ProfileEditionSection(props) {
         {props.firstEditState && <UserFirstEditionBody formik={formik} />}
         {props.secondEditState && <UserSecondEditionBody formik={formik} />}
         {props.thirdEditState && <UserThirdEditionBody formik={formik} />}
+        {props.fourthEditState && <UserFourthEditionBody formik={formik} />}
 
         <div className="user-first-edition-window-footer">
           <button className="user-edition-save" onClick={props.pageUser.address ? handleSave : handleSaveCreatingAddress}>

@@ -74,32 +74,37 @@ function ProjectPage() {
             )}
             <div className="project-information">
               <div className="project-provider">
-                {institution && <h3>Instituição: {institution.name}</h3>}
+                <h3>Instituição: </h3>
+                <div className = "project-img-link-institution">
+                {institution && <><img className = "project-institution-img" src = {institution.img} alt="imagem do projeto" />
+                   <NavLink className = "project-institution-link" to={`/institution/institution.id`}>{institution.name}</NavLink></>}
+                </div>
                 <hr />
                 {institution && <span>Cidade: {institution.address.city}</span>}
-                <span>Remoto: {project.local_type}</span>
+                <span>Localização: {project.local_type=="local"?"Presencial":"Remoto"}</span>
               </div>
               <div className="project-details">
-                <p>{project.description}</p>
                 <div className="habilities">
                   {habilities && <span>Habilidades:</span>}
                   {habilities &&
                     habilities.map((hability) => (
                       <span key={hability.id}>{hability.label}</span>
-                    ))}
+                      ))}
                 </div>
                 <div className="causes">
                   <span>Causas:</span>
                   {causes &&
                     causes.map((cause) => (
                       <span key={cause.id}>{cause.label}</span>
-                    ))}
+                      ))}
                 </div>
+                <h4>Descrição: </h4>
+                    <p>{project.description}</p>
                 {subscription &&
                 user.type === 1 &&
                 subscription.length === 0 && (
                   <button
-                    className="project-btn"
+                    className="project-btn project-status"
                     onClick={() => setActiveSubscription(true)}
                   >
                     Quero a vaga
@@ -107,11 +112,11 @@ function ProjectPage() {
                 )}
                 {subscription && subscription.length === 1 &&
                 (
-                  <p>Você está inscrito nesta vaga.</p>
+                  <p className="project-status">Você está inscrito nesta vaga.</p>
                 )}
                 {!user && (
                   <NavLink to="/login">
-                    <button className="project-btn">Faça seu Login</button>
+                    <button className="project-btn project-status">Faça seu Login</button>
                   </NavLink>
                 )}
               </div>

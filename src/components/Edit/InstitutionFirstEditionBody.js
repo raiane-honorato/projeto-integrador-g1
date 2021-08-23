@@ -47,6 +47,28 @@ function InstitutionFirstEditionBody({ formik, institution }) {
         )}
       </div>
 
+      <div>
+        <img className = "manage-project-img project-edit-img" src = {formik.values.img} alt="imagem do projeto" />
+        <div className="inputs">
+          <label htmlFor="name">Imagem de perfil</label>
+          <input
+            type="text"
+            name="img"
+            id="ongName"
+            value={formik.values.img}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            minLength="3"
+            maxLength="100"
+            required
+          />
+          {formik.touched.img && formik.errors.img && (
+            <span className="formikError">{formik.errors.img}</span>
+          )}
+        </div>
+
+      </div>
+
       <div className="inputs">
         <label htmlFor="summary">Resumo da instituição</label>
         <textarea
