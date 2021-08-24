@@ -61,7 +61,7 @@ function InstitutionData() {
         {institution && (
           <>
             <div className="institution-first-section-profile">
-              {user.institution.id === institutionId && (
+              {user.institution && (user.institution.id === institutionId) && (
                 <EditButton
                   editClass="institution-first-edit"
                   setStatePass={setFirstEditState}
@@ -102,7 +102,7 @@ function InstitutionData() {
 
               <div className="institution-second-column">
                 <div className="institution-information-address">
-                  {user.institution.id === institutionId && (
+                  {user.institution && (user.institution.id === institutionId) && (
                     <EditButton
                       editClass="institution-second-edit"
                       setStatePass={setSecondEditState}
@@ -159,7 +159,7 @@ function InstitutionData() {
                   </div>
                 </div>
                 <div className="institution-information">
-                  {user.institution.id === institutionId && (
+                  {user.institution && (user.institution.id === institutionId) && (
                     <EditButton
                       editClass="institution-second-edit"
                       setStatePass={setThirdEditState}

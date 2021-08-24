@@ -77,7 +77,7 @@ function ProjectPage() {
                 <h3>Instituição: </h3>
                 <div className = "project-img-link-institution">
                 {institution && <><img className = "project-institution-img" src = {institution.img} alt="imagem do projeto" />
-                   <NavLink className = "project-institution-link" to={`/institution/institution.id`}>{institution.name}</NavLink></>}
+                   <NavLink className = "project-institution-link" to={`/institution/${institution.id}`}>{institution.name}</NavLink></>}
                 </div>
                 <hr />
                 {institution && <span>Cidade: {institution.address.city}</span>}
